@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/TreeHole/TreeHole",
+    "pages/Me/Me",
+    "pages/Theater/Theater"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTitleText": "知音心流",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "selectedColor": "#17abe3",
+    "color": "#000000",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./img/index.png",
+        "selectedIconPath": "./img/indexS.png"
+      },
+      {
+        "pagePath": "pages/Theater/Theater",
+        "text": "剧场",
+        "iconPath": "./img/theater.png",
+        "selectedIconPath": "./img/theaterS.png"
+      },
+      {
+        "pagePath": "pages/TreeHole/TreeHole",
+        "text": "树洞",
+        "iconPath": "./img/treeHoleS.png",
+        "selectedIconPath": "./img/treeHole.png"
+      },
+      {
+        "pagePath": "pages/Me/Me",
+        "text": "我",
+        "iconPath": "./img/me.png",
+        "selectedIconPath": "./img/meS.png"
+      }
+    ]
+  }
+}
