@@ -14,6 +14,9 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
+      type_p: ['感情', '学习', '心灵', '职业', '校园热点'],
+    }
   }
 })

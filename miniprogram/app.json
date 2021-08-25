@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/TreeHole/TreeHole",
     "pages/Me/Me",
-    "pages/Theater/Theater"
+    "pages/Theater/Theater",
+    "pages/video/video"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

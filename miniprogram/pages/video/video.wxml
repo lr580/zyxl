@@ -1,0 +1,11 @@
+<!--pages/video/video.wxml-->
+<text>视频播放调试</text>
+<!--enable-auto-rotation 手机横屏自动全屏-->
+<!--enable-play-gesture 双击切换播放/暂停-->
+<!--调试：放title就会报错……不放了 title="这是全屏才能看到的标题ovo"  -->
+<view>
+  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture bindended="show_choice" bindplay="hide_choice"
+    binderror="video_error"></video>
+  <view wx:if="{{choice_showing}}">请选择：</view>
+
+</view>

@@ -39,7 +39,7 @@
   },
   "appid": "wx805dc324ae323588",
   "projectname": "zyxl",
-  "libVersion": "2.14.1",
+  "libVersion": "2.19.2",
   "condition": {
     "search": {
       "list": []

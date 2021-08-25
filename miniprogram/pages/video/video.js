@@ -1,11 +1,12 @@
-// miniprogram/pages/Theater/Theater.js
+// pages/video/video.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    choice_showing: false, //是否显示互动选项
+    video_src: "cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/video/test0-0.mp4",
   },
 
   /**
@@ -15,11 +16,23 @@ Page({
 
   },
 
-  //下面为调试代码，正式版本前会删除
-  goto_test_page: function () {
-    wx.navigateTo({
-      url: '../video/video',
-    })
+  //视频加载失败时执行
+  video_error: function (e) {
+    console.log('QwQ', e);
+  },
+
+  //弹出互动选项
+  show_choice: function () {
+    this.setData({
+      choice_showing: true
+    });
+  },
+
+  //隐藏互动选项
+  hide_choice: function () {
+    this.setData({
+      choice_showing: false
+    });
   },
 
   /**
