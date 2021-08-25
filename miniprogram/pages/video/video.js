@@ -1,4 +1,9 @@
 // pages/video/video.js
+
+const km = getApp();
+const db = wx.cloud.database();
+const _ = db.command;
+
 Page({
 
   /**
@@ -13,7 +18,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let vid = options.id;
+    console.log(km.globalData.info_video);
   },
 
   //视频加载失败时执行
