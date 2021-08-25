@@ -1,11 +1,35 @@
 <!--pages/video/video.wxml-->
-<text>视频播放调试</text>
 <!--enable-auto-rotation 手机横屏自动全屏-->
 <!--enable-play-gesture 双击切换播放/暂停-->
+<!--可以考虑自动播放-->
 <!--调试：放title就会报错……不放了 title="这是全屏才能看到的标题ovo"  -->
 <view>
+  <view>
+    <view>视频标题：{{video_title}}</view>
+    <view>视频类型：{{video_type}}</view>
+    <view>UP主：{{video_upname}}</view>
+    <view>浏览次数：{{video_click}}</view>
+    <view>发布时间：{{video_time}}</view>
+  </view>
+  <view>分鸽线</view>
+  <view>当前片段：{{video_clipname}}</view>
   <video src="{{video_src}}" enable-auto-rotation enable-play-gesture bindended="show_choice" bindplay="hide_choice"
     binderror="video_error"></video>
-  <view wx:if="{{choice_showing}}">请选择：</view>
-
+  <view wx:if="{{choice_showing}}">
+    <view wx:if="{{state==1}}">
+      请选择：
+      <view wx:for="{{avail_choice_name}}">
+        <text bindtap="goto_clip" id="{{avail_choice_id[index]}}">(点击跳转){{item}}</text>
+      </view>
+    </view>
+    <view wx:if="{{state==3}}">
+      您已到达结局。
+    </view>
+  </view>
+  <view>
+    当前存档：
+    <view wx:for="{{saves}}">
+      <text bindtap="goto_clip" id="{{item[0]}}">(点击跳转){{item[1]}}</text>
+    </view>
+  </view>
 </view>

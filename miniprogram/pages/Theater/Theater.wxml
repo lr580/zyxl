@@ -1,4 +1,2 @@
 <!--miniprogram/pages/Theater/Theater.wxml-->
 <text>miniprogram/pages/Theater/Theater.wxml</text>
-<!--下面为调试代码，正式版本前会删除-->
-<text bindtap="goto_test_page" style="color:red">不要点我ovo</text>

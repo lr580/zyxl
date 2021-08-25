@@ -2,6 +2,10 @@
 // const km = getApp() //即this, app.js外均可这么使用
 var db;
 var _;
+
+var now_loading = 0; //需要batch_read等异步多少次
+var total_loading = 1;
+
 App({
   onLaunch: function () {
     const thee = this;
@@ -13,6 +17,14 @@ App({
     //   console.log('qwq');
 
     // };
+
+    wx.showLoading({
+      title: '加载中……',
+      mask: true,
+      success: (res) => { },
+      fail: (res) => { },
+      complete: (res) => { },
+    });
 
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -59,7 +71,11 @@ App({
     var final_operation = function () {
       all_obj.sort(cmp());
       km.globalData[key] = all_obj;
+      if (++now_loading == total_loading) {
+        km.init_finish();
+      }
     };
+    if (n == 0) { final_operation(); }
 
     for (let i = 0; i < inq_time; ++i) {
       var this_batch = []; //这次要读的下标编号
@@ -91,6 +107,7 @@ App({
 
   //读取全局数据
   load_global: function () {
+
     let km = getApp();
     db.collection('global').doc('default').get().then(res => {
       km.globalData.num_video = res.data.num_video;
@@ -100,12 +117,41 @@ App({
     });
   },
 
+  //读取全局数据完毕
+  init_finish:function(){
+    wx.hideLoading({
+      success: (res) => {},
+    });
+  },
+
   //读取所有小剧场互动视频文本信息(视频信息不读取)
   load_video: function () {
     this.batch_read('video', getApp().globalData.num_video, 'info_video');
   },
 
-
+  //通用函数，传入date，返回年月日(时分 type=0)的格式化文本
+  date2str: function (x, type = 0) {
+    let s = '', t = '';
+    s += String(x.getFullYear());
+    s += '/';
+    t = String(x.getMonth() + 1);
+    if (t.length < 1) { s += '0' + t; }
+    else { s += t; }
+    s += '/';
+    t = String(x.getDate());
+    if (t.length < 1) { s += '0' + t; }
+    else { s += t; }
+    if (type != 0) { return s; }
+    s += ' ';
+    t = String(x.getHours());
+    if (t.length < 1) { s += '0' + t; }
+    else { s += t; }
+    s += ':';
+    t = String(x.getMinutes());
+    if (t.length < 1) { s += '0' + t; }
+    else { s += t; }
+    return s;
+  },
 })
 
 //调试型函数，正式版删除
