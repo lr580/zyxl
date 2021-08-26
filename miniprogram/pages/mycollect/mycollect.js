@@ -1,29 +1,18 @@
-// miniprogram/pages/Me/Me.js
-const km = getApp();
-const db = wx.cloud.database();
-const _ = db.command;
-
+// pages/mycollect/mycollect.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userid: -1,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.init_userpage();
-  },
 
-  //初始化函数
-  init_userpage: function () {
-    this.setData({
-      userid: km.globalData.userid,
-    });
   },
 
   /**

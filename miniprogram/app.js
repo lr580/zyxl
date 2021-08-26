@@ -1,12 +1,14 @@
 //app.js
 // const km = getApp() //即this, app.js外均可这么使用
-var db;
+var db = '';
 var _;
 
 var now_loading = 0; //需要batch_read等异步多少次
 var total_loading = 1;
 
 var click_busy = false; //是否处于禁止频繁点击状态
+var cloudfx_done = false; //已经getOpenId
+var loaduser_done = false; //是否加载用户完毕
 
 App({
   onLaunch: function () {
@@ -14,6 +16,10 @@ App({
 
     //若load_video等函数是局部函数，即var load_video = function(){...} 可用thee
     //如果load_video换成与onLaunch并列的函数，会导致thee不可用，但是可以用getApp()替代
+
+    wx.setEnableDebug({
+      enableDebug: true,
+    }).then(res => { }).catch(rws => { console.error('调试开启失败(lr580:真机模式外请忽略该条报错)', rws) });//真机模式外请忽略该条报错
 
     wx.showLoading({
       title: '加载中……',
@@ -42,16 +48,37 @@ App({
       });
     }
 
+    wx.cloud.callFunction({
+      name: 'getOpenId',
+    }).then(res => {
+      console.log('how slow');
+      // console.log(res.result.userInfo.openId);
+      let openid = res.result.userInfo.openId;
+      getApp().globalData.user_openid = openid;
+      if (db && !loaduser_done) {
+        this.load_user(openid);
+      }
+    }).catch(rws => {
+      console.error('获取用户openid失败', rws);
+    });
+
     this.globalData = {
       cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
       type_p: ['感情', '学习', '心灵', '职业', '校园热点', '全部'],
       info_video: [],
       num_video: 0,
       batch: 20, //每次向数据库的最大读取批次
+      userid: '',
     }
   },
 
-  //批量获取某集合编号id从0到n-1的数据对象，存在全局变量key上
+  //用户信息获取和自动登录尝试
+  load_user(openid) {
+    console.log('qwq');
+    loaduser_done = true;
+  },
+
+  //通用函数：批量获取某集合编号id从0到n-1的数据对象，存在全局变量key上
   batch_read(setname, n, key) {
     let km = getApp();
     let epoch = km.globalData.batch;
@@ -94,8 +121,12 @@ App({
 
   //读取全局数据
   load_global: function () {
-
     let km = getApp();
+
+    if (cloudfx_done && !loaduser_done) {
+      this.load_user(km.globalData.userid);
+    }
+
     db.collection('global').doc('default').get().then(res => {
       km.globalData.num_video = res.data.num_video;
       km.load_video();

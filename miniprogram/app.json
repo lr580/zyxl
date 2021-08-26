@@ -4,7 +4,13 @@
     "pages/TreeHole/TreeHole",
     "pages/Me/Me",
     "pages/Theater/Theater",
-    "pages/video/video"
+    "pages/video/video",
+    "pages/myinfo/myinfo",
+    "pages/myhistory/myhistory",
+    "pages/mycollect/mycollect",
+    "pages/mypost/mypost",
+    "pages/help/help",
+    "pages/contactus/contactus"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
