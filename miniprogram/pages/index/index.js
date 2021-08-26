@@ -1,4 +1,8 @@
 // pages/index/index.js
+const km = getApp();
+const db = wx.cloud.database();
+const _ = db.command;
+
 Page({
 
   /**
@@ -19,7 +23,8 @@ Page({
   goto_test_page: function () {
     wx.navigateTo({
       url: '../video/video?id=0',
-    })
+    });
+    km.add_click('video', '0');
   },
 
   /**

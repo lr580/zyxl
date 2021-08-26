@@ -1,2 +1,37 @@
 <!--miniprogram/pages/Theater/Theater.wxml-->
-<text>miniprogram/pages/Theater/Theater.wxml</text>
+<view>搜索框区域(不保证实现本功能)</view>
+<view>
+  选择类别：
+  <view wx:for="{{type_seq}}">
+    <view bindtap="click_type" id="{{item}}">
+      <text wx:if="{{now_type==item}}">(当前)</text>
+      <text>{{types[item]}}</text>
+    </view>
+  </view>
+</view>
+<view>
+  选择排序依据：(没得选，只有一个依据)
+  <view wx:if="{{sort_key==0}}">
+    <view bindtap="sele_sorttype" id="00">{{sort_reverse?'':'(当前)'}}按时间由近到远排序</view>
+    <view bindtap="sele_sorttype" id="01">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
+  </view>
+</view>
+
+<!-- <view>分割线(｀・ω・´)</view> -->
+
+<view wx:if="{{num_show}}">
+  <!--videolist.length-->
+  <view wx:for="{{videolist}}">
+    <view wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
+      <view>分割线(*/ω＼*)</view>
+      <view>标题：{{item[0]}}</view>
+      <view>分类：{{types[item[1]]}}</view>
+      <view>浏览次数：{{item[2]}}</view>
+      <view>封面：<image src="{{item[3]}}"></image>
+      </view>
+      <view>分割线ヾ(=･ω･=)o</view>
+    </view>
+  </view>
+  <view wx:if="{{num_show==videolist.length}}">已经到达底部啦|ू･ω･` )</view>
+</view>
+<view wx:else>没有符合条件的互动视频awa！</view>

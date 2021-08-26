@@ -6,17 +6,14 @@ var _;
 var now_loading = 0; //需要batch_read等异步多少次
 var total_loading = 1;
 
+var click_busy = false; //是否处于禁止频繁点击状态
+
 App({
   onLaunch: function () {
     const thee = this;
 
-    //这里load_video是局部函数
-    //如果load_video换成与onLaunch并列的函数，会导致thee不可用
-    //但是可以用getApp()
-    // var load_video = function () {
-    //   console.log('qwq');
-
-    // };
+    //若load_video等函数是局部函数，即var load_video = function(){...} 可用thee
+    //如果load_video换成与onLaunch并列的函数，会导致thee不可用，但是可以用getApp()替代
 
     wx.showLoading({
       title: '加载中……',
@@ -47,7 +44,7 @@ App({
 
     this.globalData = {
       cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
-      type_p: ['感情', '学习', '心灵', '职业', '校园热点'],
+      type_p: ['感情', '学习', '心灵', '职业', '校园热点', '全部'],
       info_video: [],
       num_video: 0,
       batch: 20, //每次向数据库的最大读取批次
@@ -95,16 +92,6 @@ App({
     }
   },
 
-  //调试函数，等待随机0~1秒后返回等待时长
-  network_is_low: function () {
-    return new Promise((resolve) => {
-      k = Math.random();
-      setTimeout(() => {
-        resolve(k);
-      }, k * 1000);
-    })
-  },
-
   //读取全局数据
   load_global: function () {
 
@@ -118,9 +105,9 @@ App({
   },
 
   //读取全局数据完毕
-  init_finish:function(){
+  init_finish: function () {
     wx.hideLoading({
-      success: (res) => {},
+      success: (res) => { },
     });
   },
 
@@ -129,7 +116,42 @@ App({
     this.batch_read('video', getApp().globalData.num_video, 'info_video');
   },
 
-  //通用函数，传入date，返回年月日(时分 type=0)的格式化文本
+  //通用函数：检查频繁点击并返回状态
+  check_busy: function () {
+    if (click_busy) {
+      wx.showToast({
+        title: '请勿频繁点击！',
+        duration: 1500,
+        icon: 'none',
+      });
+    }
+    return click_busy;
+  },
+
+  //通用函数：触发频繁点击(当可触发时返回true，否则返回false)
+  triggle_busy: function () {
+    if (this.check_busy()) { return false; }
+    click_busy = true;
+    return true;
+  },
+
+  //通用函数，为集合setname的记录x的字段click增加1
+  add_click: function (setname, x) {
+    if (!this.triggle_busy()) { return; }
+    //理论上这个操作是极快的，会快于用户频繁点击的频率，但还是要保险起见
+    db.collection(setname).doc(x).update({
+      data: {
+        click: _.inc(1)
+      }
+    }).then(res => {
+      click_busy = false;
+    }).catch(rws => {
+      console.error('增加浏览次数失败：', setname, x);
+      click_busy = false;
+    });
+  },
+
+  //通用函数，传入date，返回年月日(type=1)(+时分 type=0)的格式化文本
   date2str: function (x, type = 0) {
     let s = '', t = '';
     s += String(x.getFullYear());
@@ -153,14 +175,3 @@ App({
     return s;
   },
 })
-
-//调试型函数，正式版删除
-// async function fn() {
-//   db.collection('global').doc('default').get().then(res => {
-//     console.log(getApp().globalData)
-//     let w = await db.collection('global').doc('default').get()
-//     console.log('w', w)
-//   }).catch(rws => {
-//     console.error('rws', rws);
-//   })
-// }

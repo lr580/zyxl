@@ -13,15 +13,17 @@ Page({
     choice_showing: false, //是否显示互动选项
     vid: 0,
     video_src: "cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/video/fail1.mp4",//当前视频片段url
+    video_poster: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/videoposter/unknown_poster.jpg', //视频封面(当下版本已经删除该功能)
     video_title: '未知视频',//当前视频标题
     video_clipname: '未知片段',//当前片段名字
     video_upname: '未知UP主',//当前up主名字(未实现)
+    video_upavatar: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/avatar/unknown_user.jpg',//当前up主头像(未实现)
     video_type: '未知',//当前视频类型
     video_click: 0,//视频点击次数
     video_time: '时间字符串',//视频最后编辑时间
     avail_choice_name: [], //可选选项名字
     avail_choice_id: [], //可选后继点id
-    state: 0,//故障：0；正常节点：1；无选项节点：2；结局：3
+    state: 0,//未开始：0；正常节点：1；无选项节点：2；结局：3
     now_node: 0,//当前节点
     saves: [],//存档(每个元素下标0是id,1是名字)
   },
@@ -34,11 +36,10 @@ Page({
     this.video_init();
     // console.log(km.globalData.info_video);
 
-    //尚未修复的小bugs：偶尔会显示渲染层网络层错误，影响视频加载
+    //尚未修复的小bugs：偶尔会显示渲染层网络层错误，有小概率影响视频加载，产生原因未知
 
     //尚未做：
     //视频发布者信息(名称)读取
-    //增加点击次数
     //用户浏览历史更新
     //如果第一次点击，用户积分增加
     //用户点击收藏
@@ -56,7 +57,7 @@ Page({
       video_type: km.globalData.type_p[obj.type],
       video_time: km.date2str(obj.time),
       video_click: obj.click,
-      state: 1,
+      state: obj.edge[0].length > 1 ? 1 : 3,
       saves: [[0, obj.clipname[0]]],
     })
     this.video_update(0);
@@ -101,7 +102,7 @@ Page({
     console.error('视频加载失败', e);
   },
 
-  //点击选项x
+  //点击选项v
   goto_clip: function (v) {
     let idx = Number(v.currentTarget.id);
     this.choice_clip(idx);

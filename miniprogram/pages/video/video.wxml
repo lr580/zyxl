@@ -1,20 +1,24 @@
 <!--pages/video/video.wxml-->
 <!--enable-auto-rotation 手机横屏自动全屏-->
 <!--enable-play-gesture 双击切换播放/暂停-->
-<!--可以考虑自动播放-->
-<!--调试：放title就会报错……不放了 title="这是全屏才能看到的标题ovo"  -->
+<!--autoplay 自动播放-->
+<!--放title就会报错……不放了，理由未知 报错的使用示例：title="这是全屏才能看到的标题ovo"  -->
+<!--由于视频结束时会自动展示封面，会遮挡本来的最后一帧，所以不添加视频封面-->
 <view>
   <view>
     <view>视频标题：{{video_title}}</view>
     <view>视频类型：{{video_type}}</view>
     <view>UP主：{{video_upname}}</view>
+    <view>UP主头像：<image src="{{video_upavatar}}"></image>
+    </view>
     <view>浏览次数：{{video_click}}</view>
     <view>发布时间：{{video_time}}</view>
+    <view>点我收藏(暂未实现功能)</view>
   </view>
   <view>分鸽线</view>
   <view>当前片段：{{video_clipname}}</view>
-  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture bindended="show_choice" bindplay="hide_choice"
-    binderror="video_error"></video>
+  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay bindended="show_choice"
+    bindplay="hide_choice" binderror="video_error"></video>
   <view wx:if="{{choice_showing}}">
     <view wx:if="{{state==1}}">
       请选择：
@@ -29,7 +33,8 @@
   <view>
     当前存档：
     <view wx:for="{{saves}}">
-      <text bindtap="goto_clip" id="{{item[0]}}">(点击跳转){{item[1]}}</text>
+      <text bindtap="goto_clip" id="{{item[0]}}" wx:if="{{saves.length!=1+index}}">(点击跳转){{item[1]}}</text>
+      <text wx:else>(当前所在){{item[1]}}</text>
     </view>
   </view>
 </view>
