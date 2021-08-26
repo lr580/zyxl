@@ -43,6 +43,18 @@ userid: -1,
 
 存储视频对象(见下文)
 
+#### user
+
+存储用户对象(见下文)
+
+#### global
+
+##### default
+
+项目：
+
+1. num_video number
+
 ### 云存储
 
 #### video
@@ -54,6 +66,12 @@ userid: -1,
 特殊视频片段：
 
 - `fail1` 视频加载失败时显示的视频片段
+
+
+
+### 云函数
+
+getOpenId 
 
 
 

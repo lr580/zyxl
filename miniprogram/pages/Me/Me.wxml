@@ -1,6 +1,11 @@
 <!--miniprogram/pages/Me/Me.wxml-->
-<view wx:if="{{userid==-1}}">未登录</view>
-<view wx:else>已登录</view>
+<view wx:if="{{!userinfo}}">
+  未登录 
+  <view bindtap="register">点我授权登录</view>
+</view>
+<view wx:else>
+  已登录
+</view>
 
 <view>
   <view>我的消息</view>

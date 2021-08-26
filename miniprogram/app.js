@@ -3,8 +3,8 @@
 var db = '';
 var _;
 
-var now_loading = 0; //需要batch_read等异步多少次
-var total_loading = 1;
+var now_loading = 0; //需要batch_read等所有数据库读取异步多少次
+var total_loading = 2;
 
 var click_busy = false; //是否处于禁止频繁点击状态
 var cloudfx_done = false; //已经getOpenId
@@ -17,9 +17,9 @@ App({
     //若load_video等函数是局部函数，即var load_video = function(){...} 可用thee
     //如果load_video换成与onLaunch并列的函数，会导致thee不可用，但是可以用getApp()替代
 
-    wx.setEnableDebug({
-      enableDebug: true,
-    }).then(res => { }).catch(rws => { console.error('调试开启失败(lr580:真机模式外请忽略该条报错)', rws) });//真机模式外请忽略该条报错
+    // wx.setEnableDebug({
+    //   enableDebug: true,
+    // }).then(res => { }).catch(rws => { console.error('调试开启失败(lr580:真机模式外请忽略该条报错)', rws) });//真机模式外请忽略该条报错
 
     wx.showLoading({
       title: '加载中……',
@@ -51,8 +51,6 @@ App({
     wx.cloud.callFunction({
       name: 'getOpenId',
     }).then(res => {
-      console.log('how slow');
-      // console.log(res.result.userInfo.openId);
       let openid = res.result.userInfo.openId;
       getApp().globalData.user_openid = openid;
       if (db && !loaduser_done) {
@@ -69,13 +67,26 @@ App({
       num_video: 0,
       batch: 20, //每次向数据库的最大读取批次
       userid: '',
+      info_user: null,
     }
   },
 
   //用户信息获取和自动登录尝试
   load_user(openid) {
-    console.log('qwq');
+    // console.log('qwq');
     loaduser_done = true;
+    let km = getApp();
+    db.collection('user').doc(openid).get().then(res => {
+      console.log(openid, res.data);
+      km.globalData.info_user = res.data;
+      if (++now_loading == total_loading) {
+        km.init_finish();
+      }
+    }).catch(rws => {
+      if (++now_loading == total_loading) {
+        km.init_finish();
+      }
+    });
   },
 
   //通用函数：批量获取某集合编号id从0到n-1的数据对象，存在全局变量key上
