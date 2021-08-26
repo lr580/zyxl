@@ -2,6 +2,7 @@
 <!--enable-auto-rotation 手机横屏自动全屏-->
 <!--enable-play-gesture 双击切换播放/暂停-->
 <!--autoplay 自动播放-->
+<!--enable-progress-gesture 允许左右拖动视频画面来控制进度-->
 <!--放title就会报错……不放了，理由未知 报错的使用示例：title="这是全屏才能看到的标题ovo"  -->
 <!--由于视频结束时会自动展示封面，会遮挡本来的最后一帧，所以不添加视频封面-->
 <view>
@@ -17,7 +18,7 @@
   </view>
   <view>分鸽线</view>
   <view>当前片段：{{video_clipname}}</view>
-  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay bindended="show_choice"
+  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay enable-progress-gesture bindended="show_choice"
     bindplay="hide_choice" binderror="video_error"></video>
   <view wx:if="{{choice_showing}}">
     <view wx:if="{{state==1}}">

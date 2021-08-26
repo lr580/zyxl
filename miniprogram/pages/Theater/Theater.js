@@ -113,7 +113,8 @@ Page({
       });
     } else {
       let ns = this.data.num_show;
-      ns = Math.min(ns + this.data.num_normal_load, this.data.lt.length);
+      ns = Math.min(ns + this.data.num_normal_load, this.data.videolist.length);
+      console.log(ns, this.data.videolist);
       this.setData({
         num_show: ns,
       });
@@ -123,11 +124,22 @@ Page({
   //跳转到互动视频页面
   goto_video: function (v) {
     let vid = v.currentTarget.id;
-    console.log('awa', vid);
     wx.navigateTo({
       url: '../video/video?id=' + vid,
     });
     km.add_click('video', vid);
+  },
+
+  onPullDownRefresh: function () {
+
+  },
+
+  //触底加载更多
+  onReachBottom: function () {
+    // console.log(this.data.videolist.length);
+    if (this.data.num_show < this.data.videolist.length) {
+      this.load_videolist(1);
+    }
   },
 
   /**
@@ -155,20 +167,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
 
   },
 
