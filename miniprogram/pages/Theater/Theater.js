@@ -2,13 +2,19 @@
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
-
+var minOffset = 50;
+var minTime = 60;
+var startX = 0;
+var startY = 0;
+var startTime = 0;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    TabCur: 0,
+    scrollLeft:0,//以上两个为前端参数
     types: [],//类别(5全选)
     now_type: 5,//当前类别下标
     type_seq: [5, 0, 1, 2, 3, 4],//类别展示顺序常量
@@ -39,6 +45,72 @@ Page({
     this.load_videolist();
   },
 
+  touch_start:function(e){
+    console.log('touchStart!',e)
+    startX = e.touches[0].pageX;//获取触摸时的x坐标
+    startY = e.touches[0].pageY;//获取触摸时的y坐标
+    startTime = new Date().getTime();//获取毫秒数
+    console.log(this.data.TabCur);
+    console.log(this.data.now_type);
+  },
+
+  //滑动被打断时的函数
+  touch_cancel:function(e){
+    startX = 0;
+    startY = 0;
+    startTime = 0;
+  },
+
+  //滑动结束，做出判断
+  touch_end:function(e){
+    console.log('touchEnd!',e);
+    var endX = e.changedTouches[0].pageX;
+    var endY = e.changedTouches[0].pageY;
+    var touchTime = new Date().getTime() - startTime;//计算滑动的坐标及时间
+    //判断：
+    if(touchTime >= minTime){
+      var xoffset = endX - startX;
+      var yoffset = endY - startY;
+      if(Math.abs(xoffset) >= Math.abs(yoffset) && Math.abs(xoffset) >= minOffset){
+        if(xoffset < 0){
+          if(this.data.TabCur < 5){
+            this.setData({
+              TabCur: this.data.TabCur + 1,
+              now_type : this.data.type_seq[this.data.TabCur + 1]
+            })
+            this.load_videolist();
+            console.log(this.data.TabCur)
+          }else{
+            this.setData({
+              TabCur: 5,
+            })
+          }
+          
+          console.log('左滑')
+        }else{
+          if(this.data.TabCur > 0){
+            this.setData({
+              TabCur: this.data.TabCur - 1,
+              now_type : this.data.type_seq[this.data.TabCur - 1]
+            })
+            this.load_videolist();
+          }else{
+            this.setData({
+              TabCur: 0,
+            })
+          }
+        }
+      }
+    }
+  },
+
+  // tabSelect(e) {
+  //   this.setData({
+  //     TabCur: e.currentTarget.dataset.id,
+  //     scrollLeft: (e.currentTarget.dataset.id-1)*60
+  //   })
+  // },
+
   //点击类别下标为v的类别分类
   click_type: function (v) {
     let tid = Number(v.currentTarget.id);
@@ -46,6 +118,11 @@ Page({
       return;
     }
     this.sele_type(tid);
+    this.setData({
+      TabCur: v.currentTarget.dataset.id,
+      scrollLeft: (v.currentTarget.dataset.id-1)*60
+    })
+
   },
 
   //选择类别x
