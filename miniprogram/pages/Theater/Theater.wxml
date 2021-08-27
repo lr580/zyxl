@@ -5,7 +5,8 @@
   </view>
 </view>
 <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-  <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans" wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
+  <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans"
+    wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
     {{types[item]}}
   </view>
 </scroll-view>
@@ -37,24 +38,27 @@
 
 <!-- <view>分割线(｀・ω・´)</view> -->
 
-<view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part" wx:if="{{num_show}}">
+<view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part"
+  wx:if="{{num_show}}">
   <!--videolist.length-->
   <view wx:for="{{videolist}}">
 
     <view class="video_body" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
-      <view><image class="video_cover" src="{{item[3]}}"></image></view>
+      <view>
+        <image class="video_cover" src="{{item[3]}}"></image>
+      </view>
       <view class="video_intro">
         <view class="video_title">{{item[0]}}</view>
-     <view class="video_type">
-      <image src="/img/type.png"></image> 
-     <text>{{types[item[1]]}}</text> 
-    </view>
-    <view class="video_count">
-      <image src="/img/count.png"></image> 
-    <text>{{item[2]}}</text>  
-    </view>
+        <view class="video_type">
+          <image src="/img/type.png"></image>
+          <text>{{types[item[1]]}}</text>
+        </view>
+        <view class="video_count">
+          <image src="/img/count.png"></image>
+          <text>{{item[2]}}</text>
+        </view>
       </view>
-   
+
     </view>
   </view>
   <view wx:if="{{num_show==videolist.length}}">已经到达底部啦|ू･ω･` )</view>

@@ -18,8 +18,8 @@
   </view>
   <view>分鸽线</view>
   <view>当前片段：{{video_clipname}}</view>
-  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay enable-progress-gesture bindended="show_choice"
-    bindplay="hide_choice" binderror="video_error"></video>
+  <video src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay enable-progress-gesture
+    bindended="show_choice" bindplay="hide_choice" binderror="video_error"></video>
   <view wx:if="{{choice_showing}}">
     <view wx:if="{{state==1}}">
       请选择：
