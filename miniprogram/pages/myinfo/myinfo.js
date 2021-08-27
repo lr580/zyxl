@@ -27,17 +27,71 @@ Page({
     this.setData({
       openid: km.globalData.openid,
       userinfo: km.globalData.info_user,
+      i_name: km.globalData.info_user.name,
+      i_motto: km.globalData.info_user.motto,
     });
+
   },
 
   //输入昵称
   input_name: function (e) {
-    console.log(e.detail.value);
+    let v = e.detail.value;
+    this.setData({
+      i_name: v,
+    });
   },
 
-  //保存更改
-  save_change: function () {
+  //输入个性签名
+  input_motto: function (e) {
+    this.setData({
+      i_motto: e.detail.value,
+    });
+  },
 
+  //保存昵称和签名更改
+  save_change: function () {
+    let newname = this.data.i_name, newmotto = this.data.i_motto;
+    if (newname.length == 0) {
+      wx.showToast({
+        title: '昵称不能为空！',
+        icon: 'none',
+        duration: 3000,
+      })
+      return;
+    }
+    wx.showLoading({
+      title: '修改中……',
+    })
+    db.collection('user').doc(km.globalData.openid).update({
+      data: {
+        name: newname,
+        motto: newmotto,
+      }
+
+    }).then(res => {
+      km.globalData.info_user.name = newname;
+      km.globalData.info_user.motto = newmotto;
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '修改成功！',
+      });
+    }).catch(rws => {
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '修改失败，请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    });
+  },
+
+  //上传头像
+  upload_avatar: function () {
+    console.log('qwq');
   },
 
   /**
