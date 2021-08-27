@@ -35,52 +35,131 @@ Page({
       desc: '请授权获取您的头像和昵称',
       success: (ret) => {
         console.log('awa', ret);
-        //技术问题……实现不了从微信给的url里提取内容转存到云存储
-        // wx.cloud.uploadFile({
-        //   // url: ret.userInfo.avatarUrl,
-        //   url: 'https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgABHgMRicDibu4tMI2KUe7qKPhez3QZdSw3Xa90UQYia2njxUzldApErwIDtl2b4uP9X8dkG0uVQzA',
-        //   filePath: '132',
-        //   cloudPath: 'avatar/' + km.globalData.openid + '.jpg',
-        //   success: (reu) => {
-
-        //   },
-        //   fail: (rwu) => {
-        //     console.error('保存用户头像失败！', rwu);
-        //   },
-        // })
-        thee.create_newuser();
+        thee.create_newuser(ret.userInfo.nickName, ret.userInfo.avatarUrl);
       },
       fail: (rwt) => {
-        thee.create_newuser('unknown_user.jpg', '未命名用户');
+        thee.create_newuser();
       },
     });
     return;
-    //下面废置代码，以后删除
-    wx.showModal({
-      cancelColor: 'cancelColor',
-      title: '提示',
-      content: '是否使用微信头像和昵称？',
-    }).then(res => {
-      console.log(res)
-      if (res.confirm) {
-        //这样不会触发，所以放弃了这种逻辑
-        wx.getUserProfile({
-          desc: '请授权获取您的头像和昵称',
-          success: (ret) => {
-            console.log('awa', ret)
-          },
-        })
-      } else if (res.cancel) {
-        thee.create_newuser('unknown_user.jpg', '未命名用户');
-      }
-    }).catch(rws => {
-      console.error('弹窗异常');
-    });
   },
 
   //创造新用户
-  create_newuser: function (avatar, name) {
+  create_newuser: function (uname = '未命名用户', uavatar = 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/avatar/unknown_user.jpg') {
+    var thee = this;
+    wx.showLoading({
+      title: '创建用户中，请稍后……',
+      mask: true,
+      success: (res) => { },
+      fail: (res) => { },
+      complete: (res) => { },
+    });
 
+    var udata = {
+      _id: km.globalData.openid,
+      name: uname,
+      avatar: uavatar,
+      motto: '',
+      point: 0,
+      warehouse: [],
+      appointment_talk: [],
+      appointment_vr: [],
+      star_video: [],
+      star_post: [],
+      history_video: [],
+      history_post: [],
+    };
+
+    db.collection('user').add({
+      data: udata
+    }).then(res => {
+      km.globalData.info_user = udata;
+      thee.setData({
+        userinfo: udata,
+      })
+      wx.hideLoading({
+        success: (res) => { },
+      });
+    }).catch(rws => {
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '创建失败！请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    });
+  },
+
+  //真实永久删除账号(正式版本可能不会显示该功能)
+  del_user: function () {
+    let thee = this;
+    wx.showLoading({
+      title: '创建用户中，请稍后……',
+      mask: true,
+      success: (res) => { },
+      fail: (res) => { },
+      complete: (res) => { },
+    });
+
+    db.collection('user').doc(km.globalData.openid).remove().then(res => {
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '删除成功，重启小程序生效！请马上重启小程序(此时进行其他操作可能会产生故障)。',
+        icon: 'none',
+        duration: 3000,
+      })
+    }).catch(rws => {
+      console.error('删除用户失败', rws);
+      wx.hideLoading({
+        success: (res) => { },
+      });
+    })
+  },
+
+  //前往详细信息页面
+  goto_myinfo: function () {
+    wx.navigateTo({
+      url: '../myinfo/myinfo',
+    });
+  },
+
+  //前往收藏页面
+  goto_mycollect: function () {
+    wx.navigateTo({
+      url: '../mycollect/mycollect',
+    });
+  },
+
+  //前往浏览记录页面
+  goto_myhistory: function () {
+    wx.navigateTo({
+      url: '../myhistory/myhistory',
+    });
+  },
+
+  //前往树洞页面
+  goto_mypost: function () {
+    wx.navigateTo({
+      url: '../mypost/mypost',
+    });
+  },
+
+  //前往帮助页面
+  goto_help: function () {
+    wx.navigateTo({
+      url: '../help/help',
+    });
+  },
+
+  //前往联系客服页面
+  goto_contactus: function () {
+    wx.navigateTo({
+      url: '../contactus/contactus',
+    });
   },
 
   /**

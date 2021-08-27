@@ -19,14 +19,6 @@ Page({
 
   },
 
-  //下面为调试代码，正式版本前会删除
-  goto_test_page: function () {
-    wx.navigateTo({
-      url: '../video/video?id=0',
-    });
-    km.add_click('video', '0');
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

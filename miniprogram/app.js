@@ -52,7 +52,7 @@ App({
       name: 'getOpenId',
     }).then(res => {
       let openid = res.result.userInfo.openId;
-      getApp().globalData.user_openid = openid;
+      getApp().globalData.openid = openid; //修复了一条bugs
       if (db && !loaduser_done) {
         this.load_user(openid);
       }
@@ -77,12 +77,15 @@ App({
     loaduser_done = true;
     let km = getApp();
     db.collection('user').doc(openid).get().then(res => {
-      console.log(openid, res.data);
-      km.globalData.info_user = res.data;
+      // console.log(openid, res.data);
+      if (res.data._openid == openid) {
+        km.globalData.info_user = res.data;
+      }
       if (++now_loading == total_loading) {
         km.init_finish();
       }
     }).catch(rws => {
+      // console.error('获取用户信息失败', rws);
       if (++now_loading == total_loading) {
         km.init_finish();
       }

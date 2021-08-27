@@ -176,7 +176,7 @@ graph TD
 #### 用户对象
 
 1. id string 与openid和_id一致
-2. openid string //可选
+2. _openid string  数据库记录创建时自动生成的
 3. name string 要求length不超过20
 4. school string 学校信息(选填) 要求length不超过40 暂时不实现
 5. motto string 个性签名 要求length不超过80 暂时不实现
@@ -184,10 +184,11 @@ graph TD
 7. warehouse array(元素为[number, number]) 仓库(商品id+数目)
 8. appointment_talk array(元素为date)
 9. appointment_vr array(元素为date)
-10. star_video array(元素为string)
-11. star_post array(元素为string)
+10. star_video array(元素为[string,date])
+11. star_post array(元素为[string,date])
 12. history_video array(元素为[string,date])
 13. history_post array(元素为[string,date])
+14. avatar 头像url(完整地址)
 
 #### 
 
