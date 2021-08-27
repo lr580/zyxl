@@ -97,7 +97,7 @@ getOpenId
 
 特殊头像：
 
-- 
+- `unknown_user.jpg` 默认/未知用户
 
 
 
@@ -157,6 +157,8 @@ getOpenId
 
 ### 样例视频结构示意图
 
+> 仅展示有意义的样例视频
+
 #### 0
 
 ```mermaid
@@ -196,7 +198,7 @@ graph TD
 13. history_post array(元素为[string,date])
 14. avatar 头像url(完整地址)
 
-#### 
+
 
 
 
@@ -217,17 +219,11 @@ graph TD
 
 2021-8-27
 
-1. 
-
-
-
-
-
-其他：
-
-[云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
-
+1. 实现了用户板块的如下功能：
+   1. 用户的注册、自动登录和删除
+   2. 用户基本信息的修改
+   3. 用户浏览记录的增加、收藏和取消收藏的实现、首次点击积分的增加
+2. 现在“剧场”的互动视频可以在后台自由更改UP主名称和头像
 
 
 
