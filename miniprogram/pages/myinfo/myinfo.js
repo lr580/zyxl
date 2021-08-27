@@ -91,7 +91,72 @@ Page({
 
   //上传头像
   upload_avatar: function () {
-    console.log('qwq');
+    var thee = this;
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        if (res.tempFilePaths.length == 0) {
+          wx.showToast({
+            title: '您未选中图片。',
+            icon: 'none',
+          }); //也许微信自带的选择器会自带这个，不需要自己做提示
+          return;
+        }
+        let temppath = res.tempFilePaths[0];
+        let picname = temppath.substr(temppath.lastIndexOf('/') + 1);//完整文件名(不含上级路径)
+        console.log('qwq', 'avatar/' + picname);
+        wx.showLoading({
+          title: '上传中……',
+        });
+        wx.cloud.uploadFile({
+          filePath: temppath,
+          cloudPath: 'avatar/' + picname,
+        }).then(ret => {
+          let avapath = km.globalData.cloudpath + '/avatar/' + picname;
+          db.collection('user').doc(km.globalData.openid).update({
+            data: {
+              avatar: avapath,
+            }
+          }).then(reu => {
+            wx.hideLoading({
+              success: (res) => { },
+            });
+            km.globalData.info_user.avatar = avapath;
+            thee.setData({
+              userinfo: km.globalData.info_user,
+            });
+          }).catch(rwu => {
+            console.error('保存图片信息失败', rwu);
+            wx.hideLoading({
+              success: (res) => { },
+            });
+            wx.showToast({
+              title: '保存图片失败！',
+              icon: 'none',
+            });
+          });
+        }).catch(rwt => {
+          wx.hideLoading({
+            success: (res) => { },
+          });
+          wx.showToast({
+            title: '上传失败，请重试！',
+            icon: 'none',
+          })
+          console.error('上传图片到云端失败', rwt);
+        });
+      },
+      fail(rws) {
+        if (rws.errMsg == "chooseImage:fail cancel") {//用户主动撤销，不报错。
+          return;
+        }
+        wx.showToast({
+          title: '上传失败，请重试！',
+          icon: 'none',
+        });
+        console.error('图片上传失败', rws);
+      },
+    });
   },
 
   /**
