@@ -1,6 +1,24 @@
 <!--miniprogram/pages/Theater/Theater.wxml-->
-<view>搜索框区域(不保证实现本功能)</view>
-<view>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-cyan"></text> 类别
+  </view>
+</view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans" wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
+    {{types[item]}}
+  </view>
+</scroll-view>
+
+
+
+
+
+
+
+
+<!-- <view>搜索框区域(不保证实现本功能)</view> -->
+<!-- <view>
   选择类别：
   <view wx:for="{{type_seq}}">
     <view bindtap="click_type" id="{{item}}">
@@ -8,30 +26,40 @@
       <text>{{types[item]}}</text>
     </view>
   </view>
-</view>
-<view>
+</view> -->
+<!-- <view>
   选择排序依据：(没得选，只有一个依据)
   <view wx:if="{{sort_key==0}}">
     <view bindtap="sele_sorttype" id="00">{{sort_reverse?'':'(当前)'}}按时间由近到远排序</view>
     <view bindtap="sele_sorttype" id="01">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
   </view>
-</view>
+</view> -->
 
 <!-- <view>分割线(｀・ω・´)</view> -->
 
-<view wx:if="{{num_show}}">
+<view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part" wx:if="{{num_show}}">
   <!--videolist.length-->
   <view wx:for="{{videolist}}">
-    <view wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
-      <view>分割线(*/ω＼*)</view>
-      <view>标题：{{item[0]}}</view>
-      <view>分类：{{types[item[1]]}}</view>
-      <view>浏览次数：{{item[2]}}</view>
-      <view>封面：<image src="{{item[3]}}"></image>
+
+    <view class="video_body" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
+      <view><image class="video_cover" src="{{item[3]}}"></image></view>
+      <view class="video_intro">
+        <view class="video_title">{{item[0]}}</view>
+     <view class="video_type">
+      <image src="/img/type.png"></image> 
+     <text>{{types[item[1]]}}</text> 
+    </view>
+    <view class="video_count">
+      <image src="/img/count.png"></image> 
+    <text>{{item[2]}}</text>  
+    </view>
       </view>
-      <view>分割线ヾ(=･ω･=)o</view>
+   
     </view>
   </view>
   <view wx:if="{{num_show==videolist.length}}">已经到达底部啦|ू･ω･` )</view>
 </view>
+
+
+
 <view wx:else>没有符合条件的互动视频awa！</view>

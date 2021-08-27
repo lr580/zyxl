@@ -1,1 +1,92 @@
 /* miniprogram/pages/Theater/Theater.wxss */
+
+
+.video_body{
+  margin-left: 30rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  background-color: white;
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx rgba(0, 0, 0, 0.466) solid;
+  
+}
+
+.video_cover{
+  width: 260rpx;
+  height: 160rpx;
+  border-radius: 9rpx;
+}
+
+.video_intro{
+  flex-direction: column;
+  height: 180rpx;
+  width: 500rpx;
+  padding: 5rpx;
+  margin-left: 20rpx;
+}
+
+.video_title{
+  font-weight: 600;
+  font-size: 28rpx;
+  letter-spacing:0.5rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  padding-right: 10rpx;
+  height: 80rpx;
+}
+
+.video_type{
+  margin-top:25rpx;
+ 
+  align-items: center;
+  display: flex;
+}
+
+.video_type text{
+  margin-left: 8rpx;
+  font-size: 20rpx;
+  font-weight: 400;
+  color: #bfbfbf;
+}
+
+.video_type image{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+
+.video_count{
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  font-weight: 200;
+  color: #bfbfbf;
+  align-items: center;
+  display: flex;
+}
+
+.video_count image{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.video_count text{
+  margin-left: 8rpx;
+  font-size: 20rpx;
+  font-weight: 400;
+  color: #bfbfbf;
+}
+
+.scroll_part{
+
+}
+
+.trans{
+
+  transition: 0.3s;
+}
