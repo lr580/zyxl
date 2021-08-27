@@ -205,6 +205,8 @@ Page({
       url: '../video/video?id=' + vid,
     });
     km.add_click('video', vid);
+    km.isfirst_browse(vid);
+    km.add_record('history_video', vid);
   },
 
   onPullDownRefresh: function () {

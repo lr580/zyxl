@@ -68,16 +68,15 @@ App({
       batch: 20, //每次向数据库的最大读取批次
       openid: '',
       info_user: null,
+      info_up: [],
     }
   },
 
   //用户信息获取和自动登录尝试
   load_user(openid) {
-    // console.log('qwq');
     loaduser_done = true;
     let km = getApp();
     db.collection('user').doc(openid).get().then(res => {
-      // console.log(openid, res.data);
       if (res.data._openid == openid) {
         km.globalData.info_user = res.data;
       }
@@ -85,7 +84,6 @@ App({
         km.init_finish();
       }
     }).catch(rws => {
-      // console.error('获取用户信息失败', rws);
       if (++now_loading == total_loading) {
         km.init_finish();
       }
@@ -143,6 +141,7 @@ App({
 
     db.collection('global').doc('default').get().then(res => {
       km.globalData.num_video = res.data.num_video;
+      km.globalData.info_up = res.data.up;
       km.load_video();
     }).catch(rws => {
       console.error('全局数据获取失败。')
@@ -159,6 +158,84 @@ App({
   //读取所有小剧场互动视频文本信息(视频信息不读取)
   load_video: function () {
     this.batch_read('video', getApp().globalData.num_video, 'info_video');
+  },
+
+  //通用函数：为用户记录内的s数组添加一则内容[x,time](重复则覆盖),按时间从近到远排序 (不触发加载弹框) 成败回调函数是suc, fail
+  add_record: function (s, x, time = new Date, suc = () => { }, fail = () => { }) {
+    //因为跟add_click有可能同时操作，所以不在这里触发click_busy了
+    let km = getApp();
+    let arr = km.globalData.info_user[s];
+    let newarr = [];
+    for (let i = 0; i < arr.length; ++i) {
+      if (arr[i][0] != x) {
+        newarr.push(arr[i]);
+      }
+    }
+    newarr.unshift([x, time]);
+    let fix_obj = {};
+    fix_obj[s] = newarr;
+    km.globalData.info_user[s] = newarr;//修复了bugs
+    db.collection('user').doc(km.globalData.openid).update({
+      data: fix_obj
+    }).then(res => {
+      suc();
+    }).catch(rws => {
+      console.error('用户信息修改失败', s, x, time, rws);
+      fail();
+    })
+  },
+
+  //通用函数：为用户记录内的s数组删除内容[x,time](重复则覆盖),按时间从近到远排序 (不触发加载弹框) 成败回调函数是suc, fail
+  del_record: function (s, x, suc = () => { }, fail = () => { }) {
+    //因为跟add_click有可能同时操作，所以不在这里触发click_busy了
+    let km = getApp();
+    let arr = km.globalData.info_user[s];
+    let newarr = [];
+    for (let i = 0; i < arr.length; ++i) {
+      if (arr[i][0] != x) {
+        newarr.push(arr[i]);
+      }
+    }
+    let fix_obj = {};
+    fix_obj[s] = newarr;
+    km.globalData.info_user[s] = newarr;
+    db.collection('user').doc(km.globalData.openid).update({
+      data: fix_obj
+    }).then(res => {
+      suc();
+    }).catch(rws => {
+      console.error('用户信息修改失败', s, x, time, rws);
+      fail();
+    })
+  },
+
+  //通用函数：首次浏览视频时，为用户增加x点积分
+  isfirst_browse(vid, x = 1) {
+    //因为跟add_click有可能同时操作，所以不在这里触发click_busy了
+    let km = getApp();
+    let arr = km.globalData.info_user.history_video;
+    let first = true;
+    for (let i = 0; i < arr.length; ++i) {
+      if (arr[i][0] == vid) {
+        first = false;
+        break;
+      }
+    }
+    if (first) {
+      db.collection('user').doc(km.globalData.openid).update({
+        data: {
+          point: _.inc(x)
+        }
+      }).then(res => {
+        wx.showToast({
+          title: '首次浏览本视频，获得1点积分！',
+          icon: 'none', //不然title字显示不完
+          duration: 3000,
+        });
+      }).catch(rws => {
+        console.error('增加积分失败：', rws);
+      });
+    }
   },
 
   //通用函数：检查频繁点击并返回状态
@@ -180,20 +257,38 @@ App({
     return true;
   },
 
-  //通用函数，为集合setname的记录x的字段click增加1
-  add_click: function (setname, x) {
-    if (!this.triggle_busy()) { return; }
+  //通用函数，为集合setname的记录x的字段click增加y，若tb触发频繁点击警报
+  add_click: function (setname, x, y = 1, tb = true) {
+    if (tb) {
+      if (!this.triggle_busy()) {
+        return;
+      }
+    }
     //理论上这个操作是极快的，会快于用户频繁点击的频率，但还是要保险起见
     db.collection(setname).doc(x).update({
       data: {
-        click: _.inc(1)
+        click: _.inc(y)
       }
     }).then(res => {
-      click_busy = false;
+      if (tb) {
+        click_busy = false;
+      }
     }).catch(rws => {
-      console.error('增加浏览次数失败：', setname, x);
-      click_busy = false;
+      console.error('增加次数失败：', setname, x);
+      if (tb) {
+        click_busy = false;
+      }
     });
+  },
+
+  //通用函数：在元素为[x,y]的数组a(x不重复)内查找是否存在x，返回下标或-1(查不到)
+  find_in_pair: function (a, x) {
+    for (let i = 0; i < a.length; ++i) {
+      if (a[i][0] == x) {
+        return i;
+      }
+    }
+    return -1;
   },
 
   //通用函数，传入date，返回年月日(type=1)(+时分 type=0)的格式化文本

@@ -122,6 +122,7 @@ Page({
               success: (res) => { },
             });
             km.globalData.info_user.avatar = avapath;
+            //已知一个小缺陷：保存图片后昵称和个性签名编辑框会被初始化
             thee.setData({
               userinfo: km.globalData.info_user,
             });

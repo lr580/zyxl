@@ -32,7 +32,11 @@ openid: '',
 info_user: null,
 ```
 
+up主下标(即ID)对应的昵称和头像url信息：
 
+```js
+info_up: [],
+```
 
 
 
@@ -55,6 +59,7 @@ info_user: null,
 项目：
 
 1. num_video number
+2. up array([string, string]) 下标(UP主ID)对应的UP主昵称和头像完整url
 
 ### 云存储
 
@@ -120,7 +125,7 @@ getOpenId
 
 2. title string
 
-3. up string 发布者ID
+3. up string 发布者ID(见全局变量)
 
 4. type number 类型下标
 

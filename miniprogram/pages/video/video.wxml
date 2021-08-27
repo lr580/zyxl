@@ -14,7 +14,8 @@
     </view>
     <view>浏览次数：{{video_click}}</view>
     <view>发布时间：{{video_time}}</view>
-    <view>点我收藏(暂未实现功能)</view>
+    <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
+    <view bindtap="unstar_video" wx:else>点我取消收藏</view>
   </view>
   <view>分鸽线</view>
   <view>当前片段：{{video_clipname}}</view>

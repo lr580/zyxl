@@ -16,8 +16,9 @@ Page({
     video_poster: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/videoposter/unknown_poster.jpg', //视频封面(当下版本已经删除该功能)
     video_title: '未知视频',//当前视频标题
     video_clipname: '未知片段',//当前片段名字
-    video_upname: '未知UP主',//当前up主名字(未实现)
-    video_upavatar: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/avatar/unknown_user.jpg',//当前up主头像(未实现)
+    video_upname: '知音心流管理员',//当前up主名字
+    video_upavatar: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/avatar/unknown_user.jpg',//当前up主头像
+    video_upid: 0, //当前up主ID
     video_type: '未知',//当前视频类型
     video_click: 0,//视频点击次数
     video_time: '时间字符串',//视频最后编辑时间
@@ -26,6 +27,8 @@ Page({
     state: 0,//未开始：0；正常节点：1；无选项节点：2；结局：3
     now_node: 0,//当前节点
     saves: [],//存档(每个元素下标0是id,1是名字)
+    starred: false,//是否已经收藏本视频
+    busy: false,//是否处于防止频繁点击状态
   },
 
   /**
@@ -34,15 +37,7 @@ Page({
   onLoad: function (options) {
     this.setData({ vid: options.id });
     this.video_init();
-    // console.log(km.globalData.info_video);
-
     //尚未修复的小bugs：偶尔会显示渲染层网络层错误，有小概率影响视频加载，产生原因未知
-
-    //尚未做：
-    //视频发布者信息(名称)读取
-    //用户浏览历史更新
-    //如果第一次点击，用户积分增加
-    //用户点击收藏
   },
 
   //初始化视频信息
@@ -53,12 +48,15 @@ Page({
       now_node: 0,
       video_title: obj.title,
       video_clipname: obj.clipname[0],
-      /*video_upname: ,*/
       video_type: km.globalData.type_p[obj.type],
       video_time: km.date2str(obj.time),
       video_click: obj.click,
       state: obj.edge[0].length > 1 ? 1 : 3,
       saves: [[0, obj.clipname[0]]],
+      video_upid: Number(obj.up),
+      video_upname: km.globalData.info_up[Number(obj.up)][0],
+      video_upavatar: km.globalData.info_up[Number(obj.up)][1],
+      starred: km.find_in_pair(km.globalData.info_user.star_video, vid) != -1,
     })
     this.video_update(0);
     this.get_next(0);
@@ -145,6 +143,74 @@ Page({
     this.setData({
       choice_showing: false,
     });
+  },
+
+  //如果正忙，弹出请勿频繁点击且返回true，否则啥也不做且返回false
+  check_busy: function () {
+    if (this.data.busy) {
+      wx.showToast({
+        title: '请勿频繁点击！',
+        icon: 'none',
+      });
+      return true;
+    }
+    return false;
+  },
+
+  //收藏本视频
+  star_video: function () {
+    if (this.check_busy()) {
+      return;
+    }
+    this.setData({
+      busy: true,
+    });
+    let thee = this;
+    var callback_suc = function () {
+      thee.setData({
+        busy: false,
+        starred: true,
+      });
+    };
+    var callback_fail = function () {
+      thee.setData({
+        busy: false,
+      });
+      wx.showToast({
+        title: '收藏失败，请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    };
+    km.add_record('star_video', this.data.vid, new Date, callback_suc, callback_fail);
+  },
+
+  //取消收藏本视频
+  unstar_video: function () {
+    if (this.check_busy()) {
+      return;
+    }
+    this.setData({
+      busy: true,
+    });
+    let thee = this;
+    var callback_suc = function () {
+      thee.setData({
+        busy: false,
+        starred: false,
+      });
+    };
+    var callback_fail = function () {
+      thee.setData({
+        busy: false,
+      });
+      wx.showToast({
+        title: '取消收藏失败，请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    };
+    km.del_record('star_video', this.data.vid, callback_suc, callback_fail);
   },
 
   /**

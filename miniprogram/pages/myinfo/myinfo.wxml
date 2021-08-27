@@ -7,5 +7,5 @@
   </view>
   <view>个性签名：<input type="text" bindinput="input_motto" value="{{userinfo.motto}}" placeholder="请输入个性签名" maxlength="80" />
   </view>
-  <view bindtap="save_change" style="font-size: 18px;">保存</view>
+  <view bindtap="save_change" style="font-size: 18px;">保存昵称和个性签名</view>
 </view>
