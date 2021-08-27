@@ -1,8 +1,4 @@
-// pages/index/index.js
-const km = getApp();
-const db = wx.cloud.database();
-const _ = db.command;
-
+// pages/mypost/mypost.js
 Page({
 
   /**

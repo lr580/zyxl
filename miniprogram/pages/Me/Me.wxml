@@ -1,2 +1,27 @@
 <!--miniprogram/pages/Me/Me.wxml-->
-<text>miniprogram/pages/Me/Me.wxml</text>
+<view wx:if="{{!userinfo}}">
+  <view>未登录</view>
+  <view bindtap="register">点我授权登录</view>
+</view>
+<view wx:else>
+  <view>已登录</view>
+  <view bindtap="goto_myinfo">
+    <view>用户昵称：{{userinfo.name}}</view>
+    <view>用户头像：<image src="{{userinfo.avatar}}"></image>
+    </view>
+    <view>个性签名：{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</view>
+  </view>
+  <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view>
+</view>
+
+<view>分割线╰(￣▽￣)╭</view>
+
+<view>
+  <view bindtap="goto_myinfo">我的消息</view>
+  <view bindtap="goto_mycollect">收藏列表</view>
+  <view bindtap="goto_myhistory">浏览记录</view>
+  <view bindtap="goto_mypost">我的树洞</view>
+  <view bindtap="goto_help">查看帮助</view>
+  <view bindtap="goto_contactus">联系客服</view>
+  <view><button open-type="feedback">投诉反馈</button></view>
+</view>

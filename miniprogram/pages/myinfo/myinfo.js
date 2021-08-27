@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/myinfo/myinfo.js
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
@@ -16,6 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.myinfo_init();
+  },
+
+  //初始化
+  myinfo_init: function () {
 
   },
 
