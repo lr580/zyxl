@@ -66,7 +66,7 @@ App({
       info_video: [],
       num_video: 0,
       batch: 20, //每次向数据库的最大读取批次
-      userid: '',
+      openid: '',
       info_user: null,
     }
   },

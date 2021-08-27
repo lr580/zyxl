@@ -9,7 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    openid: '',
+    userinfo: '',
+    i_name: '',
+    i_motto: '',
   },
 
   /**
@@ -21,6 +24,19 @@ Page({
 
   //初始化
   myinfo_init: function () {
+    this.setData({
+      openid: km.globalData.openid,
+      userinfo: km.globalData.info_user,
+    });
+  },
+
+  //输入昵称
+  input_name: function (e) {
+    console.log(e.detail.value);
+  },
+
+  //保存更改
+  save_change: function () {
 
   },
 

@@ -17,10 +17,10 @@
 <view>分割线╰(￣▽￣)╭</view>
 
 <view>
-  <view bindtap="goto_myinfo">我的消息</view>
-  <view bindtap="goto_mycollect">收藏列表</view>
-  <view bindtap="goto_myhistory">浏览记录</view>
-  <view bindtap="goto_mypost">我的树洞</view>
+  <view bindtap="goto_myinfo" wx:if="{{userinfo}}">我的消息</view>
+  <view bindtap="goto_mycollect" wx:if="{{userinfo}}">收藏列表</view>
+  <view bindtap="goto_myhistory" wx:if="{{userinfo}}">浏览记录</view>
+  <view bindtap="goto_mypost" wx:if="{{userinfo}}">我的树洞</view>
   <view bindtap="goto_help">查看帮助</view>
   <view bindtap="goto_contactus">联系客服</view>
   <view><button open-type="feedback">投诉反馈</button></view>

@@ -1,2 +1,11 @@
 <!--pages/myinfo/myinfo.wxml-->
-<text>pages/myinfo/myinfo.wxml</text>
+<view>
+  <view>您可以在这里编辑您的头像、昵称和个性签名。昵称和个性签名编辑完毕后点击保存按钮方可生效。</view>
+  <view>头像：(点击上传新头像)<image src="{{userinfo.avatar}}"></image>
+  </view>
+  <view>昵称：<input type="text" bindinput="input_name" value="{{userinfo.name}}" placeholder="请输入昵称" maxlength="20" />
+  </view>
+  <view>个性签名：<input type="text" bindinput="input_motto" value="{{userinfo.motto}}" placeholder="请输入个性签名" maxlength="80" />
+  </view>
+  <view bindtap="save_change">保存</view>
+</view>
