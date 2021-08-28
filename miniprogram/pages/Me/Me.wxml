@@ -1,27 +1,91 @@
 <!--miniprogram/pages/Me/Me.wxml-->
 <view wx:if="{{!userinfo}}">
-  <view>未登录</view>
-  <view bindtap="register">点我授权登录</view>
+  <view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-xxl text-bold text-yellow">登录</text>
+      <text class="bg-yellow" style="width:2rem"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
+
+
+  <view class="padding-xl">
+  <button bindtap="register" class="cu-btn block line-yellow lg">
+    <text class="cuIcon-upload"></text> 授权登录</button>
+</view>
+
+<view class="flex-sub text-center">
+      <view class="solid-bottom text-xls padding">
+        <text class="text-grey text-xls">登录以进入知音心流</text>
+      </view>
+    </view>
+
 </view>
 <view wx:else>
-  <view>已登录</view>
-  <view bindtap="goto_myinfo">
-    <view>用户昵称：{{userinfo.name}}</view>
-    <view>用户头像：<image src="{{userinfo.avatar}}"></image>
+
+  <view class="user_info" bindtap="goto_myinfo">
+    <view class="a">
+    <image class="user_avater" src="{{userinfo.avatar}}"></image>
+    <view class="b">
+      <text class="user_name">{{userinfo.name}}</text>
+      <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
     </view>
-    <view>个性签名：{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</view>
+    <image class="user_goin" src="/img/goin.png"></image>
+    </view>
+
   </view>
-  <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view>
+  <!-- <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view> -->
 </view>
 
-<view>分割线╰(￣▽￣)╭</view>
+
 
 <view>
-  <view bindtap="goto_myinfo" wx:if="{{userinfo}}">我的消息</view>
+  <!-- <view bindtap="goto_myinfo" wx:if="{{userinfo}}">我的消息</view>
   <view bindtap="goto_mycollect" wx:if="{{userinfo}}">收藏列表</view>
   <view bindtap="goto_myhistory" wx:if="{{userinfo}}">浏览记录</view>
-  <view bindtap="goto_mypost" wx:if="{{userinfo}}">我的树洞</view>
-  <view bindtap="goto_help">查看帮助</view>
-  <view bindtap="goto_contactus">联系客服</view>
-  <view><button open-type="feedback">投诉反馈</button></view>
+  <view bindtap="goto_mypost" wx:if="{{userinfo}}">我的树洞</view> -->
+  <view class="cu-list menu">
+    <view bindtap="goto_myinfo" wx:if="{{userinfo}}" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-question lg text-yellow"></text>
+        <text class="text-black">我的消息</text>
+      </view>
+    </view>
+    <view bindtap="goto_mycollect" wx:if="{{userinfo}}" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-question lg text-yellow"></text>
+        <text class="text-black">收藏列表</text>
+      </view>
+    </view>
+    <view bindtap="goto_myhistory" wx:if="{{userinfo}}" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-question lg text-yellow"></text>
+        <text class="text-black">浏览记录</text>
+      </view>
+    </view>
+    <view bindtap="goto_mypost" wx:if="{{userinfo}}" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-question lg text-yellow"></text>
+        <text class="text-black">我的树洞</text>
+      </view>
+    </view>
+    <view bindtap="goto_help" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-question lg text-yellow"></text>
+        <text class="text-black">查看帮助</text>
+      </view>
+    </view>
+    <view bindtap="goto_contactus" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-service lg text-yellow"></text>
+        <text class="text-black">联系客服</text>
+      </view>
+    </view>
+    <view bindtap="goto_contactus" class="cu-item arrow">
+      <view class="content">
+        <text class="cuIcon-dianhua lg text-yellow"></text>
+        <text class="text-black">投诉反馈</text>
+      </view>
+    </view>
+  </view>
 </view>

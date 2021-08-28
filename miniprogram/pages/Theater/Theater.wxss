@@ -3,14 +3,16 @@
 
 .video_body{
   margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 15rpx;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
   background-color: white;
   height: 200rpx;
   display: flex;
   align-items: center;
-  border-bottom: 1rpx rgba(0, 0, 0, 0.466) solid;
-  
+  border-radius: 12rpx;
+  box-shadow: 2px 2px 2px gainsboro;
 }
 
 .video_cover{
@@ -42,15 +44,14 @@
 }
 
 .video_type{
-  margin-top:25rpx;
- 
   align-items: center;
   display: flex;
+  margin-left: 200rpx;
 }
 
 .video_type text{
   margin-left: 8rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   font-weight: 400;
   color: #bfbfbf;
 }
@@ -62,12 +63,12 @@
 
 
 .video_count{
-  margin-top: 10rpx;
-  font-size: 20rpx;
+
   font-weight: 200;
   color: #bfbfbf;
   align-items: center;
   display: flex;
+  margin-left: 50rpx;
 }
 
 .video_count image{
@@ -77,7 +78,7 @@
 
 .video_count text{
   margin-left: 8rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   font-weight: 400;
   color: #bfbfbf;
 }
@@ -86,7 +87,35 @@
 
 }
 
+.video_state{
+  display: flex;
+  flex-direction: row;
+  padding: 5rpx;
+  margin-top: 40rpx;
+
+
+}
+
 .trans{
 
-  transition: 0.3s;
+  transition: 0.15s;
+}
+
+.bottom_tip{
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom_tip image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.bottom_tip text{
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: gray;
 }

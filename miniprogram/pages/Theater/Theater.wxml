@@ -1,9 +1,11 @@
 <!--miniprogram/pages/Theater/Theater.wxml-->
-<view class="cu-bar bg-white solid-bottom">
-  <view class="action">
-    <text class="cuIcon-titles text-cyan"></text> 类别
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-cyan">类别</text>
+      <text class="bg-cyan" style="width:2rem"></text>
+      <!-- last-child选择器-->
+    </view>
   </view>
-</view>
 <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
   <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans"
     wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
@@ -43,12 +45,13 @@
   <!--videolist.length-->
   <view wx:for="{{videolist}}">
 
-    <view class="video_body" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
+    <view class="video_body shadow" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
       <view>
         <image class="video_cover" src="{{item[3]}}"></image>
       </view>
       <view class="video_intro">
         <view class="video_title">{{item[0]}}</view>
+        <view class="video_state">
         <view class="video_type">
           <image src="/img/type.png"></image>
           <text>{{types[item[1]]}}</text>
@@ -58,12 +61,19 @@
           <text>{{item[2]}}</text>
         </view>
       </view>
+      </view>
 
     </view>
   </view>
-  <view wx:if="{{num_show==videolist.length}}">已经到达底部啦|ू･ω･` )</view>
+  <view class="bottom_tip" wx:if="{{num_show==videolist.length}}">
+    <image src="/img/tip.png"></image>
+    <text>已经到达底部啦!</text>
+  </view>
 </view>
 
 
 
-<view wx:else>没有符合条件的互动视频awa！</view>
+<view class="bottom_tip" wx:else>
+  <image src="/img/tip.png"></image>
+  <text>暂时没有符合条件的互动视频哦~</text>
+</view>

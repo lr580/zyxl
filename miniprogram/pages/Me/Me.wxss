@@ -1,1 +1,50 @@
 /* miniprogram/pages/Me/Me.wxss */
+.user_info{
+  display: flex;
+  width: 95%;
+  height: 220rpx;
+  padding: 30rpx;
+  flex-direction: column;
+  margin: 20rpx;
+  background-color: rgba(81, 83, 83, 0.048);
+  border-radius: 20rpx;
+  box-shadow: 2px 2px 2px gainsboro;
+}
+
+.user_avater{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+
+.user_name{
+ 
+  font-weight: 400;
+  font-size: 40rpx;
+}
+
+.a{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.b{
+  display: flex;
+  flex-direction: column;
+  width: 400rpx;
+  margin-left: 30rpx;
+}
+
+.user_motto{
+  margin-top: 70rpx;
+  font-weight: 200;
+  font-size: 30rpx;
+  color: gray;
+}
+
+.user_goin{
+  width: 50rpx;
+  height: 50rpx;
+}
