@@ -38,6 +38,21 @@ up主下标(即ID)对应的昵称和头像url信息：
 info_up: [],
 ```
 
+推荐视频的下标和数量(常量)：
+
+```js
+info_recommend: [],
+num_recommend: 4,
+```
+
+海报图片完整路径：
+
+```js
+info_placard = [],
+```
+
+
+
 
 
 ## 云开发目录结构
@@ -60,6 +75,8 @@ info_up: [],
 
 1. num_video number
 2. up array([string, string]) 下标(UP主ID)对应的UP主昵称和头像完整url
+3. recommend array(string) 推荐的互动视频下标
+4. placard array(string) 海报图片(相对路径)
 
 ### 云存储
 
@@ -72,12 +89,6 @@ info_up: [],
 特殊视频片段：
 
 - `fail1` 视频加载失败时显示的视频片段
-
-
-
-### 云函数
-
-getOpenId 
 
 
 
@@ -98,6 +109,18 @@ getOpenId
 特殊头像：
 
 - `unknown_user.jpg` 默认/未知用户
+
+
+
+#### placard
+
+海报图片，没有文件名要求
+
+
+
+### 云函数
+
+getOpenId 
 
 
 

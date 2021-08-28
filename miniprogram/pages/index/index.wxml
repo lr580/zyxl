@@ -1,3 +1,35 @@
 <!--pages/index/index.wxml-->
 <text>这是一个首页</text>
 
+<view>
+  <view>精彩视频推荐！</view>
+  <view wx:if="{{arr_rec.length}}">
+    <view wx:for="{{arr_rec}}">
+      <view bindtap="goto_video" id="{{item[4]}}">
+        <view>分割线(*￣3￣)╭ </view>
+        <view>标题：{{item[0]}}</view>
+        <view>类别：{{types[item[1]]}}</view>
+        <view>浏览次数：{{item[2]}}</view>
+        <view>封面：<image src="{{item[3]}}"></image>
+        </view>
+        <view>分割线✧⁺⸜(●˙▾˙●)⸝⁺✧</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else>加载中……</view>
+</view>
+<view>
+  海报！
+  <view wx:if="{{arr_pla.length}}">
+    <view wx:for="{{arr_pla}}">
+      <image src="{{item}}" bindtap="goto_placard" id="{{index}}" style="height: 130rpx;"></image>
+    </view>
+  </view>
+  <view wx:else>加载中……</view>
+</view>
+
+<view>
+  <view bindtap="goto_talk">点我前往悄悄话预约</view>
+  <view bindtap="goto_vr">点我前往VR展预约</view>
+  <view bindtap="goto_shop">点我前往积分商城</view>
+</view>

@@ -10,10 +10,12 @@
     "pages/mycollect/mycollect",
     "pages/mypost/mypost",
     "pages/help/help",
-    "pages/contactus/contactus"
+    "pages/contactus/contactus",
+    "pages/placard/placard",
+    "pages/talk/talk",
+    "pages/vr/vr",
+    "pages/shop/shop"
   ],
-
-
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

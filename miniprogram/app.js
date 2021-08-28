@@ -69,6 +69,9 @@ App({
       openid: '',
       info_user: null,
       info_up: [],
+      info_recommend: [],
+      num_recommend: 4,
+      info_placard: [],
     }
   },
 
@@ -142,22 +145,47 @@ App({
     db.collection('global').doc('default').get().then(res => {
       km.globalData.num_video = res.data.num_video;
       km.globalData.info_up = res.data.up;
+      km.globalData.info_recommend = res.data.recommend;
+      let arr_pla = [];
+      for (let i = 0; i < res.data.placard.length; ++i) {
+        arr_pla.push(km.globalData.cloudpath + '/placard/' + res.data.placard[i]);
+      }
+      km.globalData.info_placard = arr_pla;
+
       km.load_video();
     }).catch(rws => {
       console.error('全局数据获取失败。')
     });
   },
 
+  //全局初始化后让首页做的事情 (让index页面重新赋值该函数)
+  indexpage_reload: function () {
+    return;
+  },
+
   //读取全局数据完毕
   init_finish: function () {
+    let km = getApp();
     wx.hideLoading({
       success: (res) => { },
     });
+    km.indexpage_reload();
   },
 
   //读取所有小剧场互动视频文本信息(视频信息不读取)
   load_video: function () {
     this.batch_read('video', getApp().globalData.num_video, 'info_video');
+  },
+
+  //通用函数：点击跳转到视频vid
+  goto_video: function (vid) {
+    let km = getApp();
+    wx.navigateTo({
+      url: '../video/video?id=' + vid,
+    });
+    km.add_click('video', vid);
+    km.isfirst_browse(vid);
+    km.add_record('history_video', vid);
   },
 
   //通用函数：为用户记录内的s数组添加一则内容[x,time](重复则覆盖),按时间从近到远排序 (不触发加载弹框) 成败回调函数是suc, fail
@@ -238,7 +266,7 @@ App({
     }
   },
 
-  //通用函数：加载用户的x pair数组，保存在页面thee的变量v里，若reverse=true逆序
+  //通用函数：加载用户的x pair数组，保存在页面thee的变量v里，若reverse=true逆序 (目前废置，未来删除)
   load_pair(x, thee, v, reverse = false) {
     let km = getApp();
     let arro = km.globalData.info_user[x];
@@ -307,12 +335,7 @@ App({
     //点击跳转到对应的视频页面
     thee.goto_video = function (v) {
       let vid = v.currentTarget.id;
-      wx.navigateTo({
-        url: '../video/video?id=' + vid,
-      });
-      km.add_click('video', vid);
-      km.isfirst_browse(vid);//这个没有特别的必要，能在这里点击的必然不是first_browse，可以考虑删掉
-      km.add_record('history_video', vid);
+      km.goto_video(vid);
     };
 
     //点击切换sele_bar

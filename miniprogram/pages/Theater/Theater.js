@@ -191,7 +191,6 @@ Page({
     } else {
       let ns = this.data.num_show;
       ns = Math.min(ns + this.data.num_normal_load, this.data.videolist.length);
-      console.log(ns, this.data.videolist);
       this.setData({
         num_show: ns,
       });
@@ -201,12 +200,7 @@ Page({
   //跳转到互动视频页面
   goto_video: function (v) {
     let vid = v.currentTarget.id;
-    wx.navigateTo({
-      url: '../video/video?id=' + vid,
-    });
-    km.add_click('video', vid);
-    km.isfirst_browse(vid);
-    km.add_record('history_video', vid);
+    km.goto_video(vid);
   },
 
   onPullDownRefresh: function () {

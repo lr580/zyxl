@@ -1,0 +1,2 @@
+<!--pages/placard/placard.wxml-->
+<text>第{{pid+1}}张海报</text>
