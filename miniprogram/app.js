@@ -238,6 +238,107 @@ App({
     }
   },
 
+  //通用函数：加载用户的x pair数组，保存在页面thee的变量v里，若reverse=true逆序
+  load_pair(x, thee, v, reverse = false) {
+    let km = getApp();
+    let arro = km.globalData.info_user[x];
+    let arr = []; //数组强复制，而不是指针指向
+    for (let i = 0; i < arro.length; ++i) {
+      arr.push(arro[i]);
+    }
+    if (reverse) {
+      arr.reverse();
+    }
+    let obj = {};
+    obj[v] = arr;
+    thee.setdata(obj);
+  },
+
+  //通用函数：配置一个显示pair的thee页面js代码(参数意义见注释)
+  init_pair_pagejs(thee, keyname, keych, pfirst = 'video', psecond = 'post') {
+    let km = getApp();
+    thee.setData({
+      sele_bar: 0, //0是pfirst(即互动视频), 1是psecond(即帖子) 
+      reverse: false, //若false，按时间从近到远显示，否则从远到近
+      arr: [], /*当前展示的每一项数组，当sele_bar=0时，元素为[0:标题, 1:分类下标, 2:浏览次数, 3:封面url, 4:最后编辑时间, 5:视频id]*/
+      keyname: keyname, //关键字名称
+      keych: keych,//关键字中文名
+      types: km.globalData.type_p,//分类列表
+    });
+
+    //初始化互动视频
+    thee.init_pfirst = function () {
+      let keyword = keyname + '_' + pfirst;
+      let arro = km.globalData.info_user[keyword];
+      let arr = [];
+      for (let i = 0; i < arro.length; ++i) {
+        let x = km.globalData.info_video[arro[i][0]];
+        arr.push([x.title, x.type, x.click, km.globalData.cloudpath + '/videoposter/' + x.poster, arro[i][1], Number(x.id)]);
+      }
+      //理论上arr本身是有序的，不需要特别排序一次了
+      if (thee.data.reverse) {
+        arr.reverse();
+      }
+      thee.setData({
+        arr: arr,
+      });
+    };
+    thee.init_pfirst();
+
+    //初始化帖子
+    thee.init_psecond = function () {
+      //尚未制作
+    };
+
+    //按照当前sele_bar选择初始化
+    thee.init = function () {
+      if (thee.data.sele_bar == 0) {
+        thee.init_pfirst();
+      } else {
+        thee.init_psecond();
+      }
+    };
+
+    //重新进入该页面触发
+    thee.onShow = function () {
+      thee.init();
+    };
+
+    //点击跳转到对应的视频页面
+    thee.goto_video = function (v) {
+      let vid = v.currentTarget.id;
+      wx.navigateTo({
+        url: '../video/video?id=' + vid,
+      });
+      km.add_click('video', vid);
+      km.isfirst_browse(vid);//这个没有特别的必要，能在这里点击的必然不是first_browse，可以考虑删掉
+      km.add_record('history_video', vid);
+    };
+
+    //点击切换sele_bar
+    thee.switch_bar = function (v) {
+      let newv = Number(v.currentTarget.id);
+
+      thee.setData({
+        sele_bar: newv,
+      });
+      if (newv == 0) {
+        thee.init_pfirst();
+      }
+    };
+
+    //点击切换排序顺序
+    thee.switch_reverse = function (v) {
+      let newv = Number(v.currentTarget.id);
+      let arrnew = thee.data.arr;
+      arrnew.reverse();
+      thee.setData({
+        reverse: newv,
+        arr: arrnew,
+      });
+    };
+  },
+
   //通用函数：检查频繁点击并返回状态
   check_busy: function () {
     if (click_busy) {

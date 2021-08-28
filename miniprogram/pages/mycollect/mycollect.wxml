@@ -1,2 +1,29 @@
-<!--pages/mycollect/mycollect.wxml-->
-<text>pages/mycollect/mycollect.wxml</text>
+<!--注意：当前mycollect.wxml与myhistory.wxml完全一致-->
+<view>{{keych}}列表</view>
+<view>
+  <view bindtap="switch_bar" id="0">{{sele_bar==0?'(当前)':''}}{{keych}}的视频</view>
+  <view bindtap="switch_bar" id="1">{{sele_bar==1?'(当前)':''}}{{keych}}的树洞</view>
+</view>
+<view>
+  <view bindtap="switch_reverse" id="0">{{reverse==0?'(当前)':''}}按时间由近到远排序</view>
+  <view bindtap="switch_reverse" id="1">{{reverse==1?'(当前)':''}}按时间由远到近排序</view>
+</view>
+<view wx:if="{{arr.length}}">
+  <view wx:if="{{sele_bar==0}}">
+    <view wx:for="{{arr}}">
+      <view bindtap="goto_video" id="{{item[5]}}">
+        <view>分割线ヾ(･ω･*)ﾉ</view>
+        <view>{{keych}}的视频标题：{{item[0]}}</view>
+        <view>{{keych}}的视频分类：{{types[item[1]]}}</view>
+        <view>{{keych}}的视频点击次数：{{item[2]}}</view>
+        <view>{{keych}}的视频封面：<image src="{{item[3]}}"></image>
+        </view>
+        <view>分割线＼＼\٩('ω')و//／／</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    暂未制作(；′⌒`)
+  </view>
+</view>
+<view wx:else>空空如也o(╥﹏╥)o</view>

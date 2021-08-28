@@ -12,7 +12,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //该页面js代码使用批量生产，具体见app.js的init_pair_pagejs函数内的注释，以查看data和其他Page函数及其说明
+    getApp().init_pair_pagejs(this, 'history', '浏览');
   },
 
   /**

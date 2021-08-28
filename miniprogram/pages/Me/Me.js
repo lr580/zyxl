@@ -34,7 +34,6 @@ Page({
     wx.getUserProfile({
       desc: '请授权获取您的头像和昵称',
       success: (ret) => {
-        console.log('awa', ret);
         thee.create_newuser(ret.userInfo.nickName, ret.userInfo.avatarUrl);
       },
       fail: (rwt) => {
