@@ -35,7 +35,7 @@
 
   </view>
   <view class="fengexian"></view>
-  <!-- <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view> -->
+  <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view>
 </view>
 
 

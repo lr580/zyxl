@@ -24,8 +24,8 @@ Page({
   init_userpage: function () {
     this.setData({
       userid: km.globalData.userid,
-      userinfo: km.globalData.info_user,
-    });
+      userinfo: km.globalData.info_user.length ? km.globalData.info_user : null,
+    });//注意[]!=[]成立……且仍未知道为何莫名其妙info_user在全局是[]而不是null……
   },
 
   //注册(首次登录)
@@ -91,6 +91,15 @@ Page({
         duration: 3000,
       });
     });
+
+    db.collection('global').doc('default').update({
+      data: {
+        num_user: _.inc(1),
+      }
+    }).then(res => {
+    }).catch(rws => {
+      console.error('更改用户数目失败', rws);
+    });
   },
 
   //真实永久删除账号(正式版本可能不会显示该功能)
@@ -119,6 +128,18 @@ Page({
         success: (res) => { },
       });
     })
+
+    db.collection('global').doc('default').update({
+      data: {
+        num_user: _.inc(-1),
+      }
+    }).then(res => {
+    }).catch(rws => {
+      console.error('更改用户数目失败', rws);
+      wx.hideLoading({
+        success: (res) => { },
+      });
+    });
   },
 
   //前往详细信息页面

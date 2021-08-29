@@ -161,6 +161,13 @@ Page({
     }
     if (this.data.isreplypost == false) { //是主题
       obj.title = this.data.s_title;
+      if (obj.title.length == 0) {
+        wx.showToast({
+          title: '标题不能为空！',
+          icon: 'none',
+        });
+        return;
+      }
       obj.type = Number(this.data.s_type);
     } else {//是跟帖
       obj.title = '';

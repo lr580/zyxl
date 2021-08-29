@@ -16,9 +16,7 @@
     "pages/vr/vr",
     "pages/shop/shop",
     "pages/postp/postp",
-    "pages/postt",
     "pages/postt/postt",
-    "pages/postu",
     "pages/postu/postu"
   ],
   "window": {

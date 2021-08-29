@@ -75,7 +75,7 @@ App({
       info_post: [],
       info_user: [],
       num_post: 0,
-      num_user: 0, //尚未制作：用户的增加和减少而导致num_user变更
+      num_user: 0,
     }
   },
 

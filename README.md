@@ -245,6 +245,27 @@ graph TD
 
 
 
+#### 页面options要求和意见
+
+> 摘自代码(新版本以代码为准)
+
+```js
+/*如果什么都没有，就是发布新帖子
+ 如果带edit关键字就是编辑模式
+ 编辑模式下需要带id关键字，带被编辑帖子id
+ 如果带fid关键字，就是跟帖，且被回的帖子id是fid
+ 带fid关键字的情况下，必然带ftitle关键字，即被跟帖的标题
+ 如果带rid关键字，就是回复帖子，且被回复帖子id是rid，rid出现的充分条件是fid出现
+ 带rid关键字的情况下，必然带rfloor关键字，即被回复楼层
+ 带rid关键字的情况下，必然带rname关键字，即被回复人昵称
+ 事实上rfloor,rname,ftitle可以不传入，但是这里传入是考虑到未来可能删去info_user和info_post将不再可以获取信息
+ 另：假设能够点击进入该页面的人都是已经登陆的用户
+ 然而由于openid这破玩意实在是太长了……塞两个(跟帖和回帖同时)url忍不下，所以并不能页面传递openid
+ 在删除了info_post情况下考虑每读到一个帖子情况下每次数据库读到的东西都存起来，记忆化大模拟ex吐了*/
+```
+
+
+
 #### 帖子ID分配的改进意见
 
 原方案(心行+学舟)这种点进发帖页面发表新帖先临时占用一个帖子ID的做法会缺点：
@@ -295,8 +316,12 @@ graph TD
 12. history_video array(元素为[string,date])
 13. history_post array(元素为[string,date])
 14. post array(string) 发表的帖子
-15. message array([Boolean, string, string]) 是否已读，回帖人，被回帖子
+15. message array([Boolean, string, string]) 是否未读，回帖人，被回帖子
 16. avatar 头像url(完整地址)
+
+
+
+正常代码功能下不会删除用户，所以可以保证一定不会对一个openid出现找不到该用户信息的状况。
 
 
 

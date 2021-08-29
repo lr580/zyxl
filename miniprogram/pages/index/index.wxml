@@ -1,6 +1,8 @@
 <!--pages/index/index.wxml-->
 <text>这是一个首页</text>
 
+<view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view>
+
 <view>
   <view>精彩视频推荐！</view>
   <view wx:if="{{arr_rec.length}}">
