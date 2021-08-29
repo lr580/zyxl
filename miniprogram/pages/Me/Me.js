@@ -67,6 +67,8 @@ Page({
       star_post: [],
       history_video: [],
       history_post: [],
+      post: [],
+      message: [],
     };
 
     db.collection('user').add({

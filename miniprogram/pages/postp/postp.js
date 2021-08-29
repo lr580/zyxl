@@ -31,6 +31,8 @@ Page({
     s_type: 0,//分类框选中类别下标
     fid: -1, //跟帖的被跟帖子id
     rid: -1, //回帖的被回帖子id
+    fuid: '',//跟帖的被跟用户openid
+    ruid: '',//回帖的被回用户openid
   },
 
   /* options格式要求：
@@ -44,6 +46,8 @@ Page({
  带rid关键字的情况下，必然带rname关键字，即被回复人昵称
  事实上rfloor,rname,ftitle可以不传入，但是这里传入是考虑到未来可能删去info_user和info_post将不再可以获取信息
  另：假设能够点击进入该页面的人都是已经登陆的用户
+ 然而由于openid这破玩意实在是太长了……塞两个(跟帖和回帖同时)url忍不下，所以并不能页面传递openid
+ 在删除了info_post情况下考虑每读到一个帖子情况下每次数据库读到的东西都存起来，记忆化大模拟ex吐了
  */
   onLoad: function (options) {
     console.log(options);
@@ -71,6 +75,7 @@ Page({
         isreplypost: true,
         fid: Number(options.fid),
         ftitle: options.ftitle,
+        fuid: km.globalData.info_post[Number(options.fid)].user,
       })
     }
     if (options.rid != undefined) {
@@ -79,28 +84,7 @@ Page({
         rid: Number(options.rid),
         rep_name: options.rname,
         rep_floor: options.rfloor,
-      });
-    }
-
-    let thee = this;
-    if (false) { //发布新帖(学舟旧方案，现在进行了优化，已废除该方案)
-      db.collection('global').doc('default').update({
-        data: {
-          num_post: _.inc(1),
-        }
-      }).then(res => {
-        km.globalData.num_post++;
-        thee.setData({
-          id: km.globalData.num_post,
-        });
-        console.log('num_post', km.globalData.num_post);
-      }).catch(rws => {
-        console.error('增加帖子失败！', rws);
-        wx.navigateBack();
-        wx.showToast({
-          title: '创建帖子失败，请重试！',
-          icon: 'none',
-        });
+        ruid: km.globalData.info_post[Number(options.rid)].user,
       });
     }
 
@@ -172,6 +156,9 @@ Page({
   //保存发帖，正文为nr
   publish: function (nr) {
     let obj = {};
+    if (this.data.edit) {
+      obj = km.globalData.info_post[Number(this.data.id)];
+    }
     if (this.data.isreplypost == false) { //是主题
       obj.title = this.data.s_title;
       obj.type = Number(this.data.s_type);
@@ -180,8 +167,12 @@ Page({
       obj.type = -1;
     }
     let nowtime = new Date;
+    let nowtimeid = Number(nowtime); //以当前时间戳作为帖子ID
     if (this.data.edit == false) { //是新帖
-      obj._id = km.globalData.num_post + 1;
+      obj._id = nowtimeid;
+      this.setData({
+        id: nowtimeid,
+      });
       obj.time_publish = nowtime;
       obj.click = 0;
     }
@@ -195,22 +186,134 @@ Page({
     }
     obj.content = nr;
 
-    console.log(obj);
+    // console.log(obj);可能后续还要console.log，先不删代码
 
-    let all_todos = 1;//待做云操作列表 (本帖)
+    wx.showLoading({
+      title: '保存中……',
+    });
+
+    let all_todos = 2;//待做云操作列表 (本帖+num_post global)
+    let now_todos = 0;//当前进度
+    let thee = this;
+
+    var fail = function (io, rws) {
+      console.error(io, rws);
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '保存失败，请重试！',
+        icon: 'none',
+        duration: 2000,
+      });
+    };
+
+    var final = function () {
+      wx.navigateBack();
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '保存成功！',
+        duration: 2000,
+      });
+    };
+
+    var upd = function () {
+      // console.log('=w=', now_todos + 1, all_todos);
+      if (++now_todos == all_todos) {
+        final();
+      }
+    };
+
+    if (this.data.edit == true) {
+      db.collection('post').doc(String(thee.data.id)).update({
+        data: obj,
+      }).then(res => {
+        // console.log('awa编辑');
+        km.globalData.info_post[Number(thee.data.id)] = obj;
+        upd();
+      }).catch(rws => {
+        fail('保存编辑失败', rws);
+      });
+    } else {
+      db.collection('post').add({
+        data: obj,
+      }).then(res => {
+        // console.log('awa发帖');
+        km.globalData.info_post[Number(thee.data.id)] = obj;
+        upd();
+      }).catch(rws => {
+        fail('发帖失败', rws);
+      });
+    }
+
+    db.collection('global').doc('default').update({
+      data: {
+        num_post: _.inc(1),
+      }
+    }).then(res => {
+      upd();
+    }).catch(rws => {
+      fail('更新帖子数目', rws);
+    });
+
     if (this.data.edit == false) { //用户自己新增帖子
       all_todos++;
-    }
-    if (this.data.isreplypost) { //跟帖
-      all_todos += 2; //给主题人消息，更新主题本帖
-    }
-    if (this.data.isreplyreply) { //回帖
-      if (km.info_post[this.data.rid].user != km.globalData.openid) {//不是我回我自己
-        all_todos++; //给被回帖人消息
-      }
+      db.collection('user').doc(km.globalData.openid).update({
+        data: {
+          post: _.unshift(thee.data.id),
+        }
+      }).then(res => {
+        km.globalData.info_user.post.unshift(thee.data.id); //头部插入方便排序
+        upd();
+      }).catch(rws => {
+        fail('用户信息更新失败', rws);
+      });
     }
 
-    console.log(all_todos);
+    if (this.data.isreplypost) { //跟帖
+      all_todos += 2; //给主题人消息，更新主题本帖
+
+      let newinfo = [true, km.globalData.openid, thee.data.fuid];
+      db.collection('user').doc(thee.data.fuid).update({
+        data: {
+          message: _.unshift(newinfo),
+        }
+      }).then(res => {
+        upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
+      }).catch(rws => {
+        fail('通知主题贴主', rws);
+      });
+
+      db.collection('post').doc(thee.data.fid).update({
+        data: {
+          reply: _.push(thee.data.id),
+        }
+      }).then(res => {
+        km.globalData.info_post[thee.data.fid].push(thee.data.id);
+        upd();
+      }).catch(rws => {
+        fail('更新主题帖子', rws);
+      });
+    }
+    if (this.data.isreplyreply) { //回帖
+      //km.info_post[this.data.rid].user
+      if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
+        all_todos++; //给被回帖人消息
+        let newinfo = [true, km.globalData.openid, thee.data.ruid];
+        db.collection('user').doc(thee.data.ruid).update({
+          data: {
+            message: _.unshift(newinfo),
+          }
+        }).then(res => {
+          upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
+        }).catch(rws => {
+          fail('通知被回复的用户', rws);
+        });
+      }
+    }
+    // console.log(all_todos);
   },
 
   /*以下内容是富文本编辑框官方模板 */

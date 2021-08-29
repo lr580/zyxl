@@ -1,5 +1,3 @@
-## lr580备忘录：记得交学费和返校申请
-
 ## 全局变量定义
 
 云存储根目录完整url：
@@ -232,17 +230,18 @@ graph TD
 
 #### 帖子对象
 
-1. title string 标题，限长30字符
-2. abbr string 摘要(显示在树洞页)，限长80字符
-3. type number 0~4是正常类别 
-4. time_publish Date
-5. time_active Date
-6. click number
-7. user string 即user的ID/openid
-8. content string 富文本，即HTML文本
-9. replyto number 回复的帖子ID
-10. reply array(number) 跟帖帖子ID(按顺序)
-11. parent number 被回复的帖子ID
+1. _id string 格式为：
+2. title string 标题，限长30字符
+3. abbr string 摘要(显示在树洞页)，限长80字符
+4. type number 0~4是正常类别 
+5. time_publish Date
+6. time_active Date
+7. click number
+8. user string 即user的ID/openid
+9. content string 富文本，即HTML文本
+10. replyto number 回复的帖子ID
+11. reply array(number) 跟帖帖子ID(按楼层数字顺序，维护有序)
+12. parent number 被回复的帖子ID
 
 
 
@@ -259,10 +258,20 @@ graph TD
 
 未来版本的一个ID分配设想如下：
 
-1. 帖子ID使用较长的等长随机大小写和数字字符(类似于openID)
+1. 帖子ID使用较长的等长随机大小写和数字字符(类似于openID)等，可以：
+   - 随机刷等长普通字符(英文数字下划线)
+   - 用户ID+`_`+用户帖子序号 (但是还需要保存帖子序号，考虑到删除问题)
+   - 用户ID+随机刷 (还不如直接刷)
+   - 当前时间戳
 2. 点击发帖时什么也不做，点击确认发帖时才上交服务器
 
 现在由于图片使用了随机字符，不再需要固定格式，所以分配设想的第二点可行，所以现在采用第二点方案。取消学舟的预分配策略。可以解决上述bugs。
+
+考虑到延迟问题(只采用第二个时，分配的ID如果还是有序，那么会有时差，即假设在4h登录，5h有人发两个帖，自己在6h发一个帖，那么这个帖子将会覆盖那个人发的第一个帖子)，所以仍然需要使用随机ID。或者用自己的id计数。代价是批量读取数据时比较麻烦。
+
+用户id+序号的缺点是麻烦，而且id太长，因为用户id很长，而用户id不能截断，因为会有很多用户前缀一致。开哈希截断又麻烦。而且还要统计用户ID后面的随机或计数。当然事实上是可以直接无脑随机刷一个随机字符的。
+
+或者有一个新的方案：直接用当前时间作帖子ID，这样有很多事实上的好处。总的来说胜过上述的方案。时间戳的好处是几乎不会重复，因为精确到了毫秒，而且排序方便，而且也不是特别长(与openid相比)。
 
 
 
@@ -281,11 +290,13 @@ graph TD
 7. warehouse array(元素为[number, number]) 仓库(商品id+数目)
 8. appointment_talk array(元素为date)
 9. appointment_vr array(元素为date)
-10. star_video array(元素为[string,date])
+10. star_video array(元素为[string,date]) 下文排序均由时间近到远，维护有序
 11. star_post array(元素为[string,date])
 12. history_video array(元素为[string,date])
 13. history_post array(元素为[string,date])
-14. avatar 头像url(完整地址)
+14. post array(string) 发表的帖子
+15. message array([Boolean, string, string]) 是否已读，回帖人，被回帖子
+16. avatar 头像url(完整地址)
 
 
 
