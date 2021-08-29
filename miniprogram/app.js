@@ -72,6 +72,10 @@ App({
       info_recommend: [],
       num_recommend: 4,
       info_placard: [],
+      info_post: [],
+      info_user: [],
+      num_post: 0,
+      num_user: 0, //尚未制作：用户的增加和减少而导致num_user变更
     }
   },
 
@@ -146,6 +150,8 @@ App({
       km.globalData.num_video = res.data.num_video;
       km.globalData.info_up = res.data.up;
       km.globalData.info_recommend = res.data.recommend;
+      km.globalData.num_post = res.data.num_post;
+      km.globalData.num_user = res.data.num_user;
       let arr_pla = [];
       for (let i = 0; i < res.data.placard.length; ++i) {
         arr_pla.push(km.globalData.cloudpath + '/placard/' + res.data.placard[i]);

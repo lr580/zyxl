@@ -14,7 +14,12 @@
     "pages/placard/placard",
     "pages/talk/talk",
     "pages/vr/vr",
-    "pages/shop/shop"
+    "pages/shop/shop",
+    "pages/postp/postp",
+    "pages/postt",
+    "pages/postt/postt",
+    "pages/postu",
+    "pages/postu/postu"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

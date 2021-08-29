@@ -1,0 +1,49 @@
+<view wx:if="{{isreplypost}}">
+  主题 {{ftitle}}
+</view>
+<view wx:if="{{isreplyreply}}">
+  回复{{rep_floor}}楼 {{rep_name}}：
+</view>
+<view wx:if="{{!isreplypost}}">
+  <input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input>
+  <view>选择类别：</view>
+  <view wx:for="{{types}}">
+    <view wx:if="{{index+1<types.length}}"> <!--跳过全部这一类别，该类别不可选-->
+      <view bindtap="sele_type" id="{{index}}">
+        {{s_type==index?'(当前)':''}} {{item}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<view>
+  <view class="toolbar" bindtap="format">
+    <i class="iconfont icon-charutupian" catchtouchend="insertImage"></i>
+    <i class="iconfont icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{1}}"></i>
+    <i class="iconfont icon-format-header-2 {{formats.header === 2 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{2}}"></i>
+    <i class="iconfont icon-format-header-3 {{formats.header === 3 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{3}}"></i>
+    <i class="iconfont icon-format-header-4 {{formats.header === 4 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{4}}"></i>
+    <i class="iconfont icon-format-header-5 {{formats.header === 5 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{5}}"></i>
+    <i class="iconfont icon-format-header-6 {{formats.header === 6 ? 'ql-active' : ''}}" data-name="header"
+      data-value="{{6}}"></i>
+    <i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
+    <i class="iconfont icon-zitixieti {{formats.italic ? 'ql-active' : ''}}" data-name="italic"></i>
+    <i class="iconfont icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}" data-name="underline"></i>
+    <i class="iconfont icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}" data-name="list"
+      data-value="ordered"></i>
+    <i class="iconfont icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}" data-name="list"
+      data-value="bullet"></i>
+  </view>
+  <view>
+    <editor id="main_input" placeholder="请输入内容……" bindstatuschange="mi_status" bindready="mi_ready" showImgSize
+      showImgToolbar showImgResize>
+    </editor>
+  </view>
+</view>
+
+<view bindtap="save_all" style="font-size: 18px;">保存</view>

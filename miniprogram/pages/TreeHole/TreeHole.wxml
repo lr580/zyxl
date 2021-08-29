@@ -1,2 +1,1 @@
-<!--miniprogram/pages/TreeHole/TreeHole.wxml-->
-<text>miniprogram/pages/TreeHole/TreeHole.wxml</text>
+<view bindtap="goto_postp">点我发帖</view>

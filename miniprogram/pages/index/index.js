@@ -14,9 +14,6 @@ Page({
     arr_pla: [],//海报图片
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     let thee = this;
     km.indexpage_reload = function () {

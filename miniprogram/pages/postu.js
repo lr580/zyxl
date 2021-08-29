@@ -1,8 +1,4 @@
-// miniprogram/pages/TreeHole/TreeHole.js
-const km = getApp();
-const db = wx.cloud.database();
-const _ = db.command;
-
+// pages/postu.js
 Page({
 
   /**
@@ -17,13 +13,6 @@ Page({
    */
   onLoad: function (options) {
 
-  },
-
-  //前往发帖
-  goto_postp: function () {
-    wx.navigateTo({
-      url: '../postp/postp',
-    });
   },
 
   /**

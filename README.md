@@ -1,3 +1,5 @@
+## lr580备忘录：记得交学费和返校申请
+
 ## 全局变量定义
 
 云存储根目录完整url：
@@ -22,7 +24,7 @@ num_video: 0,
 数据库单次读取记录条数上限常量：
 
 ```js
- batch: 20,
+batch: 20,
 ```
 
 用户ID和信息： (-1是未登录，否则是用户对象的openid)
@@ -48,10 +50,24 @@ num_recommend: 4,
 海报图片完整路径：
 
 ```js
-info_placard = [],
+info_placard: [],
 ```
 
+所有帖子： (反正就算几十万字也就几MB而已，一并读取算了)
 
+```js
+info_post: [],
+num_post: 0,
+```
+
+所有用户：(对于非自己的人，代码上只调用昵称和头像)
+
+```js
+info_user: [],
+num_user: 0,
+```
+
+> 当num_post或num_user过多时，未来版本可能会撤销info_post和info_user以降低用户流量消耗(但是代价是每点一个东西都要加载半天，因为缺乏了预加载)
 
 
 
@@ -104,7 +120,7 @@ info_placard = [],
 
 #### avatar
 
-用户头像，没有后缀要求(常见图片后缀均可，但推荐以用户id为名字)
+用户头像，没有后缀要求(常见图片后缀均可)，默认上传的系统给起是什么名字就是什么名字
 
 特殊头像：
 
@@ -115,6 +131,14 @@ info_placard = [],
 #### placard
 
 海报图片，没有文件名要求
+
+
+
+#### postpic
+
+帖子图片，常见图片后缀均可，没有文件名要求，默认上传的系统给起是什么名字就是什么名字
+
+
 
 
 
@@ -178,6 +202,8 @@ getOpenId
 
 
 
+
+
 ### 样例视频结构示意图
 
 > 仅展示有意义的样例视频
@@ -200,6 +226,46 @@ graph TD
 
 
 
+## 树洞
+
+### 整体结构
+
+#### 帖子对象
+
+1. title string 标题，限长30字符
+2. abbr string 摘要(显示在树洞页)，限长80字符
+3. type number 0~4是正常类别 
+4. time_publish Date
+5. time_active Date
+6. click number
+7. user string 即user的ID/openid
+8. content string 富文本，即HTML文本
+9. replyto number 回复的帖子ID
+10. reply array(number) 跟帖帖子ID(按顺序)
+11. parent number 被回复的帖子ID
+
+
+
+#### 帖子ID分配的改进意见
+
+原方案(心行+学舟)这种点进发帖页面发表新帖先临时占用一个帖子ID的做法会缺点：
+
+1. 用户强退时该帖子ID将会被永久无效占领
+2. 恰好多个用户同一时间点击发帖按钮时会占用同一个ID而导致bugs
+
+并且第一个问题会引发新的bugs：
+
+1. 无效的ID会在预处理时占用大量的无效读取次数，甚至导致读取失败报错崩溃
+
+未来版本的一个ID分配设想如下：
+
+1. 帖子ID使用较长的等长随机大小写和数字字符(类似于openID)
+2. 点击发帖时什么也不做，点击确认发帖时才上交服务器
+
+现在由于图片使用了随机字符，不再需要固定格式，所以分配设想的第二点可行，所以现在采用第二点方案。取消学舟的预分配策略。可以解决上述bugs。
+
+
+
 ## 用户板块
 
 ### 整体结构
@@ -208,9 +274,9 @@ graph TD
 
 1. id string 与openid和_id一致
 2. _openid string  数据库记录创建时自动生成的
-3. name string 要求length不超过20
+3. name string 要求length不超过某个值
 4. school string 学校信息(选填) 要求length不超过40 暂时不实现
-5. motto string 个性签名 要求length不超过80 暂时不实现
+5. motto string 个性签名 要求length不超过某个值
 6. point number 积分
 7. warehouse array(元素为[number, number]) 仓库(商品id+数目)
 8. appointment_talk array(元素为date)
@@ -225,7 +291,7 @@ graph TD
 
 #### 批量页面
 
-由于收藏和浏览记录实现逻辑几乎一致，所以两个页面实质上共用代码逻辑，所以js代码是统一的。两个页面的data数据如下：
+由于收藏和浏览记录实现逻辑几乎一致，所以两个页面实质上共用代码逻辑，所以js代码是统一的。两个页面的data数据详见代码。
 
 
 
@@ -257,6 +323,7 @@ graph TD
 
 1. 实现了用户板块的浏览和收藏记录页面的逻辑部分
 2. 实现了首页的全部逻辑功能
+3. 修改了剧场首页UI，增加了用户首页UI
 
 
 
