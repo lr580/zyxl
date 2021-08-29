@@ -4,7 +4,10 @@ var db = '';
 var _;
 
 var now_loading = 0; //需要batch_read等所有数据库读取异步多少次
-var total_loading = 2;
+var total_loading = 4;
+/* total_loading 分别如下：
+ * 读取自己的信息， 读取剧场列表， 读取树洞列表， 读取树洞用户列表
+ */
 
 var click_busy = false; //是否处于禁止频繁点击状态
 var cloudfx_done = false; //已经getOpenId
@@ -138,6 +141,37 @@ App({
     }
   },
 
+  //通用函数：批量读取某集合数据，数目为n，并以map<_id, 记录>形式存在全局变量key上，集合内排序依据是skey
+  set_read(setname, n, key, skey = '_id') {
+    let km = getApp();
+    let epoch = km.globalData.batch;
+    let inq_time = Math.ceil(n / epoch);
+    let now_time = 0;
+    var all_obj = {};
+
+    var final_operation = function () {
+      km.globalData[key] = all_obj;
+      if (++now_loading == total_loading) {
+        km.init_finish();
+      }
+    };
+    if (n == 0) { final_operation(); }
+
+    for (let i = 0; i < inq_time; ++i) {
+      let lf = i * epoch;//从多少开始读
+      db.collection(setname).orderBy(skey, 'desc').skip(lf).get().then(rea => {
+        for (let k = 0; k < rea.data.length; ++k) {
+          all_obj[rea.data[k]._id] = rea.data[k];
+        }
+        if (++now_time == inq_time) {
+          final_operation();
+        }
+      }).catch(rwa => {
+        console.error('批量读取失败：', setname, n, key, lf, skey);
+      })
+    }
+  },
+
   //读取全局数据
   load_global: function () {
     let km = getApp();
@@ -159,6 +193,8 @@ App({
       km.globalData.info_placard = arr_pla;
 
       km.load_video();
+      km.set_read('post', km.globalData.num_post, 'info_post');
+      km.set_read('user', km.globalData.num_user, 'info_user');
     }).catch(rws => {
       console.error('全局数据获取失败。')
     });
