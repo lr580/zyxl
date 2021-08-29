@@ -1,7 +1,7 @@
 /* miniprogram/pages/Theater/Theater.wxss */
 
 
-.video_body{
+.video_body {
   margin-left: 30rpx;
   margin-right: 30rpx;
   margin-bottom: 15rpx;
@@ -16,13 +16,13 @@
   padding-left: 20rpx;
 }
 
-.video_cover{
+.video_cover {
   width: 260rpx;
   height: 160rpx;
   border-radius: 9rpx;
 }
 
-.video_intro{
+.video_intro {
   flex-direction: column;
   height: 180rpx;
   width: 500rpx;
@@ -30,40 +30,40 @@
   margin-left: 20rpx;
 }
 
-.video_title{
+.video_title {
   font-weight: 600;
   font-size: 28rpx;
-  letter-spacing:0.5rpx;
+  letter-spacing: 0.5rpx;
   display: -webkit-box;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp: 2;
   padding-right: 10rpx;
   height: 80rpx;
 }
 
-.video_type{
+.video_type {
   align-items: center;
   display: flex;
   margin-left: 200rpx;
 }
 
-.video_type text{
+.video_type text {
   margin-left: 8rpx;
   font-size: 22rpx;
   font-weight: 400;
   color: #bfbfbf;
 }
 
-.video_type image{
+.video_type image {
   width: 20rpx;
   height: 20rpx;
 }
 
 
-.video_count{
+.video_count {
 
   font-weight: 200;
   color: #bfbfbf;
@@ -72,47 +72,48 @@
   margin-left: 35rpx;
 }
 
-.video_count image{
+.video_count image {
   width: 20rpx;
   height: 20rpx;
 }
 
-.video_count text{
+.video_count text {
   margin-left: 8rpx;
   font-size: 22rpx;
   font-weight: 400;
   color: #bfbfbf;
 }
 
-.scroll_part{
-
+.scroll_part {
+  color: black;
+  /*吃掉报错*/
 }
 
-.video_state{
+.video_state {
   display: flex;
   flex-direction: row;
   padding: 5rpx;
   margin-top: 40rpx;
 }
 
-.trans{
+.trans {
 
   transition: 0.15s;
 }
 
-.bottom_tip{
+.bottom_tip {
   margin-top: 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.bottom_tip image{
+.bottom_tip image {
   width: 30rpx;
   height: 30rpx;
 }
 
-.bottom_tip text{
+.bottom_tip text {
   margin-left: 20rpx;
   font-size: 30rpx;
   font-weight: 600;

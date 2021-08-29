@@ -104,7 +104,6 @@ Page({
         }
         let temppath = res.tempFilePaths[0];
         let picname = temppath.substr(temppath.lastIndexOf('/') + 1);//完整文件名(不含上级路径)
-        console.log('qwq', 'avatar/' + picname);
         wx.showLoading({
           title: '上传中……',
         });

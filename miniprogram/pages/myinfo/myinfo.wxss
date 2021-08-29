@@ -1,33 +1,33 @@
 /* pages/myinfo/myinfo.wxss */
-.user_info_edit{
+.user_info_edit {
   display: flex;
   flex-direction: column;
 
 }
 
 
-.user_info_avater{
+.user_info_avater {
   height: 200rpx;
   width: 200rpx;
   border-radius: 50%;
   justify-content: center;
 }
 
-.a1{
+.a1 {
   display: flex;
   justify-content: center;
 }
 
 
-.pleft{
-  margin-left:30rpx;
+.pleft {
+  margin-left: 30rpx;
 }
 
-.b1{
+.b1 {
   margin-top: 100rpx;
 }
 
-.change_text{
+.change_text {
   margin-top: 20rpx;
   font-weight: 400;
   color: gray;
