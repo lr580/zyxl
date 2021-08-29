@@ -1,11 +1,53 @@
 <!--pages/myinfo/myinfo.wxml-->
 <view>
-  <view>您可以在这里编辑您的头像、昵称和个性签名。昵称和个性签名编辑完毕后点击保存按钮方可生效。</view>
-  <view>头像：(点击上传新头像)<image src="{{userinfo.avatar}}" bindtap="upload_avatar"></image>
+  <view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-xxl text-bold text-cyan">我的信息</text>
+      <text class="bg-cyan" style="width:2rem"></text>
+      <!-- last-child选择器-->
+    </view>
   </view>
-  <view>昵称：<input type="text" bindinput="input_name" value="{{userinfo.name}}" placeholder="请输入昵称" maxlength="20" />
+
+  <view class="user_info_edit">
+    <view class="cu-bar  pleft bg-white">
+    <view class="action">
+      <text class="cuIcon-titles text-cyan"></text>
+      <text class="text-lg text-bold">头像</text>
+    </view>
+  </view>
+  <view class="a1"><image class="user_info_avater" src="{{userinfo.avatar}}" bindtap="upload_avatar"></image>
+  </view>
+  <view class="a1">
+    <text class="change_text">(点击更换)</text>
+  </view>
+  <!-- <view>昵称：<input type="text" bindinput="input_name" value="{{userinfo.name}}" placeholder="请输入昵称" maxlength="20" />
   </view>
   <view>个性签名：<input type="text" bindinput="input_motto" value="{{userinfo.motto}}" placeholder="请输入个性签名" maxlength="80" />
-  </view>
-  <view bindtap="save_change" style="font-size: 18px;">保存昵称和个性签名</view>
+  </view> -->
+ 
 </view>
+</view>
+
+<view class="cu-form-group margin-top b1">
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-titles text-cyan"></text>
+      <text class="text-lg text-bold">昵称</text>
+    </view>
+  </view>
+		<input type="text" bindinput="input_name" value="{{userinfo.name}}" placeholder="请输入您的昵称" maxlength="10"></input>
+  </view>
+  
+  <view class="cu-form-group margin-top">
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-titles text-cyan"></text>
+      <text class="text-lg text-bold">箴言</text>
+    </view>
+  </view>
+  
+		<input type="text" bindinput="input_motto" value="{{userinfo.motto}}" placeholder="请输入属于您的箴言" maxlength="12"></input>
+  </view>
+  <button bindtap="save_change" class="cu-btn block bg-cyan margin-tb-sm lg">
+    <text class=""></text>保存</button>
+  <!-- <view bindtap="save_change" style="font-size: 18px;">保存昵称和个性签名</view> -->

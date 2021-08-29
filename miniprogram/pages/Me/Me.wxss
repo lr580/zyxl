@@ -6,9 +6,9 @@
   padding: 30rpx;
   flex-direction: column;
   margin: 20rpx;
-  background-color: rgba(81, 83, 83, 0.048);
+  /* background-color: rgba(81, 83, 83, 0.048); */
   border-radius: 20rpx;
-  box-shadow: 2px 2px 2px gainsboro;
+  box-shadow: 4px 4px 2px gainsboro;
 }
 
 .user_avater{
@@ -18,9 +18,15 @@
 }
 
 .user_name{
- 
+  width: 400rpx;
   font-weight: 400;
   font-size: 40rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:1;
 }
 
 .a{
@@ -47,4 +53,18 @@
 .user_goin{
   width: 50rpx;
   height: 50rpx;
+}
+
+.have_icon{
+  display: flex;
+  align-items: center;
+}
+.pleft{
+  padding-left: 10rpx;
+}
+
+.fengexian{
+  margin: 40rpx;
+  height: 2rpx;
+  border: 1rpx rgba(128, 128, 128, 0.349) solid;
 }

@@ -13,6 +13,7 @@
   align-items: center;
   border-radius: 12rpx;
   box-shadow: 2px 2px 2px gainsboro;
+  padding-left: 20rpx;
 }
 
 .video_cover{
@@ -68,7 +69,7 @@
   color: #bfbfbf;
   align-items: center;
   display: flex;
-  margin-left: 50rpx;
+  margin-left: 35rpx;
 }
 
 .video_count image{
@@ -92,8 +93,6 @@
   flex-direction: row;
   padding: 5rpx;
   margin-top: 40rpx;
-
-
 }
 
 .trans{
