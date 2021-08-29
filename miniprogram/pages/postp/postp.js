@@ -193,6 +193,7 @@ Page({
     if (this.data.isreplypost) {//是跟帖
       obj.parent = this.data.fid;
     }
+    obj.content = nr;
 
     console.log(obj);
 
