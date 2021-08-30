@@ -464,20 +464,20 @@ App({
     s += String(x.getFullYear());
     s += '/';
     t = String(x.getMonth() + 1);
-    if (t.length < 1) { s += '0' + t; }
+    if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
     s += '/';
     t = String(x.getDate());
-    if (t.length < 1) { s += '0' + t; }
+    if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
     if (type != 0) { return s; }
     s += ' ';
     t = String(x.getHours());
-    if (t.length < 1) { s += '0' + t; }
+    if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
     s += ':';
     t = String(x.getMinutes());
-    if (t.length < 1) { s += '0' + t; }
+    if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
     return s;
   },

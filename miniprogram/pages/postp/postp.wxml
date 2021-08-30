@@ -6,6 +6,7 @@
 </view>
 <view wx:if="{{!isreplypost}}">
   <input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input>
+  <input type="text" placeholder="请输入主题摘要" maxlength="80" bindinput="scanf_abbr" value="{{s_abbr}}"></input>
   <view>选择类别：</view>
   <view wx:for="{{types}}">
     <view wx:if="{{index+1<types.length}}"> <!--跳过全部这一类别，该类别不可选-->

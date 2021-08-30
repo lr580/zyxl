@@ -16,3 +16,26 @@
     <view bindtap="sele_sortreverse" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
   </view>
 </view>
+
+<view wx:if="{{postlist.length}}">
+  <view wx:for="{{postlist}}">
+    <view wx:if="{{index<num_show}}" bindtap="goto_post" id="{{item[6]}}">
+      <view>&nbsp;不中用啊</view>
+      <view>酚硌酰</view>
+      <view>主题标题：{{item[0]}}</view>
+      <view>主题简介：{{item[1]}}</view>
+      <view>主题时间：{{item[2]}}</view>
+      <view>主题类型：{{types[item[3]]}}</view>
+      <view>跟帖数：{{item[4]}}</view>
+      <view>浏览次数：{{item[5]}}</view>
+      <view>dividing line</view>
+      <view>&nbsp;</view>
+    </view>
+  </view>
+  <view wx:if="{{num_show==postlist.length}}">
+    已经到达底端了捏(✪ω✪)
+  </view>
+</view>
+<view wx:else>
+  没有符合要求的帖子呀φ(．．｡)
+</view>

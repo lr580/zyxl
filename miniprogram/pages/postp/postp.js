@@ -29,6 +29,7 @@ Page({
 
     s_title: '',//标题框文本
     s_type: 0,//分类框选中类别下标
+    s_abbr: '',//摘要文本
     fid: -1, //跟帖的被跟帖子id
     rid: -1, //回帖的被回帖子id
     fuid: '',//跟帖的被跟用户openid
@@ -134,6 +135,14 @@ Page({
     });
   },
 
+  //输入摘要
+  scanf_abbr: function (e) {
+    let v = e.detail.value;
+    this.setData({
+      s_abbr: v,
+    });
+  },
+
   //选择类别
   sele_type: function (v) {
     let t = Number(v.currentTarget.id);
@@ -169,9 +178,11 @@ Page({
         return;
       }
       obj.type = Number(this.data.s_type);
+      obj.abbr = this.data.s_abbr;
     } else {//是跟帖
       obj.title = '';
       obj.type = -1;
+      obj.abbr = '';
     }
     let nowtime = new Date;
     let nowtimeid = Number(nowtime); //以当前时间戳作为帖子ID
@@ -182,6 +193,9 @@ Page({
       });
       obj.time_publish = nowtime;
       obj.click = 0;
+      obj.replyto = '';
+      obj.reply = [];
+      obj.parent = '';
     }
     obj.time_active = nowtime;
     obj.user = km.globalData.openid;
@@ -286,6 +300,7 @@ Page({
       db.collection('user').doc(thee.data.fuid).update({
         data: {
           message: _.unshift(newinfo),
+          time_active: nowtime,
         }
       }).then(res => {
         upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
