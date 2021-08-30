@@ -9,14 +9,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    types: [], //类别(注意5是全部)
+    type_seq: [5, 0, 1, 2, 3, 4],  //类别顺序
+    now_type: 5, //当前类别下标
+    sort_key: 0,//当下版本只有0，按最后活跃时间排序
+    sort_reverse: false,//是否从远到近
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.init_postindex();
+  },
 
+  //页面初始化
+  init_postindex: function () {
+    this.setData({
+      types: km.globalData.type_p,
+    });
+  },
+
+  //选择类别
+  sele_type: function (e) {
+    this.setData({
+      now_type: Number(e.currentTarget.id),
+    });
+  },
+
+  //选择排序是否逆序
+  sele_sortreverse:function(e){
+    this.setData({
+      sort_reverse: Number(e.currentTarget.id),
+    });
   },
 
   //前往发帖

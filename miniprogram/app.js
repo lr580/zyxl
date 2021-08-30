@@ -55,7 +55,8 @@ App({
       name: 'getOpenId',
     }).then(res => {
       let openid = res.result.userInfo.openId;
-      getApp().globalData.openid = openid; //修复了一条bugs
+      getApp().globalData.openid = openid;
+      cloudfx_done = true; //修复了又一个bugs
       if (db && !loaduser_done) {
         this.load_user(openid);
       }
@@ -76,7 +77,7 @@ App({
       num_recommend: 4,
       info_placard: [],
       info_post: [],
-      info_user: [],
+      info_users: [],
       num_post: 0,
       num_user: 0,
     }
@@ -194,7 +195,7 @@ App({
 
       km.load_video();
       km.set_read('post', km.globalData.num_post, 'info_post');
-      km.set_read('user', km.globalData.num_user, 'info_user');
+      km.set_read('user', km.globalData.num_user, 'info_users');
     }).catch(rws => {
       console.error('全局数据获取失败。')
     });

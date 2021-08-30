@@ -24,8 +24,8 @@ Page({
   init_userpage: function () {
     this.setData({
       userid: km.globalData.userid,
-      userinfo: km.globalData.info_user.length ? km.globalData.info_user : null,
-    });//注意[]!=[]成立……且仍未知道为何莫名其妙info_user在全局是[]而不是null……
+      userinfo: km.globalData.info_user,
+    });//修复了一个bug
   },
 
   //注册(首次登录)

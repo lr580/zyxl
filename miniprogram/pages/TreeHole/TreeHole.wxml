@@ -1,1 +1,18 @@
 <view bindtap="goto_postp">点我发帖</view>
+
+<view>
+  选择分类
+  <view wx:for="{{type_seq}}">
+    <view bindtap="sele_type" id="{{item}}">
+      {{now_type==item?'(当前)':''}} {{types[item]}}
+    </view>
+  </view>
+</view>
+
+<view>
+  排序依据：
+  <view wx:if="{{sort_key==0}}">
+    <view bindtap="sele_sortreverse" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
+    <view bindtap="sele_sortreverse" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
+  </view>
+</view>

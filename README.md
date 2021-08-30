@@ -58,11 +58,11 @@ info_post: [],
 num_post: 0,
 ```
 
-所有用户：(对于非自己的人，代码上只调用昵称和头像)
+所有用户：(对于非自己的人，代码上只调用昵称和头像) (区别于上文info_user)
 
 ```js
-info_user: [],
-num_user: 0,
+info_users: [],
+num_users: 0,
 ```
 
 > 当num_post或num_user过多时，未来版本可能会撤销info_post和info_user以降低用户流量消耗(但是代价是每点一个东西都要加载半天，因为缺乏了预加载)
