@@ -306,26 +306,29 @@ Page({
     }
 
     if (this.data.isreplypost) { //跟帖
-      all_todos += 2; //给主题人消息，更新主题本帖
+      all_todos++; //更新主题本帖
 
-      let newinfo = [true, km.globalData.openid, thee.data.fuid];
-      db.collection('user').doc(thee.data.fuid).update({
-        data: {
-          message: _.unshift(newinfo),
-          time_active: nowtime,
-        }
-      }).then(res => {
-        upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
-      }).catch(rws => {
-        fail('通知主题贴主', rws);
-      });
+      if (thee.data.ruid != km.globalData.openid) {//不是我跟我自己
+        all_todos++; //给主题人发信息
+        let newinfo = [[true, km.globalData.openid, thee.data.fuid]]; //修复bugs
+        db.collection('user').doc(thee.data.fuid).update({
+          data: {
+            message: _.unshift(newinfo),
+            time_active: nowtime,
+          }
+        }).then(res => {
+          upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
+        }).catch(rws => {
+          fail('通知主题贴主', rws);
+        });
+      }
 
       db.collection('post').doc(thee.data.fid).update({
         data: {
           reply: _.push(thee.data.id),
         }
       }).then(res => {
-        km.globalData.info_post[thee.data.fid].push(thee.data.id);
+        km.globalData.info_post[thee.data.fid].reply.push(thee.data.id); //修了一个bugs
         upd();
       }).catch(rws => {
         fail('更新主题帖子', rws);
@@ -334,7 +337,7 @@ Page({
     if (this.data.isreplyreply) { //回帖
       if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
         all_todos++; //给被回帖人消息
-        let newinfo = [true, km.globalData.openid, thee.data.ruid];
+        let newinfo = [[true, km.globalData.openid, thee.data.ruid]]; //修复bugs
         db.collection('user').doc(thee.data.ruid).update({
           data: {
             message: _.unshift(newinfo),

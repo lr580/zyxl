@@ -59,7 +59,7 @@ Page({
     rid = pinfo.reply;
     for (let i = 0; i < pinfo.reply.length; ++i) {
       rseq.push(i);
-      rinfo.push(km.globalData.inffo_post[rid[i]]);
+      rinfo.push(km.globalData.info_post[rid[i]]);//修拼写错误……
       ruid.push(rinfo[i].user);
       ruinfo.push(km.globalData.info_users[ruid[i]]);
       rtime.push(km.date2str(rinfo[i].time_active));
@@ -90,10 +90,16 @@ Page({
     if (thee.pctx) {
       thee.pctx.setContents({ html: thee.data.info.content });
     }
+    this.update_editor();
+  },
+
+  //更新回帖区的富文本编辑框
+  update_editor: function () {
+    const thee = this;
     if (thee.rctx) {
       for (let i = 0; i < thee.rctx.length; ++i) {
         if (thee.rctx[i]) {
-          thee.rctx[i].setContents({ html: thee.data.rinfo[i].content });
+          thee.rctx[i].setContents({ html: thee.data.rinfo[thee.data.rseq[i]].content });
         }
       }
     }
@@ -111,6 +117,7 @@ Page({
       sort_reverse: v,
       rseq: arr,
     });
+    this.update_editor();
   },
 
   //主贴富文本框准备就绪
@@ -124,19 +131,31 @@ Page({
 
   //第e个跟帖富文本框准备就绪
   rct_ready: function (e) {
-    let v = Number(e.currentTarget.id);
+    let v = Number(e.currentTarget.id.match(/rcontent(\d+)/)[1]);//分组
     const thee = this;
+    if (!thee.rctx) {
+      thee.rctx = [];
+    }
     wx.createSelectorQuery().select('#rcontent' + v).context(res => {
       thee.rctx[v] = res.context;
       thee.rctx[v].setContents({ html: thee.data.rinfo[v].content });
     }).exec();
   },
 
-  //编辑_id=id的主帖子
+  //编辑主帖子
   goto_pedit: function () {
     let id = this.data.id;
     wx.navigateTo({
       url: '../postp/postp?id=' + id + '&edit=1',
+    });
+  },
+
+  //回帖主帖子
+  goto_preply: function () {
+    let id = this.data.id;
+    let title = this.data.info.title;
+    wx.navigateTo({
+      url: '../postp/postp?fid=' + id + '&ftitle=' + title,
     });
   },
 

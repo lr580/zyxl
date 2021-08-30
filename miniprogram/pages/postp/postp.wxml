@@ -1,5 +1,5 @@
 <view wx:if="{{isreplypost}}">
-  主题 {{ftitle}}
+  所跟帖的主题 {{ftitle}}
 </view>
 <view wx:if="{{isreplyreply}}">
   回复{{rep_floor}}楼 {{rep_name}}：

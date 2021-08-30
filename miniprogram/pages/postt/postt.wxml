@@ -7,12 +7,12 @@
     主题类别：{{types[info.type]}}
   </view>
   <view>发表时间：{{ptime}}</view>
-  <editor id="pcontent" bindstatuschange="pct_status" bindready="pct_ready" read-only>
+  <editor id="pcontent" bindready="pct_ready" read-only>
   </editor>
   <view wx:if="{{uid==openid}}">
     <view bindtap="goto_pedit">点我编辑</view>
-    <view>点我回帖</view>
-    <view>点我删除</view>
+    <view bindtap="goto_preply">点我回帖</view>
+    <view bindtap="goto_pdel">点我删除</view>
   </view>
 </view>
 <view>
@@ -20,7 +20,7 @@
   <view bindtap="sele_rev" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
 </view>
 <view wx:if="{{rseq.length}}">
-  <view wx:for="{{rinfo}}">
+  <view wx:for="{{rseq}}"><!--修bugs-->
     <view>{{rfloor[item]}}楼</view>
     <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
     </view>
@@ -29,7 +29,7 @@
       回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
     </view>
     <view>发表时间：{{rtime[item]}}</view>
-    <editor id="{{'rcontent'+item}}" bindstatuschange="pct_status" bindready="pct_ready" read-only>
+    <editor id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
   </editor>
     <view wx:if="{{ruid[item]==openid}}">
       <view>点我编辑</view>
