@@ -34,6 +34,7 @@ Page({
     rid: -1, //回帖的被回帖子id
     fuid: '',//跟帖的被跟用户openid
     ruid: '',//回帖的被回用户openid
+    obj: {},//编辑模式下原贴对象
   },
 
   /* options格式要求：
@@ -66,9 +67,14 @@ Page({
     });
 
     if (options.edit != undefined) {
+      let obj = km.globalData.info_post[options.id];
       this.setData({
         edit: true,
-        id: Number(id),
+        id: options.id,
+        s_title: obj.title,
+        s_type: obj.type,
+        s_abbr: obj.abbr,
+        obj: obj,
       });
     }
     if (options.fid != undefined) {
@@ -124,6 +130,9 @@ Page({
     const thee = this;
     wx.createSelectorQuery().select('#main_input').context(res => {
       thee.editorCtx = res.context;
+      if (thee.data.edit) {
+        thee.editorCtx.setContents({ html: thee.data.obj.content });
+      }
     }).exec();
   },
 
@@ -167,6 +176,8 @@ Page({
     let obj = {};
     if (this.data.edit) {
       obj = km.globalData.info_post[Number(this.data.id)];
+      delete obj._openid;//不可编辑openid和id
+      delete obj._id;
     }
     if (this.data.isreplypost == false) { //是主题
       obj.title = this.data.s_title;
@@ -197,6 +208,7 @@ Page({
       obj.reply = [];
       obj.parent = '';
     }
+    obj.time_publish = nowtime; //现在强制pubtime等于最后编辑时间，acttime是最后编辑和回帖编辑时间的最值
     obj.time_active = nowtime;
     obj.user = km.globalData.openid;
     if (this.data.isreplyreply) { //是回帖
@@ -207,13 +219,13 @@ Page({
     }
     obj.content = nr;
 
-    // console.log(obj);可能后续还要console.log，先不删代码
+    console.log(obj);//可能后续还要console.log，先不删代码
 
     wx.showLoading({
       title: '保存中……',
     });
 
-    let all_todos = 2;//待做云操作列表 (本帖+num_post global)
+    let all_todos = 1;//待做云操作列表 (本帖)
     let now_todos = 0;//当前进度
     let thee = this;
 
@@ -241,17 +253,17 @@ Page({
     };
 
     var upd = function () {
-      // console.log('=w=', now_todos + 1, all_todos);
+      console.log('=w=', now_todos + 1, all_todos);
       if (++now_todos == all_todos) {
         final();
       }
     };
 
     if (this.data.edit == true) {
-      db.collection('post').doc(String(thee.data.id)).update({
+      db.collection('post').doc(Number(thee.data.id)).update({
         data: obj,
       }).then(res => {
-        // console.log('awa编辑');
+        console.log('awa编辑');
         km.globalData.info_post[Number(thee.data.id)] = obj;
         upd();
       }).catch(rws => {
@@ -261,7 +273,7 @@ Page({
       db.collection('post').add({
         data: obj,
       }).then(res => {
-        // console.log('awa发帖');
+        console.log('awa发帖');
         km.globalData.info_post[Number(thee.data.id)] = obj;
         upd();
       }).catch(rws => {
@@ -269,18 +281,8 @@ Page({
       });
     }
 
-    db.collection('global').doc('default').update({
-      data: {
-        num_post: _.inc(1),
-      }
-    }).then(res => {
-      upd();
-    }).catch(rws => {
-      fail('更新帖子数目', rws);
-    });
-
     if (this.data.edit == false) { //用户自己新增帖子
-      all_todos++;
+      all_todos += 2; //用户信息更新和贴子总数增加
       db.collection('user').doc(km.globalData.openid).update({
         data: {
           post: _.unshift(thee.data.id),
@@ -290,6 +292,16 @@ Page({
         upd();
       }).catch(rws => {
         fail('用户信息更新失败', rws);
+      });
+
+      db.collection('global').doc('default').update({
+        data: {
+          num_post: _.inc(1),
+        }
+      }).then(res => {
+        upd();
+      }).catch(rws => {
+        fail('更新帖子数目', rws);
       });
     }
 
@@ -320,7 +332,6 @@ Page({
       });
     }
     if (this.data.isreplyreply) { //回帖
-      //km.info_post[this.data.rid].user
       if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
         all_todos++; //给被回帖人消息
         let newinfo = [true, km.globalData.openid, thee.data.ruid];
@@ -335,7 +346,6 @@ Page({
         });
       }
     }
-    // console.log(all_todos);
   },
 
   /*以下内容是富文本编辑框官方模板 */

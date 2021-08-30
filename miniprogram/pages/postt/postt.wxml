@@ -1,2 +1,43 @@
 <!--pages/postt/postt.wxml-->
-<text>pages/postt/postt.wxml</text>
+<view>
+  <view>主题标题：{{info.title}}</view>
+  <view>
+    主题发布者头像：<image src="{{uinfo.avatar}}"></image>
+    主题发布者昵称：{{uinfo.name}}
+    主题类别：{{types[info.type]}}
+  </view>
+  <view>发表时间：{{ptime}}</view>
+  <editor id="pcontent" bindstatuschange="pct_status" bindready="pct_ready" read-only>
+  </editor>
+  <view wx:if="{{uid==openid}}">
+    <view bindtap="goto_pedit">点我编辑</view>
+    <view>点我回帖</view>
+    <view>点我删除</view>
+  </view>
+</view>
+<view>
+  <view bindtap="sele_rev" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
+  <view bindtap="sele_rev" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
+</view>
+<view wx:if="{{rseq.length}}">
+  <view wx:for="{{rinfo}}">
+    <view>{{rfloor[item]}}楼</view>
+    <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
+    </view>
+    <view>跟帖人昵称：{{ruinfo[item].title}}</view>
+    <view wx:if="{{rruinfo[item]}}">
+      回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
+    </view>
+    <view>发表时间：{{rtime[item]}}</view>
+    <editor id="{{'rcontent'+item}}" bindstatuschange="pct_status" bindready="pct_ready" read-only>
+  </editor>
+    <view wx:if="{{ruid[item]==openid}}">
+      <view>点我编辑</view>
+      <view>点我回帖</view>
+      <view>点我删除</view>
+    </view>
+  </view>
+</view>
+<view wx:else>
+  暂无跟帖(╥╯^╰╥)
+</view>
