@@ -27,17 +27,8 @@ Page({
   init: function () {
     let arro = km.globalData.info_user.post;
     let arr = [];
-    // let ro = Object.keys(km.globalData.info_post).map(x => { return Number(x); });
-    // console.log(arro, ro);
-    // db.collection('user').doc(km.globalData.openid).update({
-    //   data: {
-    //     post: ro,
-    //   }
-    // });
-    // return; 临时修锅代码
     for (let i = 0; i < arro.length; ++i) {
       let w = km.globalData.info_post[arro[i]];
-      // console.log(i, w);
       let pa = w.parent ? km.globalData.info_post[w.parent] : w; //主贴对象
       let v;
       if (!pa) { //被删除了

@@ -25,6 +25,7 @@ Page({
     this.setData({
       userid: km.globalData.userid,
       userinfo: km.globalData.info_user,
+      num_newmessage: km.globalData.num_newmessage,
     });//修复了一个bug
   },
 
@@ -69,6 +70,7 @@ Page({
       history_post: [],
       post: [],
       message: [],
+      num_newmessage: 0,
     };
 
     db.collection('user').add({

@@ -310,7 +310,7 @@ Page({
 
       if (thee.data.fuid != km.globalData.openid) {//不是我跟我自己 //修复bugs
         all_todos++; //给主题人发信息
-        let newinfo = [[true, km.globalData.openid, thee.data.fuid]];
+        let newinfo = [[true, km.globalData.openid, thee.data.fid]];//修了2次这行代码 [[]]和fuid->fid
         db.collection('user').doc(thee.data.fuid).update({
           data: {
             message: _.unshift(newinfo),
@@ -329,7 +329,8 @@ Page({
         }//修bugs……time_active怎么能跑到user去呢？
       }).then(res => {
         km.globalData.info_post[thee.data.fid].reply.push(thee.data.id);
-        upd();
+        km.globalData.info_post[thee.data.fid].time_active = nowtime,//修bugs……那您不顺便更一下当前变量？
+          upd();
       }).catch(rws => {
         fail('更新主题帖子', rws);
       });
@@ -338,7 +339,7 @@ Page({
     if (this.data.isreplyreply && this.data.edit == false) { //回帖 同理编辑不用通知
       if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
         all_todos++; //给被回帖人消息
-        let newinfo = [[true, km.globalData.openid, thee.data.ruid]];
+        let newinfo = [[true, km.globalData.openid, thee.data.rid]];//修了2次这行代码
         db.collection('user').doc(thee.data.ruid).update({
           data: {
             message: _.unshift(newinfo),

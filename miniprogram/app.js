@@ -80,6 +80,7 @@ App({
       info_users: [],
       num_post: 0,
       num_user: 0,
+      num_newmessage: 0,
     }
   },
 
@@ -90,6 +91,13 @@ App({
     db.collection('user').doc(openid).get().then(res => {
       if (res.data._openid == openid) {
         km.globalData.info_user = res.data;
+        let cnt = 0;
+        for (let i = 0; i < res.data.message.length; ++i) {
+          if (res.data.message[i][0]) {
+            ++cnt;
+          }
+        }
+        km.globalData.num_newmessage = cnt;
       }
       if (++now_loading == total_loading) {
         km.init_finish();

@@ -1,2 +1,35 @@
 <!--pages/mymessage/mymessage.wxml-->
-<text>pages/mymessage/mymessage.wxml</text>
+<view>我的消息</view>
+<view>
+  <view>显示筛选</view>
+  <view bindtap="switch_range" id="0">{{show_all==0?'(当前)':''}}只显示未读消息</view>
+  <view bindtap="switch_range" id="1">{{show_all==1?'(当前)':''}}显示全部</view>
+</view>
+<view>
+  <view>排序方式</view>
+  <view bindtap="switch_reverse" id="0">{{sort_reverse==0?'(当前)':''}}按时间由近到远排序</view>
+  <view bindtap="switch_reverse" id="1">{{sort_reverse==1?'(当前)':''}}按时间由远到近排序</view>
+</view>
+<view wx:if="{{arr_seq.length}}">
+  <view wx:for="{{arr_seq}}">
+    <view wx:if="{{arr[item].length==11}}">
+      <view bindtap="goto_post" id="{{arr[item][6]+'|'+item}}">
+        <view>分割线ヾ(･ω･*)ﾉ</view>
+        <view>用户 {{arr[item][9]}} 回复了您 {{arr[item][6]==arr[item][8]?'发布的主题':'在主题下的跟帖'}}：</view>
+        <view>{{arr[item][6]==arr[item][8]?'主题标题：':'所跟帖主题的标题：'}}{{arr[item][0]}}</view>
+        <view>{{arr[item][6]==arr[item][8]?'主题简介：':'所跟帖主题的简介：'}}{{arr[item][1]}}</view>
+        <view>发表时间：{{arr[item][2]}}</view>
+        <view>主题类型：{{types[arr[item][3]]}}</view>
+        <view>主题跟帖数：{{arr[item][4]}}</view>
+        <view>主题浏览次数：{{arr[item][5]}}</view>
+        <view>分割线＼＼\٩('ω')و//／／</view>
+      </view>
+    </view>
+    <view wx:else>
+      与这条消息有关联的原主题已被删除(〃＞＿＜;〃)
+    </view>
+  </view>
+</view>
+<view wx:else>
+  暂无消息(o°ω°o)
+</view>

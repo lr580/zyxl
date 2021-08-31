@@ -6,7 +6,7 @@
 <view wx:if="{{arr.length}}">
   <view wx:for="{{arr}}">
     <view wx:if="{{item.length!=1}}">
-      <view bindtap="goto_post" id="{{item[8]}}">
+      <view bindtap="goto_post" id="{{item[6]}}">
         <view>分割线ヾ(･ω･*)ﾉ</view>
         <view>{{item[6]==item[8]?'我发布的主题':'我在主题下的跟帖'}}</view>
         <view>{{item[6]==item[8]?'主题标题：':'所跟帖主题的标题：'}}{{item[0]}}</view>
@@ -18,7 +18,7 @@
         <view>分割线＼＼\٩('ω')و//／／</view>
       </view>
     </view>
-    <!--如果主贴被删了，那么我对这个主贴的跟帖也不显示了-->
+    <!--如果主贴被删了，那么我对这个主贴的跟帖也不显示了；未来版本可以考虑显示，只需要id改成item[8]即可-->
   </view>
 </view>
 <view wx:else>

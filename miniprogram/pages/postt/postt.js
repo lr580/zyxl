@@ -191,7 +191,7 @@ Page({
       if (sudo) {
         rid = ri;
       }
-      console.log(rid, 'awa?');
+      // console.log(rid, 'awa?');
       let rname = km.globalData.info_users[km.globalData.info_post[rid].user].name;
       let rfloor = -1;
       for (let i = 0; i < this.data.rinfo.length; ++i) {
@@ -232,7 +232,7 @@ Page({
     let id = this.data.id;
     let title = this.data.info.title;
     let uurl = '../postp/postp?fid=' + id + '&ftitle=' + title + this.checkadd_rr(ri, true);
-    console.log(uurl);
+    // console.log(uurl);
     wx.navigateTo({
       url: uurl,
     });
