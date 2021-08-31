@@ -305,7 +305,7 @@ Page({
       });
     }
 
-    if (this.data.isreplypost) { //跟帖
+    if (this.data.isreplypost && this.data.edit == false) { //跟帖 且 非编辑 (编辑就没必要通知别人了吧，也不用改reply)
       all_todos++; //更新主题本帖
 
       if (thee.data.ruid != km.globalData.openid) {//不是我跟我自己
@@ -325,16 +325,17 @@ Page({
 
       db.collection('post').doc(thee.data.fid).update({
         data: {
-          reply: _.push(thee.data.id),
+          reply: _.push(Number(thee.data.id)),
         }
       }).then(res => {
-        km.globalData.info_post[thee.data.fid].reply.push(thee.data.id); //修了一个bugs
+        km.globalData.info_post[thee.data.fid].reply.push(thee.data.id);
         upd();
       }).catch(rws => {
         fail('更新主题帖子', rws);
       });
     }
-    if (this.data.isreplyreply) { //回帖
+
+    if (this.data.isreplyreply && this.data.edit == false) { //回帖 同理编辑不用通知
       if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
         all_todos++; //给被回帖人消息
         let newinfo = [[true, km.globalData.openid, thee.data.ruid]]; //修复bugs

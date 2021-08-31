@@ -32,8 +32,8 @@
     <editor id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
   </editor>
     <view wx:if="{{ruid[item]==openid}}">
-      <view>点我编辑</view>
-      <view>点我回帖</view>
+      <view bindtap="goto_redit" id="{{rid[item]}}">点我编辑</view>
+      <view bindtap="goto_rreply" id="{{rid[item]}}">点我回帖</view>
       <view>点我删除</view>
     </view>
   </view>

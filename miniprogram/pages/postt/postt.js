@@ -150,12 +150,57 @@ Page({
     });
   },
 
+  //检测跟帖id是否是回帖，如果是的话加上url信息，否则什么也不加(可以强制回复自己，参数是sudo)
+  checkadd_rr: function (ri, sudo = false) {
+    if (km.globalData.info_post[ri].replyto || sudo) {
+      let rid = km.globalData.info_post[ri].replyto;
+      if (sudo) {
+        rid = ri;
+      }
+      console.log(rid, 'awa?');
+      let rname = km.globalData.info_users[km.globalData.info_post[rid].user].name;
+      let rfloor = -1;
+      for (let i = 0; i < this.data.rinfo.length; ++i) {
+        if (this.data.rid[i] == rid) {
+          rfloor = this.data.rfloor[i];
+          break;
+        }
+      }
+      return '&rid=' + rid + '&rname=' + rname + '&rfloor=' + rfloor;
+    }
+    return '';
+  },
+
+  //编辑跟帖，跟帖id是v
+  goto_redit: function (v) {
+    let ri = v.currentTarget.id;
+    let fid = this.data.id;
+    let title = this.data.info.title;
+    let uurl = '../postp/postp?id=' + ri + '&edit=1&fid=' + fid + '&ftitle=' + title;
+    uurl += this.checkadd_rr(ri);
+    wx.navigateTo({
+      url: uurl,
+    });
+  },
+
   //回帖主帖子
   goto_preply: function () {
     let id = this.data.id;
     let title = this.data.info.title;
     wx.navigateTo({
       url: '../postp/postp?fid=' + id + '&ftitle=' + title,
+    });
+  },
+
+  //回帖跟帖
+  goto_rreply: function (v) {
+    let ri = v.currentTarget.id;
+    let id = this.data.id;
+    let title = this.data.info.title;
+    let uurl = '../postp/postp?fid=' + id + '&ftitle=' + title + this.checkadd_rr(ri, true);
+    console.log(uurl);
+    wx.navigateTo({
+      url: uurl,
     });
   },
 
