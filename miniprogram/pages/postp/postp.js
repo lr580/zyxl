@@ -52,7 +52,7 @@ Page({
  在删除了info_post情况下考虑每读到一个帖子情况下每次数据库读到的东西都存起来，记忆化大模拟ex吐了
  */
   onLoad: function (options) {
-    console.log(options);
+    // console.log(options);
     this.init(options);
   },
 

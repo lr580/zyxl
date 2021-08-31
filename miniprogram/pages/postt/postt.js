@@ -30,6 +30,8 @@ Page({
     pctx: null,//主贴富文本框对象 (事实上不在data内，在this直系，在这里写一遍只是声明格式，此处变量不可用，rctx同)
     rctx: [],//回帖富文本框对象数组
     rseq: [],//按显示顺序的回帖显示下标顺序数组
+    busy: false,//是否禁止频繁点击
+    starred: false,//是否收藏了主贴
   },
 
   /**
@@ -114,6 +116,7 @@ Page({
       rrexist, rrexist,
       rseq: rseq,
       types: km.globalData.type_p,
+      starred: km.find_in_pair(km.globalData.info_user.star_post, Number(pid)) != -1,
     });
     const thee = this;
     if (thee.pctx) {
@@ -253,12 +256,22 @@ Page({
 
   //物理删除_id=id的帖子； 若quit，删除完毕后退出本页面
   del_post: function (id, quit = true) {
+    if (this.check_busy()) {
+      return;
+    }
+    this.setData({
+      busy: true,
+    });
+    let thee = this;
     wx.showLoading({
       title: '请稍后……',
     });
     let tot = 3;
     let now = 0;
     let fail = function (io, rws) {
+      thee.setData({
+        busy: false,
+      });
       wx.hideLoading({
         success: (res) => { },
       });
@@ -269,6 +282,9 @@ Page({
     };
     let upd = function () {
       if (++now == tot) {
+        thee.setData({
+          busy: false,
+        });
         wx.hideLoading({
           success: (res) => { },
         });
@@ -276,6 +292,10 @@ Page({
           wx.navigateBack({
             delta: 0,
           });
+        }else{
+          if (thee.data.id) {
+            thee.init_post(thee.data.id);
+          }
         }
         wx.showToast({
           title: '删除成功！',
@@ -324,6 +344,74 @@ Page({
   rdel: function (e) {
     let id = e.currentTarget.id;
     this.del_query(this.del_post, id, false);
+  },
+
+  //如果正忙，弹出请勿频繁点击且返回true，否则啥也不做且返回false
+  check_busy: function () {
+    if (this.data.busy) {
+      wx.showToast({
+        title: '请勿频繁点击！',
+        icon: 'none',
+      });
+      return true;
+    }
+    return false;
+  },
+
+  //收藏本视频
+  star_video: function () {
+    if (this.check_busy()) {
+      return;
+    }
+    this.setData({
+      busy: true,
+    });
+    let thee = this;
+    var callback_suc = function () {
+      thee.setData({
+        busy: false,
+        starred: true,
+      });
+    };
+    var callback_fail = function () {
+      thee.setData({
+        busy: false,
+      });
+      wx.showToast({
+        title: '收藏失败，请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    };
+    km.add_record('star_post', Number(this.data.id), new Date, callback_suc, callback_fail);
+  },
+
+  //取消收藏本视频
+  unstar_video: function () {
+    if (this.check_busy()) {
+      return;
+    }
+    this.setData({
+      busy: true,
+    });
+    let thee = this;
+    var callback_suc = function () {
+      thee.setData({
+        busy: false,
+        starred: false,
+      });
+    };
+    var callback_fail = function () {
+      thee.setData({
+        busy: false,
+      });
+      wx.showToast({
+        title: '取消收藏失败，请重试！',
+        icon: 'none',
+        duration: 3000,
+      });
+    };
+    km.del_record('star_post', Number(this.data.id), callback_suc, callback_fail);
   },
 
   /**

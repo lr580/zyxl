@@ -76,10 +76,7 @@ Page({
 
   //前往帖子页
   goto_post: function (e) {
-    let pid = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../postt/postt?id=' + pid,
-    });
+    km.goto_post(Number(e.currentTarget.id));
   },
 
   //创建关于主题对象x的部分信息列表(格式同postlist元素)

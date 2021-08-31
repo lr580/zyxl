@@ -220,7 +220,7 @@ App({
     this.batch_read('video', getApp().globalData.num_video, 'info_video');
   },
 
-  //通用函数：点击跳转到视频vid
+  //通用函数：点击跳转到视频vid (vid是string)
   goto_video: function (vid) {
     let km = getApp();
     wx.navigateTo({
@@ -229,6 +229,16 @@ App({
     km.add_click('video', vid);
     km.isfirst_browse(vid);
     km.add_record('history_video', vid);
+  },
+
+  //通用函数：点击跳转到帖子pid (pid是number)
+  goto_post: function (pid) {
+    let km = getApp();
+    wx.navigateTo({
+      url: '../postt/postt?id=' + pid,
+    });
+    km.add_click('post', pid);
+    km.add_record('history_post', pid);
   },
 
   //通用函数：为用户记录内的s数组添加一则内容[x,time](重复则覆盖),按时间从近到远排序 (不触发加载弹框) 成败回调函数是suc, fail

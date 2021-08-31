@@ -15,6 +15,8 @@
     <view bindtap="goto_preply">点我回帖</view>
     <view bindtap="pdel">点我删除</view>
   </view>
+  <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
+  <view bindtap="unstar_video" wx:else>点我取消收藏</view>
 </view>
 <view wx:else>
   原主题已被删除(╥╯^╰╥)
