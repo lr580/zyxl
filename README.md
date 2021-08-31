@@ -71,6 +71,12 @@ num_users: 0,
 num_newmessage: 0,
 ```
 
+商品信息：
+
+```js
+info_goods: [],
+```
+
 
 
 > 当num_post或num_user过多时，未来版本可能会撤销info_post和info_user以降低用户流量消耗(但是代价是每点一个东西都要加载半天，因为缺乏了预加载)
@@ -99,6 +105,7 @@ num_newmessage: 0,
 2. up array([string, string]) 下标(UP主ID)对应的UP主昵称和头像完整url
 3. recommend array(string) 推荐的互动视频下标
 4. placard array(string) 海报图片(相对路径)
+5. goods array(array) 商品信息(见下文描述)
 
 ### 云存储
 
@@ -145,6 +152,10 @@ num_newmessage: 0,
 帖子图片，常见图片后缀均可，没有文件名要求，默认上传的系统给起是什么名字就是什么名字
 
 
+
+#### goods
+
+商品图片，常见图片后缀均可，没有文件名要求
 
 
 
@@ -350,7 +361,7 @@ graph TD
 4. school string 学校信息(选填) 要求length不超过40 暂时不实现
 5. motto string 个性签名 要求length不超过某个值
 6. point number 积分
-7. warehouse array(元素为[number, number]) 仓库(商品id+数目)
+7. warehouse Object(number:number) 仓库(key是商品id，值是数目)
 8. appointment_talk array(元素为date)
 9. appointment_vr array(元素为date)
 10. star_video array(元素为[string,date]) 下文排序均由时间近到远，维护有序
@@ -373,18 +384,20 @@ graph TD
 
 
 
-## 其他
+## 首页
 
-待解决问题：
+### 商店
 
-1. 后台的用户数量变量会莫名其妙增长(一天下来都没遇到这个bugs，算解决了吧)
-2. 实现跟帖后主题的time_active随之更新
+#### 商品对象
 
+格式：数组，每个元素是一个商品，也是数组，格式如下：
 
-
-当下版本不打算实现的内容：
-
-1. 
+- 0: number 剩余数量 
+- 1: number 单价
+- 2: Boolean 是否有限
+- 3: string 商品名
+- 4: string 商品描述
+- 5: string 商品图(完整url)(反正相对url也省不了多少内存反而麻烦死了)
 
 
 
@@ -430,5 +443,12 @@ graph TD
 2. 实现了树洞主页、帖子详情页的逻辑部分，实现了跟帖和编辑主题的逻辑部分
 3. 增加了小剧场互动视频页UI
 
+2021-8-31
 
+1. 实现了树洞的主题、跟帖、回帖的编辑、删除和回帖
+2. 实现了树洞主题的收藏和浏览次数增加
+3. 实现了树洞的收藏列表、浏览记录逻辑部分
+4. 实现了我的消息页面逻辑部分
+5. 实现了积分商城的逻辑部分
+6. 修复了若干bugs，现在跟帖会让主题的最后活跃时间改变
 

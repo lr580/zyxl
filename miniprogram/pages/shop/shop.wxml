@@ -1,2 +1,23 @@
-<!--pages/shop/shop.wxml-->
-<text>pages/shop/shop.wxml</text>
+<view>积分商城</view>
+<view>我的积分：{{my_money}}</view>
+<view wx:if="{{goods.length}}">
+  <view wx:for="{{goods}}">
+    <view>分割线(～￣▽￣)～ </view>
+    <view>商品名：{{item[3]}}</view>
+    <view>商品简介：{{item[4]}}</view>
+    <view>单价：{{item[1]}}</view>
+    <view>剩余数量：{{item[2]?item[0]:'不限量'}}</view>
+    <view>商品图：<image src="{{item[5]}}"></image>
+    </view>
+    <view>
+      <text>购买数量：{{num_sele[index]}}</text>
+      <text bindtap="numsele_down" id="{{index}}"> (-) </text>
+      <text bindtap="numsele_up" id="{{index}}"> (+) </text>
+      <!--反正是个摆看的页面所以懒得设计连点了-->
+    </view>
+    <view>我现在拥有的数量：{{my_num[index]}}</view>
+    <view bindtap="buy" id="{{index}}">买！</view>
+    <view>分割线ヾ(✿ﾟ▽ﾟ)ノ</view>
+  </view>
+</view>
+<view wx:else>空空如也o(╥﹏╥)o</view>

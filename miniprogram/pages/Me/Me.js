@@ -61,7 +61,7 @@ Page({
       avatar: uavatar,
       motto: '',
       point: 0,
-      warehouse: [],
+      warehouse: {},
       appointment_talk: [],
       appointment_vr: [],
       star_video: [],
