@@ -46,7 +46,7 @@ Page({
   //选择排序是否逆序
   sele_sortreverse: function (e) {
     let sr = Number(e.currentTarget.id);
-    if(sr==this.data.sort_reverse){
+    if (sr == this.data.sort_reverse) {
       return;
     }
     this.setData({
@@ -84,7 +84,13 @@ Page({
 
   //创建关于主题对象x的部分信息列表(格式同postlist元素)
   make_infoabbr: function (x) {
-    return [x.title, x.abbr, km.date2str(x.time_active), x.type, x.reply.length, x.click, x._id, x.time_active];
+    let valid_replynum = 0; //由于存在被删除的帖子，所以需要开for统计(因为早期设计不足所以该数据没有写进post对象)
+    for (let i = 0; i < x.reply.length; ++i) { //不过反正这个时间复杂度蛮低的，就这样也挺好
+      if (km.globalData.info_post[x.reply[i]]) {
+        ++valid_replynum;
+      }
+    }
+    return [x.title, x.abbr, km.date2str(x.time_active), x.type, valid_replynum, x.click, x._id, x.time_active];
   },
 
   //加载所有符合条件的主题，若mode=0是首次加载，否则是下拉加载

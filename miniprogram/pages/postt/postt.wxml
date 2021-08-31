@@ -1,10 +1,11 @@
 <!--pages/postt/postt.wxml-->
-<view>
+<view wx:if="{{exist}}">
   <view>主题标题：{{info.title}}</view>
   <view>
-    主题发布者头像：<image src="{{uinfo.avatar}}"></image>
-    主题发布者昵称：{{uinfo.name}}
-    主题类别：{{types[info.type]}}
+    <view>主题发布者头像：<image src="{{uinfo.avatar}}"></image>
+    </view>
+    <view>主题发布者昵称：{{uinfo.name}}</view>
+    <view>主题类别：{{types[info.type]}}</view>
   </view>
   <view>发表时间：{{ptime}}</view>
   <editor id="pcontent" bindready="pct_ready" read-only>
@@ -12,29 +13,43 @@
   <view wx:if="{{uid==openid}}">
     <view bindtap="goto_pedit">点我编辑</view>
     <view bindtap="goto_preply">点我回帖</view>
-    <view bindtap="goto_pdel">点我删除</view>
+    <view bindtap="pdel">点我删除</view>
   </view>
+</view>
+<view wx:else>
+  原主题已被删除(╥╯^╰╥)
 </view>
 <view>
   <view bindtap="sele_rev" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
   <view bindtap="sele_rev" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
 </view>
 <view wx:if="{{rseq.length}}">
-  <view wx:for="{{rseq}}"><!--修bugs-->
+  <view wx:for="{{rseq}}">
     <view>{{rfloor[item]}}楼</view>
-    <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
+    <view wx:if="{{rexist[item]}}">
+      <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
+      </view>
+      <view>跟帖人昵称：{{ruinfo[item].name}}</view>
+      <!--修bugs-->
+      <view wx:if="{{rinfo[item].replyto}}">
+        <view wx:if="{{rrexist[item]}}">
+          回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
+        </view>
+        <view wx:else>
+          回复{{rrfloor[item]}}楼 原楼层已被删除(╥╯^╰╥)
+        </view>
+      </view>
+      <view>发表时间：{{rtime[item]}}</view>
+      <editor id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
+      </editor>
+      <view wx:if="{{ruid[item]==openid}}">
+        <view bindtap="goto_redit" id="{{rid[item]}}">点我编辑</view>
+        <view bindtap="goto_rreply" id="{{rid[item]}}">点我回帖</view>
+        <view bindtap="rdel" id="{{rid[item]}}">点我删除</view>
+      </view>
     </view>
-    <view>跟帖人昵称：{{ruinfo[item].title}}</view>
-    <view wx:if="{{rruinfo[item]}}">
-      回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
-    </view>
-    <view>发表时间：{{rtime[item]}}</view>
-    <editor id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
-  </editor>
-    <view wx:if="{{ruid[item]==openid}}">
-      <view bindtap="goto_redit" id="{{rid[item]}}">点我编辑</view>
-      <view bindtap="goto_rreply" id="{{rid[item]}}">点我回帖</view>
-      <view>点我删除</view>
+    <view wx:else>
+      该楼层已被删除(╥╯^╰╥)
     </view>
   </view>
 </view>

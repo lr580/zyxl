@@ -23,6 +23,9 @@ Page({
     rruinfo: [],//被回帖用户信息数组
     rrfloor: [],//被回帖楼层信息数组
     rfloor: [],//跟帖楼层数组
+    rexist: [],//跟帖是否存在布尔值数组
+    rrexist: [],//被回帖子是否存在布尔值数组
+    exist: true,//原帖是否存在
     sort_reverse: false,//跟帖楼层是否降序显示
     pctx: null,//主贴富文本框对象 (事实上不在data内，在this直系，在这里写一遍只是声明格式，此处变量不可用，rctx同)
     rctx: [],//回帖富文本框对象数组
@@ -36,7 +39,6 @@ Page({
     this.setData({
       id: options.id,
     });//onshow会处理初始化的
-    // this.init_post(this.data.id);
   },
 
   //初始化
@@ -55,16 +57,41 @@ Page({
     let rfloor = [];
     let rrfloor = [];
     let rseq = [];
+    let rexist = [];
+    let rrexist = [];
     let bin = []; //楼层：帖子id桶排(/map)数组优化
     rid = pinfo.reply;
     for (let i = 0; i < pinfo.reply.length; ++i) {
       rseq.push(i);
       rinfo.push(km.globalData.info_post[rid[i]]);//修拼写错误……
-      ruid.push(rinfo[i].user);
-      ruinfo.push(km.globalData.info_users[ruid[i]]);
-      rtime.push(km.date2str(rinfo[i].time_active));
-      rruinfo.push(rinfo[i].replyto ? km.globalData.info_users[km.globalData.info_post[rinfo[i].replyto].user] : '');
-      rrfloor.push(rinfo[i].replyto ? bin[rinfo[i].replyto] : -1); //不能回复比自己高的楼层(即不能回复未来的帖子)
+      if (!rinfo[i]) {//跟帖已被删除
+        rexist.push(false);
+        rrexist.push(false);
+        ruid.push(null);
+        ruinfo.push(null);
+        rtime.push(null);
+        rruinfo.push(null);
+        rrfloor.push(null);
+      } else {
+        rexist.push(true);
+        ruid.push(rinfo[i].user);
+        ruinfo.push(km.globalData.info_users[ruid[i]]);
+        rtime.push(km.date2str(rinfo[i].time_active));
+        if (rinfo[i].replyto) {//回帖存在
+          rrfloor.push(bin[rinfo[i].replyto]);
+          if (!km.globalData.info_post[rinfo[i].replyto]) { //被回复的跟帖已被删除
+            rrexist.push(false);
+            rruinfo.push(null);
+          } else {
+            rrexist.push(true);
+            rruinfo.push(km.globalData.info_users[km.globalData.info_post[rinfo[i].replyto].user]);
+          }
+        } else {
+          rrfloor.push(null);//修bugs
+          rrexist.push(false);
+          rruinfo.push('');
+        }
+      }
       rfloor.push(i + 1);
       bin[rid[i]] = i + 1;
     }
@@ -83,6 +110,8 @@ Page({
       rtime: rtime,
       rfloor: rfloor,
       rrfloor: rrfloor,
+      rexist: rexist,//修bugs
+      rrexist, rrexist,
       rseq: rseq,
       types: km.globalData.type_p,
     });
@@ -98,7 +127,7 @@ Page({
     const thee = this;
     if (thee.rctx) {
       for (let i = 0; i < thee.rctx.length; ++i) {
-        if (thee.rctx[i]) {
+        if (thee.rctx[i] && thee.data.rinfo[thee.data.rseq[i]]) { //被删除就不能加载了
           thee.rctx[i].setContents({ html: thee.data.rinfo[thee.data.rseq[i]].content });
         }
       }
@@ -138,7 +167,9 @@ Page({
     }
     wx.createSelectorQuery().select('#rcontent' + v).context(res => {
       thee.rctx[v] = res.context;
-      thee.rctx[v].setContents({ html: thee.data.rinfo[v].content });
+      if (thee.data.rinfo[v]) { //可能被删帖了
+        thee.rctx[v].setContents({ html: thee.data.rinfo[v].content });
+      }
     }).exec();
   },
 
@@ -202,6 +233,97 @@ Page({
     wx.navigateTo({
       url: uurl,
     });
+  },
+
+  //删除询问，如果确认删除，调用函数及参数
+  del_query: function (f, x, y = true) {
+    wx.showModal({
+      title: '提示',
+      content: '该操作不可逆，是否确认删除？',
+      confirmText: '删除',
+      confirmColor: '#aa0000',
+    }).then(res => {
+      if (res.confirm) {
+        f(x, y);
+      }
+    }).catch(rws => {
+      console.error('询问失败', rws);
+    });
+  },
+
+  //物理删除_id=id的帖子； 若quit，删除完毕后退出本页面
+  del_post: function (id, quit = true) {
+    wx.showLoading({
+      title: '请稍后……',
+    });
+    let tot = 3;
+    let now = 0;
+    let fail = function (io, rws) {
+      wx.hideLoading({
+        success: (res) => { },
+      });
+      wx.showToast({
+        title: '删除失败，请重试！',
+      });
+      console.error(io, rws);
+    };
+    let upd = function () {
+      if (++now == tot) {
+        wx.hideLoading({
+          success: (res) => { },
+        });
+        if (quit) {
+          wx.navigateBack({
+            delta: 0,
+          });
+        }
+        wx.showToast({
+          title: '删除成功！',
+          icon: 'none',
+          duration: 2000,
+        });
+      }
+    };
+    let uid = this.data.openid;//其实就是自己
+    db.collection('post').doc(Number(id)).remove({}).then(res => {
+      delete km.globalData.info_post[id];
+      upd();
+    }).catch(rws => {
+      fail('删除帖子', rws);
+    });
+
+    db.collection('user').doc(uid).update({
+      data: {
+        post: _.pop(Number(id)),
+      }
+    }).then(res => {
+      let i = km.globalData.info_user.post.indexOf(Number(id));
+      km.globalData.info_user.post.pop(i);
+      upd();
+    }).catch(rws => {
+      fail('更新用户', rws);
+    });
+
+    db.collection('global').doc('default').update({
+      data: {
+        num_post: _.inc(-1),
+      }
+    }).then(res => {
+      upd();
+    }).catch(rws => {
+      fail('帖子数目', rws);
+    });
+  },
+
+  //删除主贴
+  pdel: function () {
+    this.del_query(this.del_post, this.data.id);
+  },
+
+  //删除帖子id为e的跟帖
+  rdel: function (e) {
+    let id = e.currentTarget.id;
+    this.del_query(this.del_post, id, false);
   },
 
   /**

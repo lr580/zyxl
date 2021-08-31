@@ -219,7 +219,7 @@ Page({
     }
     obj.content = nr;
 
-    console.log(obj);//可能后续还要console.log，先不删代码
+    // console.log(obj);//可能后续还要console.log，先不删代码
 
     wx.showLoading({
       title: '保存中……',
@@ -253,7 +253,7 @@ Page({
     };
 
     var upd = function () {
-      console.log('=w=', now_todos + 1, all_todos);
+      // console.log('=w=', now_todos + 1, all_todos);
       if (++now_todos == all_todos) {
         final();
       }
@@ -263,7 +263,7 @@ Page({
       db.collection('post').doc(Number(thee.data.id)).update({
         data: obj,
       }).then(res => {
-        console.log('awa编辑');
+        // console.log('awa编辑');
         km.globalData.info_post[Number(thee.data.id)] = obj;
         upd();
       }).catch(rws => {
@@ -273,7 +273,7 @@ Page({
       db.collection('post').add({
         data: obj,
       }).then(res => {
-        console.log('awa发帖');
+        // console.log('awa发帖');
         km.globalData.info_post[Number(thee.data.id)] = obj;
         upd();
       }).catch(rws => {
@@ -308,9 +308,9 @@ Page({
     if (this.data.isreplypost && this.data.edit == false) { //跟帖 且 非编辑 (编辑就没必要通知别人了吧，也不用改reply)
       all_todos++; //更新主题本帖
 
-      if (thee.data.ruid != km.globalData.openid) {//不是我跟我自己
+      if (thee.data.fuid != km.globalData.openid) {//不是我跟我自己 //修复bugs
         all_todos++; //给主题人发信息
-        let newinfo = [[true, km.globalData.openid, thee.data.fuid]]; //修复bugs
+        let newinfo = [[true, km.globalData.openid, thee.data.fuid]];
         db.collection('user').doc(thee.data.fuid).update({
           data: {
             message: _.unshift(newinfo),
@@ -338,7 +338,7 @@ Page({
     if (this.data.isreplyreply && this.data.edit == false) { //回帖 同理编辑不用通知
       if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
         all_todos++; //给被回帖人消息
-        let newinfo = [[true, km.globalData.openid, thee.data.ruid]]; //修复bugs
+        let newinfo = [[true, km.globalData.openid, thee.data.ruid]];
         db.collection('user').doc(thee.data.ruid).update({
           data: {
             message: _.unshift(newinfo),
