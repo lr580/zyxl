@@ -23,7 +23,18 @@
     </view>
   </view>
   <view wx:else>
-    暂未制作(；′⌒`)
+    <view wx:for="{{arr}}">
+      <view bindtap="goto_post" id="{{item[6]}}">
+        <view>分割线ヾ(･ω･*)ﾉ</view>
+        <view>{{keych}}的主题标题：{{item[0]}}</view>
+        <view>{{keych}}的主题简介：{{item[1]}}</view>
+        <view>{{keych}}的主题时间：{{item[2]}}</view>
+        <view>{{keych}}的主题类型：{{types[item[3]]}}</view>
+        <view>{{keych}}的跟帖数：{{item[4]}}</view>
+        <view>{{keych}}的浏览次数：{{item[5]}}</view>
+        <view>分割线＼＼\٩('ω')و//／／</view>
+      </view>
+    </view>
   </view>
 </view>
 <view wx:else>空空如也o(╥﹏╥)o</view>

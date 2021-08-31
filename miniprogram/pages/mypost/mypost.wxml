@@ -1,2 +1,26 @@
-<!--pages/mypost/mypost.wxml-->
-<text>pages/mypost/mypost.wxml</text>
+<view>我的树洞</view>
+<view>
+  <view bindtap="switch_reverse" id="0">{{sort_reverse==0?'(当前)':''}}按时间由近到远排序</view>
+  <view bindtap="switch_reverse" id="1">{{sort_reverse==1?'(当前)':''}}按时间由远到近排序</view>
+</view>
+<view wx:if="{{arr.length}}">
+  <view wx:for="{{arr}}">
+    <view wx:if="{{item.length!=1}}">
+      <view bindtap="goto_post" id="{{item[8]}}">
+        <view>分割线ヾ(･ω･*)ﾉ</view>
+        <view>{{item[6]==item[8]?'我发布的主题':'我在主题下的跟帖'}}</view>
+        <view>{{item[6]==item[8]?'主题标题：':'所跟帖主题的标题：'}}{{item[0]}}</view>
+        <view>{{item[6]==item[8]?'主题简介：':'所跟帖主题的简介：'}}{{item[1]}}</view>
+        <view>发表时间：{{item[2]}}</view>
+        <view>主题类型：{{types[item[3]]}}</view>
+        <view>主题跟帖数：{{item[4]}}</view>
+        <view>主题浏览次数：{{item[5]}}</view>
+        <view>分割线＼＼\٩('ω')و//／／</view>
+      </view>
+    </view>
+    <!--如果主贴被删了，那么我对这个主贴的跟帖也不显示了-->
+  </view>
+</view>
+<view wx:else>
+  您还没有在树洞发表过任何主题或跟帖(*･ω-q) 
+</view>

@@ -27,12 +27,12 @@
 </view>
 <view wx:if="{{rseq.length}}">
   <view wx:for="{{rseq}}">
-    <view>{{rfloor[item]}}楼</view>
+
     <view wx:if="{{rexist[item]}}">
+      <view>{{rfloor[item]}}楼</view>
       <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
       </view>
       <view>跟帖人昵称：{{ruinfo[item].name}}</view>
-      <!--修bugs-->
       <view wx:if="{{rinfo[item].replyto}}">
         <view wx:if="{{rrexist[item]}}">
           回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
@@ -49,9 +49,6 @@
         <view bindtap="goto_rreply" id="{{rid[item]}}">点我回帖</view>
         <view bindtap="rdel" id="{{rid[item]}}">点我删除</view>
       </view>
-    </view>
-    <view wx:else>
-      该楼层已被删除(╥╯^╰╥)
     </view>
   </view>
 </view>

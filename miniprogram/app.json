@@ -17,7 +17,8 @@
     "pages/shop/shop",
     "pages/postp/postp",
     "pages/postt/postt",
-    "pages/postu/postu"
+    "pages/postu/postu",
+    "pages/mymessage/mymessage"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

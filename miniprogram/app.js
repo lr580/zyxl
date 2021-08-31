@@ -335,6 +335,18 @@ App({
     thee.setdata(obj);
   },
 
+  //通用函数：根据帖子对象生成显示文本数组 创建关于主题对象x的部分信息列表(格式同postlist元素)
+  make_postinfoabbr(x) {
+    let km = getApp();
+    let valid_replynum = 0;
+    for (let i = 0; i < x.reply.length; ++i) {
+      if (km.globalData.info_post[x.reply[i]]) {
+        ++valid_replynum;
+      }
+    }
+    return [x.title, x.abbr, km.date2str(x.time_active), x.type, valid_replynum, x.click, x._id, x.time_active];
+  },
+
   //通用函数：配置一个显示pair的thee页面js代码(参数意义见注释)
   init_pair_pagejs(thee, keyname, keych, pfirst = 'video', psecond = 'post') {
     let km = getApp();
@@ -364,12 +376,25 @@ App({
         arr: arr,
       });
     };
-    thee.init_pfirst();
 
     //初始化帖子
     thee.init_psecond = function () {
-      //尚未制作
+      let keyword = keyname + '_' + psecond;
+      let arro = km.globalData.info_user[keyword];
+      let arr = [];
+      for (let i = 0; i < arro.length; ++i) {
+        let x = km.globalData.info_post[arro[i][0]];
+        arr.push(km.make_postinfoabbr(x));
+      }
+      if (thee.data.reverse) {
+        arr.reverse();
+      }
+      thee.setData({
+        arr: arr,
+      });
     };
+
+    thee.init_pfirst();
 
     //按照当前sele_bar选择初始化
     thee.init = function () {
@@ -391,6 +416,12 @@ App({
       km.goto_video(vid);
     };
 
+    //点击跳转到对应的帖子页面
+    thee.goto_post = function (v) {
+      let vid = Number(v.currentTarget.id);
+      km.goto_post(vid);
+    };
+
     //点击切换sele_bar
     thee.switch_bar = function (v) {
       let newv = Number(v.currentTarget.id);
@@ -400,6 +431,8 @@ App({
       });
       if (newv == 0) {
         thee.init_pfirst();
+      } else {
+        thee.init_psecond();
       }
     };
 

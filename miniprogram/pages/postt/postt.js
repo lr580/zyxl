@@ -312,9 +312,9 @@ Page({
       fail('删除帖子', rws);
     });
 
-    db.collection('user').doc(uid).update({
+    db.collection('user').doc(uid).update({//如果这里用了_.pop暴毙，因为pop是删掉最后一个元素
       data: {
-        post: _.pop(Number(id)),
+        post: _.pull(Number(id)),
       }
     }).then(res => {
       let i = km.globalData.info_user.post.indexOf(Number(id));

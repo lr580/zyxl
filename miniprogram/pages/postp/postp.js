@@ -314,7 +314,6 @@ Page({
         db.collection('user').doc(thee.data.fuid).update({
           data: {
             message: _.unshift(newinfo),
-            time_active: nowtime,
           }
         }).then(res => {
           upd();//理论上当前小程序内不用更新这个消息，只需要后台更新
@@ -326,7 +325,8 @@ Page({
       db.collection('post').doc(thee.data.fid).update({
         data: {
           reply: _.push(Number(thee.data.id)),
-        }
+          time_active: nowtime,
+        }//修bugs……time_active怎么能跑到user去呢？
       }).then(res => {
         km.globalData.info_post[thee.data.fid].reply.push(thee.data.id);
         upd();

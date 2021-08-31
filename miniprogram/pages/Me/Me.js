@@ -149,6 +149,13 @@ Page({
     });
   },
 
+  //前往我的消息页面
+  goto_mymessage: function () {
+    wx.navigateTo({
+      url: '../mymessage/mymessage',
+    });
+  },
+
   //前往收藏页面
   goto_mycollect: function () {
     wx.navigateTo({
