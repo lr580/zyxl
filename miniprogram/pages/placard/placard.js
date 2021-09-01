@@ -1,4 +1,7 @@
 // pages/placard/placard.js
+const km = getApp();
+const db = wx.cloud.database();
+const _ = db.command;
 Page({
 
   /**
@@ -14,6 +17,20 @@ Page({
   onLoad: function (options) {
     this.setData({
       pid: Number(options.id),
+    });
+  },
+
+  //前往悄悄话预约页面
+  goto_talk: function () {
+    wx.navigateTo({
+      url: '../talk/talk',
+    });
+  },
+
+  //前往VR预约页面
+  goto_vr: function () {
+    wx.navigateTo({
+      url: '../vr/vr',
     });
   },
 

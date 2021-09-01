@@ -1,2 +1,15 @@
-<!--pages/placard/placard.wxml-->
 <text>第{{pid+1}}张海报</text>
+<view wx:if="{{pid==0}}">
+  <view>悄悄话预约开放啦！</view>
+  <view>“悄悄话.预约”与心理咨询室建立联系，帮助需要治愈、疏导的群体，“知心体验展预约”为想要参加线下体验的用户提供预约通道，后台通过整理预约数据，设计展览实际情况。</view>
+  <image src="cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/placard/talk.jpg"></image>
+  <view bindtap="goto_talk">点我前往预约</view>
+</view>
+<view wx:elif="{{pid==1}}">
+  <view>为了配合“知音心流”小程序中互动视频应用，使受众获得更加深刻真实的交互式体验，“知音心流”工作室开展互动视频线下体验活动，将原创互动视频剧情搬下荧幕，让受众以第一视角去感受互动剧情的变化，从中获得收获。</view>
+  <image src="cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896/placard/vr.png"></image>
+  <view bindtap="goto_vr">点我前往预约</view>
+</view>
+<view wx:else>
+  <view>暂无</view>
+</view>

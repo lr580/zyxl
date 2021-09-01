@@ -72,12 +72,12 @@
         <text class="text-black pleft">查看帮助</text>
       </view>
     </view>
-    <view bindtap="goto_contactus" class="cu-item arrow">
+    <!-- <view bindtap="goto_contactus" class="cu-item arrow">
       <view class="content">
         <image class="icon_init" src="/img/kefu.png"></image>
         <text class="text-black pleft">联系客服</text>
       </view>
-    </view>
+    </view> -->
     <view bindtap="goto_contactus" class="cu-item arrow">
       <view class="content">
         <image class="icon_init" src="/img/fankui.png"></image>

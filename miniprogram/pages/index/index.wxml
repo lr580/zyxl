@@ -36,7 +36,7 @@
   </view>
   <view wx:else>加载中……</view>
 </view>
-<view>
+<!-- <view>
   海报！
   <view wx:if="{{arr_pla.length}}">
     <view wx:for="{{arr_pla}}">
@@ -44,7 +44,7 @@
     </view>
   </view>
   <view wx:else>加载中……</view>
-</view>
+</view> -->
 
 <view>
   <view bindtap="goto_talk">点我前往悄悄话预约</view>
