@@ -458,6 +458,128 @@ App({
     };
   },
 
+  //通用函数：配置一个预约页面js代码(参数意义见注释)
+  init_appointmentjs(thee, aname, ach, kfirst = 'appointment') {
+    let km = getApp();
+    let key = kfirst + '_' + aname;
+    let openid = km.globalData.openid;
+
+    //将date x转换为picker要求的时间格式
+    thee.date2str = function (x = new Date) {
+      return km.date2str(x, 2);
+    };
+
+    thee.init = function () {
+      let ma = km.globalData.info_user[key].map(x => { return new Date(x); });
+      thee.setData({
+        my_appointment: ma, //由已经预约的时间戳数组转换的日期对象数组
+        my_timestr: ma.map(x => { return km.date2str(x, 1); }), //由日期对象数组转换的字符串日期(年月日星期)数组
+        aname: aname,//数组库字段后半段名
+        ach: ach,//字段的显示名字
+        busy: false,//禁止频繁点击
+        nowdate: thee.date2str(),//当前选择时间 yyyy-mm-dd 字符串
+        nowdatestr: thee.date2str(new Date, 1), //当前选择时间 yyyy:mm:dd 星期 字符串
+        today: thee.date2str(), //今天的 yyyy-mm-dd 字符串
+      });
+    };
+    thee.init();
+
+    thee.cancel = function (e) {
+      if (thee.data.busy) {
+        wx.showToast({
+          title: '请勿频繁点击！',
+          icon: 'none',
+        });
+        return;
+      }
+      let id = Number(e.currentTarget.id);
+      let v = Number(thee.data.my_appointment[id]);
+      let obj = {};
+      obj[key] = _.pull(v);
+      wx.showLoading({
+        title: '取消中……',
+      });
+      let debusy = function () {
+        wx.hideLoading({
+          success: (res) => { },
+        });
+        thee.setData({
+          busy: false,
+        });
+      };
+      db.collection('user').doc(openid).update({
+        data: obj,
+      }).then(res => {
+        km.globalData.info_user[key].splice(km.globalData.info_user[key].indexOf(v), 1);
+        debusy();
+        thee.init();
+      }).catch(rws => {
+        console.error('取消失败！', rws);
+        debusy();
+      });
+    };
+
+    //选择日期
+    thee.sele_date = function (e) {
+      thee.setData({
+        nowdate: e.detail.value,
+        nowdatestr: km.date2str(km.str2date(e.detail.value), 1),
+      })
+    };
+
+    //确认预约
+    thee.appoint = function () {
+      let vobj = km.str2date(thee.data.nowdate);
+      let v = Number(vobj);
+      let na = km.globalData.info_user[key];
+      let week = vobj.getDay();
+      if (week <= 0 || week >= 6) {
+        wx.showToast({
+          title: '不可以预约周六周日！',
+          icon: 'none',
+        });
+        return;
+      }
+      if (na.indexOf(v) != -1) {
+        wx.showToast({
+          title: '您已预约该日期，不可重复预约！',
+          icon: 'none',
+        });
+        return;
+      }
+      if (thee.data.busy) {
+        wx.showToast({
+          title: '请勿频繁点击！',
+          icon: 'none',
+        });
+        return;
+      }
+      let obj = {};
+      obj[key] = _.unshift(v);
+      wx.showLoading({
+        title: '预约中……',
+      });
+      let debusy = function () {
+        wx.hideLoading({
+          success: (res) => { },
+        });
+        thee.setData({
+          busy: false,
+        });
+      };
+      db.collection('user').doc(openid).update({
+        data: obj,
+      }).then(res => {
+        km.globalData.info_user[key].unshift(v);
+        debusy();
+        thee.init();
+      }).catch(rws => {
+        console.error('预约失败！', rws);
+        debusy();
+      });
+    };
+  },
+
   //通用函数：检查频繁点击并返回状态
   check_busy: function () {
     if (click_busy) {
@@ -511,19 +633,25 @@ App({
     return -1;
   },
 
-  //通用函数，传入date，返回年月日(type=1)(+时分 type=0)的格式化文本
+  //通用函数，传入date，返回年月日(type=1 +星期)(+时分 type=0) (年月日- type=2)的格式化文本
   date2str: function (x, type = 0) {
     let s = '', t = '';
     s += String(x.getFullYear());
-    s += '/';
+    s += type == 2 ? '-' : '/';
     t = String(x.getMonth() + 1);
     if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
-    s += '/';
+    s += type == 2 ? '-' : '/';
     t = String(x.getDate());
     if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
-    if (type != 0) { return s; }
+    if (type != 0) {
+      if (type == 1) {
+        let weekch = '日一二三四五六日';
+        s += ' 星期' + weekch[x.getDay()];
+      }
+      return s;
+    }
     s += ' ';
     t = String(x.getHours());
     if (t.length <= 1) { s += '0' + t; }
@@ -533,5 +661,14 @@ App({
     if (t.length <= 1) { s += '0' + t; }
     else { s += t; }
     return s;
+  },
+
+  //通用函数：将picker格式string x转换为date
+  str2date: function (x) {
+    let tx = x.match(/(\d+)\-(\d+)-(\d+)/);
+    let yy = Number(tx[1]);
+    let mm = Number(tx[2]) - 1;
+    let dd = Number(tx[3]);
+    return new Date(yy, mm, dd);
   },
 })

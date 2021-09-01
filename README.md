@@ -362,8 +362,8 @@ graph TD
 5. motto string 个性签名 要求length不超过某个值
 6. point number 积分
 7. warehouse Object(number:number) 仓库(key是商品id，值是数目)
-8. appointment_talk array(元素为date)
-9. appointment_vr array(元素为date)
+8. appointment_talk array(元素为number)
+9. appointment_vr array(元素为number)
 10. star_video array(元素为[string,date]) 下文排序均由时间近到远，维护有序
 11. star_post array(元素为[string,date])
 12. history_video array(元素为[string,date])
@@ -398,6 +398,18 @@ graph TD
 - 3: string 商品名
 - 4: string 商品描述
 - 5: string 商品图(完整url)(反正相对url也省不了多少内存反而麻烦死了)
+
+
+
+### 预约
+
+继续使用(写起来非常爽的)批量页面生成
+
+#### 日期对象
+
+采用年月日日期，仍然用Date(反正没有设置时分秒那就都是一样的)
+
+由于js对日期对象同一时刻判定为不相等，所以数据上保存记录时间戳
 
 
 

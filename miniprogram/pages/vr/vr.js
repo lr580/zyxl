@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    getApp().init_appointmentjs(this, 'vr', 'VR展'); //js代码和data见app.js的init_appointmentjs函数
   },
 
   /**

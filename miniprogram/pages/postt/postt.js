@@ -292,7 +292,7 @@ Page({
           wx.navigateBack({
             delta: 0,
           });
-        }else{
+        } else {
           if (thee.data.id) {
             thee.init_post(thee.data.id);
           }
@@ -318,7 +318,7 @@ Page({
       }
     }).then(res => {
       let i = km.globalData.info_user.post.indexOf(Number(id));
-      km.globalData.info_user.post.pop(i);
+      km.globalData.info_user.post.splice(i, 1);//修了一个bugs
       upd();
     }).catch(rws => {
       fail('更新用户', rws);

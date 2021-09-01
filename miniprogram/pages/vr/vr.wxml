@@ -1,2 +1,23 @@
-<!--pages/vr/vr.wxml-->
-<text>pages/vr/vr.wxml</text>
+<!--当前talk.wxml与vr.wxml完全一致(逐字符)-->
+<view>{{ach}}预约</view>
+<view>
+  我的{{ach}}预约
+  <view wx:if="{{my_timestr.length}}">
+    <view wx:for="{{my_timestr}}">
+      <view>
+        时间：{{item}}
+        <text bindtap="cancel" id="{{index}}">点我取消</text>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    空空如也(T ^ T)
+  </view>
+  <view>
+    <view> 您可以选择周一到周五的任意一天进行新的{{ach}}预约：</view>
+    <picker mode="date" bindchange="sele_date" start="{{today}}" value="{{nowdate}}">
+      <view>当前选择：{{nowdatestr}}</view>
+    </picker>
+  </view>
+  <view bindtap="appoint">点我预约</view>
+</view>
