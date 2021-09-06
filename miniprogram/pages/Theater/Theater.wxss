@@ -50,6 +50,7 @@
   margin-left: 200rpx;
 }
 
+
 .video_type text {
   margin-left: 8rpx;
   font-size: 22rpx;
