@@ -1,11 +1,11 @@
 /* pages/index/index.wxss */
 .video_body{
   background-color: white;
-  width: 330rpx;
-  height: 300rpx;
-  margin: 20rpx;
+  width: 340rpx;
+  height: 290rpx;
+  margin: 10rpx;
   border-radius: 15rpx;
- box-shadow:1rpx 1rpx 1rpx gainsboro;
+
 }
 
 .video_list{
@@ -20,17 +20,17 @@
 }
 
 .video_cover_img image{
-  width: 330rpx;
+  width: 340rpx;
   height: 200rpx;
   border-top-left-radius: 15rpx;
   border-top-right-radius: 15rpx;
 }
 
 .video_tittle{
-  padding-left: 10rpx;
-  padding-right: 10rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
   font-weight: 400;
-  font-size: 35rpx;
+  font-size: 30rpx;
   display: -webkit-box;
   word-break: break-all;
   text-overflow: ellipsis;
@@ -42,14 +42,13 @@
 .state{
   display: flex;
   align-items: center;
-
-  margin-top: 10rpx;
+ margin-top: 5rpx;
 }
 
 .e{
   align-items: center;
   display: flex;
-  margin-left: 10rpx;
+  margin-left: 20rpx;
 }
 
 .e image{
@@ -84,8 +83,8 @@
 }
 
 .index_fun{
-  width: 200rpx;
-  height: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .func{
@@ -93,6 +92,15 @@
   align-items: center;
   justify-content: space-evenly;
   padding-top: 40rpx;
+  margin: 20rpx;
+  padding-top: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-bottom: 30rpx;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30rpx;
+  margin-top: 50rpx;
+  /* box-shadow: 4px 4px 2px gainsboro; */
 }
 
 .goto_talk{

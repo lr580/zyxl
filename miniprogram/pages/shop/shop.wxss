@@ -1,1 +1,133 @@
 /* pages/shop/shop.wxss */
+
+.a{
+  font-size: 30rpx;
+  font-weight: 400;
+  color: gray;
+}
+
+.b{
+  font-size: 45rpx;
+  font-weight: 800;
+  color: rgba(255, 0, 0, 0.541);
+  width: 50rpx;
+}
+
+.c{
+  display: flex;
+  align-items: center;
+  margin-right: 150rpx;
+}
+
+.goods_show{
+  margin: 5rpx;
+ 
+  height: auto;
+  width: 600rpx;
+  border-radius: 30rpx;
+  background-color: white;
+  margin-top: 30rpx;
+}
+
+.goods_img{
+  width: 600rpx;
+  height: 600rpx;
+  border-top-right-radius: 20rpx;
+  border-top-left-radius: 25rpx;
+}
+
+.big_body{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20rpx;
+  padding: 10rpx;
+  justify-items: center;
+  justify-content: center;
+  margin-top: 40rpx;
+}
+
+.goods_name{
+  font-weight: 600;
+  font-size: 40rpx;
+}
+
+.goods_intro{
+  color: gray;
+  margin-top: 15rpx;
+  border-bottom: 2rpx gainsboro solid;
+  padding-bottom: 5rpx;
+}
+
+.e{
+  padding: 20rpx;
+}
+
+.t{
+  
+  font-size: 35rpx;
+}
+.goods_price{
+  display: flex;
+  align-items: center;
+}
+.qq{
+  font-size: 35rpx;
+  color: gray;
+  margin-left: 5rpx;
+}
+
+.qqq{
+  margin-left: 20rpx;
+  color: gray;
+
+}
+.no{
+  width: 450rpx;
+}
+
+.up_down{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.acount{
+  font-weight: 600;
+  color: black;
+  font-size: 40rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  width: 50rpx;
+}
+
+.ww{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  margin-top: 30rpx;
+}
+
+.buy_img{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.buy_txt{
+  font-size: 40rpx;
+  font-weight: 600;
+  padding-left: 10rpx;
+}
+
+.buy_button{
+  display: flex;
+  align-items: center;
+  margin-left: 50rpx;
+  justify-content: center;
+  margin-left: 50rpx;
+}
+
+.bottom_tip {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

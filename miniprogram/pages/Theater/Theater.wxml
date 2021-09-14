@@ -39,7 +39,7 @@
 </view> -->
 
 <!-- <view>分割线(｀・ω・´)</view> -->
-
+<view class="kk"></view>
 <view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part"
   wx:if="{{num_show}}">
   <!--videolist.length-->

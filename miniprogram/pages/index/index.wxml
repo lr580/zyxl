@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
-<view class="func">
+<view class="func padding-xl radius shadow bg-white">
   <view bindtap="goto_talk">
   <image class="index_fun" src="/img/index_talk.png"></image>
   <view class="fun_txt">悄悄话</view>
