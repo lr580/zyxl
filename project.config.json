@@ -73,6 +73,12 @@
         {
           "name": "talk",
           "pathName": "pages/talk/talk",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "TreeHole",
+          "pathName": "pages/TreeHole/TreeHole",
           "scene": null
         }
       ]

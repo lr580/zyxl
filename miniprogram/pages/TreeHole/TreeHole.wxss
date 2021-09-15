@@ -1,1 +1,48 @@
 /* miniprogram/pages/TreeHole/TreeHole.wxss */
+.content_body{
+
+ margin-top: 20rpx;
+ background-color: white;
+border-top: 3rpx gainsboro solid;
+border-bottom: 3rpx gainsboro solid;
+padding-left: 20rpx;
+padding-right: 20rpx;
+padding-bottom: 10rpx;
+}
+
+.tz_title{
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.tz_intro{
+  display: flex;
+  flex-direction: row;
+  margin-top:30rpx;
+
+}
+
+.tz_title image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tz_intro image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tz_title text{
+  font-weight: 600;
+  font-size: 33rpx;
+  color: rgba(0, 0, 0, 0.712);
+  margin-left: 15rpx;
+}
+
+.tz_intro text{
+  font-weight: 400;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.658);
+  width: 90%;
+}
+

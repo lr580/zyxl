@@ -45,7 +45,7 @@ Page({
 
   //选择排序是否逆序
   sele_sortreverse: function (e) {
-    let sr = Number(e.currentTarget.id);
+    let sr = Number(e.detail.value);
     if (sr == this.data.sort_reverse) {
       return;
     }
