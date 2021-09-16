@@ -135,7 +135,8 @@ Page({
 
   //选择排序依据v
   sele_sorttype: function (v) {
-    let nr = v.currentTarget.id;
+    let nr = '0'+String(Number(v.detail.value));
+    console.log(nr);
     let sk = Number(nr[0]);
     let sr = Number(nr[1]);
     this.setData({
