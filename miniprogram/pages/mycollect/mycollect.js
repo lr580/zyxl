@@ -9,6 +9,25 @@ Page({
    * 页面的初始数据
    */
   data: {
+    TabCur: 0,
+    scrollLeft:0,
+    collect_type:['视频','树洞']
+  },
+  tabSelect(e) {
+    this.setData({
+      TabCur: e.currentTarget.dataset.id,
+      scrollLeft: (e.currentTarget.dataset.id-1)*60
+    })
+    let newv = Number(e.currentTarget.dataset.id);
+
+      this.setData({
+        sele_bar: newv,
+      });
+      if (newv == 0) {
+        this.init_pfirst();
+      } else {
+        this.init_psecond();
+      }
   },
 
   /**

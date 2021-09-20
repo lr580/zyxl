@@ -40,9 +40,9 @@
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp:2;
   padding-right: 10rpx;
-  height: 80rpx;
+  height: 75rpx;
   margin-left: 30rpx;
 }
 

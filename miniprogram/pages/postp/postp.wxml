@@ -4,20 +4,33 @@
 <view wx:if="{{isreplyreply}}">
   回复{{rep_floor}}楼 {{rep_name}}：
 </view>
+
+
+
 <view wx:if="{{!isreplypost}}">
-  <input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input>
-  <input type="text" placeholder="请输入主题摘要" maxlength="80" bindinput="scanf_abbr" value="{{s_abbr}}"></input>
-  <view>选择类别：</view>
-  <view wx:for="{{types}}">
-    <view wx:if="{{index+1<types.length}}"> <!--跳过全部这一类别，该类别不可选-->
-      <view bindtap="sele_type" id="{{index}}">
-        {{s_type==index?'(当前)':''}} {{item}}
-      </view>
-    </view>
-  </view>
+  <view class="cu-form-group">
+		<view class="title">主题</view>
+		<input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input>
+		<text class="cuIcon-playfill lg text-cyan"></text>
+	</view>
+  <!-- <input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input> -->
+  <view class="cu-form-group align-start">
+		<view class="title">摘要</view>
+		<textarea type="text" placeholder="请输入主题摘要" maxlength="80" bindinput="scanf_abbr" value="{{s_abbr}}"></textarea>
+	</view>
+  <!-- <input type="text" placeholder="请输入主题摘要" maxlength="80" bindinput="scanf_abbr" value="{{s_abbr}}"></input> -->
+	<view class="cu-form-group margin-top">
+		<view class="title">选择类别</view>
+		<picker bindchange="sele_type" value="{{index}}" range="{{picker}}">
+			<view class="picker">
+				{{index?picker[index]:'感情'}}
+			</view>
+		</picker>
+	</view>
+
 </view>
 
-<view>
+<view class="edit_zone">
   <view class="toolbar" bindtap="format">
     <i class="iconfont icon-charutupian" catchtouchend="insertImage"></i>
     <i class="iconfont icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}" data-name="header"
@@ -46,5 +59,6 @@
     </editor>
   </view>
 </view>
-
-<view bindtap="save_all" style="font-size: 18px;">保存</view>
+<view class="padding flex flex-direction">
+  <button bindtap="save_all" class="cu-btn bg-cyan lg text-xsl">保存</button>
+</view>
