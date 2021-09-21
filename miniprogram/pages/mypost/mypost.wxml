@@ -1,26 +1,50 @@
-<view>我的树洞</view>
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-lg text-bold text-cyan">我的树洞</text>
+      <text class="bg-cyan"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
+
+
+
+<!-- 
 <view>
   <view bindtap="switch_reverse" id="0">{{sort_reverse==0?'(当前)':''}}按时间由近到远排序</view>
   <view bindtap="switch_reverse" id="1">{{sort_reverse==1?'(当前)':''}}按时间由远到近排序</view>
-</view>
+</view> -->
 <view wx:if="{{arr.length}}">
   <view wx:for="{{arr}}">
     <view wx:if="{{item.length!=1}}">
-      <view bindtap="goto_post" id="{{item[6]}}">
-        <view>分割线ヾ(･ω･*)ﾉ</view>
-        <view>{{item[6]==item[8]?'我发布的主题':'我在主题下的跟帖'}}</view>
-        <view>{{item[6]==item[8]?'主题标题：':'所跟帖主题的标题：'}}{{item[0]}}</view>
-        <view>{{item[6]==item[8]?'主题简介：':'所跟帖主题的简介：'}}{{item[1]}}</view>
-        <view>发表时间：{{item[2]}}</view>
-        <view>主题类型：{{types[item[3]]}}</view>
-        <view>主题跟帖数：{{item[4]}}</view>
-        <view>主题浏览次数：{{item[5]}}</view>
-        <view>分割线＼＼\٩('ω')و//／／</view>
+      <view class="treeHole_part"  bindtap="goto_post" id="{{item[6]}}">
+        <text class="th_title">{{item[0]}}</text>
+        <view class="statea">
+        
+        <view class="a">
+          <image class="aa" src="/img/type.png"></image>
+         <text class="aaa">{{types[item[3]]}}</text> 
+        </view>
+        <view class="a">
+          <image class="aa" src="/img/tz_talk.png"></image>
+         <text class="aaa">{{item[4]}}</text> 
+        </view>
+        <view class="a">
+          <image class="aa" src="/img/tz_liulan.png"></image>
+         <text class="aaa">{{item[5]}}</text> 
+        </view>
+        <!-- <view>{{keych}}的跟帖数：{{item[4]}}</view> -->
+        <!-- <view>{{keych}}的浏览次数：{{item[5]}}</view> -->
+        <!-- <view>{{keych}}的主题时间：{{item[2]}}</view> -->
+        </view>
+        <text class="th_intro">{{item[1]}}</text>
+        
       </view>
     </view>
     <!--如果主贴被删了，那么我对这个主贴的跟帖也不显示了；未来版本可以考虑显示，只需要id改成item[8]即可-->
   </view>
 </view>
-<view wx:else>
-  您还没有在树洞发表过任何主题或跟帖(*･ω-q) 
+
+<view class="bottom_tip" wx:else>
+  <image src="/img/tip.png"></image>
+  <text>您还没有在树洞发表过任何主题或跟帖</text>
 </view>

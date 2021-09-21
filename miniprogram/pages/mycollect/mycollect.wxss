@@ -67,7 +67,7 @@
   margin-top: 20rpx;
   border-bottom: gainsboro 2rpx solid;
   padding-bottom: 10rpx;
-  padding-left: 300rpx;
+  padding-left: 0rpx;
   
 }
 
