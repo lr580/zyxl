@@ -1,5 +1,11 @@
 <!--pages/mymessage/mymessage.wxml-->
-<view>我的消息</view>
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-lg text-bold text-cyan">我的消息</text>
+      <text class="bg-cyan"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
 <view>
   <view>显示筛选</view>
   <view bindtap="switch_range" id="0">{{show_all==0?'(当前)':''}}只显示未读消息</view>

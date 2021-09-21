@@ -1,9 +1,22 @@
+
+
 <view wx:if="{{isreplypost}}">
-  所跟帖的主题 {{ftitle}}
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-title text-cyan"></text>
+      <text class="text-xl text-bold">回复：{{ftitle}}</text>
+    </view>
+  </view>
 </view>
 <view wx:if="{{isreplyreply}}">
-  回复{{rep_floor}}楼 {{rep_name}}：
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-title text-cyan"></text>
+      <text class="text-xl text-bold">回复：{{rep_floor}}楼 {{rep_name}}</text>
+    </view>
+  </view>
 </view>
+
 
 
 
