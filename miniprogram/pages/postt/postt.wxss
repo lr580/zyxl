@@ -154,7 +154,7 @@
 }
 
 .b2{
-  margin-left: 300rpx;
+  margin-right: 100rpx;
 }
 
 .b2 image{
@@ -164,7 +164,7 @@
 }
 
 .b3{
-  margin-left: 100rpx;
+  margin-right:100rpx;
 }
 
 .b3 image{

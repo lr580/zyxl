@@ -1,1 +1,9 @@
 /* pages/help/help.wxss */
+
+.a{
+  font-weight: 400;
+  font-size: 30rpx;
+  color: gray;
+  line-height: 1.5;
+  text-indent: 2em;
+}

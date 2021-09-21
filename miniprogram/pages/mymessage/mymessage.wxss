@@ -1,1 +1,57 @@
 /* pages/mymessage/mymessage.wxss */
+.msg_body{
+ 
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30rpx;
+}
+
+.a2{
+  width: 80%;
+  display: flex;
+  justify-self: center;
+  margin-left: 30rpx;
+  background-color: rgba(220, 220, 220, 0.39);
+  border-radius: 10rpx;
+}
+
+
+.a2 text{
+  font-size: 30rpx;
+  color: gray;
+  padding: 20rpx;
+}
+
+.a1_1{
+  margin-left: 30rpx;
+  font-size: 37rpx;
+  color: gray;
+}
+
+.a1_2{
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  color: gainsboro;
+}
+
+.bottom_tip {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom_tip image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.bottom_tip text {
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: gray;
+}
