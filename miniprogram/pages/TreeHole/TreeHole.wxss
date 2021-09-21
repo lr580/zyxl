@@ -1,1 +1,128 @@
 /* miniprogram/pages/TreeHole/TreeHole.wxss */
+.content_body{
+
+ margin-top: 15rpx;
+ background-color: white;
+border-top: 3rpx gainsboro solid;
+border-bottom: 3rpx gainsboro solid;
+padding-left: 20rpx;
+padding-right: 20rpx;
+padding-bottom: 10rpx;
+}
+
+.tz_title{
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.tz_intro{
+  display: flex;
+  flex-direction: row;
+  margin-top:30rpx;
+
+}
+
+.tz_title image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tz_intro image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tz_title text{
+  font-weight: 600;
+  font-size: 33rpx;
+  color: rgba(0, 0, 0, 0.712);
+  margin-left: 15rpx;
+}
+
+.tz_intro text{
+  font-weight: 400;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.658);
+  width: 90%;
+}
+
+.tz_state{
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+  border-top: 3rpx solid gainsboro;
+  padding-top: 15rpx;
+}
+
+.img_set{
+  display: flex;
+  align-items: center;
+  width: 100rpx;
+  margin-right: 40rpx;
+}
+
+.img_set image{
+  width: 25rpx;
+  height: 25rpx;
+}
+
+.img_set text{
+  margin-left: 10rpx;
+  font-size: 25rpx;
+  color: gray;
+}
+.img_set1{
+  display: flex;
+  align-items: center;
+
+}
+
+.img_set1 image{
+  width: 25rpx;
+  height: 25rpx;
+}
+
+.img_set1 text{
+  margin-left: 10rpx;
+  font-size: 25rpx;
+  color: gray;
+}
+
+.bottom_tip {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom_tip image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.bottom_tip text {
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: gray;
+}
+
+.btn_Suspension{
+  position: fixed;
+  height: 100rpx;
+  width: 100rpx;
+  background-color: rgba(255, 255, 255, 0.755);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  box-shadow: 1px 0px 1px 1px #ede7e7;
+}
+.Suspension_logo{
+  position:absolute;
+  height:80%;
+  width:80%;
+  left:12%;
+  top:10%
+}

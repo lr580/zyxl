@@ -1,16 +1,29 @@
 <!--pages/index/index.wxml-->
-<text>这是一个首页</text>
+<view class="func padding-xl radius shadow bg-white">
+  <view bindtap="goto_talk">
+  <image class="index_fun" src="/img/index_talk.png"></image>
+  <view class="fun_txt">悄悄话</view>
+</view>
+  <view bindtap="goto_vr">
+    <image class="index_fun" src="/img/index_vr.png"></image>
+    <view class="fun_txt">VR展</view>  
+  </view>
+  <view bindtap="goto_shop">
+    <image class="index_fun" src="/img/index_shop.png"></image>
+    <view class="fun_txt">积分商城</view>  
+  </view>
+</view>
 
+<view class="fengexian"></view>
 
-
-<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+<!-- <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
   <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
     <view class="swiper-item">
       <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
       <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
     </view>
   </swiper-item>
-</swiper>
+</swiper> -->
 
 
 
@@ -20,21 +33,39 @@
 <!-- <view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view> -->
 
 <view>
-  <view>精彩视频推荐！</view>
   <view wx:if="{{arr_rec.length}}">
-    <view wx:for="{{arr_rec}}">
+    <view class="video_list">
+    <view class="video_body" wx:for="{{arr_rec}}">
       <view bindtap="goto_video" id="{{item[4]}}">
-        <view>分割线(*￣3￣)╭ </view>
-        <view>标题：{{item[0]}}</view>
-        <view>类别：{{types[item[1]]}}</view>
-        <view>浏览次数：{{item[2]}}</view>
-        <view>封面：<image src="{{item[3]}}"></image>
+        <view class="video_cover_img"><image src="{{item[3]}}">
+
+        </image>
+        <view class="video_tittle">{{item[0]}}</view>
+        <view class="state">
+          <view class="e">
+          <image src="/img/type.png"></image>
+          <text>{{types[item[1]]}}</text>
+       </view>
+        <view class="f">
+          <image src="/img/count.png"></image>
+          <text>{{item[2]}}</text>
+
         </view>
-        <view>分割线✧⁺⸜(●˙▾˙●)⸝⁺✧</view>
+      </view>
+        
+        
+        </view>
       </view>
     </view>
   </view>
-  <view wx:else>加载中……</view>
+  </view>
+  <view class="bottom_tip" wx:else>
+    
+  <image src="/img/tip.png"></image>
+  <text>加载中</text>
+
+  
+  </view>
 </view>
 <!-- <view>
   海报！
@@ -46,8 +77,3 @@
   <view wx:else>加载中……</view>
 </view> -->
 
-<view>
-  <view bindtap="goto_talk">点我前往悄悄话预约</view>
-  <view bindtap="goto_vr">点我前往VR展预约</view>
-  <view bindtap="goto_shop">点我前往积分商城</view>
-</view>

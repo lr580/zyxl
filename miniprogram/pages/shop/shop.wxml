@@ -1,23 +1,55 @@
-<view>积分商城</view>
-<view>我的积分：{{my_money}}</view>
-<view wx:if="{{goods.length}}">
-  <view wx:for="{{goods}}">
-    <view>分割线(～￣▽￣)～ </view>
-    <view>商品名：{{item[3]}}</view>
-    <view>商品简介：{{item[4]}}</view>
-    <view>单价：{{item[1]}}</view>
-    <view>剩余数量：{{item[2]?item[0]:'不限量'}}</view>
-    <view>商品图：<image src="{{item[5]}}"></image>
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-xxl text-bold text-red">积分商城</text>
+      <text class="bg-red" style="width:4rem"></text>
+      
+      <!-- last-child选择器-->
     </view>
-    <view>
-      <text>购买数量：{{num_sele[index]}}</text>
-      <text bindtap="numsele_down" id="{{index}}"> (-) </text>
-      <text bindtap="numsele_up" id="{{index}}"> (+) </text>
-      <!--反正是个摆看的页面所以懒得设计连点了-->
+    <view class="c">
+
+  <text class="a">我的积分：</text>
+  <text class="b">{{my_money}}</text>
+  
+</view>
+  </view>
+
+<view class="big_body" wx:if="{{goods.length}}">
+  <view class="goods_show" wx:for="{{goods}}">
+    <image class="goods_img" src="{{item[5]}}"></image>
+    <view class="e">
+    <view class="goods_name">{{item[3]}}</view>
+    <view class="goods_intro">{{item[4]}}</view>
+  </view>
+    <view class="goods_price">
+      <view class="no">
+    <text class="qqq">剩余数量：{{item[2]?item[0]:'不限量'}}</text>
+  </view>
+    <text class="cuIcon-rechargefill lg text-yellow t"></text>
+     <text class="qq">{{item[1]}}</text>
     </view>
-    <view>我现在拥有的数量：{{my_num[index]}}</view>
+    <!-- <view>剩余数量：{{item[2]?item[0]:'不限量'}}</view> -->
+   
+   
+    <view class="ww">
+   
+      <image class="up_down" bindtap="numsele_down" id="{{index}}" src="/img/decrease.png"></image>
+      <text class="acount">{{num_sele[index]}}</text>
+      <image class="up_down" bindtap="numsele_up" id="{{index}}" src="/img/add.png"></image>
+    
+     <button bindtap="buy" id="{{index}}" style="width:300rpx;margin-left:70rpx;" class="buy_button round bg-red button-hover">
+       <image class="buy_img" src="/img/buy.png"></image>
+       <text class="buy_txt">购买</text>
+     </button>
+      
+    </view>
+    <!-- <view>我现在拥有的数量：{{my_num[index]}}</view>
     <view bindtap="buy" id="{{index}}">买！</view>
-    <view>分割线ヾ(✿ﾟ▽ﾟ)ノ</view>
+    <view>分割线ヾ(✿ﾟ▽ﾟ)ノ</view> -->
   </view>
 </view>
-<view wx:else>空空如也o(╥﹏╥)o</view>
+<view  class="bottom_tip"  wx:else>
+  <image src="/img/tip.png"></image>
+  <text>暂无商品</text>
+ 
+
+</view>

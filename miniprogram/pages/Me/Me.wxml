@@ -34,19 +34,20 @@
     </view>
 
   </view>
-  <view class="fengexian"></view>
-  <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view>
+  <!-- <view class="fengexian"></view>
+  <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view> -->
 </view>
+<!-- 
+<view>调试用：新消息数目{{num_newmessage}}</view> -->
 
-<view>调试用：新消息数目{{num_newmessage}}</view>
-
-<view>
+<view style="margin-top:80rpx;">
   <view class="cu-list menu">
     <view bindtap="goto_mymessage" wx:if="{{userinfo}}" class="cu-item arrow">
       <view class="content">
         <image class="icon_init" src="/img/xiaoxi.png"></image>
         <text class="text-black pleft">我的消息</text>
       </view>
+      <view wx:if="{{num_newmessage}}" class="cu-tag round bg-red sm">{{num_newmessage}}</view>
     </view>
     <view bindtap="goto_mycollect" wx:if="{{userinfo}}" class="cu-item arrow">
       <view class="content">

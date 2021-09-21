@@ -1,1 +1,79 @@
 /* pages/talk/talk.wxss */
+.yuyue_text{
+  color: gray;
+}
+
+.my_yuyue{
+
+  margin: 30rpx;
+  padding: 10rpx;
+  height: 100rpx;
+  background-color: white;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  
+}
+
+.body{
+  margin-left: 180rpx;
+  display: flex;
+  align-items: center;
+}
+
+.my_big{
+  font-size: 50rpx;
+  margin-left: 150rpx;
+}
+
+.aa{
+  font-size: 35rpx;
+  font-weight: 600;
+}
+
+.tips{
+  padding: 20rpx;
+  margin-top: 40rpx;
+  color: gray;
+}
+
+.bb{
+  font-size: 40rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.562);
+  margin-left: 100rpx;
+}
+
+.cc{
+  display: flex;
+  align-items: center;
+}
+
+.dd{
+  margin-top: 200rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.ee{
+  width: 150rpx;
+
+}
+
+.noway{
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noway image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.noway text{
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  color: gray;
+}

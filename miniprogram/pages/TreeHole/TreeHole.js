@@ -2,13 +2,19 @@
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
-
+var startPoint
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    buttonTop:0,
+    buttonLeft:0,
+    windowHeight:'',
+    windowWidth:'',
+    TabCur: 0,
+    scrollLeft: 0,//以上为前端参数
     types: [], //类别(注意5是全部)
     type_seq: [5, 0, 1, 2, 3, 4],  //类别顺序
     now_type: 5, //当前类别下标
@@ -24,7 +30,69 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res);
+        // 屏幕宽度、高度
+        console.log('height=' + res.windowHeight);
+        console.log('width=' + res.windowWidth);
+        // 高度,宽度 单位为px
+        that.setData({
+          windowHeight:  res.windowHeight,
+          windowWidth:  res.windowWidth,
+          buttonTop:res.windowHeight*0.70,//这里定义按钮的初始位置
+          buttonLeft:res.windowWidth*0.70,//这里定义按钮的初始位置
+        })
+      }
+    })
+  },
 
+  btn_Suspension_click:function(){
+    //这里是点击图标之后将要执行的操作
+    if (km.globalData.info_user == null) {
+      wx.showToast({
+        title: '您未登录，不能发帖！',
+        icon: 'none',
+        duration: '3000',
+      });
+      return;
+    }
+    wx.navigateTo({
+      url: '../postp/postp',
+    });
+  },
+  //以下是按钮拖动事件
+  buttonStart: function (e) {
+    startPoint = e.touches[0]//获取拖动开始点
+  },
+  buttonMove: function (e) {
+    var endPoint = e.touches[e.touches.length - 1]//获取拖动结束点
+    //计算在X轴上拖动的距离和在Y轴上拖动的距离
+    var translateX = endPoint.clientX - startPoint.clientX
+    var translateY = endPoint.clientY - startPoint.clientY
+    startPoint = endPoint//重置开始位置
+    var buttonTop = this.data.buttonTop + translateY
+    var buttonLeft = this.data.buttonLeft + translateX
+    //判断是移动否超出屏幕
+    if (buttonLeft+50 >= this.data.windowWidth){
+      buttonLeft = this.data.windowWidth-50;
+    }
+    if (buttonLeft<=0){
+      buttonLeft=0;
+    }
+    if (buttonTop<=0){
+      buttonTop=0
+    }
+    if (buttonTop + 50 >= this.data.windowHeight){
+      buttonTop = this.data.windowHeight-50;
+    }
+    this.setData({
+      buttonTop: buttonTop,
+      buttonLeft: buttonLeft
+    })
+  },
+  buttonEnd: function (e) {
   },
 
   //页面初始化
@@ -37,15 +105,16 @@ Page({
 
   //选择类别
   sele_type: function (e) {
+    console.log(e);
     this.setData({
-      now_type: Number(e.currentTarget.id),
+      now_type: Number(e),
     });
     this.load_postlist();
   },
 
   //选择排序是否逆序
   sele_sortreverse: function (e) {
-    let sr = Number(e.currentTarget.id);
+    let sr = Number(e.detail.value);
     if (sr == this.data.sort_reverse) {
       return;
     }
@@ -77,6 +146,20 @@ Page({
   //前往帖子页
   goto_post: function (e) {
     km.goto_post(Number(e.currentTarget.id));
+  },
+  click_type: function (v) {
+    
+    let tid = Number(v.currentTarget.id);
+   
+    if (tid == this.data.now_type) {
+      return;
+    }
+    this.sele_type(tid);
+    this.setData({
+      TabCur: v.currentTarget.dataset.id,
+      scrollLeft: (v.currentTarget.dataset.id - 1) * 60
+    })
+
   },
 
   //创建关于主题对象x的部分信息列表(格式同postlist元素)

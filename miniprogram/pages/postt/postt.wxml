@@ -1,57 +1,85 @@
 <!--pages/postt/postt.wxml-->
-<view wx:if="{{exist}}">
-  <view>主题标题：{{info.title}}</view>
-  <view>
-    <view>主题发布者头像：<image src="{{uinfo.avatar}}"></image>
-    </view>
-    <view>主题发布者昵称：{{uinfo.name}}</view>
-    <view>主题类别：{{types[info.type]}}</view>
+<view class="post_body" wx:if="{{exist}}">
+  <view class="intro">
+    <view class="post_up_avator">
+    <image src="{{uinfo.avatar}}"></image>
+    <text class="aa">{{uinfo.name}}</text>
+    <text class="bb">{{ptime}}</text>
   </view>
-  <view>发表时间：{{ptime}}</view>
-  <editor id="pcontent" bindready="pct_ready" read-only>
+  <view class="post_title">{{info.title}}</view>
+
+  
+  </view>
+
+  <editor style="height:auto; min-height:30px;" class="a" id="pcontent" bindready="pct_ready" read-only>
   </editor>
-  <view wx:if="{{uid==openid}}">
+  <view class="post_state">
+    <text class="post_type"> {{types[info.type]}}</text>
+    <image wx:if="{{uid==openid}}" bindtap="goto_pedit" src="/img/post_edit.png"></image>
+    <image wx:if="{{uid==openid}}" bindtap="goto_preply" src="/img/post_talk.png"></image>
+    <image wx:if="{{uid==openid}}" bindtap="pdel" src="/img/post_delete.png"></image>
+    <image bindtap="star_video" wx:if="{{!starred}}" src="/img/collect.png"></image>
+    <image bindtap="unstar_video" wx:else="{{!starred}}" src="/img/collect!.png"></image>
+   </view>
+  <!-- <view wx:if="{{uid==openid}}">
     <view bindtap="goto_pedit">点我编辑</view>
     <view bindtap="goto_preply">点我回帖</view>
     <view bindtap="pdel">点我删除</view>
-  </view>
-  <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
-  <view bindtap="unstar_video" wx:else>点我取消收藏</view>
+  </view> -->
+  <!-- <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
+  <view bindtap="unstar_video" wx:else>点我取消收藏</view> -->
 </view>
 <view wx:else>
   原主题已被删除(╥╯^╰╥)
 </view>
-<view>
+
+<view class="cu-form-group">
+		<view class="title">排序由远到近</view>
+		<switch bindchange="sele_rev" class="orange radius sm"></switch>
+  </view>
+  
+<!-- <view>
   <view bindtap="sele_rev" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
   <view bindtap="sele_rev" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
-</view>
-<view wx:if="{{rseq.length}}">
+</view> -->
+<view class="qq" wx:if="{{rseq.length}}">
   <view wx:for="{{rseq}}">
 
-    <view wx:if="{{rexist[item]}}">
-      <view>{{rfloor[item]}}楼</view>
-      <view>跟帖人头像：<image src="{{ruinfo[item].avatar}}"></image>
+    <view style="margin-bottom:40rpx" wx:if="{{rexist[item]}}">
+      <view class="talker">
+        <image src="{{ruinfo[item].avatar}}"></image>
+        <text class="a1">{{ruinfo[item].name}}</text>
+        <text class="a2">{{rtime[item]}}</text>
+        <text class="a3">{{rfloor[item]}}楼</text>
       </view>
-      <view>跟帖人昵称：{{ruinfo[item].name}}</view>
+      <!-- <view>跟帖人昵称：{{ruinfo[item].name}}</view> -->
+  
+      
       <view wx:if="{{rinfo[item].replyto}}">
-        <view wx:if="{{rrexist[item]}}">
-          回复{{rrfloor[item]}}楼的{{rruinfo[item].name}}
+        
+        <view class="hfa" wx:if="{{rrexist[item]}}">
+          <image class="hf" src="/img/hf.png"></image>
+        <text>{{rrfloor[item]}}楼的{{rruinfo[item].name}}</text>  
         </view>
-        <view wx:else>
-          回复{{rrfloor[item]}}楼 原楼层已被删除(╥╯^╰╥)
+        <view class="hfa" wx:else>
+          <image class="hf" src="/img/hf.png"></image>
+          <text>{{rrfloor[item]}}楼  原楼层已被删除</text>
+          
         </view>
       </view>
-      <view>发表时间：{{rtime[item]}}</view>
-      <editor id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
+ 
+      <editor class="a4" style="height:auto; min-height:30px;" id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
       </editor>
-      <view wx:if="{{ruid[item]==openid}}">
-        <view bindtap="goto_redit" id="{{rid[item]}}">点我编辑</view>
-        <view bindtap="goto_rreply" id="{{rid[item]}}">点我回帖</view>
-        <view bindtap="rdel" id="{{rid[item]}}">点我删除</view>
+      <view class="B" wx:if="{{ruid[item]==openid}}">
+        <view class="b2" bindtap="goto_redit" id="{{rid[item]}}"><image src="/img/post_edit.png"></image></view>
+        <view class="b3" bindtap="goto_rreply" id="{{rid[item]}}"><image src="/img/post_talk.png"></image></view>
+        <view class="b3" bindtap="rdel" id="{{rid[item]}}"><image src="/img/post_delete.png"></image></view>
       </view>
     </view>
   </view>
 </view>
-<view wx:else>
-  暂无跟帖(╥╯^╰╥)
+
+<view class="bottom_tip" wx:else>
+  <image src="/img/tip.png"></image>
+  <text>暂无跟帖</text>
 </view>

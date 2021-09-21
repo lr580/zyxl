@@ -1,23 +1,55 @@
 <!--当前talk.wxml与vr.wxml完全一致(逐字符)-->
-<view>{{ach}}预约</view>
+
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-lg text-bold text-cyan">{{ach}}预约</text>
+      <text class="bg-cyan"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
+
 <view>
-  我的{{ach}}预约
+  <view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-cyan"></text>
+    <text class="yuyue_text">  我的{{ach}}预约</text>
+  </view>
+</view>
   <view wx:if="{{my_timestr.length}}">
-    <view wx:for="{{my_timestr}}">
-      <view>
-        时间：{{item}}
-        <text bindtap="cancel" id="{{index}}">点我取消</text>
+    <view class="my_yuyue shadow-warp"  wx:for="{{my_timestr}}">
+      <view class="body">
+       <text class="aa">{{item}}</text>
+        <text class="cuIcon-roundclosefill my_big text-red" bindtap="cancel" id="{{index}}"></text>
       </view>
     </view>
   </view>
-  <view wx:else>
-    空空如也(T ^ T)
+  <view class="noway" wx:else>
+    <image src="/img/tip.png"></image>
+   <text>您暂时没有预约哦</text> 
   </view>
   <view>
-    <view> 您可以选择周一到周五的任意一天进行新的{{ach}}预约：</view>
+    <view class="tips"> 您可以选择周一到周五的任意一天进行新的{{ach}}预约：</view>
     <picker mode="date" bindchange="sele_date" start="{{today}}" value="{{nowdate}}">
-      <view>当前选择：{{nowdatestr}}</view>
+      <view>
+        <view class="cu-bar bg-white">
+  <view class="action cc">
+    <text class="cuIcon-title text-cyan"></text>
+    <text class="yuyue_text">
+      当前选择
+  
+    </text>
+    <text class="bb">{{nowdatestr}}</text> 
+  </view>
+</view>
+       
+      
+      </view>
     </picker>
   </view>
-  <view bindtap="appoint">点我预约</view>
+  <view class="dd">
+    <button class=" round bg-white ee" bindtap="appoint">
+      <text class="text-cyan">点我预约</text>
+      
+    </button>
+    </view>
 </view>

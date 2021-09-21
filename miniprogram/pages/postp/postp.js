@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    picker: ['感情', '学习', '心灵','职业','校园热点'],
     editorCtx: '', //富文本编辑框API
     formats: {},  //富文本编辑框样式使用
     readOnly: false, //富文本编辑框样式使用
@@ -58,6 +59,13 @@ Page({
 
   onUnload: function () {
 
+  },
+
+  PickerChange(e) {
+    console.log(e);
+    this.setData({
+      index: e.detail.value
+    })
   },
 
   //初始化
@@ -154,10 +162,15 @@ Page({
 
   //选择类别
   sele_type: function (v) {
-    let t = Number(v.currentTarget.id);
+    let t = Number(v.detail.value);
     this.setData({
       s_type: t,
     });
+    console.log(v);
+    console.log(v);
+    this.setData({
+      index: Number(v.detail.value)
+    })
   },
 
   //保存所有内容，发布

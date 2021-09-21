@@ -1,41 +1,101 @@
-<view bindtap="goto_postp">点我发帖</view>
 
-<view>
+<view class="btn_Suspension" bindtap="btn_Suspension_click" catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+    <image class="Suspension_logo" src="/img/wpost.png"></image><!--这里是按钮图标，下载地址会在文章底部说明-->
+ 
+  </view>
+
+
+<view class="cu-bar bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-cyan">类别</text>
+      <text class="bg-cyan" style="width:2rem"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans"
+    wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
+    {{types[item]}}
+  </view>
+</scroll-view>
+
+
+
+<view class="cu-form-group">
+		<view class="title">排序由远到近</view>
+		<switch bindchange="sele_sortreverse" class="orange radius sm"></switch>
+	</view>
+
+
+
+
+<!-- <view>
   选择分类
   <view wx:for="{{type_seq}}">
     <view bindtap="sele_type" id="{{item}}">
       {{now_type==item?'(当前)':''}} {{types[item]}}
     </view>
   </view>
-</view>
+</view> -->
 
-<view>
+<!-- <view>
   排序依据：
   <view wx:if="{{sort_key==0}}">
     <view bindtap="sele_sortreverse" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
     <view bindtap="sele_sortreverse" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
   </view>
-</view>
+</view> -->
 
-<view wx:if="{{postlist.length}}">
-  <view wx:for="{{postlist}}">
+<view class="big_body" wx:if="{{postlist.length}}">
+  <view class="content_body" wx:for="{{postlist}}">
     <view wx:if="{{index<num_show}}" bindtap="goto_post" id="{{item[6]}}">
-      <view>&nbsp;不中用啊</view>
-      <view>酚硌酰</view>
-      <view>主题标题：{{item[0]}}</view>
-      <view>主题简介：{{item[1]}}</view>
-      <view>主题时间：{{item[2]}}</view>
-      <view>主题类型：{{types[item[3]]}}</view>
+      
+      <view class="tz_title"> 
+        <image src="/img/tz_intro.png"></image>
+      <text>{{item[0]}}</text>  
+      </view>
+      <view class="tz_intro">
+        <image src="/img/title.png"></image>
+        <text class="true_intro">{{item[1]}}</text>
+        </view>
+        
+        <view class="tz_state">
+          <view class="img_set">
+          <image src="/img/tz_type.png"></image>
+          <text>{{types[item[3]]}}</text>
+          </view>
+          <view class="img_set">
+          <image src="/img/tz_talk.png"></image>
+          <text>{{item[4]}}</text>
+          </view>
+          <view class="img_set">
+          <image src="/img/tz_liulan.png"></image>
+          <text>{{item[5]}}</text>
+          </view>
+          <view class="img_set1">
+          <image src="/img/tz_time.png"></image>
+          <text>{{item[2]}}</text>
+          </view>
+      
+      <!-- <view>主题类型：{{types[item[3]]}}</view>
       <view>跟帖数：{{item[4]}}</view>
-      <view>浏览次数：{{item[5]}}</view>
-      <view>dividing line</view>
-      <view>&nbsp;</view>
+      <view>浏览次数：{{item[5]}}</view> -->
+        </view>
+     
+
     </view>
   </view>
-  <view wx:if="{{num_show==postlist.length}}">
-    已经到达底端了捏(✪ω✪)
+
+  <view class="bottom_tip" wx:if="{{num_show==postlist.length}}">
+    <image src="/img/tip.png"></image>
+    <text>已经到达底部啦!</text>
   </view>
+
+
+  
 </view>
-<view wx:else>
-  没有符合要求的帖子呀φ(．．｡)
+<view class="bottom_tip" wx:else>
+  <image src="/img/tip.png"></image>
+    <text>没有符合要求的帖子呀</text>
+  
 </view>

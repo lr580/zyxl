@@ -9,6 +9,7 @@
   /* background-color: rgba(81, 83, 83, 0.048); */
   border-radius: 20rpx;
   box-shadow: 4px 4px 2px gainsboro;
+  background-color: white;
 }
 
 .user_avater{

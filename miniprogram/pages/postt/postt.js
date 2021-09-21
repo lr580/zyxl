@@ -139,7 +139,9 @@ Page({
 
   //更改跟帖排序
   sele_rev: function (e) {
-    let v = Number(e.currentTarget.id);
+ 
+    let v = Number(e.detail.value);
+
     if (v == this.data.sort_reverse) {
       return;
     }

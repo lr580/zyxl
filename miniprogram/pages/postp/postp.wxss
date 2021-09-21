@@ -20,3 +20,11 @@
   border-left: none;
   border-right: none;
 }
+
+
+.edit_zone{
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+}
