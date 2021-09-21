@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userinfo: {},//用于判定是否登陆
     openid: '',//自己的id
     types: [],//类别
     id: '',//主贴id
@@ -98,6 +99,7 @@ Page({
       bin[rid[i]] = i + 1;
     }
     this.setData({
+      userinfo: km.globalData.info_user,
       openid: km.globalData.openid,
       id: pid,
       info: pinfo,
@@ -139,7 +141,7 @@ Page({
 
   //更改跟帖排序
   sele_rev: function (e) {
- 
+
     let v = Number(e.detail.value);
 
     if (v == this.data.sort_reverse) {

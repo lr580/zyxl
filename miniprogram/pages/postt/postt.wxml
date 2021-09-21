@@ -2,13 +2,13 @@
 <view class="post_body" wx:if="{{exist}}">
   <view class="intro">
     <view class="post_up_avator">
-    <image src="{{uinfo.avatar}}"></image>
-    <text class="aa">{{uinfo.name}}</text>
-    <text class="bb">{{ptime}}</text>
-  </view>
-  <view class="post_title">{{info.title}}</view>
+      <image src="{{uinfo.avatar}}"></image>
+      <text class="aa">{{uinfo.name}}</text>
+      <text class="bb">{{ptime}}</text>
+    </view>
+    <view class="post_title">{{info.title}}</view>
 
-  
+
   </view>
 
   <editor style="height:auto; min-height:30px;" class="a" id="pcontent" bindready="pct_ready" read-only>
@@ -16,11 +16,11 @@
   <view class="post_state">
     <text class="post_type"> {{types[info.type]}}</text>
     <image wx:if="{{uid==openid}}" bindtap="goto_pedit" src="/img/post_edit.png"></image>
-    <image wx:if="{{uid==openid}}" bindtap="goto_preply" src="/img/post_talk.png"></image>
+    <image wx:if="{{userinfo}}" bindtap="goto_preply" src="/img/post_talk.png"></image>
     <image wx:if="{{uid==openid}}" bindtap="pdel" src="/img/post_delete.png"></image>
     <image bindtap="star_video" wx:if="{{!starred}}" src="/img/collect.png"></image>
     <image bindtap="unstar_video" wx:else="{{!starred}}" src="/img/collect!.png"></image>
-   </view>
+  </view>
   <!-- <view wx:if="{{uid==openid}}">
     <view bindtap="goto_pedit">点我编辑</view>
     <view bindtap="goto_preply">点我回帖</view>
@@ -34,10 +34,10 @@
 </view>
 
 <view class="cu-form-group">
-		<view class="title">排序由远到近</view>
-		<switch bindchange="sele_rev" class="orange radius sm"></switch>
-  </view>
-  
+  <view class="title">排序由远到近</view>
+  <switch bindchange="sele_rev" class="orange radius sm"></switch>
+</view>
+
 <!-- <view>
   <view bindtap="sele_rev" id="0">{{!sort_reverse?'(当前)':''}}按时间由近到远排序</view>
   <view bindtap="sele_rev" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
@@ -53,28 +53,35 @@
         <text class="a3">{{rfloor[item]}}楼</text>
       </view>
       <!-- <view>跟帖人昵称：{{ruinfo[item].name}}</view> -->
-  
-      
+
+
       <view wx:if="{{rinfo[item].replyto}}">
-        
+
         <view class="hfa" wx:if="{{rrexist[item]}}">
           <image class="hf" src="/img/hf.png"></image>
-        <text>{{rrfloor[item]}}楼的{{rruinfo[item].name}}</text>  
+          <text>{{rrfloor[item]}}楼的{{rruinfo[item].name}}</text>
         </view>
         <view class="hfa" wx:else>
           <image class="hf" src="/img/hf.png"></image>
-          <text>{{rrfloor[item]}}楼  原楼层已被删除</text>
-          
+          <text>{{rrfloor[item]}}楼 原楼层已被删除</text>
+
         </view>
       </view>
- 
+
       <editor class="a4" style="height:auto; min-height:30px;" id="{{'rcontent'+item}}" bindready="rct_ready" read-only>
       </editor>
-      <view class="B" wx:if="{{ruid[item]==openid}}">
-        <view class="b2" bindtap="goto_redit" id="{{rid[item]}}"><image src="/img/post_edit.png"></image></view>
-        <view class="b3" bindtap="goto_rreply" id="{{rid[item]}}"><image src="/img/post_talk.png"></image></view>
-        <view class="b3" bindtap="rdel" id="{{rid[item]}}"><image src="/img/post_delete.png"></image></view>
+      <view class="B">
+        <view class="b2" bindtap="goto_redit" id="{{rid[item]}}" wx:if="{{ruid[item]==openid}}">
+          <image src="/img/post_edit.png"></image>
+        </view>
+        <view class="b3" bindtap="goto_rreply" id="{{rid[item]}}" wx:if="{{userinfo}}">
+          <image src="/img/post_talk.png"></image>
+        </view>
+        <view class="b3" bindtap="rdel" id="{{rid[item]}}" wx:if="{{ruid[item]==openid}}">
+          <image src="/img/post_delete.png"></image>
+        </view>
       </view>
+
     </view>
   </view>
 </view>
