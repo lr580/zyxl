@@ -42,6 +42,7 @@ Page({
       }
       arr.push(v);
     }
+    console.log(arr);
     if (this.data.sort_reverse) {
       arr.reverse();
     }

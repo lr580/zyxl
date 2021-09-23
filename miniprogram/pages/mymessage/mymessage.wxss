@@ -1,6 +1,6 @@
 /* pages/mymessage/mymessage.wxss */
-.msg_body{
- 
+.msg_body {
+
   margin: 20rpx;
   padding: 20rpx;
   background-color: white;
@@ -9,7 +9,7 @@
   border-radius: 30rpx;
 }
 
-.a2{
+.a2 {
   width: 80%;
   display: flex;
   justify-self: center;
@@ -19,19 +19,19 @@
 }
 
 
-.a2 text{
+.a2 text {
   font-size: 30rpx;
   color: gray;
   padding: 20rpx;
 }
 
-.a1_1{
+.a1_1 {
   margin-left: 30rpx;
   font-size: 37rpx;
   color: gray;
 }
 
-.a1_2{
+.a1_2 {
   margin-left: 20rpx;
   font-size: 30rpx;
   color: gainsboro;

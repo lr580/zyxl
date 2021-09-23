@@ -166,8 +166,8 @@ Page({
     this.setData({
       s_type: t,
     });
-    console.log(v);
-    console.log(v);
+    // console.log(v);
+    // console.log(v);
     this.setData({
       index: Number(v.detail.value)
     })
