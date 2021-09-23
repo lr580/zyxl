@@ -394,6 +394,9 @@ App({
       let arr = [];
       for (let i = 0; i < arro.length; ++i) {
         let x = km.globalData.info_post[arro[i][0]];
+        if (!x || x.parent) {//修复bugs：回帖或错误帖子不能单独出现在浏览记录和收藏页面内
+          continue;
+        }
         arr.push(km.make_postinfoabbr(x));
       }
       if (thee.data.reverse) {
