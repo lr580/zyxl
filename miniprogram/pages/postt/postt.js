@@ -48,7 +48,7 @@ Page({
   init_post: function (opt) {
     let pid = opt;
     let pinfo = km.globalData.info_post[pid];
-    console.log(pid,pinfo);
+    // console.log(pid,pinfo);
     let puid = pinfo.user;
     let puinfo = km.globalData.info_users[puid];
     let ptime = km.date2str(pinfo.time_publish);

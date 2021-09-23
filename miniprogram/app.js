@@ -639,6 +639,12 @@ App({
     return -1;
   },
 
+  //通用函数：监测用户是否已经登录
+  logined: function () {
+    let km = getApp();
+    return km.globalData.info_user != null;
+  },
+
   //通用函数，传入date，返回年月日(type=1 +星期)(+时分 type=0) (年月日- type=2)的格式化文本
   date2str: function (x, type = 0) {
     let s = '', t = '';

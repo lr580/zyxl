@@ -46,12 +46,12 @@ Page({
   },
 
   touch_start: function (e) {
-    console.log('touchStart!', e)
+    // console.log('touchStart!', e)
     startX = e.touches[0].pageX;//获取触摸时的x坐标
     startY = e.touches[0].pageY;//获取触摸时的y坐标
     startTime = new Date().getTime();//获取毫秒数
-    console.log(this.data.TabCur);
-    console.log(this.data.now_type);
+    // console.log(this.data.TabCur);
+    // console.log(this.data.now_type);
   },
 
   //滑动被打断时的函数
@@ -63,7 +63,7 @@ Page({
 
   //滑动结束，做出判断
   touch_end: function (e) {
-    console.log('touchEnd!', e);
+    // console.log('touchEnd!', e);
     var endX = e.changedTouches[0].pageX;
     var endY = e.changedTouches[0].pageY;
     var touchTime = new Date().getTime() - startTime;//计算滑动的坐标及时间
@@ -79,14 +79,14 @@ Page({
               now_type: this.data.type_seq[this.data.TabCur + 1]
             })
             this.load_videolist();
-            console.log(this.data.TabCur)
+            // console.log(this.data.TabCur)
           } else {
             this.setData({
               TabCur: 5,
             })
           }
 
-          console.log('左滑')
+          // console.log('左滑')
         } else {
           if (this.data.TabCur > 0) {
             this.setData({
@@ -135,8 +135,8 @@ Page({
 
   //选择排序依据v
   sele_sorttype: function (v) {
-    let nr = '0'+String(Number(v.detail.value));
-    console.log(nr);
+    let nr = '0' + String(Number(v.detail.value));
+    // console.log(nr);
     let sk = Number(nr[0]);
     let sr = Number(nr[1]);
     this.setData({

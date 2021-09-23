@@ -109,7 +109,7 @@ Page({
 
   //选择类别
   sele_type: function (e) {
-    console.log(e);
+    // console.log(e);
     this.setData({
       now_type: Number(e),
     });

@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cardCur:0,//前端调试参数
+    cardCur: 0,//前端调试参数
     arr_rec: [], //推荐视频(元素为数组[0:标题, 1:类别下标, 2:浏览次数, 3:封面, 4:视频id])
     types: km.globalData.type_p,//类别
     arr_pla: [],//海报图片
@@ -19,8 +19,8 @@ Page({
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
     }, {
       id: 1,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+      type: 'image',
+      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
     }, {
       id: 2,
       type: 'image',
@@ -50,6 +50,7 @@ Page({
       thee.init_index();
     } //云开发数据库全部读完后重新加载一次本页面
     this.towerSwiper('swiperList');
+
   },
 
 
@@ -60,8 +61,8 @@ Page({
     })
   },
 
-   // cardSwiper
-   cardSwiper(e) {
+  // cardSwiper
+  cardSwiper(e) {
     this.setData({
       cardCur: e.detail.current
     })
@@ -150,6 +151,13 @@ Page({
 
   //前往悄悄话预约页面
   goto_talk: function () {
+    if (!km.logined()) {
+      wx.showToast({
+        title: '您尚未登录，无法预约！',
+        icon: 'none',
+      })
+      return;
+    }
     wx.navigateTo({
       url: '../talk/talk',
     });
@@ -157,6 +165,13 @@ Page({
 
   //前往VR预约页面
   goto_vr: function () {
+    if (!km.logined()) {
+      wx.showToast({
+        title: '您尚未登录，无法预约！',
+        icon: 'none',
+      })
+      return;
+    }
     wx.navigateTo({
       url: '../vr/vr',
     });
@@ -164,6 +179,13 @@ Page({
 
   //前往积分商城预约页面
   goto_shop: function () {
+    if (!km.logined()) {
+      wx.showToast({
+        title: '您尚未登录，无法使用商城！',
+        icon: 'none',
+      })
+      return;
+    }
     wx.navigateTo({
       url: '../shop/shop',
     });
