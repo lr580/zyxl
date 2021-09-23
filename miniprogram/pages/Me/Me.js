@@ -23,7 +23,7 @@ Page({
   //初始化函数
   init_userpage: function () {
     this.setData({
-      userid: km.globalData.userid,
+      userid: km.globalData.openid, //修了一个warning
       userinfo: km.globalData.info_user,
       num_newmessage: km.globalData.num_newmessage,
     });//修复了一个bug

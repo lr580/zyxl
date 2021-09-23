@@ -9,10 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buttonTop:0,
-    buttonLeft:0,
-    windowHeight:'',
-    windowWidth:'',
+    buttonTop: 0,
+    buttonLeft: 0,
+    windowHeight: '',
+    windowWidth: '',
     TabCur: 0,
     scrollLeft: 0,//以上为前端参数
     types: [], //类别(注意5是全部)
@@ -24,6 +24,7 @@ Page({
     num_normal_load: 3, //非第一次加载多少个主题项
     postlist: [],//所有符合要求的有序视频列表，每个元素是列表，该列表每个下标意义为：0 标题 ； 1 简介； 2 最后活跃时间(文本)； 3 类型； 4 回帖数； 5 点击次数； 6 帖子ID； 7 最后活跃时间(对象)
     num_show: 0, //在所有符合要求的视频列表里，展现前num_show个视频
+    firstin: true,//第一次打开树洞页
   },
 
   /**
@@ -31,24 +32,27 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    setTimeout(() => {
+      that.setData({ firstin: false });
+    }, 50);
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         // 屏幕宽度、高度
-        console.log('height=' + res.windowHeight);
-        console.log('width=' + res.windowWidth);
+        // console.log('height=' + res.windowHeight);
+        // console.log('width=' + res.windowWidth);
         // 高度,宽度 单位为px
         that.setData({
-          windowHeight:  res.windowHeight,
-          windowWidth:  res.windowWidth,
-          buttonTop:res.windowHeight*0.70,//这里定义按钮的初始位置
-          buttonLeft:res.windowWidth*0.70,//这里定义按钮的初始位置
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth,
+          buttonTop: res.windowHeight * 0.70,//这里定义按钮的初始位置
+          buttonLeft: res.windowWidth * 0.70,//这里定义按钮的初始位置
         })
       }
     })
   },
 
-  btn_Suspension_click:function(){
+  btn_Suspension_click: function () {
     //这里是点击图标之后将要执行的操作
     if (km.globalData.info_user == null) {
       wx.showToast({
@@ -75,17 +79,17 @@ Page({
     var buttonTop = this.data.buttonTop + translateY
     var buttonLeft = this.data.buttonLeft + translateX
     //判断是移动否超出屏幕
-    if (buttonLeft+50 >= this.data.windowWidth){
-      buttonLeft = this.data.windowWidth-50;
+    if (buttonLeft + 50 >= this.data.windowWidth) {
+      buttonLeft = this.data.windowWidth - 50;
     }
-    if (buttonLeft<=0){
-      buttonLeft=0;
+    if (buttonLeft <= 0) {
+      buttonLeft = 0;
     }
-    if (buttonTop<=0){
-      buttonTop=0
+    if (buttonTop <= 0) {
+      buttonTop = 0
     }
-    if (buttonTop + 50 >= this.data.windowHeight){
-      buttonTop = this.data.windowHeight-50;
+    if (buttonTop + 50 >= this.data.windowHeight) {
+      buttonTop = this.data.windowHeight - 50;
     }
     this.setData({
       buttonTop: buttonTop,
@@ -148,9 +152,9 @@ Page({
     km.goto_post(Number(e.currentTarget.id));
   },
   click_type: function (v) {
-    
+
     let tid = Number(v.currentTarget.id);
-   
+
     if (tid == this.data.now_type) {
       return;
     }
@@ -234,6 +238,11 @@ Page({
    */
   onShow: function () {
     this.init_postindex();
+    if (!this.data.firstin) { //解决返回后没有下拉列表的问题的粗暴方法
+      while (this.data.num_show < this.data.postlist.length) {
+        this.load_postlist(1);
+      }
+    }
   },
 
   /**
