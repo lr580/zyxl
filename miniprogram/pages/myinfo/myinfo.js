@@ -23,14 +23,20 @@ Page({
   },
 
   //初始化
-  myinfo_init: function () {
-    this.setData({
-      openid: km.globalData.openid,
-      userinfo: km.globalData.info_user,
-      i_name: km.globalData.info_user.name,
-      i_motto: km.globalData.info_user.motto,
-    });
-
+  myinfo_init: function (all = true) { //all=false时编辑框不改变
+    if (all) {
+      this.setData({
+        openid: km.globalData.openid,
+        userinfo: km.globalData.info_user,
+        i_name: km.globalData.info_user.name,
+        i_motto: km.globalData.info_user.motto,
+      });
+    } else {
+      this.setData({
+        openid: km.globalData.openid,
+        userinfo: km.globalData.info_user,
+      });
+    }
   },
 
   //输入昵称
@@ -71,6 +77,7 @@ Page({
     }).then(res => {
       km.globalData.info_user.name = newname;
       km.globalData.info_user.motto = newmotto;
+      km.globalData.info_users[km.globalData.openid] = km.globalData.info_user;
       wx.hideLoading({
         success: (res) => { },
       });
@@ -121,9 +128,11 @@ Page({
               success: (res) => { },
             });
             km.globalData.info_user.avatar = avapath;
+            km.globalData.info_users[thee.data.openid] = km.globalData.info_user;
             //已知一个小缺陷：保存图片后昵称和个性签名编辑框会被初始化
             thee.setData({
               userinfo: km.globalData.info_user,
+
             });
           }).catch(rwu => {
             console.error('保存图片信息失败', rwu);

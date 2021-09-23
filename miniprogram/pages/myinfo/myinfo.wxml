@@ -36,7 +36,7 @@
       <text class="text-lg text-bold">昵称</text>
     </view>
   </view>
-  <input type="text" bindinput="input_name" value="{{userinfo.name}}" placeholder="请输入您的昵称" maxlength="10"></input>
+  <input type="text" bindinput="input_name" value="{{i_name}}" placeholder="请输入您的昵称" maxlength="10"></input>
 </view>
 
 <view class="cu-form-group margin-top">
@@ -47,8 +47,8 @@
     </view>
   </view>
 
-  <input type="text" bindinput="input_motto" value="{{userinfo.motto}}" placeholder="请输入属于您的箴言" maxlength="12"></input>
+  <input type="text" bindinput="input_motto" value="{{i_motto}}" placeholder="请输入属于您的箴言" maxlength="12"></input>
 </view>
 <button bindtap="save_change" class="cu-btn block bg-cyan margin-tb-sm lg">
-  <text class=""></text>保存</button>
+  <text class=""></text>保存昵称和箴言</button>
 <!-- <view bindtap="save_change" style="font-size: 18px;">保存昵称和个性签名</view> -->
