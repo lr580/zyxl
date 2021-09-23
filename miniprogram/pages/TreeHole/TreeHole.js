@@ -54,11 +54,11 @@ Page({
 
   btn_Suspension_click: function () {
     //这里是点击图标之后将要执行的操作
-    if (km.globalData.info_user == null) {
+    if (!km.logined()) {
       wx.showToast({
         title: '您未登录，不能发帖！',
         icon: 'none',
-        duration: '3000',
+        duration: 3000, //修复字符串duration bugs
       });
       return;
     }
@@ -134,11 +134,11 @@ Page({
 
   //前往发帖
   goto_postp: function () {
-    if (km.globalData.info_user == null) {
+    if (!km.logined()) {
       wx.showToast({
         title: '您未登录，不能发帖！',
         icon: 'none',
-        duration: '3000',
+        duration: 3000, //字符串duration的bugs
       });
       return;
     }

@@ -1,20 +1,24 @@
 <!--pages/index/index.wxml-->
 <view class="func padding-xl radius shadow bg-white">
   <view bindtap="goto_talk">
-  <image class="index_fun" src="/img/index_talk.png"></image>
-  <view class="fun_txt">悄悄话</view>
-</view>
+    <image class="index_fun" src="/img/index_talk.png"></image>
+    <view class="fun_txt">悄悄话</view>
+  </view>
   <view bindtap="goto_vr">
     <image class="index_fun" src="/img/index_vr.png"></image>
-    <view class="fun_txt">VR展</view>  
+    <view class="fun_txt">VR展</view>
   </view>
   <view bindtap="goto_shop">
     <image class="index_fun" src="/img/index_shop.png"></image>
-    <view class="fun_txt">积分商城</view>  
+    <view class="fun_txt">积分商城</view>
   </view>
 </view>
 
 <view class="fengexian"></view>
+
+<view wx:if="{{!loaded&&longtimed}}">
+  如果一直处于加载中(超过10秒)，请尝试重启本程序
+</view>
 
 <!-- <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
   <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
@@ -35,36 +39,37 @@
 <view>
   <view wx:if="{{arr_rec.length}}">
     <view class="video_list">
-    <view class="video_body" wx:for="{{arr_rec}}">
-      <view bindtap="goto_video" id="{{item[4]}}">
-        <view class="video_cover_img"><image src="{{item[3]}}">
+      <view class="video_body" wx:for="{{arr_rec}}">
+        <view bindtap="goto_video" id="{{item[4]}}">
+          <view class="video_cover_img">
+            <image src="{{item[3]}}">
 
-        </image>
-        <view class="video_tittle">{{item[0]}}</view>
-        <view class="state">
-          <view class="e">
-          <image src="/img/type.png"></image>
-          <text>{{types[item[1]]}}</text>
-       </view>
-        <view class="f">
-          <image src="/img/count.png"></image>
-          <text>{{item[2]}}</text>
+            </image>
+            <view class="video_tittle">{{item[0]}}</view>
+            <view class="state">
+              <view class="e">
+                <image src="/img/type.png"></image>
+                <text>{{types[item[1]]}}</text>
+              </view>
+              <view class="f">
+                <image src="/img/count.png"></image>
+                <text>{{item[2]}}</text>
 
-        </view>
-      </view>
-        
-        
+              </view>
+            </view>
+
+
+          </view>
         </view>
       </view>
     </view>
   </view>
-  </view>
   <view class="bottom_tip" wx:else>
-    
-  <image src="/img/tip.png"></image>
-  <text>加载中</text>
 
-  
+    <image src="/img/tip.png"></image>
+    <text>加载中</text>
+
+
   </view>
 </view>
 <!-- <view>
@@ -76,4 +81,3 @@
   </view>
   <view wx:else>加载中……</view>
 </view> -->
-

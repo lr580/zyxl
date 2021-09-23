@@ -33,6 +33,7 @@ Page({
     rseq: [],//按显示顺序的回帖显示下标顺序数组
     busy: false,//是否禁止频繁点击
     starred: false,//是否收藏了主贴
+    logined: false,//是否登陆了
   },
 
   /**
@@ -48,7 +49,8 @@ Page({
   init_post: function (opt) {
     let pid = opt;
     let pinfo = km.globalData.info_post[pid];
-    // console.log(pid,pinfo);
+    // console.log(pid, pinfo, km.globalData.info_users);
+    console.log(km.globalData.info_users);
     let puid = pinfo.user;
     let puinfo = km.globalData.info_users[puid];
     let ptime = km.date2str(pinfo.time_publish);
@@ -119,8 +121,11 @@ Page({
       rrexist, rrexist,
       rseq: rseq,
       types: km.globalData.type_p,
-      starred: km.find_in_pair(km.globalData.info_user.star_post, Number(pid)) != -1,
+      starred: km.logined() ? km.find_in_pair(km.globalData.info_user.star_post, Number(pid)) != -1 : false,
+      logined: km.logined(),
     });
+    // console.log(rexist, rrexist);
+    console.log(puinfo);
     const thee = this;
     if (thee.pctx) {
       thee.pctx.setContents({ html: thee.data.info.content });

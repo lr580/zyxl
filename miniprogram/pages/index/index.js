@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loaded: false,//加载完毕
+    longtimed: false,//是否经过了足够长时间(10s)
     cardCur: 0,//前端调试参数
     arr_rec: [], //推荐视频(元素为数组[0:标题, 1:类别下标, 2:浏览次数, 3:封面, 4:视频id])
     types: km.globalData.type_p,//类别
@@ -50,7 +52,11 @@ Page({
       thee.init_index();
     } //云开发数据库全部读完后重新加载一次本页面
     this.towerSwiper('swiperList');
-
+    setTimeout(() => {
+      thee.setData({
+        longtimed: true,
+      });
+    }, 10000);
   },
 
 
@@ -132,6 +138,7 @@ Page({
     this.setData({
       arr_rec: arr,
       arr_pla: km.globalData.info_placard,
+      loaded: true,
     });
   },
 
@@ -155,7 +162,7 @@ Page({
       wx.showToast({
         title: '您尚未登录，无法预约！',
         icon: 'none',
-      })
+      });
       return;
     }
     wx.navigateTo({
@@ -169,7 +176,7 @@ Page({
       wx.showToast({
         title: '您尚未登录，无法预约！',
         icon: 'none',
-      })
+      });
       return;
     }
     wx.navigateTo({
@@ -183,7 +190,7 @@ Page({
       wx.showToast({
         title: '您尚未登录，无法使用商城！',
         icon: 'none',
-      })
+      });
       return;
     }
     wx.navigateTo({

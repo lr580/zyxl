@@ -255,6 +255,9 @@ App({
   add_record: function (s, x, time = new Date, suc = () => { }, fail = () => { }) {
     //因为跟add_click有可能同时操作，所以不在这里触发click_busy了
     let km = getApp();
+    if (!km.logined()) {
+      return;
+    }
     let arr = km.globalData.info_user[s];
     let newarr = [];
     for (let i = 0; i < arr.length; ++i) {
@@ -304,6 +307,9 @@ App({
   isfirst_browse(vid, x = 1) {
     //因为跟add_click有可能同时操作，所以不在这里触发click_busy了
     let km = getApp();
+    if (!km.logined()) {
+      return false;
+    }
     let arr = km.globalData.info_user.history_video;
     let first = true;
     for (let i = 0; i < arr.length; ++i) {
@@ -318,6 +324,7 @@ App({
           point: _.inc(x)
         }
       }).then(res => {
+        km.globalData.info_user.point++;//修复bugs
         wx.showToast({
           title: '首次浏览本视频，获得1点积分！',
           icon: 'none', //不然title字显示不完

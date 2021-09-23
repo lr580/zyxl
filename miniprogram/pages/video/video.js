@@ -29,6 +29,7 @@ Page({
     saves: [],//存档(每个元素下标0是id,1是名字)
     starred: false,//是否已经收藏本视频
     busy: false,//是否处于防止频繁点击状态
+    logined: false,//是否登陆
   },
 
   /**
@@ -56,7 +57,8 @@ Page({
       video_upid: Number(obj.up),
       video_upname: km.globalData.info_up[Number(obj.up)][0],
       video_upavatar: km.globalData.info_up[Number(obj.up)][1],
-      starred: km.find_in_pair(km.globalData.info_user.star_video, vid) != -1,
+      starred: km.logined() ? km.find_in_pair(km.globalData.info_user.star_video, vid) != -1 : false,
+      logined: km.logined(),
     })
     this.video_update(0);
     this.get_next(0);
@@ -159,6 +161,13 @@ Page({
 
   //收藏本视频
   star_video: function () {
+    if (!km.logined()) {
+      wx.showToast({
+        title: '您尚未登录，无法收藏！',
+        icon: 'none',
+      });
+      return;
+    }
     if (this.check_busy()) {
       return;
     }
@@ -187,6 +196,13 @@ Page({
 
   //取消收藏本视频
   unstar_video: function () {
+    if (!km.logined()) {
+      wx.showToast({
+        title: '您尚未登录，无法收藏！',
+        icon: 'none',
+      });
+      return;
+    }
     if (this.check_busy()) {
       return;
     }
