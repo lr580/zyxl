@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker: ['感情', '学习', '心灵','职业','校园热点'],
+    picker: ['感情', '学习', '心灵', '职业', '校园热点'],
     editorCtx: '', //富文本编辑框API
     formats: {},  //富文本编辑框样式使用
     readOnly: false, //富文本编辑框样式使用
@@ -276,8 +276,15 @@ Page({
       db.collection('post').doc(Number(thee.data.id)).update({
         data: obj,
       }).then(res => {
-        // console.log('awa编辑');
-        km.globalData.info_post[Number(thee.data.id)] = obj;
+        // console.log('awa编辑 ', thee.data.id, obj);
+        // let obj2 = Object.create(obj);//复制
+        let obj2 = {};
+        for (let i in obj) {
+          obj2[i] = obj[i];
+        }
+        // console.log(obj2, obj);
+        obj2._id = Number(thee.data.id);
+        km.globalData.info_post[Number(thee.data.id)] = obj2;
         upd();
       }).catch(rws => {
         fail('保存编辑失败', rws);
