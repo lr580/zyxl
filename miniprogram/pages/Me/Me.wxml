@@ -10,27 +10,27 @@
 
 
   <view class="padding-xl">
-  <button bindtap="register" class="cu-btn block line-yellow lg">
-    <text class="cuIcon-upload"></text> 授权登录</button>
-</view>
+    <button bindtap="register" class="cu-btn block line-yellow lg">
+      <text class="cuIcon-upload"></text> 授权登录</button>
+  </view>
 
-<view class="flex-sub text-center">
-      <view class="solid-bottom text-xls padding">
-        <text class="text-grey text-xls">登录以进入知音心流</text>
-      </view>
+  <view class="flex-sub text-center">
+    <view class="solid-bottom text-xls padding">
+      <text class="text-grey text-xls">登录以进入知音心流</text>
     </view>
+  </view>
 
 </view>
 <view wx:else>
 
   <view class="user_info" bindtap="goto_myinfo">
     <view class="a">
-    <image class="user_avater" src="{{userinfo.avatar}}"></image>
-    <view class="b">
-      <text class="user_name">{{userinfo.name}}</text>
-      <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
-    </view>
-    <image class="user_goin" src="/img/goin.png"></image>
+      <image class="user_avater" src="{{userinfo.avatar}}"></image>
+      <view class="b">
+        <text class="user_name">{{userinfo.name}}</text>
+        <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
+      </view>
+      <image class="user_goin" src="/img/goin.png"></image>
     </view>
 
   </view>
@@ -79,11 +79,14 @@
         <text class="text-black pleft">联系客服</text>
       </view>
     </view> -->
-    <view bindtap="goto_contactus" class="cu-item arrow">
-      <view class="content">
-        <image class="icon_init" src="/img/fankui.png"></image>
-        <text class="text-black pleft">投诉反馈</text>
-      </view>
+    <!-- <button open-type='feedback' class="cu-item arrow;" style="width:100%">/ -->
+    <view class="cu-item arrow;">
+      <button open-type='feedback' style="font-weight:500; width: 100%;">
+        <view class="content" style="position: relative;left:-43%; ">
+          <image class="icon_init" src="/img/fankui.png"></image>
+          <text class="text-black pleft">投诉反馈</text>
+        </view>
+      </button>
     </view>
   </view>
 </view>

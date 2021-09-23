@@ -34,7 +34,7 @@
 </view>
 
 <view class="cu-form-group">
-  <view class="title">排序由远到近</view>
+  <view class="title">开启逆序排序</view>
   <switch bindchange="sele_rev" class="orange radius sm"></switch>
 </view>
 

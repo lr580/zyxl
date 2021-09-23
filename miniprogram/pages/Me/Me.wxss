@@ -1,5 +1,5 @@
 /* miniprogram/pages/Me/Me.wxss */
-.user_info{
+.user_info {
   display: flex;
   width: 95%;
   height: 220rpx;
@@ -12,13 +12,13 @@
   background-color: white;
 }
 
-.user_avater{
+.user_avater {
   width: 160rpx;
   height: 160rpx;
   border-radius: 50%;
 }
 
-.user_name{
+.user_name {
   width: 400rpx;
   font-weight: 400;
   font-size: 40rpx;
@@ -27,44 +27,45 @@
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:1;
+  -webkit-line-clamp: 1;
 }
 
-.a{
+.a {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
 }
 
-.b{
+.b {
   display: flex;
   flex-direction: column;
   width: 400rpx;
   margin-left: 30rpx;
 }
 
-.user_motto{
+.user_motto {
   margin-top: 70rpx;
   font-weight: 200;
   font-size: 30rpx;
   color: gray;
 }
 
-.user_goin{
+.user_goin {
   width: 50rpx;
   height: 50rpx;
 }
 
-.have_icon{
+.have_icon {
   display: flex;
   align-items: center;
 }
-.pleft{
+
+.pleft {
   padding-left: 10rpx;
 }
 
-.fengexian{
+.fengexian {
   margin: 40rpx;
   height: 2rpx;
   border: 1rpx rgba(128, 128, 128, 0.349) solid;
