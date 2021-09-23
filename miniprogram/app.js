@@ -481,9 +481,11 @@ App({
         ach: ach,//字段的显示名字
         busy: false,//禁止频繁点击
         nowdate: thee.date2str(),//当前选择时间 yyyy-mm-dd 字符串
-        nowdatestr: thee.date2str(new Date, 1), //当前选择时间 yyyy:mm:dd 星期 字符串
+        nowdatestr: km.date2str(new Date, 1), //当前选择时间 yyyy:mm:dd 星期 字符串
+        //上一行thee改成km修复了bugs
         today: thee.date2str(), //今天的 yyyy-mm-dd 字符串
       });
+      // console.log(thee.data.nowdate, thee.data.nowdatestr, thee.date2str(new Date, 1));
     };
     thee.init();
 
@@ -524,6 +526,7 @@ App({
 
     //选择日期
     thee.sele_date = function (e) {
+      // console.log(e);
       thee.setData({
         nowdate: e.detail.value,
         nowdatestr: km.date2str(km.str2date(e.detail.value), 1),
