@@ -23,7 +23,7 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarBackgroundColor": "#4ecdc4",
     "navigationBarTitleText": "知音心流",
     "navigationBarTextStyle": "black"
   },

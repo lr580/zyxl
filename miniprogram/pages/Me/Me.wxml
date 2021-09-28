@@ -26,7 +26,7 @@
   <view class="user_info" bindtap="goto_myinfo">
     <view class="a">
       <image class="user_avater" src="{{userinfo.avatar}}"></image>
-      <view class="b">
+      <view class="b"> 
         <text class="user_name">{{userinfo.name}}</text>
         <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
       </view>

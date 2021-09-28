@@ -45,8 +45,8 @@ Page({
         that.setData({
           windowHeight: res.windowHeight,
           windowWidth: res.windowWidth,
-          buttonTop: res.windowHeight * 0.70,//这里定义按钮的初始位置
-          buttonLeft: res.windowWidth * 0.70,//这里定义按钮的初始位置
+          buttonTop: res.windowHeight * 0.88,//这里定义按钮的初始位置
+          buttonLeft: res.windowWidth * 0.82,//这里定义按钮的初始位置
         })
       }
     })

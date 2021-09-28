@@ -89,6 +89,7 @@
 
 .func{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   padding-top: 40rpx;
@@ -106,20 +107,47 @@
 .goto_talk{
   display: flex;
   flex-direction: column;
-  
+
 }
 
-.fun_txt{
+.list_index{
   display: flex;
-  justify-content: center;
-  font-weight: 600;
+
+  width: 85%;
+  height: 120rpx;
+  margin: 15rpx;
+  background-color: #4ecdc525;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  border-radius: 20rpx;
+}
+
+.fun_txt1{
+  display: flex;
+  font-weight: 800;
+  font-size: 45rpx;
+  margin-left: 40rpx;
+  width: 350rpx;
+  letter-spacing: .3rem;
+  color: rgb(82, 79, 79);
+}
+.fun_txt2{
+  display: flex;
+  font-weight: 200;
+  font-size: 25rpx;
+  margin-left: 40rpx;
+  width: 350rpx;
+  letter-spacing: .2rem;
+  color: rgb(184, 180, 180);
 }
 
 .fengexian{
-  margin: 30rpx;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
-  border-bottom: 2rpx rgba(128, 128, 128, 0.384) solid;
+  margin: 50rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  border-bottom: 4rpx rgba(53, 146, 126, 0.384) solid;
 }
 
 .bottom_tip {
@@ -129,6 +157,9 @@
   justify-content: center;
 }
 
+.aaaa{
+  margin-bottom: 40rpx;
+}
 .bottom_tip image {
   width: 30rpx;
   height: 30rpx;

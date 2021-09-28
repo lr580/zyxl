@@ -1,23 +1,38 @@
 <!--pages/index/index.wxml-->
 <view class="func padding-xl radius shadow bg-white">
-  <view bindtap="goto_talk">
+  <view class="list_index" bindtap="goto_talk">
+    <view class="funa">
+    <text class="fun_txt1">悄悄话</text> 
+    <text class="fun_txt2">点此进入悄悄话预约</text> 
+    </view>
     <image class="index_fun" src="/img/index_talk.png"></image>
-    <view class="fun_txt">悄悄话</view>
+    
   </view>
-  <view bindtap="goto_vr">
+  <view class="list_index"  bindtap="goto_vr">
+    <view class="funa">
+      <text class="fun_txt1">VR展</text>
+      <text class="fun_txt2">点此进入VR展预约</text> 
+     </view>
     <image class="index_fun" src="/img/index_vr.png"></image>
-    <view class="fun_txt">VR展</view>
+    
   </view>
-  <view bindtap="goto_shop">
+  <view class="list_index"  bindtap="goto_shop">
+    <view class="funa">
+      <text class="fun_txt1">积分商城</text>
+      <text class="fun_txt2">点此使用积分购买物品</text> 
+      </view>
     <image class="index_fun" src="/img/index_shop.png"></image>
-    <view class="fun_txt">积分商城</view>
+    
   </view>
 </view>
 
 <view class="fengexian"></view>
 
-<view wx:if="{{!loaded&&longtimed}}">
-  如果一直处于加载中(超过10秒)，请尝试重启本程序
+
+<view class="bottom_tip"  wx:if="{{!loaded&&longtimed}}">
+  <image src="/img/tip.png"></image>
+<text>如果一直处于加载中，请尝试重启本程序</text>
+  
 </view>
 
 <!-- <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
@@ -35,6 +50,13 @@
 
 
 <!-- <view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view> -->
+<view class="cu-bar bg-white aaaa">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-cyan">视频推荐</text>
+      <text class="text-ABC text-cyan">video</text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
 
 <view>
   <view wx:if="{{arr_rec.length}}">
