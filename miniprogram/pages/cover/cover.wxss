@@ -1,0 +1,12 @@
+/* miniprogram/pages/cover/cover.wxss */
+.cover{
+  margin-top: 150rpx;
+  width: 100%;
+  height: 800rpx;
+}
+
+
+.body{
+  height: 1500rpx;
+  background-color: rgb(255, 255, 255);
+}

@@ -40,7 +40,7 @@
 <!-- 
 <view>调试用：新消息数目{{num_newmessage}}</view> -->
 
-<view style="margin-top:80rpx;">
+<view style="margin-top:2rpx;">
   <view class="cu-list menu">
     <view bindtap="goto_mymessage" wx:if="{{userinfo}}" class="cu-item arrow">
       <view class="content">

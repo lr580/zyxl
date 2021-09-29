@@ -1,0 +1,4 @@
+<!--miniprogram/pages/cover/cover.wxml-->
+<view class="body">
+<image class="cover" src="/img/zyxl_cover.jpg"></image>
+</view>

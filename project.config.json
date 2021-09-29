@@ -21,7 +21,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -79,6 +79,12 @@
         {
           "name": "TreeHole",
           "pathName": "pages/TreeHole/TreeHole",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "cover",
+          "pathName": "pages/cover/cover",
           "scene": null
         }
       ]

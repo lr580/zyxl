@@ -83,8 +83,10 @@
 }
 
 .index_fun{
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 40rpx;
 }
 
 .func{
