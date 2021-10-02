@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/cover/cover",
     "pages/index/index",
     "pages/TreeHole/TreeHole",
     "pages/Me/Me",
@@ -18,8 +19,8 @@
     "pages/postp/postp",
     "pages/postt/postt",
     "pages/postu/postu",
-    "pages/mymessage/mymessage",
-    "pages/cover/cover"
+    "pages/mymessage/mymessage"
+   
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -32,33 +33,33 @@
   "style": "v2",
   "tabBar": {
     "backgroundColor": "#FFFFFF",
-    "selectedColor": "#17abe3",
+    "selectedColor": "#4ecdc4",
     "color": "#000000",
     "position": "bottom",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "./img/index.png",
-        "selectedIconPath": "./img/indexS.png"
+        "iconPath": "./img/indexa.png",
+        "selectedIconPath": "./img/index.png"
       },
       {
         "pagePath": "pages/Theater/Theater",
         "text": "剧场",
-        "iconPath": "./img/theater.png",
-        "selectedIconPath": "./img/theaterS.png"
+        "iconPath": "./img/Theatera.png",
+        "selectedIconPath": "./img/Theater.png"
       },
       {
         "pagePath": "pages/TreeHole/TreeHole",
         "text": "树洞",
-        "iconPath": "./img/treeHoleS.png",
+        "iconPath": "./img/treeHolea.png",
         "selectedIconPath": "./img/treeHole.png"
       },
       {
         "pagePath": "pages/Me/Me",
         "text": "我",
-        "iconPath": "./img/me.png",
-        "selectedIconPath": "./img/meS.png"
+        "iconPath": "./img/Mea.png",
+        "selectedIconPath": "./img/Me.png"
       }
     ]
   }

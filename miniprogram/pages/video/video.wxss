@@ -53,6 +53,8 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  width: 85%;
+ 
 }
 
 .c1{
