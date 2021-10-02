@@ -357,7 +357,7 @@ Page({
     }
 
     if (this.data.isreplyreply && this.data.edit == false) { //回帖 同理编辑不用通知
-      if (thee.data.ruid != km.globalData.openid) {//不是我回我自己
+      if (thee.data.ruid != km.globalData.openid && thee.data.fuid != thee.data.ruid) {//不是我回我自己和重复
         all_todos++; //给被回帖人消息
         let newinfo = [[true, km.globalData.openid, thee.data.rid]];//修了2次这行代码
         db.collection('user').doc(thee.data.ruid).update({
