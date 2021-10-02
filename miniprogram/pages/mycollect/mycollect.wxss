@@ -51,6 +51,7 @@
 .th_title{
   font-size: 40rpx;
   font-weight: 600;
+  margin-left: 20rpx;
 }
 
 .th_intro{
@@ -58,6 +59,8 @@
   font-size: 30rpx;
   color: gray;
   margin-top: 30rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
 
 .statea{
@@ -68,7 +71,8 @@
   border-bottom: gainsboro 2rpx solid;
   padding-bottom: 10rpx;
   padding-left: 0rpx;
-  
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
 
 .aa{

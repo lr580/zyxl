@@ -44,6 +44,9 @@ Page({
     let arro = km.globalData.info_user.message;
     for (let i = 0; i < arro.length; ++i) {
       let w = km.globalData.info_post[arro[i][2]];
+      if(!w){
+        continue;
+      }
       let pa = w.parent ? km.globalData.info_post[w.parent] : w; //主贴对象
       let v;
       if (!pa) {
