@@ -48,6 +48,10 @@ Page({
 
   onLoad: function (options) {
     // console.log("!");
+    this.update_index();
+  },
+
+  update_index: function () {
     let thee = this;
     // console.log("qwq");
     km.indexpage_reload = function () {
@@ -145,7 +149,7 @@ Page({
       arr_pla: km.globalData.info_placard,
       loaded: true,
     });
-    
+
     // km.coverpage_reload();
   },
 
@@ -216,7 +220,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // this.update_index();
   },
 
   /**

@@ -82,7 +82,7 @@ App({
       num_user: 0,
       num_newmessage: 0,
       info_goods: [],
-      cover_loaded: false,
+      // cover_loaded: false,
     }
   },
 
@@ -228,7 +228,8 @@ App({
     wx.hideLoading({
       success: (res) => { },
     });
-    km.coverpage_reload();
+    km.indexpage_reload();
+    // km.coverpage_reload();
     // setTimeout(() => {
     //   km.coverpage_reload();
     // }, 1500);
