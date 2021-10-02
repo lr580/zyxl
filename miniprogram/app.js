@@ -21,7 +21,7 @@ App({
     //如果load_video换成与onLaunch并列的函数，会导致thee不可用，但是可以用getApp()替代
 
     // wx.setEnableDebug({
-    //   enableDebug: true,
+    //   enableDebug: false,
     // }).then(res => { }).catch(rws => { console.error('调试开启失败(lr580:真机模式外请忽略该条报错)', rws) });//真机模式外请忽略该条报错
 
     wx.showLoading({
@@ -82,6 +82,7 @@ App({
       num_user: 0,
       num_newmessage: 0,
       info_goods: [],
+      cover_loaded: false,
     }
   },
 
@@ -186,9 +187,9 @@ App({
   load_global: function () {
     let km = getApp();
 
-    if (cloudfx_done && !loaduser_done) {
-      this.load_user(km.globalData.userid);
-    }
+    // if (cloudfx_done && !loaduser_done) {
+    //   this.load_user(km.globalData.userid);
+    // } 这一条异步可能会出错，干脆舍弃优化删掉这个异步了
 
     db.collection('global').doc('default').get().then(res => {
       km.globalData.num_video = res.data.num_video;
@@ -227,8 +228,10 @@ App({
     wx.hideLoading({
       success: (res) => { },
     });
-    km.indexpage_reload();
     km.coverpage_reload();
+    // setTimeout(() => {
+    //   km.coverpage_reload();
+    // }, 1500);
   },
 
   //读取所有小剧场互动视频文本信息(视频信息不读取)

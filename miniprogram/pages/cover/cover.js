@@ -9,18 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    already: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    km.coverpage_reload = function(){
-      wx.switchTab({
-        url: '../index/index',
-      });
-    };
+    // this.init_coverpage();
     // setTimeout(
     //   function () {
     //     wx.switchTab({
@@ -28,6 +24,37 @@ Page({
     //       // url: '../Me/Me',
     //     });
     //   }, 1);
+  },
+
+  init_coverpage: function () {
+    let thee = this;
+    // setTimeout(() => {
+    //   wx.showToast({
+    //     title: '网络不佳，请点击右上角重新进入小程序。',
+    //     duration: 20000,
+    //     icon: 'none',
+    //   });
+    // }, 8000);
+    wx.switchTab({
+      url: '../index/index',
+    });
+    // return;
+    // if (!thee.data.already || !km.globalData.cover_loaded) {
+    //   km.coverpage_reload = function () {
+    //     thee.setData({
+    //       already: true,
+    //     });
+    //     wx.switchTab({
+    //       url: '../index/index',
+    //     });
+    //     km.globalData.cover_loaded = true;
+    //     km.indexpage_reload();
+    //   };
+    // } else {
+    //   wx.switchTab({
+    //     url: '../index/index',
+    //   });
+    // }
   },
 
   /**
@@ -41,7 +68,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init_coverpage();
   },
 
   /**

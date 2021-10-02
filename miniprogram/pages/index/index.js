@@ -47,6 +47,7 @@ Page({
   },
 
   onLoad: function (options) {
+    // console.log("!");
     let thee = this;
     // console.log("qwq");
     km.indexpage_reload = function () {
@@ -144,6 +145,8 @@ Page({
       arr_pla: km.globalData.info_placard,
       loaded: true,
     });
+    
+    // km.coverpage_reload();
   },
 
   //视频跳转
