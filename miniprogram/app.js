@@ -216,6 +216,11 @@ App({
     return;
   },
 
+  //全局初始化后让封面做的事情
+  coverpage_reload: function () {
+
+  },
+
   //读取全局数据完毕
   init_finish: function () {
     let km = getApp();
@@ -223,6 +228,7 @@ App({
       success: (res) => { },
     });
     km.indexpage_reload();
+    km.coverpage_reload();
   },
 
   //读取所有小剧场互动视频文本信息(视频信息不读取)

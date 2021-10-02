@@ -48,9 +48,13 @@ Page({
 
   onLoad: function (options) {
     let thee = this;
+    // console.log("qwq");
     km.indexpage_reload = function () {
       thee.init_index();
     } //云开发数据库全部读完后重新加载一次本页面
+    if (!this.data.loaded) { //防止全局没读出来(多跑一遍也没坏处)
+      km.indexpage_reload();
+    }
     this.towerSwiper('swiperList');
     setTimeout(() => {
       thee.setData({

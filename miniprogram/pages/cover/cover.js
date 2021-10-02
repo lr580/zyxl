@@ -1,4 +1,8 @@
 // miniprogram/pages/cover/cover.js
+const km = getApp();
+const db = wx.cloud.database();
+const _ = db.command;
+
 Page({
 
   /**
@@ -12,12 +16,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      setTimeout(
-        function(){
-          wx.switchTab({
-            url: '../Me/Me',
-          })
-        },2000)
+    km.coverpage_reload = function(){
+      wx.switchTab({
+        url: '../index/index',
+      });
+    };
+    // setTimeout(
+    //   function () {
+    //     wx.switchTab({
+    //       url: '../index/index',
+    //       // url: '../Me/Me',
+    //     });
+    //   }, 1);
   },
 
   /**

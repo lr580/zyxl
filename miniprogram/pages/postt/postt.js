@@ -50,7 +50,7 @@ Page({
     let pid = opt;
     let pinfo = km.globalData.info_post[pid];
     // console.log(pid, pinfo, km.globalData.info_users);
-    console.log(km.globalData.info_users);
+    // console.log(km.globalData.info_users);
     let puid = pinfo.user;
     let puinfo = km.globalData.info_users[puid];
     let ptime = km.date2str(pinfo.time_publish);
@@ -125,7 +125,7 @@ Page({
       logined: km.logined(),
     });
     // console.log(rexist, rrexist);
-    console.log(puinfo);
+    // console.log(puinfo);
     const thee = this;
     if (thee.pctx) {
       thee.pctx.setContents({ html: thee.data.info.content });
