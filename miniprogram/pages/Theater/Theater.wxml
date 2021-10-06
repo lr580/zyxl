@@ -33,7 +33,7 @@
 </view> -->
 <view>
   <view class="cu-form-group">
-    <view class="title">排序由远到近</view>
+    <view class="title">开启逆序排序</view>
     <switch bindchange="sele_sorttype" class="orange radius sm"></switch>
   </view>
   <!-- 选择排序依据：(没得选，只有一个依据) -->
