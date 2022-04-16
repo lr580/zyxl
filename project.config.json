@@ -1,93 +1,95 @@
 {
-  "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
-  "setting": {
-    "urlCheck": true,
-    "es6": true,
-    "enhance": true,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": false,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
+    "miniprogramRoot": "miniprogram/",
+    "cloudfunctionRoot": "cloudfunctions/",
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "enhance": true,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "coverView": true,
+        "nodeModules": false,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "lazyloadPlaceholderEnable": false,
+        "useMultiFrameRuntime": true,
+        "useApiHook": true,
+        "useApiHostProcess": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "useIsolateContext": false,
+        "userConfirmedBundleSwitch": false,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "minifyWXML": true,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false,
+        "ignoreUploadUnusedFiles": true
     },
-    "enableEngineNative": false,
-    "useIsolateContext": true,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "showES6CompileOption": false,
-    "minifyWXML": true
-  },
-  "appid": "wx805dc324ae323588",
-  "projectname": "zyxl",
-  "libVersion": "2.19.2",
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
+    "appid": "wx805dc324ae323588",
+    "projectname": "ZYXL",
+    "libVersion": "2.19.2",
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "Theater",
-          "pathName": "pages/Theater/Theater",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "Me",
-          "pathName": "pages/Me/Me",
-          "query": "",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "talk",
-          "pathName": "pages/talk/talk",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "TreeHole",
-          "pathName": "pages/TreeHole/TreeHole",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "cover",
-          "pathName": "pages/cover/cover",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "db guide",
+                    "pathName": "pages/databaseGuide/databaseGuide",
+                    "query": ""
+                },
+                {
+                    "name": "Theater",
+                    "pathName": "pages/Theater/Theater",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "Me",
+                    "pathName": "pages/Me/Me",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "talk",
+                    "pathName": "pages/talk/talk",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "TreeHole",
+                    "pathName": "pages/TreeHole/TreeHole",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "cover",
+                    "pathName": "pages/cover/cover",
+                    "scene": null
+                }
+            ]
         }
-      ]
     }
-  }
 }

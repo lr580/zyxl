@@ -1,39 +1,48 @@
 /* miniprogram/pages/Theater/Theater.wxss */
+@import "../../colorui/animation.wxss";
+
+image[class*="gif-"] {
+  border-radius: 6rpx;
+  display: block;
+}
 
 
 .video_body {
+  border-radius: 10rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
-  margin-bottom: 15rpx;
-  padding-top: 20rpx;
+  margin-bottom: 30rpx;
+  padding: 40rpx;
   padding-bottom: 20rpx;
-  background-color: white;
-  height: 200rpx;
+  background-color: #f4f4f4;
+  height: 500rpx;
   display: flex;
-  align-items: center;
-  border-radius: 20rpx;
-  box-shadow: 2px 2px 2px gainsboro;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* box-shadow: 2px 2px 2px gainsboro; */
   padding-left: 20rpx;
 }
 
 .video_cover {
-  width: 280rpx;
-  height: 160rpx;
-  border-radius: 16rpx;
-  border: 4rpx solid rgba(128, 128, 128, 0.24);
+  width: 96%;
+  height: 100%;
+  margin-left: 22rpx;
+  border-radius: 5rpx;
 }
 
 .video_intro {
   flex-direction: column;
-  height: 180rpx;
+  height: 150rpx;
   width: 500rpx;
   padding: 5rpx;
+  margin-top: 20rpx;
   margin-left: 20rpx;
 }
 
 .video_title {
   font-weight: 600;
-  font-size: 28rpx;
+  font-size: 33rpx;
   letter-spacing: 0.5rpx;
   display: -webkit-box;
   word-break: break-all;
@@ -42,14 +51,15 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   padding-right: 10rpx;
-  height: 75rpx;
-  margin-left: 30rpx;
+  height: 50rpx;
+  margin-top: 10rpx;
 }
 
 .video_type {
   align-items: center;
   display: flex;
-  margin-left: 180rpx;
+  width:130rpx;
+  /* margin-left: 180rpx; */
 }
 
 
@@ -61,23 +71,22 @@
 }
 
 .video_type image {
-  width: 20rpx;
-  height: 20rpx;
+  width: 30rpx;
+  height:30rpx;
 }
 
 
 .video_count {
-
-  font-weight: 200;
+  font-weight: 400;
   color: #bfbfbf;
   align-items: center;
   display: flex;
-  margin-left: 35rpx;
+  margin-left:10rpx;
 }
 
 .video_count image {
-  width: 20rpx;
-  height: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .video_count text {
@@ -96,7 +105,7 @@
   display: flex;
   flex-direction: row;
   padding: 5rpx;
-  margin-top: 40rpx;
+  /* margin-top: 40rpx; */
 }
 
 .trans {

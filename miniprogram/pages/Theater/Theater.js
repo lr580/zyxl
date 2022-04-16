@@ -1,6 +1,7 @@
 // miniprogram/pages/Theater/Theater.js
 const km = getApp();
 const db = wx.cloud.database();
+const app = getApp();
 const _ = db.command;
 var minOffset = 50;
 var minTime = 60;
@@ -13,6 +14,41 @@ Page({
    * 页面的初始数据
    */
   data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    list: [{
+        name: 'fade',
+        color: 'red'
+      },
+      {
+        name: 'scale-up',
+        color: 'orange'
+      },
+      {
+        name: 'scale-down',
+        color: 'olive'
+      },
+      {
+        name: 'slide-top',
+        color: 'green'
+      }, {
+        name: 'slide-bottom',
+        color: 'cyan'
+      },
+      {
+        name: 'slide-left',
+        color: 'blue'
+      },
+      {
+        name: 'slide-right',
+        color: 'purple'
+      },
+      {
+        name: 'shake',
+        color: 'mauve'
+      }
+    ],
+    toggleDelay: false,
     TabCur: 0,
     scrollLeft: 0,//以上两个为前端参数
     types: [],//类别(5全选)
@@ -24,6 +60,32 @@ Page({
     num_normal_load: 3,//非第一次加载多少个视频项
     videolist: [],//所有符合要求的有序视频列表，每个元素是列表，该列表每个下标意义为：0 标题； 1 分类下标； 2 浏览次数； 3 封面完整url; 4 发布时间date(排序依据); 5 视频id(点击跳转依据)
     num_show: 0,//在所有符合要求的视频列表里，展现前num_show个视频
+  },
+
+  toggle(e) {
+    console.log(e);
+    var anmiaton = e.currentTarget.dataset.class;
+    console.log(anmiaton);
+    var that = this;
+    that.setData({
+      animation: anmiaton
+    })
+    setTimeout(function() {
+      that.setData({
+        animation: ''
+      })
+    }, 1000)
+  },
+  toggleDelay() {
+    var that = this;
+    that.setData({
+      toggleDelay: true
+    })
+    setTimeout(function() {
+      that.setData({
+        toggleDelay: false
+      })
+    }, 1000)
   },
 
   /**

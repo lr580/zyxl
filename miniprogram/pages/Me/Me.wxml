@@ -1,4 +1,6 @@
 <!--miniprogram/pages/Me/Me.wxml-->
+<van-transition name="slide-right">
+
 <view wx:if="{{!userinfo}}">
   <view class="cu-bar bg-white">
     <view class="action sub-title">
@@ -22,16 +24,27 @@
 
 </view>
 <view wx:else>
+  <view class="cu-bar bg-white">
+  <view class="action sub-title">
+    <text class="text-xxl text-bold text-cyan">我的</text>
+    <text class="bg-cyan" style="width:2rem"></text>
+    <!-- last-child选择器-->
+  </view>
+</view>
 
-  <view class="user_info" bindtap="goto_myinfo">
+  <view class="user_info">
+
+
     <view class="a">
       <image class="user_avater" src="{{userinfo.avatar}}"></image>
+    </view>
       <view class="b"> 
         <text class="user_name">{{userinfo.name}}</text>
         <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
       </view>
-      <image class="user_goin" src="/img/goin.png"></image>
-    </view>
+    
+      <image bindtap="goto_myinfo" style="position: absolute;top: 60rpx;right: 20rpx;"  class="user_goin" src="/img/goin.png"></image>
+    
 
   </view>
   <!-- <view class="fengexian"></view>
@@ -39,8 +52,48 @@
 </view>
 <!-- 
 <view>调试用：新消息数目{{num_newmessage}}</view> -->
+<!-- <van-divider style="padding-left: 60rpx;padding-right: 60rpx;"/> -->
+<van-divider contentPosition="left">功能</van-divider>
+<van-grid clickable column-num="3">
+  <van-grid-item wx:if="{{userinfo}}" style="border-radius: 30rpx;"
+    icon="/img/xiaoxi.png"
+    link-type="navigateTo"
+    url="../mymessage/mymessage"
+    text="消息"
+  />
+  <van-grid-item wx:if="{{userinfo}}" 
+    icon="/img/shoucang.png"
+    link-type="navigateTo"
+    url="../mycollect/mycollect"
+    text="收藏"
+  />
+  <van-grid-item wx:if="{{userinfo}}" 
+    icon="/img/liulan.png"
+    link-type="navigateTo"
+    url="../myhistory/myhistory"
+    text="历史"
+  />
+  <van-grid-item wx:if="{{userinfo}}" 
+    icon="/img/shudong.png"
+    link-type="navigateTo"
+    url="../mypost/mypost"
+    text="树洞"
+  />
+  <van-grid-item
+    icon="/img/help.png"
+    link-type="navigateTo"
+    url="../help/help"
+    text="帮助"
+  />
+  <van-grid-item 
+    icon="/img/fankui.png"
+    link-type="navigateTo"
+    url=""
+    text="反馈"
+  />
+</van-grid>
 
-<view style="margin-top:2rpx;">
+<!-- <view style="margin-top:2rpx;">
   <view class="cu-list menu">
     <view bindtap="goto_mymessage" wx:if="{{userinfo}}" class="cu-item arrow">
       <view class="content">
@@ -73,13 +126,13 @@
         <text class="text-black pleft">查看帮助</text>
       </view>
     </view>
-    <!-- <view bindtap="goto_contactus" class="cu-item arrow">
+    <view bindtap="goto_contactus" class="cu-item arrow">
       <view class="content">
         <image class="icon_init" src="/img/kefu.png"></image>
         <text class="text-black pleft">联系客服</text>
       </view>
-    </view> -->
-    <!-- <button open-type='feedback' class="cu-item arrow;" style="width:100%">/ -->
+    </view> 
+   <button open-type='feedback' class="cu-item arrow;" style="width:100%">/ 
     <view class="cu-item arrow;">
       <button open-type='feedback' style="font-weight:500; width: 100%;">
         <view class="content" style="position: relative;left:-43%; ">
@@ -89,4 +142,5 @@
       </button>
     </view>
   </view>
-</view>
+</view> -->
+</van-transition>

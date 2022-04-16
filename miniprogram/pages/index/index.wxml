@@ -1,5 +1,20 @@
 <!--pages/index/index.wxml-->
-<view class="func padding-xl radius shadow bg-white">
+<van-transition name="slide-left">
+<view class="cu-bar bg-white aaaa">
+  <view class="action sub-title">
+    <text class="text-xxl text-bold text-blue">特色功能</text>
+    <text class="text-ABC text-blue">function</text>
+    <!-- last-child选择器-->
+  </view>
+</view>
+<van-grid icon-size="35px" column-num="3" border="{{true }}">
+
+    <van-grid-item bindtap="goto_talk" icon="/img/index_talk.png" text="悄悄话预约" />
+    <van-grid-item bindtap="goto_vr" icon="/img/index_vr.png" text="vr展预约" />
+    <van-grid-item bindtap="goto_shop" icon="/img/index_shop.png" text="积分商城" />
+
+</van-grid>
+<!-- <view class="func padding-xl radius shadow bg-white">
   <view class="list_index" bindtap="goto_talk">
     <view class="funa">
       <text class="fun_txt1">悄悄话</text>
@@ -24,9 +39,9 @@
     <image class="index_fun" src="/img/index_shop.png"></image>
 
   </view>
-</view>
+</view> -->
 
-<view class="fengexian"></view>
+<!-- <view class="fengexian"></view> -->
 
 
 <view class="bottom_tip" wx:if="{{!loaded&&longtimed}}">
@@ -52,8 +67,8 @@
 <!-- <view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view> -->
 <view class="cu-bar bg-white aaaa">
   <view class="action sub-title">
-    <text class="text-xl text-bold text-cyan">视频推荐</text>
-    <text class="text-ABC text-cyan">video</text>
+    <text class="text-xxl text-bold text-blue">视频推荐</text>
+    <text class="text-ABC text-blue">video</text>
     <!-- last-child选择器-->
   </view>
 </view>
@@ -62,7 +77,7 @@
   <!-- em?{{arr_rec}} -->
   <view wx:if="{{arr_rec.length}}">
     <view class="video_list">
-      <view class="video_body" wx:for="{{arr_rec}}">
+      <view class="video_body shadow-warp" wx:for="{{arr_rec}}">
         <view bindtap="goto_video" id="{{item[4]}}">
           <view class="video_cover_img">
             <image src="{{item[3]}}">
@@ -104,3 +119,4 @@
   </view>
   <view wx:else>加载中……</view>
 </view> -->
+</van-transition>

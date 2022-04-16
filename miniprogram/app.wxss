@@ -1,6 +1,7 @@
 /**app.wxss**/
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
+@import 'miniprogram_npm/@vant/weapp/common/index.wxss';
 .container {
   display: flex;
   flex-direction: column;
@@ -22,7 +23,10 @@ button::after{
 
 
 page {
-  background: #d8d8d827;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

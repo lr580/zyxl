@@ -1,18 +1,40 @@
 <!--miniprogram/pages/Theater/Theater.wxml-->
 
-<view class="cu-bar bg-white">
+<!-- <view class="cu-bar bg-white">
   <view class="action sub-title">
     <text class="text-xl text-bold text-cyan">类别</text>
+    <text class="bg-cyan" style="width:2rem"></text> -->
+    <!-- last-child选择器-->
+  <!-- </view>
+</view> -->
+<van-transition  name="slide-down" show="true" custom-class="block">
+  <view class="cu-bar bg-white">
+  <view class="action sub-title">
+    <text class="text-xxl text-bold text-cyan">视频</text>
     <text class="bg-cyan" style="width:2rem"></text>
     <!-- last-child选择器-->
   </view>
 </view>
+
 <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
   <view class="cu-item {{index==TabCur?'text-cyan cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans"
     wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
     {{types[item]}}
   </view>
 </scroll-view>
+<view>
+  <view class="cu-form-group">
+    <view class="title">开启逆序排序</view>
+    <switch bindchange="sele_sorttype" class="orange cyan sm"></switch>
+  </view>
+  <!-- 选择排序依据：(没得选，只有一个依据) -->
+  <!-- <view wx:if="{{sort_key==0}}">
+    <view bindtap="sele_sorttype" id="00">{{sort_reverse?'':'(当前)'}}按时间由近到远排序</view>
+    <view bindtap="sele_sorttype" id="01">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
+  </view> -->
+</view>
+</van-transition>
+
 
 
 
@@ -31,17 +53,7 @@
     </view>
   </view>
 </view> -->
-<view>
-  <view class="cu-form-group">
-    <view class="title">开启逆序排序</view>
-    <switch bindchange="sele_sorttype" class="orange radius sm"></switch>
-  </view>
-  <!-- 选择排序依据：(没得选，只有一个依据) -->
-  <!-- <view wx:if="{{sort_key==0}}">
-    <view bindtap="sele_sorttype" id="00">{{sort_reverse?'':'(当前)'}}按时间由近到远排序</view>
-    <view bindtap="sele_sorttype" id="01">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
-  </view> -->
-</view>
+
 
 <!-- <view>分割线(｀・ω・´)</view> -->
 <view class="kk"></view>
@@ -49,9 +61,9 @@
   wx:if="{{num_show}}">
   <!--videolist.length-->
   <view wx:for="{{videolist}}">
-
-    <view class="video_body shadow" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
-      <view>
+    <van-transition name="slide-up">
+      <view class="video_body shadow animation-scale-up" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
+      <view style="width: 100%;height:100%;">
         <image class="video_cover" src="{{item[3]}}"></image>
       </view>
       <view class="video_intro">
@@ -69,6 +81,8 @@
       </view>
 
     </view>
+    </van-transition>
+   
   </view>
   <view class="bottom_tip" wx:if="{{num_show==videolist.length}}">
     <image src="/img/tip.png"></image>

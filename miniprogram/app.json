@@ -23,9 +23,9 @@
    
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#4ecdc4",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "知音心流",
     "navigationBarTextStyle": "black"
   },
@@ -33,8 +33,8 @@
   "style": "v2",
   "tabBar": {
     "backgroundColor": "#FFFFFF",
-    "selectedColor": "#4ecdc4",
-    "color": "#000000",
+    "selectedColor": "#333333",
+    "color": "#A0AEB4",
     "position": "bottom",
     "list": [
       {
@@ -47,19 +47,14 @@
         "pagePath": "pages/Theater/Theater",
         "text": "剧场",
         "iconPath": "./img/Theatera.png",
-        "selectedIconPath": "./img/Theater.png"
+        "selectedIconPath": "./img/theater.png"
       },
-      {
-        "pagePath": "pages/TreeHole/TreeHole",
-        "text": "树洞",
-        "iconPath": "./img/treeHolea.png",
-        "selectedIconPath": "./img/treeHole.png"
-      },
+    
       {
         "pagePath": "pages/Me/Me",
         "text": "我",
         "iconPath": "./img/Mea.png",
-        "selectedIconPath": "./img/Me.png"
+        "selectedIconPath": "./img/me.png"
       }
     ]
   }

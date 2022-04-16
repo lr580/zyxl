@@ -5,10 +5,10 @@
 
 </view>
 
-
-<view class="cu-bar bg-white">
+<van-transition name="slide-down">
+  <view class="cu-bar bg-white">
   <view class="action sub-title">
-    <text class="text-xl text-bold text-cyan">类别</text>
+    <text class="text-xxl text-bold text-cyan">类别</text>
     <text class="bg-cyan" style="width:2rem"></text>
     <!-- last-child选择器-->
   </view>
@@ -19,13 +19,16 @@
     {{types[item]}}
   </view>
 </scroll-view>
-
-
-
 <view class="cu-form-group">
   <view class="title">开启逆序排序</view>
-  <switch bindchange="sele_sortreverse" class="orange radius sm"></switch>
+  <switch bindchange="sele_sortreverse" class="orange cyan sm"></switch>
 </view>
+</van-transition>
+
+
+
+
+
 
 
 
@@ -46,8 +49,8 @@
     <view bindtap="sele_sortreverse" id="1">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
   </view>
 </view> -->
-
-<view class="big_body" wx:if="{{postlist.length}}">
+<van-transition name="slide-up">
+  <view class="big_body" wx:if="{{postlist.length}}">
   <view class="content_body" wx:for="{{postlist}}">
     <view wx:if="{{index<num_show}}" bindtap="goto_post" id="{{item[6]}}">
 
@@ -100,3 +103,5 @@
   <text>没有符合要求的帖子呀</text>
 
 </view>
+</van-transition>
+

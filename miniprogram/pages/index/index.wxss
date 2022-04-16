@@ -1,11 +1,11 @@
 /* pages/index/index.wxss */
 .video_body{
-  background-color: white;
+  background-color: #ffffff;
   width: 340rpx;
-  height: 290rpx;
+  height: 340rpx;
   margin: 10rpx;
   border-radius: 15rpx;
-
+  
 }
 
 .video_list{
@@ -21,12 +21,13 @@
 
 .video_cover_img image{
   width: 340rpx;
-  height: 200rpx;
+  height: 220rpx;
   border-top-left-radius: 15rpx;
   border-top-right-radius: 15rpx;
 }
 
 .video_tittle{
+  margin-top: 15rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
   font-weight: 400;
@@ -42,7 +43,7 @@
 .state{
   display: flex;
   align-items: center;
- margin-top: 5rpx;
+ margin-top: 10rpx;
 }
 
 .e{
@@ -65,15 +66,15 @@
 }
 
 .state image{
-  width: 20rpx;
-  height: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .f text{
   font-weight: 200;
   color: gray;
-  padding-left: 5rpx;
-  font-size: 20rpx;
+  padding-left: 15rpx;
+  font-size: 25rpx;
 }
 .e text{
   font-weight: 200;
