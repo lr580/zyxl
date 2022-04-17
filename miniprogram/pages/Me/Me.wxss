@@ -1,4 +1,23 @@
 /* miniprogram/pages/Me/Me.wxss */
+@import "/colorui/animation.wxss";
+.jz text{
+  margin-top: 20rpx;
+  font-weight: 200;
+  color: A0AEB4;
+}
+image[class*="gif-"] {
+  border-radius: 6rpx;
+  display: block;
+}
+
+.big_user_info{
+  display: flex;
+  margin-top: 20rpx;
+  margin-left: 15rpx;
+  width: 95%;
+  height: 400rpx;
+  border: 2rpx solid blueviolet;
+}
 
 .user_info {
   /* padding-top: 20rpx; */
@@ -7,10 +26,10 @@
   height: 200rpx;
   padding: 0rpx;
   margin: 40rpx;
-  background-color: #FAE6B9;
+  background-color: #0081ff;
   border-radius: 15rpx;
   /* background-color: rgba(81, 83, 83, 0.048); */
-
+  align-items: center;
 
 }
 
@@ -35,8 +54,8 @@
 }
 
 .b {
-  margin-top:40rpx;
-  width: 80%;
+
+  width: 50%;
   display: flex;    /*设置显示样式**/
   margin-left: 30rpx;
     flex-direction:column; 
@@ -52,7 +71,7 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  color: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
 }
 
 .user_motto {
@@ -61,15 +80,15 @@
   font-weight: 200;
   font-size: 25rpx;
   letter-spacing: .3rem;
-  color: rgb(145, 145, 145);
+  color: rgb(255, 255, 255);
   background-color: rgba(220, 220, 220, 0.226);
   border-radius: 8rpx;
   padding: 10rpx;
 }
 
 .user_goin {
-  width: 60rpx;
-  height: 60rpx;
+  width: 70rpx;
+  height:70rpx;
 }
 
 .have_icon {

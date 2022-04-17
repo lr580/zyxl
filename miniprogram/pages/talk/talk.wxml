@@ -2,7 +2,7 @@
 
 <view class="cu-bar bg-white">
     <view class="action sub-title">
-      <text class="text-lg text-bold text-cyan">{{ach}}预约</text>
+      <text class="text-lg text-bold text-blue">{{ach}}预约</text>
       <text class="bg-cyan"></text>
       <!-- last-child选择器-->
     </view>
@@ -11,7 +11,7 @@
 <view>
   <view class="cu-bar bg-white">
   <view class="action">
-    <text class="cuIcon-title text-cyan"></text>
+    <text class="cuIcon-title text-blue"></text>
     <text class="yuyue_text">  我的{{ach}}预约</text>
   </view>
 </view>
@@ -33,7 +33,7 @@
       <view>
         <view class="cu-bar bg-white">
   <view class="action cc">
-    <text class="cuIcon-title text-cyan"></text>
+    <text class="cuIcon-title text-blue"></text>
     <text class="yuyue_text">
       当前选择
   

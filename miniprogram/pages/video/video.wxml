@@ -9,8 +9,8 @@
   <view class="video_part">
     <view class="video_clipname center">
       <view class="a1">
-        <text class="cuIcon-right lg text-gray"></text>
-        <text>{{video_clipname}}</text>
+        <image style="width: 40rpx;height: 40rpx;" src="/img/video_title.png"/>
+        <text style="margin-left: 20rpx;">{{video_clipname}}</text>
       </view>
     </view>
     <view class="center">
@@ -29,11 +29,11 @@
     </view>
     <view class="bg-white b1">
       <view class="action d1">
-        <text class="cuIcon-titles text-cyan"></text>
+        <text class="cuIcon-titles text-blue"></text>
         <text class="text-xl text-bold c1">{{video_title}}</text>
       </view>
       <view class="liulan">
-        <image src="/img/liulan2.png"></image>
+        <image src="/img/count.png"></image>
         <text>{{video_click}}</text>
       </view>
       <view wx:if="{{logined}}">
@@ -43,7 +43,7 @@
     </view>
     <view class="bg-white b1">
       <view class="action">
-        <text class="cuIcon-title text-cyan"></text>
+        <text class="cuIcon-title text-red"></text>
         <text class="text-sm text-bold c1">{{video_type}}</text>
       </view>
     </view>
@@ -64,13 +64,13 @@
     <view wx:if="{{state==1}}">
       <view class="cu-bar">
         <view class="action sub-title">
-          <text class="text-lg text-bold text-cyan">请选择</text>
+          <text class="text-lg text-bold text-blue">请选择</text>
           <text class="bg-cyan"></text>
           <!-- last-child选择器-->
         </view>
       </view>
-      <view class="center" wx:for="{{avail_choice_name}}">
-        <view class="video_option" bindtap="goto_clip" id="{{avail_choice_id[index]}}">{{item}}</view>
+      <view  class="center" wx:for="{{avail_choice_name}}">
+        <view style="background-color: #d2f1f0;" class="video_option" bindtap="goto_clip" id="{{avail_choice_id[index]}}">{{item}}</view>
       </view>
     </view>
     <view class="center" wx:if="{{state==3}}">
@@ -80,7 +80,7 @@
   <view class="big_body">
     <view class="cu-bar">
       <view class="action sub-title">
-        <text class="text-lg text-bold text-cyan">已存档</text>
+        <text class="text-lg text-bold text-blue">已存档</text>
         <text class="bg-cyan"></text>
         <!-- last-child选择器-->
       </view>

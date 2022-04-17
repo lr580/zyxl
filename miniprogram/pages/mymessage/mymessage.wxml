@@ -1,7 +1,7 @@
 <!--pages/mymessage/mymessage.wxml-->
 <view class="cu-bar bg-white">
   <view class="action sub-title">
-    <text class="text-lg text-bold text-cyan">我的消息</text>
+    <text class="text-lg text-bold text-blue">我的消息</text>
     <text class="bg-cyan"></text>
     <!-- last-child选择器-->
   </view>
@@ -9,7 +9,7 @@
 
 
 <scroll-view scroll-x class="bg-white nav text-center">
-  <view class="cu-item {{index==TabCur?'text-cyan cur':''}}" wx:for="{{show_type}}" wx:key bindtap="tabSelect"
+  <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{show_type}}" wx:key bindtap="tabSelect"
     data-id="{{index}}">
     {{show_type[index]}}
   </view>

@@ -115,9 +115,9 @@
 }
 
 .collect_img{
-  margin-left: 50rpx;
+  margin-left: 30rpx;
   height: 40rpx;
-  width: 40rpx;
+  width: 55rpx;
 }
 
 .liulan{

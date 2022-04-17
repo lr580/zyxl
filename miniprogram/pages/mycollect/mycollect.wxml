@@ -1,14 +1,14 @@
 <!--注意：当前mycollect.wxml与myhistory.wxml完全一致-->
 <view class="cu-bar bg-white">
     <view class="action sub-title">
-      <text class="text-lg text-bold text-cyan">{{keych}}列表</text>
+      <text class="text-lg text-bold text-blue">{{keych}}列表</text>
       <text class="bg-cyan"></text>
       <!-- last-child选择器-->
     </view>
   </view>
 
   <scroll-view scroll-x class="bg-white nav text-center">
-  <view class="cu-item {{index==TabCur?'text-cyan cur':''}}" wx:for="{{collect_type}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+  <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{collect_type}}" wx:key bindtap="tabSelect" data-id="{{index}}">
    {{collect_type[index]}}
   </view>
 </scroll-view>

@@ -9,7 +9,7 @@
 .b{
   font-size: 45rpx;
   font-weight: 800;
-  color: rgba(255, 0, 0, 0.541);
+  color: #0081ff;
   width: 50rpx;
 }
 

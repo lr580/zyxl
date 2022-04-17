@@ -2,7 +2,7 @@
 <view>
   <view class="cu-bar bg-white">
     <view class="action sub-title">
-      <text class="text-xxl text-bold text-cyan">我的信息</text>
+      <text class="text-xxl text-bold text-blue">我的信息</text>
       <text class="bg-cyan" style="width:2rem"></text>
       <!-- last-child选择器-->
     </view>
@@ -11,7 +11,7 @@
   <view class="user_info_edit">
     <view class="cu-bar  pleft bg-white">
       <view class="action">
-        <text class="cuIcon-titles text-cyan"></text>
+        <text class="cuIcon-titles text-blue"></text>
         <text class="text-lg text-bold">头像</text>
       </view>
     </view>
@@ -32,7 +32,7 @@
 <view class="cu-form-group margin-top b1">
   <view class="cu-bar bg-white">
     <view class="action">
-      <text class="cuIcon-titles text-cyan"></text>
+      <text class="cuIcon-titles text-blue"></text>
       <text class="text-lg text-bold">昵称</text>
     </view>
   </view>
@@ -42,7 +42,7 @@
 <view class="cu-form-group margin-top">
   <view class="cu-bar bg-white">
     <view class="action">
-      <text class="cuIcon-titles text-cyan"></text>
+      <text class="cuIcon-titles text-blue"></text>
       <text class="text-lg text-bold">箴言</text>
     </view>
   </view>
