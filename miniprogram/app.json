@@ -25,9 +25,9 @@
   "window": {
     "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#0081ff",
     "navigationBarTitleText": "知音心流",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
@@ -49,7 +49,12 @@
         "iconPath": "./img/Theatera.png",
         "selectedIconPath": "./img/theater.png"
       },
-    
+      {
+        "pagePath": "pages/TreeHole/TreeHole",
+        "text": "树洞",
+        "iconPath": "./img/Th!.png",
+        "selectedIconPath": "./img/Th.png"
+      },
       {
         "pagePath": "pages/Me/Me",
         "text": "我",

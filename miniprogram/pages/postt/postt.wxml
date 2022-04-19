@@ -38,7 +38,7 @@
 
 <view class="cu-form-group">
   <view class="title">开启逆序排序</view>
-  <switch bindchange="sele_rev" class="orange radius sm"></switch>
+  <switch bindchange="sele_rev" class="red radius sm"></switch>
 </view>
 
 <!-- <view>

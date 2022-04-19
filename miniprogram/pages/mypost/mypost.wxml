@@ -1,6 +1,6 @@
 <view class="cu-bar bg-white">
   <view class="action sub-title">
-    <text class="text-lg text-bold text-cyan">我的树洞</text>
+    <text class="text-lg text-bold text-blue">我的树洞</text>
     <text class="bg-cyan"></text>
     <!-- last-child选择器-->
   </view>

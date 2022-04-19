@@ -117,7 +117,7 @@
 .collect_img{
   margin-left: 30rpx;
   height: 40rpx;
-  width: 55rpx;
+  width: 40rpx;
 }
 
 .liulan{

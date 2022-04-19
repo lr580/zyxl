@@ -18,37 +18,41 @@ Page({
     swiperList: [{
       id: 0,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb1.jpg?sign=6b6bc03bc7265fa4c471bd606c6709e6&t=1650382442'
     }, {
       id: 1,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb2.jpg?sign=aac8eb8c5585dd2b3edce5bcd04d090b&t=1650382454',
     }, {
       id: 2,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb3.jpg?sign=964e656b7a9445c102b628bc43522729&t=1650382464'
     }, {
       id: 3,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb4.jpg?sign=7f6857dea76e2a71cc01d261fa94e671&t=1650382473'
     }, {
       id: 4,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb5.jpg?sign=7882b8ca44bc3261b2f8bf822bdbe4f9&t=1650382493'
     }, {
       id: 5,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb6.jpg?sign=6d23e712b662e34b6cc2a2c3b26a0475&t=1650382502'
     }, {
       id: 6,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+      url: 'https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/hb_cover/hb7.jpg?sign=b1a9b0c304b65a7aa89545fc517d9ace&t=1650382509'
     }],
   },
 
   onLoad: function (options) {
     // console.log("!");
     this.update_index();
+    this.setData({
+      DotStyle: true
+      
+    })
   },
 
   update_index: function () {

@@ -3,7 +3,7 @@
 <view wx:if="{{isreplypost}}">
   <view class="cu-bar bg-white">
     <view class="action">
-      <text class="cuIcon-title text-cyan"></text>
+      <text class="cuIcon-title text-blue"></text>
       <text class="text-xl text-bold">回复：{{ftitle}}</text>
     </view>
   </view>
@@ -11,7 +11,7 @@
 <view wx:if="{{isreplyreply}}">
   <view class="cu-bar bg-white">
     <view class="action">
-      <text class="cuIcon-title text-cyan"></text>
+      <text class="cuIcon-title text-blue"></text>
       <text class="text-xl text-bold">回复：{{rep_floor}}楼 {{rep_name}}</text>
     </view>
   </view>
@@ -24,7 +24,7 @@
   <view class="cu-form-group">
 		<view class="title">主题</view>
 		<input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input>
-		<text class="cuIcon-playfill lg text-cyan"></text>
+		<text class="cuIcon-playfill lg text-blue"></text>
 	</view>
   <!-- <input type="text" placeholder="请输入主题名字" maxlength="20" bindinput="scanf_title" value="{{s_title}}"></input> -->
   <view class="cu-form-group align-start">
@@ -73,5 +73,5 @@
   </view>
 </view>
 <view class="padding flex flex-direction">
-  <button bindtap="save_all" class="cu-btn bg-cyan lg text-xsl">保存</button>
+  <button bindtap="save_all" class="cu-btn bg-blue lg text-xsl">保存</button>
 </view>

@@ -65,7 +65,7 @@
     text="消息"
   />
   <van-grid-item  wx:if="{{userinfo}}" 
-    icon="/img/shoucang.png"
+    icon="/img/collect!.png"
     link-type="navigateTo"
     url="../mycollect/mycollect"
     text="收藏"
@@ -76,12 +76,12 @@
     url="../myhistory/myhistory"
     text="历史"
   />
-  <!-- <van-grid-item wx:if="{{userinfo}}" 
-    icon="/img/shudong.png"
+  <van-grid-item wx:if="{{userinfo}}" 
+    icon="/img/Th.png"
     link-type="navigateTo"
     url="../mypost/mypost"
     text="树洞"
-  /> -->
+  />
   <van-grid-item
     icon="/img/help.png"
     link-type="navigateTo"

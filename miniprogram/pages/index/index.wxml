@@ -1,5 +1,8 @@
 <!--pages/index/index.wxml-->
 <van-transition name="slide-left">
+
+
+
 <view style="display: flex;flex-direction: row;align-items: center;">
 <view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
   <view class="action sub-title">
@@ -64,6 +67,14 @@
 </swiper> -->
 
 
+<view style="margin-top: 40rpx;"></view>
+
+<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{swiperList}}" wx:key>
+    <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+    <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+  </swiper-item>
+</swiper>
 
 
 
