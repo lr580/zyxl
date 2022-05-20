@@ -15,7 +15,7 @@
 
 <view class="big_body" wx:if="{{goods.length}}">
   <view class="goods_show" wx:for="{{goods}}">
-    <image class="goods_img" src="{{item[5]}}"></image>
+    <image mode="widthFix" class="goods_img" src="{{item[5]}}"></image>
     <view class="e">
       <view class="goods_name">{{item[3]}}</view>
       <view class="goods_intro">{{item[4]}}</view>
