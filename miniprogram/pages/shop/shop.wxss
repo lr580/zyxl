@@ -31,7 +31,7 @@
 
 .goods_img{
   width: 600rpx;
-  height: 600rpx;
+  /* height: 600rpx; */
   border-top-right-radius: 20rpx;
   border-top-left-radius: 25rpx;
 }

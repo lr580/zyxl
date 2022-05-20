@@ -35,6 +35,7 @@ Page({
         my_num.push(0);
       }
     }
+    console.log(km.globalData.info_goods)
     this.setData({
       goods: km.globalData.info_goods,
       my_money: km.globalData.info_user.point,
