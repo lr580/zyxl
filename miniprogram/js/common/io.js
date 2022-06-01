@@ -175,6 +175,14 @@ export function helpGoto(handler, url, param = {}, funcName = '', full = false) 
     };
 }
 
+export function helpGoback(handler) {
+    handler.goback = function () {
+        wx.navigateBack({
+            delta: 0,
+        });
+    };
+}
+
 export function setData(handler, ...param) {
     let wrap = {};
     let idx = 0;

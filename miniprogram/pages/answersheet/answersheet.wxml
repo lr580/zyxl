@@ -1,2 +1,51 @@
-<!--pages/answersheet/answersheet.wxml-->
-<text>pages/answersheet/answersheet.wxml</text>
+<view wx:if="{{nowIndex<problems.length}}">
+    <view wx:for="{{problems}}">
+        <view wx:if="{{index==nowIndex}}">
+            <view>{{nowIndex+1}}.{{item[0]}}</view>
+            <view wx:if="{{1==item[1]}}" wx:for-index="i">
+                (判断)
+                <radio-group bindchange="input_answer">
+                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                        <view>{{j}}</view>
+                    </radio>
+                </radio-group>
+            </view>
+            <view wx:elif="{{2==item[1]}}">
+                (单选)
+                <radio-group bindchange="input_answer">
+                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                        <view>{{j}}</view>
+                    </radio>
+                </radio-group>
+            </view>
+            <view wx:elif="{{3==item[1]}}">
+                (多选)
+                <checkbox-group bindchange="input_answer">
+                    <checkbox wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                        <view>{{j}}</view>
+                    </checkbox>
+                </checkbox-group>
+            </view>
+            <button bindtap="submit">提交</button>
+            <view>{{nowIndex+1}} / {{problems.length}}</view>
+
+        </view>
+    </view>
+    <view>下面是折叠的，请你设计默认折叠，点击再展开</view>
+    <view wx:for="{{problems}}">
+        <view>
+            第{{index+1}}题：
+            <text wx:if="{{!nowAnswers[index]}}">
+                <text wx:if="{{nowIndex==index}}">在做本题</text>
+                <text wx:else>未做</text>
+            </text>
+            <text wx:elif="{{nowAnswers[index]==item[3]}}">正确</text>
+            <text wx:else>错误</text>
+        </view>
+    </view>
+</view>
+<view wx:else>
+    <view>你已完成全部题目！</view>
+    <view>共有{{problems.length}}题，你答对了{{ac}}题！</view>
+    <button bindtap="goback">返回</button>
+</view>

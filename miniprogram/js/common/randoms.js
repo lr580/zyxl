@@ -26,3 +26,28 @@ export function choice(arr) {
 export function randint(a, b) { //[a,b]
     return Math.floor(Math.random() * (b - a + 1)) + a;
 }
+
+Array.prototype.shuffle = function () {
+    var array = this;
+    var m = array.length,
+        t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    return array;
+}
+
+export function shuffle(array) {
+    var m = array.length,
+        t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    return array;
+}

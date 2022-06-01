@@ -10,7 +10,7 @@
 
 ##### obj
 
-Object 功能拓展。[深复制参考](https://blog.csdn.net/weixin_46074961/article/details/122412958)
+Object 功能拓展。[对象深复制参考](https://blog.csdn.net/weixin_46074961/article/details/122412958) [数组深复制](https://blog.csdn.net/weixin_46074961/article/details/122415014)
 
 - `clone(obj)` 返回深复制结果。
 
@@ -94,6 +94,8 @@ Object 功能拓展。[深复制参考](https://blog.csdn.net/weixin_46074961/ar
 
   为 page 绑定一个 `funcName` 函数，调用跳转到名为 `url` 的页面，参数列表为 `param`。若 `funcName` 缺省，`funcName='goto_'+url`，若非 `full`，令 `url` 为 `/pages/url/url`。
 
+- `helpGoback(handler)` 绑定一个 `goback` 函数，点击返回上一个页面。
+
 - `setData(handler, ...param)` 调用 page 的 `setData`，以 `param` 奇数为 key，偶数为 value。
 
   `setDatas(handler, param)` 简写式(格式同原有)。
@@ -115,6 +117,7 @@ Object 功能拓展。[深复制参考](https://blog.csdn.net/weixin_46074961/ar
 - `name(sex = 0, len = 0)`，生成随机名字，若 `sex=0` 性别随机， `1` 男， `2` 女。字库来源自分析[该网站](https://www.qqxiuzi.cn/zh/xingming/)，名长，若 `len=0` 则 0.3 概率得到 1，0.7 得到 2；姓名长=单姓长+名长
 - `choice(arr)` 从数组随机取出一个元素
 - `randint(a, b)` 获取区间 \[a,b\] 内随机整数
+- `Array.shuffle` / `shuffle(array)` 重载打乱 [参考](https://blog.csdn.net/Slueia/article/details/110470328)
 
 
 

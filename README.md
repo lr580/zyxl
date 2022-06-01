@@ -77,6 +77,12 @@ num_newmessage: 0,
 info_goods: [],
 ```
 
+所有题目：
+
+```js
+problems: [],
+```
+
 
 
 > 当num_post或num_user过多时，未来版本可能会撤销info_post和info_user以降低用户流量消耗(但是代价是每点一个东西都要加载半天，因为缺乏了预加载)
@@ -106,6 +112,9 @@ info_goods: [],
 3. recommend array(string) 推荐的互动视频下标
 4. placard array(string) 海报图片(相对路径)
 5. goods array(array) 商品信息(见下文描述)
+5. problems array(object) 所有题目信息
+
+> 因为本来代码屎山的回调地狱太难改了，所以不想再加并发了，直接这么做吧，不管单个记录大小爆表问题了，反正……开摆
 
 ### 云存储
 
@@ -357,13 +366,17 @@ graph TD
 
 problem
 
-1. \_id number 主键 时间戳，默认排序用
+1. \_id number 主键 时间戳，默认排序用 (因为设计成了数组，所以未使用)
 2. num\_video number 对应的视频 ID
 3. type number 题型 1判断，2单选，3多选
 4. answers number 答案的二进制状态压缩表示(低位是下标小的选项)
 5. desc string 题干描述
 6. selections array(string) 选项描述
 7. solution string 题解
+
+在数组里的排序：`[题干,题型,视频ID,答案,题解,[选项]]`
+
+
 
 
 

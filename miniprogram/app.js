@@ -82,6 +82,7 @@ App({
             num_user: 0,
             num_newmessage: 0,
             info_goods: [],
+            problems:[],
             // cover_loaded: false,
         }
     },
@@ -204,6 +205,7 @@ App({
             km.globalData.num_post = res.data.num_post;
             km.globalData.num_user = res.data.num_user;
             km.globalData.info_goods = res.data.goods;
+            km.globalData.problems = res.data.problems;
             let arr_pla = [];
             for (let i = 0; i < res.data.placard.length; ++i) {
                 arr_pla.push(km.globalData.cloudpath + '/placard/' + res.data.placard[i]);

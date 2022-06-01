@@ -1,5 +1,6 @@
 // pages/answersheet/answersheet.js
 import * as io from '../../js/common/io'
+import * as problem from '../../js/base/problemCtrl'
 Page({
 
     /**
@@ -12,9 +13,23 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+    /*options:
+    若有vty,为多少代表当前是视频做题，无就是题库或对战
+
+    */
     onLoad(options) {
-        io.out(options);
+        // io.out(options);
+        // io.out(getApp().globalData.problems);
+        problem.fitOptions(this, options);
+        io.out(this.data);
+        io.helpInput(this, 'answer');
+        problem.bindNextProblem(this);
+        io.helpGoback(this);
     },
+
+    // submit() {
+    //     io.out(this.data);
+    // },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

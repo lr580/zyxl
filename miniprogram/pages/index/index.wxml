@@ -1,4 +1,6 @@
 <!--pages/index/index.wxml-->
+<button bindtap="goto_answersheet">点我调试</button>
+
 <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
     <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
         <view class="swiper-item">
@@ -8,12 +10,12 @@
 </swiper>
 <van-transition name="slide-left">
     <!-- <view style="display: flex;flex-direction: row;align-items: center;">-->
-        <!-- <view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
+    <!-- <view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
             <view class="action sub-title">
                 <text class="text-xxl text-bold text-blue">特色功能</text>
                 <text class="text-ABC text-cyan">function</text> -->
-                <!-- last-child选择器-->
-            <!-- </view>
+    <!-- last-child选择器-->
+    <!-- </view>
         </view>
         <image style="width: 250rpx;height: 250rpx;margin-left: 150rpx;" src="https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/backgroundPhoto/star.gif?sign=e26fd9e0b0f5820080c8883eccc1aa5c&t=1650190043"></image>
     </view>  -->
