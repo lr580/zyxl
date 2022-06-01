@@ -1,7 +1,7 @@
 {
-  "usingComponents": {
-    "van-transition": "@vant/weapp/transition/index"
-  },
-  "onReachBottomDistance": 100
+    "usingComponents": {
+        "van-transition": "@vant/weapp/transition/index"
+    },
+    "onReachBottomDistance": 100
 
 }

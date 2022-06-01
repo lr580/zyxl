@@ -351,6 +351,22 @@ graph TD
 
 
 
+## 做题板块
+
+#### 题目对象
+
+problem
+
+1. \_id number 主键 时间戳，默认排序用
+2. num\_video number 对应的视频 ID
+3. type number 题型 1判断，2单选，3多选
+4. answers number 答案的二进制状态压缩表示(低位是下标小的选项)
+5. desc string 题干描述
+6. selections array(string) 选项描述
+7. solution string 题解
+
+
+
 ## 用户板块
 
 ### 整体结构
@@ -373,6 +389,7 @@ graph TD
 14. post array(string) 发表的帖子
 15. message array([Boolean, string, string]) 是否未读，回帖人，被回帖子
 16. avatar 头像url(完整地址)
+16. answers array([number, number]) 作答题库的题(题号和选的答案)
 
 
 

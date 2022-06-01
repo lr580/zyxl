@@ -1,102 +1,72 @@
 <!--miniprogram/pages/Me/Me.wxml-->
 <van-transition name="slide-right">
 
-<view wx:if="{{!userinfo}}">
-  <view class="cu-bar bg-white">
-    <view class="action sub-title">
-      <text class="text-xxl text-bold text-blue">登录</text>
-      <text class="bg-cyan" style="width:2rem"></text>
-      <!-- last-child选择器-->
+    <view wx:if="{{!userinfo}}">
+        <view class="cu-bar bg-white">
+            <view class="action sub-title">
+                <text class="text-xxl text-bold text-blue">登录</text>
+                <text class="bg-cyan" style="width:2rem"></text>
+                <!-- last-child选择器-->
+            </view>
+        </view>
+
+
+        <view class="padding-xl">
+            <button bindtap="register" class="cu-btn block line-blue lg">
+                <text class="cuIcon-upload"></text> 授权登录</button>
+        </view>
+
+        <view class="flex-sub text-center">
+            <view class="solid-bottom text-xls padding">
+                <text class="text-grey text-xls">登录以进入知音心流</text>
+            </view>
+        </view>
+
     </view>
-  </view>
+    <view wx:else>
+        <view class="cu-bar bg-white">
+            <view class="action sub-title">
+                <text class="text-xxl text-bold text-blue">我的</text>
+                <text class="bg-cyan" style="width:2rem"></text>
+                <!-- last-child选择器-->
+            </view>
+        </view>
+
+        <view class="user_info shadow bg-blue">
 
 
-  <view class="padding-xl">
-    <button bindtap="register" class="cu-btn block line-blue lg">
-      <text class="cuIcon-upload"></text> 授权登录</button>
-  </view>
+            <view class="a">
+                <image class="user_avater" src="{{userinfo.avatar}}"></image>
+            </view>
+            <view class="b">
+                <text class="user_name">{{userinfo.name}}</text>
+                <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
+            </view>
+            <view class="c">
 
-  <view class="flex-sub text-center">
-    <view class="solid-bottom text-xls padding">
-      <text class="text-grey text-xls">登录以进入知音心流</text>
-    </view>
-  </view>
+                <image bindtap="goto_myinfo" class="user_goin" src="/img/change_info.png"></image>
+            </view>
 
-</view>
-<view wx:else>
-  <view class="cu-bar bg-white">
-  <view class="action sub-title">
-    <text class="text-xxl text-bold text-blue">我的</text>
-    <text class="bg-cyan" style="width:2rem"></text>
-    <!-- last-child选择器-->
-  </view>
-</view>
+        </view>
 
-  <view class="user_info shadow bg-blue">
-
-
-    <view class="a">
-      <image class="user_avater" src="{{userinfo.avatar}}"></image>
-    </view>
-      <view class="b"> 
-        <text class="user_name">{{userinfo.name}}</text>
-        <text class="user_motto">{{userinfo.motto?userinfo.motto:'您未设置个性签名。'}}</text>
-      </view>
-    <view class="c">
-    
-      <image bindtap="goto_myinfo"  class="user_goin" src="/img/change_info.png"></image>
-    </view>
-
-  </view>
-
-  <!-- <view class="fengexian"></view>
+        <!-- <view class="fengexian"></view>
   <view bindtap="del_user">点我永久删除账户(调试阶段使用，正式版本删除)</view> -->
-</view>
-<!-- 
+    </view>
+    <!-- 
 <view>调试用：新消息数目{{num_newmessage}}</view> -->
-<!-- <van-divider style="padding-left: 60rpx;padding-right: 60rpx;"/> -->
+    <!-- <van-divider style="padding-left: 60rpx;padding-right: 60rpx;"/> -->
 
-<van-divider contentPosition="left">功能</van-divider>
-<van-grid icon-size="30px" clickable column-num="3">
-  <van-grid-item wx:if="{{userinfo}}" style="border-radius: 30rpx;"
-    icon="/img/xiaoxi.png"
-    link-type="navigateTo"
-    url="../mymessage/mymessage"
-    text="消息"
-  />
-  <van-grid-item  wx:if="{{userinfo}}" 
-    icon="/img/collect!.png"
-    link-type="navigateTo"
-    url="../mycollect/mycollect"
-    text="收藏"
-  />
-  <van-grid-item wx:if="{{userinfo}}" 
-    icon="/img/liulan.png"
-    link-type="navigateTo"
-    url="../myhistory/myhistory"
-    text="历史"
-  />
-  <van-grid-item wx:if="{{userinfo}}" 
-    icon="/img/Th.png"
-    link-type="navigateTo"
-    url="../mypost/mypost"
-    text="树洞"
-  />
-  <van-grid-item
-    icon="/img/help.png"
-    link-type="navigateTo"
-    url="../help/help"
-    text="帮助"
-  />
-  <van-grid-item 
-    icon="/img/fankui.png"
-    link-type="navigateTo"
-    url=""
-    text="反馈"
-  />
-</van-grid>
+    <van-divider contentPosition="left">功能</van-divider>
+    <van-grid icon-size="30px" clickable column-num="3">
+        <!-- <van-grid-item wx:if="{{userinfo}}" style="border-radius: 30rpx;" icon="/img/xiaoxi.png" link-type="navigateTo" url="../mymessage/mymessage" text="消息" /> -->
+        <van-grid-item wx:if="{{userinfo}}" icon="/img/collect!.png" link-type="navigateTo" url="../mycollect/mycollect" text="收藏" />
+        <van-grid-item wx:if="{{userinfo}}" icon="/img/liulan.png" link-type="navigateTo" url="../myhistory/myhistory" text="历史" />
+        <!-- <van-grid-item wx:if="{{userinfo}}" icon="/img/Th.png" link-type="navigateTo" url="../mypost/mypost" text="树洞" /> -->
+        <van-grid-item icon="/img/help.png" link-type="navigateTo" url="../help/help" text="帮助" />
+        <van-grid-item icon="/img/fankui.png" link-type="navigateTo" url="" text="反馈" />
+    </van-grid>
 
-<!-- <view style="margin-top:2rpx;">
+    <!-- <view style="margin-top:2rpx;">
   <view class="cu-list menu">
     <view bindtap="goto_mymessage" wx:if="{{userinfo}}" class="cu-item arrow">
       <view class="content">
@@ -146,13 +116,13 @@
     </view>
   </view>
 </view> -->
-<view class="jz" style="height: 200rpx;padding: 40rpx;display: flex;flex-direction: column;">
-<text>人的生命</text>
-<text>似洪水奔流</text>
-<text>不遇着岛屿和暗礁</text>
-<text>难以激起美丽的浪花</text>
-</view>
-<view style="margin-top: 150rpx;" class="margin radius bg-blue shadow-blur">
-  <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-black response" style="height:100rpx"></image>
-</view>
+    <view class="jz" style="height: 200rpx;padding: 40rpx;display: flex;flex-direction: column;">
+        <text>人的生命</text>
+        <text>似洪水奔流</text>
+        <text>不遇着岛屿和暗礁</text>
+        <text>难以激起美丽的浪花</text>
+    </view>
+    <view style="margin-top: 150rpx;" class="margin radius bg-blue shadow-blur">
+        <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-black response" style="height:100rpx"></image>
+    </view>
 </van-transition>

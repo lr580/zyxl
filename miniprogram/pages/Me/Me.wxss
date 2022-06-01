@@ -1,107 +1,110 @@
 /* miniprogram/pages/Me/Me.wxss */
 @import "/colorui/animation.wxss";
-.jz text{
-  margin-top: 20rpx;
-  font-weight: 200;
-  color: A0AEB4;
-}
-image[class*="gif-"] {
-  border-radius: 6rpx;
-  display: block;
+
+.jz text {
+    margin-top: 20rpx;
+    font-weight: 200;
+    color: A0AEB4;
 }
 
-.big_user_info{
-  display: flex;
-  margin-top: 20rpx;
-  margin-left: 15rpx;
-  width: 95%;
-  height: 400rpx;
-  border: 2rpx solid blueviolet;
+image[class*="gif-"] {
+    border-radius: 6rpx;
+    display: block;
+}
+
+.big_user_info {
+    display: flex;
+    margin-top: 20rpx;
+    margin-left: 15rpx;
+    width: 95%;
+    height: 400rpx;
+    border: 2rpx solid blueviolet;
 }
 
 .user_info {
-  /* padding-top: 20rpx; */
-  display: flex;
-  width: 90%;
-  height: 200rpx;
-  padding: 0rpx;
-  margin: 40rpx;
-  background-color: #0081ff;
-  border-radius: 15rpx;
-  /* background-color: rgba(81, 83, 83, 0.048); */
-  align-items: center;
+    /* padding-top: 20rpx; */
+    display: flex;
+    width: 90%;
+    height: 200rpx;
+    padding: 0rpx;
+    margin: 40rpx;
+    background-color: #0081ff;
+    border-radius: 15rpx;
+    /* background-color: rgba(81, 83, 83, 0.048); */
+    align-items: center;
 
 }
 
 .user_avater {
-  width: 130rpx;
-  height: 130rpx;
-  /* margin-left: 30rpx; */
-  border-radius: 6%;
-  margin-top: 15rpx;
+    width: 130rpx;
+    height: 130rpx;
+    /* margin-left: 30rpx; */
+    border-radius: 6%;
+    margin-top: 15rpx;
 }
 
 
 
 .a {
-  display: flex;
-  flex-direction: row;
-  width: 20%;
-  /* justify-content: center; */
-  margin-top: 20rpx;
-  margin-bottom: 30rpx;
-  margin-left: 60rpx;
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    /* justify-content: center; */
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+    margin-left: 60rpx;
 }
 
 .b {
 
-  width: 50%;
-  display: flex;    /*设置显示样式**/
-  margin-left: 30rpx;
-    flex-direction:column; 
+    width: 50%;
+    display: flex;
+    /*设置显示样式**/
+    margin-left: 30rpx;
+    flex-direction: column;
 }
 
 .user_name {
-  width: fit-content;
-  font-weight: 600;
-  font-size: 40rpx;
-  display: -webkit-box;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: rgb(255, 255, 255);
+    width: fit-content;
+    font-weight: 600;
+    font-size: 40rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: rgb(255, 255, 255);
 }
 
 .user_motto {
-  width: fit-content;
-  margin-top: 15rpx;
-  font-weight: 200;
-  font-size: 25rpx;
-  letter-spacing: .3rem;
-  color: rgb(255, 255, 255);
-  background-color: rgba(220, 220, 220, 0.226);
-  border-radius: 8rpx;
-  padding: 10rpx;
+    width: fit-content;
+    margin-top: 15rpx;
+    font-weight: 200;
+    font-size: 25rpx;
+    letter-spacing: .3rem;
+    color: rgb(255, 255, 255);
+    background-color: rgba(220, 220, 220, 0.226);
+    border-radius: 8rpx;
+    padding: 10rpx;
 }
 
 .user_goin {
-  width: 70rpx;
-  height:70rpx;
+    width: 70rpx;
+    height: 70rpx;
 }
 
 .have_icon {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .pleft {
-  padding-left: 10rpx;
+    padding-left: 10rpx;
 }
 
 .fengexian {
-  margin: 40rpx;
-  height: 2rpx;
-  border: 1rpx rgba(128, 128, 128, 0.349) solid;
+    margin: 40rpx;
+    height: 2rpx;
+    border: 1rpx rgba(128, 128, 128, 0.349) solid;
 }

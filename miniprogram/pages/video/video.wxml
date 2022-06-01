@@ -6,89 +6,89 @@
 <!--放title就会报错……不放了，理由未知 报错的使用示例：title="这是全屏才能看到的标题ovo"  -->
 <!--由于视频结束时会自动展示封面，会遮挡本来的最后一帧，所以不添加视频封面-->
 <view>
-  <view class="video_part">
-    <view class="video_clipname center">
-      <view class="a1">
-        <image style="width: 40rpx;height: 40rpx;" src="/img/video_title.png"/>
-        <text style="margin-left: 20rpx;">{{video_clipname}}</text>
-      </view>
+    <view class="video_part">
+        <view class="video_clipname center">
+            <view class="a1">
+                <image style="width: 40rpx;height: 40rpx;" src="/img/video_title.png" />
+                <text style="margin-left: 20rpx;">{{video_clipname}}</text>
+            </view>
+        </view>
+        <view class="center">
+            <video class="video_body" src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay enable-progress-gesture bindended="show_choice" bindplay="hide_choice" binderror="video_error"></video>
+        </view>
     </view>
-    <view class="center">
-      <video class="video_body" src="{{video_src}}" enable-auto-rotation enable-play-gesture autoplay
-        enable-progress-gesture bindended="show_choice" bindplay="hide_choice" binderror="video_error"></video>
-    </view>
-  </view>
 
-  <view class="center1">
-    <view class="up_user">
-      <view>
-        <image class="up_avater" src="{{video_upavatar}}"></image>
-      </view>
-      <view class="up_name">{{video_upname}}</view>
-      <view class="video_time">{{video_time}}</view>
-    </view>
-    <view class="bg-white b1">
-      <view class="action d1">
-        <text class="cuIcon-titles text-blue"></text>
-        <text class="text-xl text-bold c1">{{video_title}}</text>
-      </view>
-      <view class="liulan">
-        <image src="/img/count.png"></image>
-        <text>{{video_click}}</text>
-      </view>
-      <view wx:if="{{logined}}">
-        <image bindtap="star_video" wx:if="{{!starred}}" class="collect_img" src="/img/collect.png"></image>
-        <image bindtap="unstar_video" wx:else class="collect_img" src="/img/collect!.png"></image>
-      </view>
-    </view>
-    <view class="bg-white b1">
-      <view class="action">
-        <text class="cuIcon-title text-red"></text>
-        <text class="text-sm text-bold c1">{{video_type}}</text>
-      </view>
-    </view>
-    <!-- <view class="icon_and_text">
+    <view class="center1">
+        <view class="up_user">
+            <view>
+                <image class="up_avater" src="{{video_upavatar}}"></image>
+            </view>
+            <view class="up_name">{{video_upname}}</view>
+            <view class="video_time">{{video_time}}</view>
+        </view>
+        <view class="bg-white b1">
+            <view class="action d1">
+                <text class="cuIcon-titles text-blue"></text>
+                <text class="text-xl text-bold c1">{{video_title}}</text>
+            </view>
+            <view class="liulan">
+                <image src="/img/count.png"></image>
+                <text>{{video_click}}</text>
+            </view>
+            <view wx:if="{{logined}}">
+                <image bindtap="star_video" wx:if="{{!starred}}" class="collect_img" src="/img/collect.png"></image>
+                <image bindtap="unstar_video" wx:else class="collect_img" src="/img/collect!.png"></image>
+            </view>
+        </view>
+        <view class="bg-white b1">
+            <view class="action">
+                <text class="cuIcon-title text-red"></text>
+                <text class="text-sm text-bold c1">{{video_type}}</text>
+            </view>
+        </view>
+        <!-- <view class="icon_and_text">
       <image src="/img/tittle.png"></image>
       <text>{{video_title}}</text>
     </view> -->
-    <!-- <view>视频类型：{{video_type}}</view> -->
+        <!-- <view>视频类型：{{video_type}}</view> -->
 
 
 
-    <!-- <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
+        <!-- <view bindtap="star_video" wx:if="{{!starred}}">点我收藏</view>
     <view bindtap="unstar_video" wx:else>点我取消收藏</view> -->
-  </view>
-  <!-- <view>分鸽线</view> -->
+    </view>
+    <!-- <view>分鸽线</view> -->
 
-  <view class="choice_body" wx:if="{{choice_showing}}">
-    <view wx:if="{{state==1}}">
-      <view class="cu-bar">
-        <view class="action sub-title">
-          <text class="text-lg text-bold text-blue">请选择</text>
-          <text class="bg-cyan"></text>
-          <!-- last-child选择器-->
+    <view class="choice_body" wx:if="{{choice_showing}}">
+        <view wx:if="{{state==1}}">
+            <view class="cu-bar">
+                <view class="action sub-title">
+                    <text class="text-lg text-bold text-blue">请选择</text>
+                    <text class="bg-cyan"></text>
+                    <!-- last-child选择器-->
+                </view>
+            </view>
+            <view class="center" wx:for="{{avail_choice_name}}">
+                <view style="background-color: #d2f1f0;" class="video_option" bindtap="goto_clip" id="{{avail_choice_id[index]}}">{{item}}</view>
+            </view>
         </view>
-      </view>
-      <view  class="center" wx:for="{{avail_choice_name}}">
-        <view style="background-color: #d2f1f0;" class="video_option" bindtap="goto_clip" id="{{avail_choice_id[index]}}">{{item}}</view>
-      </view>
+        <view class="center" wx:if="{{state==3}}">
+            <text class="ending">您已到达结局!</text>
+            <button bindtap="goto_answersheet">点我答题</button>
+        </view>
     </view>
-    <view class="center" wx:if="{{state==3}}">
-      <text class="ending">您已到达结局!</text>
+    <view class="big_body">
+        <view class="cu-bar">
+            <view class="action sub-title">
+                <text class="text-lg text-bold text-blue">已存档</text>
+                <text class="bg-cyan"></text>
+                <!-- last-child选择器--> 
+            </view>
+        </view>
+        <view class="center" wx:for="{{saves}}">
+            <view class="video_done center" bindtap="goto_clip" id="{{item[0]}}" wx:if="{{saves.length!=1+index}}">{{item[1]}}
+            </view>
+            <!-- <view class="video_now" wx:else>(当前所在){{item[1]}}</view> -->
+        </view>
     </view>
-  </view>
-  <view class="big_body">
-    <view class="cu-bar">
-      <view class="action sub-title">
-        <text class="text-lg text-bold text-blue">已存档</text>
-        <text class="bg-cyan"></text>
-        <!-- last-child选择器-->
-      </view>
-    </view>
-    <view class="center" wx:for="{{saves}}">
-      <view class="video_done center" bindtap="goto_clip" id="{{item[0]}}" wx:if="{{saves.length!=1+index}}">{{item[1]}}
-      </view>
-      <!-- <view class="video_now" wx:else>(当前所在){{item[1]}}</view> -->
-    </view>
-  </view>
 </view>

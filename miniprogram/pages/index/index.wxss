@@ -1,181 +1,186 @@
 /* pages/index/index.wxss */
 .tower-swiper .tower-item {
-  transform: scale(calc(0.5 + var(--index) / 10));
-  margin-left: calc(var(--left) * 100rpx - 150rpx);
-  z-index: var(--index);
-}
-.video_body{
-  background-color: #ffffff;
-  width: 340rpx;
-  height: 340rpx;
-  margin: 10rpx;
-  border-radius: 15rpx;
-  
+    transform: scale(calc(0.5 + var(--index) / 10));
+    margin-left: calc(var(--left) * 100rpx - 150rpx);
+    z-index: var(--index);
 }
 
-.video_list{
-  
-  padding: 20prx;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.video_cover_img image{
-  width: 340rpx;
-  height: 220rpx;
-  border-top-left-radius: 15rpx;
-  border-top-right-radius: 15rpx;
-}
-
-.video_tittle{
-  margin-top: 15rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  font-weight: 400;
-  font-size: 30rpx;
-  display: -webkit-box;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:1;
-}
-
-.state{
-  display: flex;
-  align-items: center;
- margin-top: 10rpx;
-}
-
-.e{
-  align-items: center;
-  display: flex;
-  margin-left: 20rpx;
-}
-
-.e image{
-  border-radius: 0;
-}
-
-.f image{
-  border-radius: 0;
-}
-.f{
-  align-items: center;
-  display: flex;
-  margin-left: 30rpx;
-}
-
-.state image{
-  width: 30rpx;
-  height: 30rpx;
-}
-
-.f text{
-  font-weight: 200;
-  color: gray;
-  padding-left: 15rpx;
-  font-size: 25rpx;
-}
-.e text{
-  font-weight: 200;
-  color: gray;
-  padding-left: 5rpx;
-  font-size: 20rpx;
-}
-
-.index_fun{
-  width: 80rpx;
-  height: 80rpx;
-  margin-top: 10rpx;
-  margin-left: 40rpx;
-}
-
-.func{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  padding-top: 40rpx;
-  margin: 20rpx;
-  padding-top: 30rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
-  padding-bottom: 30rpx;
-  background-color: rgb(255, 255, 255);
-  border-radius: 30rpx;
-  margin-top: 50rpx;
-  /* box-shadow: 4px 4px 2px gainsboro; */
-}
-
-.goto_talk{
-  display: flex;
-  flex-direction: column;
+.video_body {
+    background-color: #ffffff;
+    width: 340rpx;
+    height: 340rpx;
+    margin: 10rpx;
+    border-radius: 15rpx;
 
 }
 
-.list_index{
-  display: flex;
+.video_list {
 
-  width: 85%;
-  height: 120rpx;
-  margin: 15rpx;
-  background-color: #4ecdc525;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
-  border-radius: 20rpx;
+    padding: 20prx;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.fun_txt1{
-  display: flex;
-  font-weight: 800;
-  font-size: 45rpx;
-  margin-left: 40rpx;
-  width: 350rpx;
-  letter-spacing: .3rem;
-  color: rgb(82, 79, 79);
-}
-.fun_txt2{
-  display: flex;
-  font-weight: 200;
-  font-size: 25rpx;
-  margin-left: 40rpx;
-  width: 350rpx;
-  letter-spacing: .2rem;
-  color: rgb(184, 180, 180);
+.video_cover_img image {
+    width: 340rpx;
+    height: 220rpx;
+    border-top-left-radius: 15rpx;
+    border-top-right-radius: 15rpx;
 }
 
-.fengexian{
-  margin: 50rpx;
-  padding-left: 40rpx;
-  padding-right: 40rpx;
-  border-bottom: 4rpx rgba(53, 146, 126, 0.384) solid;
+.video_tittle {
+    margin-top: 15rpx;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    font-weight: 400;
+    font-size: 30rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.state {
+    display: flex;
+    align-items: center;
+    margin-top: 10rpx;
+}
+
+.e {
+    align-items: center;
+    display: flex;
+    margin-left: 20rpx;
+}
+
+.e image {
+    border-radius: 0;
+}
+
+.f image {
+    border-radius: 0;
+}
+
+.f {
+    align-items: center;
+    display: flex;
+    margin-left: 30rpx;
+}
+
+.state image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.f text {
+    font-weight: 200;
+    color: gray;
+    padding-left: 15rpx;
+    font-size: 25rpx;
+}
+
+.e text {
+    font-weight: 200;
+    color: gray;
+    padding-left: 5rpx;
+    font-size: 20rpx;
+}
+
+.index_fun {
+    width: 80rpx;
+    height: 80rpx;
+    margin-top: 10rpx;
+    margin-left: 40rpx;
+}
+
+.func {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 40rpx;
+    margin: 20rpx;
+    padding-top: 30rpx;
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+    padding-bottom: 30rpx;
+    background-color: rgb(255, 255, 255);
+    border-radius: 30rpx;
+    margin-top: 50rpx;
+    /* box-shadow: 4px 4px 2px gainsboro; */
+}
+
+.goto_talk {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.list_index {
+    display: flex;
+
+    width: 85%;
+    height: 120rpx;
+    margin: 15rpx;
+    background-color: #4ecdc525;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+    border-radius: 20rpx;
+}
+
+.fun_txt1 {
+    display: flex;
+    font-weight: 800;
+    font-size: 45rpx;
+    margin-left: 40rpx;
+    width: 350rpx;
+    letter-spacing: .3rem;
+    color: rgb(82, 79, 79);
+}
+
+.fun_txt2 {
+    display: flex;
+    font-weight: 200;
+    font-size: 25rpx;
+    margin-left: 40rpx;
+    width: 350rpx;
+    letter-spacing: .2rem;
+    color: rgb(184, 180, 180);
+}
+
+.fengexian {
+    margin: 50rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    border-bottom: 4rpx rgba(53, 146, 126, 0.384) solid;
 }
 
 .bottom_tip {
-  margin-top: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin-top: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.aaaa{
-  margin-bottom: 40rpx;
+.aaaa {
+    margin-bottom: 40rpx;
 }
+
 .bottom_tip image {
-  width: 30rpx;
-  height: 30rpx;
+    width: 30rpx;
+    height: 30rpx;
 }
 
 .bottom_tip text {
-  margin-left: 20rpx;
-  font-size: 30rpx;
-  font-weight: 600;
-  color: gray;
+    margin-left: 20rpx;
+    font-size: 30rpx;
+    font-weight: 600;
+    color: gray;
 }

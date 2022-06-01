@@ -1,37 +1,31 @@
 <!--pages/index/index.wxml-->
 <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
-    <view class="swiper-item">
-      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-    </view>
-  </swiper-item>
+    <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+        <view class="swiper-item">
+            <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+        </view>
+    </swiper-item>
 </swiper>
 <van-transition name="slide-left">
+    <!-- <view style="display: flex;flex-direction: row;align-items: center;">-->
+        <!-- <view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
+            <view class="action sub-title">
+                <text class="text-xxl text-bold text-blue">特色功能</text>
+                <text class="text-ABC text-cyan">function</text> -->
+                <!-- last-child选择器-->
+            <!-- </view>
+        </view>
+        <image style="width: 250rpx;height: 250rpx;margin-left: 150rpx;" src="https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/backgroundPhoto/star.gif?sign=e26fd9e0b0f5820080c8883eccc1aa5c&t=1650190043"></image>
+    </view>  -->
 
+    <!-- <van-grid icon-size="35px" column-num="3" border="{{true }}">
 
+        <van-grid-item bindtap="goto_talk" icon="/img/index_talk.png" text="悄悄话预约" />
+        <van-grid-item bindtap="goto_vr" icon="/img/index_vr.png" text="vr展预约" />
+        <van-grid-item bindtap="goto_shop" icon="/img/index_shop.png" text="积分商城" />
 
-
-
-
-<view style="display: flex;flex-direction: row;align-items: center;">
-<view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
-  <view class="action sub-title">
-    <text class="text-xxl text-bold text-blue">特色功能</text>
-    <text class="text-ABC text-cyan">function</text>
-    <!-- last-child选择器-->
-  </view>
-</view>
-<image style="width: 250rpx;height: 250rpx;margin-left: 150rpx;" src="https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/backgroundPhoto/star.gif?sign=e26fd9e0b0f5820080c8883eccc1aa5c&t=1650190043"></image>
-</view>
-
-<van-grid icon-size="35px" column-num="3" border="{{true }}">
-
-    <van-grid-item bindtap="goto_talk" icon="/img/index_talk.png" text="悄悄话预约" />
-    <van-grid-item bindtap="goto_vr" icon="/img/index_vr.png" text="vr展预约" />
-    <van-grid-item bindtap="goto_shop" icon="/img/index_shop.png" text="积分商城" />
-
-</van-grid>
-<!-- <view class="func padding-xl radius shadow bg-white">
+    </van-grid> -->
+    <!-- <view class="func padding-xl radius shadow bg-white">
   <view class="list_index" bindtap="goto_talk">
     <view class="funa">
       <text class="fun_txt1">悄悄话</text>
@@ -58,16 +52,16 @@
   </view>
 </view> -->
 
-<!-- <view class="fengexian"></view> -->
+    <!-- <view class="fengexian"></view> -->
 
 
-<view class="bottom_tip" wx:if="{{!loaded&&longtimed}}">
-  <image src="/img/tip.png"></image>
-  <text>如果一直处于加载中，请尝试重启本程序</text>
+    <view class="bottom_tip" wx:if="{{!loaded&&longtimed}}">
+        <image src="/img/tip.png"></image>
+        <text>如果一直处于加载中，请尝试重启本程序</text>
 
-</view>
+    </view>
 
-<!-- <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <!-- <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
   <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
     <view class="swiper-item">
       <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
@@ -76,62 +70,53 @@
   </swiper-item>
 </swiper> -->
 
-
-
-
-
-
-<!-- <view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view> -->
-<view style="display: flex;flex-direction: row;align-items: center;">
-<view style="width: 50%;" class="cu-bar bg-white aaaa">
-  <view class="action sub-title">
-    <text class="text-xxl text-bold text-blue">视频推荐</text>
-    <text class="text-ABC text-cyan">video</text>
-    <!-- last-child选择器-->
-  </view>
-</view>
-<image style="width: 200rpx;height: 200rpx;margin-left: 150rpx;" src="https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/backgroundPhoto/video.gif?sign=ce89e60c91c9f8d440451a71790a9043&t=1650190316"></image>
-</view>
-
-
-<view>
-  <!-- em?{{arr_rec}} -->
-  <view wx:if="{{arr_rec.length}}">
-    <view class="video_list">
-      <view class="video_body shadow-warp" wx:for="{{arr_rec}}">
-        <view bindtap="goto_video" id="{{item[4]}}">
-          <view class="video_cover_img">
-            <image src="{{item[3]}}">
-
-            </image>
-            <view class="video_tittle">{{item[0]}}</view>
-            <view class="state">
-              <view class="e">
-                <image src="/img/type.png"></image>
-                <text>{{types[item[1]]}}</text>
-              </view>
-              <view class="f">
-                <image src="/img/count.png"></image>
-                <text>{{item[2]}}</text>
-
-              </view>
+    <!-- <view>如果一直处于加载中(超过10秒)，请尝试重启本程序 (T ^ T) </view> -->
+    <view style="display: flex;flex-direction: row;align-items: center;">
+        <view style="width: 50%;" class="cu-bar bg-white aaaa">
+            <view class="action sub-title">
+                <text class="text-xxl text-bold text-blue">视频推荐</text>
+                <text class="text-ABC text-cyan">video</text>
+                <!-- last-child选择器-->
             </view>
-
-
-          </view>
         </view>
-      </view>
+        <image style="width: 200rpx;height: 200rpx;margin-left: 150rpx;" src="https://636c-cloud1-5gb77mtq8dcc1698-1307133896.tcb.qcloud.la/backgroundPhoto/video.gif?sign=ce89e60c91c9f8d440451a71790a9043&t=1650190316"></image>
     </view>
-  </view>
-  <view class="bottom_tip" wx:else>
-
-    <image src="/img/tip.png"></image>
-    <text>加载中</text>
 
 
-  </view>
-</view>
-<!-- <view>
+    <view>
+        <!-- em?{{arr_rec}} -->
+        <view wx:if="{{arr_rec.length}}">
+            <view class="video_list">
+                <view class="video_body shadow-warp" wx:for="{{arr_rec}}">
+                    <view bindtap="goto_video" id="{{item[4]}}">
+                        <view class="video_cover_img">
+                            <image src="{{item[3]}}">
+                            </image>
+                            <view class="video_tittle">{{item[0]}}</view>
+                            <view class="state">
+                                <view class="e">
+                                    <image src="/img/type.png"></image>
+                                    <text>{{types[item[1]]}}</text>
+                                </view>
+                                <view class="f">
+                                    <image src="/img/count.png"></image>
+                                    <text>{{item[2]}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bottom_tip" wx:else>
+
+            <image src="/img/tip.png"></image>
+            <text>加载中</text>
+
+
+        </view>
+    </view>
+    <!-- <view>
   海报！
   <view wx:if="{{arr_pla.length}}">
     <view wx:for="{{arr_pla}}">

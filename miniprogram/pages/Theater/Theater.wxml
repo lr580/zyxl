@@ -4,35 +4,34 @@
   <view class="action sub-title">
     <text class="text-xl text-bold text-cyan">类别</text>
     <text class="bg-cyan" style="width:2rem"></text> -->
-    <!-- last-child选择器-->
-  <!-- </view>
+<!-- last-child选择器-->
+<!-- </view>
 </view> -->
-<van-transition  name="slide-down" show="true" custom-class="block">
-  <view class="cu-bar bg-white">
-  <view class="action sub-title">
-    <text class="text-xxl text-bold text-blue">视频</text>
-    <text class="bg-cyan" style="width:2rem"></text>
-    <!-- last-child选择器-->
-  </view>
-</view>
+<van-transition name="slide-down" show="true" custom-class="block">
+    <view class="cu-bar bg-white">
+        <view class="action sub-title">
+            <text class="text-xxl text-bold text-blue">视频</text>
+            <text class="bg-cyan" style="width:2rem"></text>
+            <!-- last-child选择器-->
+        </view>
+    </view>
 
-<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-  <view class="cu-item {{index==TabCur?'text-blue cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans"
-    wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
-    {{types[item]}}
-  </view>
-</scroll-view>
-<view>
-  <view class="cu-form-group">
-    <view class="title">开启逆序排序</view>
-    <switch bindchange="sele_sorttype" class="orange red sm"></switch>
-  </view>
-  <!-- 选择排序依据：(没得选，只有一个依据) -->
-  <!-- <view wx:if="{{sort_key==0}}">
+    <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view class="cu-item {{index==TabCur?'text-blue cur':''}} {{index==TabCur?'text-xl':'text-xls'}} trans" wx:for="{{type_seq}}" wx:key bindtap="click_type" id="{{item}}" data-id="{{index}}">
+            {{types[item]}}
+        </view>
+    </scroll-view>
+    <view>
+        <view class="cu-form-group">
+            <view class="title">开启逆序排序</view>
+            <switch bindchange="sele_sorttype" class="orange red sm"></switch>
+        </view>
+        <!-- 选择排序依据：(没得选，只有一个依据) -->
+        <!-- <view wx:if="{{sort_key==0}}">
     <view bindtap="sele_sorttype" id="00">{{sort_reverse?'':'(当前)'}}按时间由近到远排序</view>
     <view bindtap="sele_sorttype" id="01">{{sort_reverse?'(当前)':''}}按时间由远到近排序</view>
   </view> -->
-</view>
+    </view>
 </van-transition>
 
 
@@ -57,42 +56,41 @@
 
 <!-- <view>分割线(｀・ω・´)</view> -->
 <view class="kk"></view>
-<view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part"
-  wx:if="{{num_show}}">
-  <!--videolist.length-->
-  <view wx:for="{{videolist}}">
-    <van-transition name="slide-up">
-      <view class="video_body shadow animation-scale-up" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
-      <view style="width: 100%;height:100%;">
-        <image class="video_cover" src="{{item[3]}}"></image>
-      </view>
-      <view class="video_intro">
-        <view class="video_title">{{item[0]}}</view>
-        <view class="video_state">
-          <view class="video_type">
-            <image src="/img/type.png"></image>
-            <text>{{types[item[1]]}}</text>
-          </view>
-          <view class="video_count">
-            <image src="/img/count.png"></image>
-            <text>{{item[2]}}</text>
-          </view>
-        </view>
-      </view>
+<view bindtouchstart="touch_start" bindtouchend="touch_end" bindtouchcancel="touch_cancel" class="scroll_part" wx:if="{{num_show}}">
+    <!--videolist.length-->
+    <view wx:for="{{videolist}}">
+        <van-transition name="slide-up">
+            <view class="video_body shadow animation-scale-up" wx:if="{{num_show>index}}" bindtap="goto_video" id="{{item[5]}}">
+                <view style="width: 100%;height:100%;">
+                    <image class="video_cover" src="{{item[3]}}"></image>
+                </view>
+                <view class="video_intro">
+                    <view class="video_title">{{item[0]}}</view>
+                    <view class="video_state">
+                        <view class="video_type">
+                            <image src="/img/type.png"></image>
+                            <text>{{types[item[1]]}}</text>
+                        </view>
+                        <view class="video_count">
+                            <image src="/img/count.png"></image>
+                            <text>{{item[2]}}</text>
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+        </van-transition>
 
     </view>
-    </van-transition>
-   
-  </view>
-  <view class="bottom_tip" wx:if="{{num_show==videolist.length}}">
-    <image src="/img/tip.png"></image>
-    <text>已经到达底部啦!</text>
-  </view>
+    <view class="bottom_tip" wx:if="{{num_show==videolist.length}}">
+        <image src="/img/tip.png"></image>
+        <text>已经到达底部啦!</text>
+    </view>
 </view>
 
 
 
 <view class="bottom_tip" wx:else>
-  <image src="/img/tip.png"></image>
-  <text>暂时没有符合条件的互动视频哦~</text>
+    <image src="/img/tip.png"></image>
+    <text>暂时没有符合条件的互动视频哦~</text>
 </view>
