@@ -49,6 +49,7 @@ Page({
   onLoad: function (options) {
     // console.log("!");
     this.update_index();
+    this.towerSwiper('swiperList');
     this.setData({
       DotStyle: true
       
@@ -73,13 +74,6 @@ Page({
   },
 
 
-
-  DotStyle(e) {
-    this.setData({
-      DotStyle: e.detail.value
-    })
-  },
-
   // cardSwiper
   cardSwiper(e) {
     this.setData({
@@ -93,6 +87,7 @@ Page({
     for (let i = 0; i < list.length; i++) {
       list[i].zIndex = parseInt(list.length / 2) + 1 - Math.abs(i - parseInt(list.length / 2))
       list[i].mLeft = i - parseInt(list.length / 2)
+
     }
     this.setData({
       swiperList: list
@@ -112,6 +107,8 @@ Page({
   },
   // towerSwiper计算滚动
   towerEnd(e) {
+
+
     let direction = this.data.direction;
     let list = this.data.swiperList;
     if (direction == 'right') {
@@ -135,11 +132,19 @@ Page({
       }
       list[0].mLeft = mLeft;
       list[0].zIndex = zIndex;
+      
       this.setData({
         swiperList: list
       })
     }
   },
+
+  
+
+ 
+
+
+
 
   //初始化
   init_index: function () {
