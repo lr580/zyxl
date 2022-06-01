@@ -1,2 +1,18 @@
-<!--pages/questionbank/questionbank.wxml-->
-<text>pages/questionbank/questionbank.wxml</text>
+<button bindtap="goto_">点我双人对战</button>
+<view>默认折叠，点击展开，这个你来做吧 QwQ</view>
+<text>字数限制，超长显示省略号，你来做吧</text>
+<view wx:for="{{types}}" wx:for-index="index_type" wx:for-item="item_type">
+    <view wx:if="{{index_type < types.length - 1}}">
+        <view>{{item_type}}</view>
+        <view wx:for="{{problems}}">
+            <view wx:if="{{item[6]==index_type}}">
+                <view bindtap="goto_answersheet" data-index="{{index}}" data-type="{{index_type}}">
+                    <text>{{item[0]}}</text>
+                    <text wx:if="!{{nowAnswers[index]}}">(未曾作答)</text>
+                    <text wx:elif="{{nowAnswers[index]!=item[3]}}">(回答错误)</text>
+                    <text wx:else>(回答正确)</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

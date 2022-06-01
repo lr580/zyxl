@@ -1,22 +1,58 @@
 import * as io from '../common/io';
 import * as randoms from '../common/randoms'; //要import一下不然不会加载重载函数
+
+function history_map(history, index_map) {
+    let map = [];
+    for (let i = 0; i < history.length; ++i) {
+        map[index_map[history[i][0]]] = history[i][1];
+    }
+    return map;
+}
+
 export function fitOptions(handler, options) {
     // io.out(options);
     let problems = getApp().globalData.problems;
-    let filted = []
-    if (options.vid) {
-        for (let i = 0; i < problems.length; ++i) {
-            if (problems[i][2] == Number(options.vid)) {
-                filted.push(JSON.parse(JSON.stringify(problems[i]))); //数组深复制
-            }
+    let videos = getApp().globalData.info_video;
+    let history = getApp().globalData.info_user.answers;
+    // io.out(history);
+
+    // io.out(videos);
+    let filted = [];
+    let index_map = []; //题库index对应到页面index
+    let index_cnt = 0;
+    for (let i = 0; i < problems.length; ++i) {
+        if (options.vid && problems[i][2] != Number(options.vid)) {
+            continue;
         }
+        if (options.type && videos[problems[i][2]].type != Number(options.type)) {
+            continue;
+        }
+        filted.push(JSON.parse(JSON.stringify(problems[i]))); //数组深复制
+        filted[filted.length - 1][6] = videos[problems[i][2]].type;
+        index_map[i] = index_cnt++;
     }
-    filted.shuffle();
+    if (options.vid) {
+        filted.shuffle();
+    }
+    let nowIndex = 0;
+    if (options.index) {
+        nowIndex = index_map[Number(options.index)];
+    }
+    let nowAnswers = [];
+    let keepMemory = false;
+    if (options.type) {
+        nowAnswers = history_map(history, index_map);
+        keepMemory = true;
+    }
+
+    // io.out(filted);
     handler.setData({
         problems: filted,
-        nowIndex: 0,
-        nowAnswers: [],
+        nowIndex: nowIndex,
+        nowAnswers: nowAnswers,
         ac: 0,
+        types: getApp().globalData.type_p,
+        keepMemory: keepMemory,
     });
 }
 

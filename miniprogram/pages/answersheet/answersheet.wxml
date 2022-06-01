@@ -26,9 +26,16 @@
                     </checkbox>
                 </checkbox-group>
             </view>
-            <button bindtap="submit">提交</button>
+            
             <view>{{nowIndex+1}} / {{problems.length}}</view>
-
+            <view wx:if="{{keepMemory}}">
+                <button bindtap="rollback">上一题</button>
+                <button bindtap="submit">提交</button>
+                <button bindtap="rollback">下一题</button>
+            </view>
+            <view wx:else>
+                <button bindtap="submit">提交</button>
+            </view>
         </view>
     </view>
     <view>下面是折叠的，请你设计默认折叠，点击再展开</view>
@@ -47,5 +54,13 @@
 <view wx:else>
     <view>你已完成全部题目！</view>
     <view>共有{{problems.length}}题，你答对了{{ac}}题！</view>
-    <button bindtap="goback">返回</button>
+    <button bindtap="goback">返回(该按钮要放哪你喜欢)</button>
+    <view>题目解析：</view>
+    <view wx:for="{{problems}}">
+        <view>{{index+1}}.{{item[0]}}</view>
+        <view>{{['','判断','单选','多选'][item[1]]}}</view>
+        <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j">
+            <text wx:if="{{item[3]&(1<<j)}}">(选择)</text><text wx:else>(不选)</text>{{item2}}
+        </view>
+    </view>
 </view>

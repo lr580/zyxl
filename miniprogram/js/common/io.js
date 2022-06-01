@@ -163,7 +163,9 @@ export function helpGoto(handler, url, param = {}, funcName = '', full = false) 
     for (let key in param) {
         if (!hasParam) {
             hasParam = true;
-            url += '?';
+            para += '?';
+        } else {
+            para += '&';
         }
         para += key + '=' + param[key];
     }
@@ -172,6 +174,34 @@ export function helpGoto(handler, url, param = {}, funcName = '', full = false) 
         wx.navigateTo({
             url: url,
         });
+    };
+}
+
+export function helpGotoParam(handler, url, funcName = '', full = false) {
+    if (funcName.length == 0) {
+        funcName = 'goto_' + url;
+    }
+    if (!full) {
+        url = '/pages/' + url + '/' + url;
+    }
+    handler[funcName] = function (param) {
+        let url0 = url;
+        let hasParam = false;
+        let para = '';
+        for (let key in param.currentTarget.dataset) {
+            if (!hasParam) {
+                hasParam = true;
+                para += '?';
+            } else {
+                para += '&';
+            }
+            para += key + '=' + param.currentTarget.dataset[key];
+        }
+        url += para;
+        wx.navigateTo({
+            url: url,
+        });
+        url = url0; //刷新参数，不然会bugs
     };
 }
 

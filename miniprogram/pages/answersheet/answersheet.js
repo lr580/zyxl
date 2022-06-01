@@ -18,18 +18,11 @@ Page({
 
     */
     onLoad(options) {
-        // io.out(options);
-        // io.out(getApp().globalData.problems);
         problem.fitOptions(this, options);
-        io.out(this.data);
         io.helpInput(this, 'answer');
         problem.bindNextProblem(this);
         io.helpGoback(this);
     },
-
-    // submit() {
-    //     io.out(this.data);
-    // },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

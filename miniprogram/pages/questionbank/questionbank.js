@@ -1,4 +1,6 @@
 // pages/questionbank/questionbank.js
+import * as io from '../../js/common/io'
+import * as problem from '../../js/base/problemCtrl'
 Page({
 
     /**
@@ -12,8 +14,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        problem.fitOptions(this, options);
+        io.helpGotoParam(this, 'answersheet');
     },
+
+    // goto_answersheet(param) {
+    //     let data = param.currentTarget.dataset;
+    //     wx.navigateTo({
+    //         url: '/pages/answersheet/answersheet?index=' + data.index + '&type=' + data.type,
+    //     });
+    // },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
