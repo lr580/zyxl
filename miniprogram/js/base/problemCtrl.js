@@ -31,10 +31,18 @@ export function fitOptions(handler, options = {}) {
         filted.push(JSON.parse(JSON.stringify(problems[i]))); //数组深复制
         filted[filted.length - 1][6] = videos[problems[i][2]].type;
         filted[filted.length - 1][7] = i; //存储数据库用的主键(即index)
+        // filted[filted.length - 1][8] = [];
+        // for (let j = 0; j < problems[i][5].length; ++i) { //选项打乱
+        //     filted[filted.length - 1][8].push(i);
+        // }
         index_map[i] = index_cnt++;
     }
-    if (options.vid) {
+    if (options.vid || options.combat) {
         filted.shuffle();
+
+    }
+    if (options.combat) {
+        filted = filted.slice(0, 5);
     }
     let nowIndex = 0;
     if (options.index) {
@@ -42,7 +50,7 @@ export function fitOptions(handler, options = {}) {
     }
     let nowAnswers = [];
     let keepMemory = false;
-    if (!options.vid) {
+    if (!options.vid && !options.combat) {
         nowAnswers = history_map(history, index_map);
         keepMemory = true;
     }

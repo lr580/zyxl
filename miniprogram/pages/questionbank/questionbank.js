@@ -16,6 +16,10 @@ Page({
     onLoad(options) {
         // problem.fitOptions(this, options);
         io.helpGotoParam(this, 'answersheet');
+        io.helpGoto(this, 'answersheet', {
+            combat: true,
+        }, 'goto_combat');
+        io.out(this);
         problem.helpClearall(this);
     },
 
