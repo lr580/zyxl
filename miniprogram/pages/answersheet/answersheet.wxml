@@ -31,10 +31,10 @@
         <view wx:elif="{{index==nowIndex && nowAnswers[index]}}">
             <view>{{index+1}}.{{item[0]}}</view>
             <view>{{['','判断','单选','多选'][item[1]]}}</view>
-            <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j">
-                <text wx:if="{{(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(正确选择)</text>
-                <text wx:elif="{{(item[3]&(1<<j))&&!(nowAnswers[index]&(1<<j)) }}">(对而未选)</text>
-                <text wx:elif="{{!(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(错而选了)</text>
+            <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
+                <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
+                <text wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}">(对而未选)</text>
+                <text wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(错而选了)</text>
                 <text wx:else>(不选)</text>
                 <text>{{item2}}</text>
             </view>
@@ -44,7 +44,7 @@
             <view wx:if="{{keepMemory}}">
                 <button bindtap="rollback" wx:if="{{index}}">上一题</button>
                 <button bindtap="submit" wx:if="{{!nowAnswers[index]}}">提交</button>
-                <button bindtap="rollnext" wx:if="{{index+1<problems.length}}">下一题</button>
+                <button bindtap="rollnext" wx:if="{{index+1<problems.length || nowAnswers[index]}}">下一题</button>
                 <!-- <button bindtap="submit" wx:if="{{index==topIndex}}">提交</button> -->
                 <!-- <button bindtap="rollnext" wx:if="{{index<topIndex}}">下一题</button> -->
             </view>
@@ -71,14 +71,13 @@
     <view>共有{{problems.length}}题，你答对了{{ac}}题！</view>
     <button bindtap="goback">返回(该按钮要放哪你喜欢)</button>
     <view>题目解析：</view>
-    <view wx:for="{{problems}}">
+    <view wx:for="{{problems}}" wx:if="{{(keepMemory && nowAnswers[index]) || !keepMemory}}">
         <view>{{index+1}}.{{item[0]}}</view>
         <view>{{['','判断','单选','多选'][item[1]]}}</view>
-        <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j">
-            <!-- <text wx:if="{{item[3]&(1<<j)}}">(选择)</text><text wx:else>(不选)</text>{{item2}} -->
-            <text wx:if="{{(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(正确选择)</text>
-            <text wx:elif="{{(item[3]&(1<<j))&&!(nowAnswers[index]&(1<<j)) }}">(对而未选)</text>
-            <text wx:elif="{{!(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(错而选了)</text>
+        <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
+            <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
+            <text wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}">(对而未选)</text>
+            <text wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(错而选了)</text>
             <text wx:else>(不选)</text>
             <text>{{item2}}</text>
         </view>

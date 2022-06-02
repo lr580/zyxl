@@ -39,15 +39,15 @@ export function fitOptions(handler, options = {}) {
     }
     if (options.vid || options.combat) {
         filted.shuffle();
-        for (let i = 0; i < filted.length; ++i) {
-            filted[i][8].shuffle();
-            let temp = JSON.parse(JSON.stringify(filted[i][5]));
-            for (let j = 0; j < filted[i][8].length; ++j) {
-                filted[i][5][j] = temp[filted[i][8][j]];
-                // filted[i][5][j] = new String(temp[filted[i][8][j]]);
-            }
+    }
+    for (let i = 0; i < filted.length; ++i) { //目前设计恒打乱选项
+        filted[i][8].shuffle();
+        let temp = JSON.parse(JSON.stringify(filted[i][5]));
+        for (let j = 0; j < filted[i][8].length; ++j) {
+            filted[i][5][j] = temp[filted[i][8][j]];
         }
     }
+
     if (options.combat) {
         filted = filted.slice(0, 5);
     }
@@ -57,16 +57,20 @@ export function fitOptions(handler, options = {}) {
     }
     let nowAnswers = [];
     let keepMemory = false;
+    let ac = 0;
     if (!options.vid && !options.combat) {
         nowAnswers = history_map(history, index_map);
         keepMemory = true;
+        for (let i = 0; i < filted.length; ++i) {
+            ac += filted[i][3] == nowAnswers[i];
+        }
     }
 
     handler.setData({
         problems: filted,
         nowIndex: nowIndex,
         nowAnswers: nowAnswers,
-        ac: 0,
+        ac: ac,
         types: getApp().globalData.type_p,
         keepMemory: keepMemory,
         topIndex: nowIndex, //控制是否显示下一题按钮
@@ -90,7 +94,6 @@ export function bindNextProblem(handler) { //绑定题目提交和上下题切�
         let answers = handler.data.input.answer;
         let problems = handler.data.problems;
         let nowIndex = handler.data.nowIndex;
-        // io.out(problems);
         let ans = 0;
         for (let i = 0; i < answers.length; ++i) {
             ans += 1 << (problems[nowIndex][8][answers[i]]);
