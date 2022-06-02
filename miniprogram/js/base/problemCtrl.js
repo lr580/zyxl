@@ -9,14 +9,15 @@ function history_map(history, index_map) {
     return map;
 }
 
-export function fitOptions(handler, options) {
-    // io.out(options);
+export function fitOptions(handler, options = {}) {
+    if (!options) {
+        options = {};
+    }
+
     let problems = getApp().globalData.problems;
     let videos = getApp().globalData.info_video;
     let history = getApp().globalData.info_user.answers;
-    // io.out(history);
 
-    // io.out(videos);
     let filted = [];
     let index_map = []; //题库index对应到页面index
     let index_cnt = 0;
@@ -29,6 +30,7 @@ export function fitOptions(handler, options) {
         }
         filted.push(JSON.parse(JSON.stringify(problems[i]))); //数组深复制
         filted[filted.length - 1][6] = videos[problems[i][2]].type;
+        filted[filted.length - 1][7] = i; //存储数据库用的主键(即index)
         index_map[i] = index_cnt++;
     }
     if (options.vid) {
@@ -40,12 +42,11 @@ export function fitOptions(handler, options) {
     }
     let nowAnswers = [];
     let keepMemory = false;
-    if (options.type) {
+    if (!options.vid) {
         nowAnswers = history_map(history, index_map);
         keepMemory = true;
     }
 
-    // io.out(filted);
     handler.setData({
         problems: filted,
         nowIndex: nowIndex,
@@ -53,11 +54,24 @@ export function fitOptions(handler, options) {
         ac: 0,
         types: getApp().globalData.type_p,
         keepMemory: keepMemory,
+        topIndex: nowIndex, //控制是否显示下一题按钮
     });
 }
 
-export function bindNextProblem(handler) {
-    handler.submit = function () {
+var col = null;
+var _ = null;
+var db = null;
+
+function get_col() {
+    if (!col) {
+        col = wx.cloud.database().collection('user');
+        _ = wx.cloud.database().command;
+        db = wx.cloud.database();
+    }
+}
+
+export function bindNextProblem(handler) { //绑定题目提交和上下题切换
+    handler.submit = async function () {
         let answers = handler.data.input.answer;
         let ans = 0;
         for (let i = 0; i < answers.length; ++i) {
@@ -65,15 +79,71 @@ export function bindNextProblem(handler) {
         }
         let nowAnswers = handler.data.nowAnswers;
         let nowIndex = handler.data.nowIndex;
+
+        if (handler.data.keepMemory) {
+            get_col();
+            let openid = getApp().globalData.openid;
+            try {
+                let userAnswers = getApp().globalData.info_user.answers;
+                userAnswers.push([handler.data.problems[nowIndex][7], ans]);
+                await col.doc(openid).update({
+                    data: {
+                        answers: userAnswers,
+                        // _.push({
+                        //     each: [handler.data.problems[nowIndex][7], ans]
+                        // }),
+                    }
+                });
+                getApp().globalData.info_user.answers = userAnswers;
+            } catch (err) {
+                io.err(err);
+            }
+        }
+
         nowAnswers[nowIndex] = ans;
         let input = handler.data.input;
-        input.answer = [];
+        input.answer = []; //清空输入，防止跳题变成用上一次的记忆选项
         handler.setData({
             nowAnswers: nowAnswers,
             nowIndex: nowIndex + 1,
+            topIndex: Math.max(nowIndex + 1, handler.data.topIndex),
             problems: handler.data.problems, //强制刷新下拉列表
             ac: handler.data.ac + (ans == handler.data.problems[nowIndex][3]),
             input: input,
         });
-    }
+    };
+    handler.rollback = function () {
+        handler.setData({
+            nowIndex: handler.data.nowIndex - 1,
+        });
+    };
+    handler.rollnext = function () {
+        handler.setData({
+            nowIndex: handler.data.nowIndex + 1,
+        });
+    };
+}
+
+export function helpClearall(handler) {
+    handler.clearAll = async function () {
+        let res = await wx.showModal({
+            title: '警告',
+            content: '这将会删除您的全部做题记录，确认删除吗？'
+        });
+        if (res.confirm) {
+            get_col();
+            let openid = getApp().globalData.openid;
+            try {
+                await col.doc(openid).update({
+                    data: {
+                        answers: [],
+                    }
+                });
+                getApp().globalData.info_user.answers = [];
+                fitOptions(handler);
+            } catch (err) {
+                io.err(err);
+            }
+        }
+    };
 }

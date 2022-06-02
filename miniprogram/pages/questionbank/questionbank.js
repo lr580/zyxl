@@ -14,8 +14,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        problem.fitOptions(this, options);
+        // problem.fitOptions(this, options);
         io.helpGotoParam(this, 'answersheet');
+        problem.helpClearall(this);
     },
 
     // goto_answersheet(param) {
@@ -36,7 +37,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        problem.fitOptions(this);
     },
 
     /**

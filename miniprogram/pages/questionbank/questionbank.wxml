@@ -7,8 +7,9 @@
         <view wx:for="{{problems}}">
             <view wx:if="{{item[6]==index_type}}">
                 <view bindtap="goto_answersheet" data-index="{{index}}" data-type="{{index_type}}">
+                {{nowAnswers[index]}} {{item[3]}}
                     <text>{{item[0]}}</text>
-                    <text wx:if="!{{nowAnswers[index]}}">(未曾作答)</text>
+                    <text wx:if="{{!nowAnswers[index]}}">(未曾作答)</text>
                     <text wx:elif="{{nowAnswers[index]!=item[3]}}">(回答错误)</text>
                     <text wx:else>(回答正确)</text>
                 </view>
@@ -16,3 +17,4 @@
         </view>
     </view>
 </view>
+<button style="color:red" bindtap="clearAll">清空记录</button>

@@ -1,11 +1,11 @@
 <view wx:if="{{nowIndex<problems.length}}">
     <view wx:for="{{problems}}">
-        <view wx:if="{{index==nowIndex}}">
+        <view wx:if="{{index==nowIndex && !nowAnswers[index]}}">
             <view>{{nowIndex+1}}.{{item[0]}}</view>
             <view wx:if="{{1==item[1]}}" wx:for-index="i">
                 (判断)
                 <radio-group bindchange="input_answer">
-                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
                         <view>{{j}}</view>
                     </radio>
                 </radio-group>
@@ -13,7 +13,7 @@
             <view wx:elif="{{2==item[1]}}">
                 (单选)
                 <radio-group bindchange="input_answer">
-                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
                         <view>{{j}}</view>
                     </radio>
                 </radio-group>
@@ -21,17 +21,31 @@
             <view wx:elif="{{3==item[1]}}">
                 (多选)
                 <checkbox-group bindchange="input_answer">
-                    <checkbox wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}">
+                    <checkbox wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
                         <view>{{j}}</view>
                     </checkbox>
                 </checkbox-group>
             </view>
-            
             <view>{{nowIndex+1}} / {{problems.length}}</view>
+        </view>
+        <view wx:elif="{{index==nowIndex && nowAnswers[index]}}">
+            <view>{{index+1}}.{{item[0]}}</view>
+            <view>{{['','判断','单选','多选'][item[1]]}}</view>
+            <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j">
+                <text wx:if="{{(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(正确选择)</text>
+                <text wx:elif="{{(item[3]&(1<<j))&&!(nowAnswers[index]&(1<<j)) }}">(对而未选)</text>
+                <text wx:elif="{{!(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(错而选了)</text>
+                <text wx:else>(不选)</text>
+                <text>{{item2}}</text>
+            </view>
+        </view>
+        <view wx:if="{{index==nowIndex}}">
             <view wx:if="{{keepMemory}}">
-                <button bindtap="rollback">上一题</button>
-                <button bindtap="submit">提交</button>
-                <button bindtap="rollback">下一题</button>
+                <button bindtap="rollback" wx:if="{{index}}">上一题</button>
+                <button bindtap="submit" wx:if="{{!nowAnswers[index]}}">提交</button>
+                <button bindtap="rollnext" wx:if="{{index+1<problems.length}}">下一题</button>
+                <!-- <button bindtap="submit" wx:if="{{index==topIndex}}">提交</button> -->
+                <!-- <button bindtap="rollnext" wx:if="{{index<topIndex}}">下一题</button> -->
             </view>
             <view wx:else>
                 <button bindtap="submit">提交</button>
@@ -60,7 +74,12 @@
         <view>{{index+1}}.{{item[0]}}</view>
         <view>{{['','判断','单选','多选'][item[1]]}}</view>
         <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j">
-            <text wx:if="{{item[3]&(1<<j)}}">(选择)</text><text wx:else>(不选)</text>{{item2}}
+            <!-- <text wx:if="{{item[3]&(1<<j)}}">(选择)</text><text wx:else>(不选)</text>{{item2}} -->
+            <text wx:if="{{(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(正确选择)</text>
+            <text wx:elif="{{(item[3]&(1<<j))&&!(nowAnswers[index]&(1<<j)) }}">(对而未选)</text>
+            <text wx:elif="{{!(item[3]&(1<<j))&&(nowAnswers[index]&(1<<j)) }}">(错而选了)</text>
+            <text wx:else>(不选)</text>
+            <text>{{item2}}</text>
         </view>
     </view>
 </view>

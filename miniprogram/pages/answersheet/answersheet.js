@@ -14,8 +14,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     /*options:
-    若有vty,为多少代表当前是视频做题，无就是题库或对战
-
+    若有vty,为多少代表当前是视频做题，无就是题库（有type和index）或对战
     */
     onLoad(options) {
         problem.fitOptions(this, options);
