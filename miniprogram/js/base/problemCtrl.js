@@ -9,10 +9,20 @@ function history_map(history, index_map) {
     return map;
 }
 
+function shuffle_selections(filted) {
+    for (let i = 0; i < filted.length; ++i) {
+        filted[i][8].shuffle();
+        let temp = JSON.parse(JSON.stringify(filted[i][5]));
+        for (let j = 0; j < filted[i][8].length; ++j) {
+            filted[i][5][j] = temp[filted[i][8][j]];
+        }
+    }
+}
+
 export function fitOptions(handler, options = {}) {
     if (!options) {
         options = {};
-    }
+    } //options:若有vty,为多少代表当前是视频做题，无就是题库（有type和index）或对战(有combat)
 
     let problems = getApp().globalData.problems;
     let videos = getApp().globalData.info_video;
@@ -40,12 +50,8 @@ export function fitOptions(handler, options = {}) {
     if (options.vid || options.combat) {
         filted.shuffle();
     }
-    for (let i = 0; i < filted.length; ++i) { //目前设计恒打乱选项
-        filted[i][8].shuffle();
-        let temp = JSON.parse(JSON.stringify(filted[i][5]));
-        for (let j = 0; j < filted[i][8].length; ++j) {
-            filted[i][5][j] = temp[filted[i][8][j]];
-        }
+    if (!options.combat) {
+        shuffle_selections(filted); //目前设计恒打乱选项，若双人对战先不打乱，不然后手二次打乱难以复原
     }
 
     if (options.combat) {
@@ -66,15 +72,39 @@ export function fitOptions(handler, options = {}) {
         }
     }
 
-    handler.setData({
-        problems: filted,
-        nowIndex: nowIndex,
-        nowAnswers: nowAnswers,
-        ac: ac,
-        types: getApp().globalData.type_p,
-        keepMemory: keepMemory,
-        topIndex: nowIndex, //控制是否显示下一题按钮
-    });
+    if (!options.combat) {
+        handler.setData({
+            problems: filted,
+            nowIndex: nowIndex,
+            nowAnswers: nowAnswers,
+            ac: ac,
+            types: getApp().globalData.type_p, //答题首页用
+            keepMemory: keepMemory,
+            topIndex: nowIndex, //控制是否显示下一题按钮
+        });
+    } else {
+        let filted2 = (JSON.parse(JSON.stringify(filted)));
+        filted2.shuffle();
+        shuffle_selections(filted2);
+        shuffle_selections(filted);
+        let obj1 = {
+            problems: filted,
+            nowIndex: 0,
+            nowAnswers: [],
+            ac: 0
+        };
+        let obj2 = {
+            problems: filted2,
+            nowIndex: 0,
+            nowAnswers: [],
+            ac: 0
+        };
+        handler.setData({
+            player1: obj1,
+            player2: obj2,
+            ended: 0, //有多少玩家答完了
+        });
+    }
 }
 
 var col = null;
@@ -89,19 +119,22 @@ function get_col() {
     }
 }
 
-export function bindNextProblem(handler) { //绑定题目提交和上下题切换
-    handler.submit = async function () {
-        let answers = handler.data.input.answer;
-        let problems = handler.data.problems;
-        let nowIndex = handler.data.nowIndex;
+export function bindNextProblem(handler, funcName = 'submit', src = null, rawinput = null) { //绑定题目提交和上下题切换
+    handler[funcName] = async function () {
+        let data = src ? handler.data[src] : handler.data;
+        let input = handler.data.input;
+        rawinput = rawinput ? rawinput : 'answer';
+        let answers = input[rawinput];
+        let problems = data.problems;
+        let nowIndex = data.nowIndex;
         let ans = 0;
         for (let i = 0; i < answers.length; ++i) {
             ans += 1 << (problems[nowIndex][8][answers[i]]);
             // ans += 1 << (Number(answers[i]));//选项未打乱前
         }
-        let nowAnswers = handler.data.nowAnswers;
+        let nowAnswers = data.nowAnswers;
 
-        if (handler.data.keepMemory) {
+        if (data.keepMemory) {
             get_col();
             let openid = getApp().globalData.openid;
             try {
@@ -122,16 +155,34 @@ export function bindNextProblem(handler) { //绑定题目提交和上下题切�
         }
 
         nowAnswers[nowIndex] = ans;
-        let input = handler.data.input;
-        input.answer = []; //清空输入，防止跳题变成用上一次的记忆选项
-        handler.setData({
+
+        input[rawinput] = []; //清空输入，防止跳题变成用上一次的记忆选项
+        let obj = {
             nowAnswers: nowAnswers,
             nowIndex: nowIndex + 1,
-            topIndex: Math.max(nowIndex + 1, handler.data.topIndex),
+            topIndex: Math.max(nowIndex + 1, data.topIndex ? data.topIndex : 0),
             problems: problems, //强制刷新下拉列表
-            ac: handler.data.ac + (ans == problems[nowIndex][3]),
+            ac: data.ac + (ans == problems[nowIndex][3]),
             input: input,
-        });
+        };
+        if (!src) {
+            handler.setData(obj);
+        } else {
+            if (nowIndex + 1 == problems.length) {
+                handler.setData({
+                    ended: handler.data.ended + 1,
+                });
+                let playerid = src[6];
+                let stop_timer_funcname = 'stop_timer' + playerid; //这个跟其他代码配合使用
+                handler[stop_timer_funcname]();
+                if (handler.data.ended == 2) {
+                    winningJudge(handler);
+                }
+            }
+            let wrap = {};
+            wrap[src] = obj;
+            handler.setData(wrap);
+        }
     };
     handler.rollback = function () {
         handler.setData({
@@ -143,6 +194,18 @@ export function bindNextProblem(handler) { //绑定题目提交和上下题切�
             nowIndex: handler.data.nowIndex + 1,
         });
     };
+}
+
+function winningJudge(handler) {
+    let ans = 0;
+    if (handler.data.player1.ac != handler.data.player2.ac) {
+        ans = handler.data.player1.ac > handler.data.player2.ac ? 1 : 2;
+    } else if (handler.data.timer1 != handler.data.timer2) {
+        ans = handler.data.timer1 < handler.data.timer2 ? 1 : 2;
+    }
+    handler.setData({
+        winner: ans,
+    });
 }
 
 export function helpClearall(handler) {

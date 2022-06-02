@@ -1,5 +1,4 @@
 // pages/index/index.js
-import * as io from '../../js/common/io';
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
@@ -48,14 +47,10 @@ Page({
     },
 
     onLoad: function (options) {
-        // console.log("!");
         this.update_index();
         this.towerSwiper('swiperList');
         this.setData({
             DotStyle: true
-        })
-        io.helpGoto(this, 'answersheet', {
-            vid: 2
         });
     },
 

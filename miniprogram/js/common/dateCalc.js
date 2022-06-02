@@ -76,7 +76,7 @@ export function get_ymdhms(v) {
 }
 
 export function print(v, type = 0) {
-    if(v==0){
+    if (v == 0) {
         return '未设置';
     }
     v = new Date(v);
@@ -86,5 +86,37 @@ export function print(v, type = 0) {
         return v.format('yyyy-MM-dd hh:mm:ss');
     } else {
         return '';
+    }
+}
+
+export function outMili(timestamp) { //精度100ms，以后有需要再改别的精度
+    timestamp = Number(timestamp);
+    let mili = Math.floor(timestamp % 1000 / 100 + 0.04);
+    let sec = Math.floor(timestamp / 1000 + 0.04);
+    return '' + sec + '.' + mili + 's';
+}
+
+export function helpTimer(handler, varname = 'timer', interval = 100) {
+    let cycler_name = 'set_' + varname;
+    handler[cycler_name] = function () {
+        let wrap = {};
+        wrap[varname] = handler.data[varname] + interval;
+        wrap[varname + '_show'] = outMili(wrap[varname]);
+        handler.setData(wrap);
+    };
+
+    let init_cycler_name = 'init_' + varname;
+    handler[init_cycler_name] = function () {
+        let wrap = {};
+        wrap[varname] = 0;
+        wrap[varname + '_show'] = outMili(0);
+        handler.setData(wrap);
+        let cycler_id_name = 'id_' + varname;
+        handler[cycler_id_name] = setInterval(handler[cycler_name], interval);
+    }
+
+    let stop_cycler_name = 'stop_' + varname;
+    handler[stop_cycler_name] = function () {
+        clearInterval(handler['id_' + varname]);
     }
 }

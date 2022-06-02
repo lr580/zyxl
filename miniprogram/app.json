@@ -21,7 +21,8 @@
         "pages/postu/postu",
         "pages/mymessage/mymessage",
         "pages/questionbank/questionbank",
-        "pages/answersheet/answersheet"
+        "pages/answersheet/answersheet",
+        "pages/combat/combat"
     ],
     "window": {
         "backgroundColor": "#ffffff",

@@ -33,6 +33,7 @@ Object 功能拓展。[对象深复制参考](https://blog.csdn.net/weixin_46074
 - `get_ymd(v)` 对 Date 返回 `{yy, mm, dd}`
 - `get_ymdhms(v)` 对 Date 返回 `{yy, MM, dd, hh, mm, ss}`
 - `print(v, type = 0)` 对 Date / <u>时间戳</u> 返回 `%04d/%02d/%02d` ，若 type = 1，加多 `%02d:%02d:%02d`
+- `helpTimer(handler, varname = 'timer', interval = 100)` 给 page 注册一个计时器变量，使用时间戳相对值，每 interval 毫秒刷新一次。使用 `handler.init_varname()` 初始化，`handler.stop_varname()` 终止。变量值用 `handler.data.varname` ，输出的字符串变量值用 `handler.data.varname_show`
 
 
 

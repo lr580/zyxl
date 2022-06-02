@@ -1,6 +1,7 @@
-// pages/questionbank/questionbank.js
-import * as io from '../../js/common/io'
-import * as problem from '../../js/base/problemCtrl'
+// pages/combat/combat.js
+import * as dates from '../../js/common/dateCalc';
+import * as io from '../../js/common/io';
+import * as problem from '../../js/base/problemCtrl';
 Page({
 
     /**
@@ -14,12 +15,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        // problem.fitOptions(this, options);//移步onUpdate
-        io.helpGotoParam(this, 'answersheet');
-        io.helpGoto(this, 'combat', {
-            combat: true,
+        dates.helpTimer(this, 'timer1');
+        dates.helpTimer(this, 'timer2');
+        this.init_timer1();
+        this.init_timer2();
+        problem.fitOptions(this, {
+            'combat': true
         });
-        problem.helpClearall(this);
+        io.helpInput(this, 'answer1');
+        io.helpInput(this, 'answer2');
+        problem.bindNextProblem(this, 'submit1', 'player1', 'answer1');
+        problem.bindNextProblem(this, 'submit2', 'player2', 'answer2');
+    },
+
+    oncemore() {
+        this.stop_timer1();
+        this.stop_timer2();
+        this.onLoad();
     },
 
     /**
@@ -33,7 +45,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        problem.fitOptions(this);
+
     },
 
     /**
