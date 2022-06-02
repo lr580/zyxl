@@ -31,15 +31,22 @@ export function fitOptions(handler, options = {}) {
         filted.push(JSON.parse(JSON.stringify(problems[i]))); //数组深复制
         filted[filted.length - 1][6] = videos[problems[i][2]].type;
         filted[filted.length - 1][7] = i; //存储数据库用的主键(即index)
-        // filted[filted.length - 1][8] = [];
-        // for (let j = 0; j < problems[i][5].length; ++i) { //选项打乱
-        //     filted[filted.length - 1][8].push(i);
-        // }
+        filted[filted.length - 1][8] = [];
+        for (let j = 0; j < problems[i][5].length; ++j) { //选项打乱
+            filted[filted.length - 1][8].push(j);
+        }
         index_map[i] = index_cnt++;
     }
     if (options.vid || options.combat) {
         filted.shuffle();
-
+        for (let i = 0; i < filted.length; ++i) {
+            filted[i][8].shuffle();
+            let temp = JSON.parse(JSON.stringify(filted[i][5]));
+            for (let j = 0; j < filted[i][8].length; ++j) {
+                filted[i][5][j] = temp[filted[i][8][j]];
+                // filted[i][5][j] = new String(temp[filted[i][8][j]]);
+            }
+        }
     }
     if (options.combat) {
         filted = filted.slice(0, 5);
@@ -81,19 +88,22 @@ function get_col() {
 export function bindNextProblem(handler) { //绑定题目提交和上下题切换
     handler.submit = async function () {
         let answers = handler.data.input.answer;
+        let problems = handler.data.problems;
+        let nowIndex = handler.data.nowIndex;
+        // io.out(problems);
         let ans = 0;
         for (let i = 0; i < answers.length; ++i) {
-            ans += 1 << (Number(answers[i]));
+            ans += 1 << (problems[nowIndex][8][answers[i]]);
+            // ans += 1 << (Number(answers[i]));//选项未打乱前
         }
         let nowAnswers = handler.data.nowAnswers;
-        let nowIndex = handler.data.nowIndex;
 
         if (handler.data.keepMemory) {
             get_col();
             let openid = getApp().globalData.openid;
             try {
                 let userAnswers = getApp().globalData.info_user.answers;
-                userAnswers.push([handler.data.problems[nowIndex][7], ans]);
+                userAnswers.push([problems[nowIndex][7], ans]);
                 await col.doc(openid).update({
                     data: {
                         answers: userAnswers,
@@ -115,8 +125,8 @@ export function bindNextProblem(handler) { //绑定题目提交和上下题切�
             nowAnswers: nowAnswers,
             nowIndex: nowIndex + 1,
             topIndex: Math.max(nowIndex + 1, handler.data.topIndex),
-            problems: handler.data.problems, //强制刷新下拉列表
-            ac: handler.data.ac + (ans == handler.data.problems[nowIndex][3]),
+            problems: problems, //强制刷新下拉列表
+            ac: handler.data.ac + (ans == problems[nowIndex][3]),
             input: input,
         });
     };
