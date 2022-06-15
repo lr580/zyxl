@@ -1,16 +1,29 @@
 <button bindtap="goto_combat">点我双人对战</button>
-<view>默认折叠，点击展开，这个你来做吧 QwQ</view>
-<text>字数限制，超长显示省略号，你来做吧</text>
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-blue cur':''}}" wx:for="{{types}}" wx:for-item="item_type" wx:key bindtap="click_type" data-id="{{index}}">
+        {{item_type}}
+    </view>
+  </view>
+</scroll-view>
+
+
 <view wx:for="{{types}}" wx:for-index="index_type" wx:for-item="item_type">
-    <view wx:if="{{index_type < types.length - 1}}">
-        <view>{{item_type}}</view>
+    <view wx:if="{{index_type == now_type}}">
         <view wx:for="{{problems}}">
-            <view wx:if="{{item[6]==index_type}}">
-                <view bindtap="goto_answersheet" data-index="{{index}}" data-type="{{index_type}}">
-                    <text>{{item[0]}}</text>
-                    <text wx:if="{{!nowAnswers[index]}}">(未曾作答)</text>
+            <view wx:if="{{item[6]==now_type}}">
+                <view class="pro_body shadow" bindtap="goto_answersheet" data-index="{{index}}" data-type="{{index_type}}">
+                
+                    <view class="pro_tm">{{item[0]}}</view>
+                    <view class="pro_state">
+                    <view wx:if="{{!nowAnswers[index]}}" class="cu-tag bg-grey tag">未做</view>
+                    <view wx:elif="{{nowAnswers[index]!=item[3]}}" class="cu-tag bg-red tag">错误</view>
+                    <view wx:else class="cu-tag bg-green tag">正确</view>
+                        
+                </view>
+                    <!-- <text wx:if="{{!nowAnswers[index]}}">(未曾作答)</text>
                     <text wx:elif="{{nowAnswers[index]!=item[3]}}">(回答错误)</text>
-                    <text wx:else>(回答正确)</text>
+                    <text wx:else>(回答正确)</text> -->
                 </view>
             </view>
         </view>

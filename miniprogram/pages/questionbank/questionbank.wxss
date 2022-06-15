@@ -1,1 +1,33 @@
 /* pages/questionbank/questionbank.wxss */
+.pro_body{
+    border:0rpx solid;
+    margin: 20rpx;
+    background-color:#f1f1f1;
+    padding: 20rpx;
+    border-radius: 9rpx;
+}
+
+.pro_tm{
+    font-weight: 600;
+    font-size:32rpx;
+    letter-spacing: 0.05rem;
+    display: -webkit-box;  
+word-break: break-all;
+text-overflow: ellipsis; 
+overflow: hidden;          
+-webkit-box-orient: vertical;    
+-webkit-line-clamp: 2;   
+
+}
+
+.pro_state{
+    margin-top:10rpx;
+    padding-top: 10rpx;
+    border-top: 1rpx gainsboro solid;
+}
+
+.tag{
+    width:80rpx;
+    height: 40rpx;
+    border-radius: 10rpx;
+}
