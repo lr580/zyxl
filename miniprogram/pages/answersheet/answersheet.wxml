@@ -1,8 +1,9 @@
-<view wx:if="{{nowIndex<problems.length}}">
-    <view wx:for="{{problems}}">
-        <view wx:if="{{index==nowIndex && !nowAnswers[index]}}">
+<view class="problem_card  radius shadow shadow-lg bg-white"  wx:if="{{nowIndex<problems.length}}">
+    <view  wx:for="{{problems}}">
+        <view  wx:if="{{index==nowIndex && !nowAnswers[index]}}">
             <view>{{nowIndex+1}}.{{item[0]}}</view>
-            <view wx:if="{{1==item[1]}}" wx:for-index="i">
+            <view  wx:if="{{1==item[1]}}" wx:for-index="i">
+                
                 (判断)
                 <radio-group bindchange="input_answer">
                     <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
@@ -29,16 +30,24 @@
             <view>{{nowIndex+1}} / {{problems.length}}</view>
         </view>
         <view wx:elif="{{index==nowIndex && nowAnswers[index]}}">
-            <view>{{index+1}}.{{item[0]}}</view>
-            <view>{{['','判断','单选','多选'][item[1]]}}</view>
-            <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
-                <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
-                <text wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}">(对而未选)</text>
-                <text wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(错而选了)</text>
-                <text wx:else>(不选)</text>
-                <text>{{item2}}</text>
+            <view style="font-weight: 600;font-size: 30rpx;">{{index+1}}.{{item[0]}}</view>
+            <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">{{['','判断','单选','多选'][item[1]]}}</view>
+            <view class="option" wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
+                <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}" class="cuIcon-roundcheck text-xsl text-green"></text>
+                <!-- <text >(正确选择)</text> -->
+                <text class="cuIcon-roundcheck text-xsl text-cyan" wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                <text class="cuIcon-roundclose text-xsl text-red" wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                <text class="cuIcon-round text-xsl text-diy_gray" wx:else></text>
+                <text style="margin-left: 15rpx;">{{item2}}</text>
             </view>
-            <view>解：{{item[4]}}</view>
+
+            <view class="cu-bar bg-white">
+                 <view class="action">
+                <text class="cuIcon-title text-blue"></text>
+                 <text class="lg text-bold">解析</text>
+                </view>
+             </view>
+            <view class="ans">{{item[4]}}</view>
         </view>
         <view wx:if="{{index==nowIndex}}">
             <view wx:if="{{keepMemory}}">

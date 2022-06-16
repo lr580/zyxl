@@ -29,4 +29,7 @@
         </view>
     </view>
 </view>
-<button style="color:red" bindtap="clearAll">清空记录</button>
+
+<button style="display: flex; color:grey;align-items: center;justify-content: center;text-align: center;vertical-align:middle;" bindtap="clearAll">
+<image style="width: 40rpx;height: 40rpx;margin-right: 15rpx;" src="/img/delete_rec.png"></image>
+清空记录</button>

@@ -1,1 +1,29 @@
 /* pages/answersheet/answersheet.wxss */
+.problem_card{
+    padding: 40rpx;
+    margin: 30rpx;
+    /* border: aqua 1rpx solid; */
+    border-radius: 15rpx;
+}
+
+
+.tag{
+    width:80rpx;
+    height: 40rpx;
+    border-radius: 10rpx;
+}
+
+.option{
+    font-weight: 400;
+    font-size: 28rpx;
+    margin-top: 15rpx;
+    padding: 15rpx;
+    background-color: #f1f1f1;
+    border-radius: 6rpx;
+}
+
+.ans{
+  
+    padding:0 30rpx;
+    font-size: 28rpx;
+}

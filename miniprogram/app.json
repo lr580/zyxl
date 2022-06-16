@@ -54,8 +54,8 @@
             {
                 "pagePath": "pages/questionbank/questionbank",
                 "text": "题库",
-                "iconPath": "./img/Th!.png",
-                "selectedIconPath": "./img/Th.png"
+                "iconPath": "./img/tt.png",
+                "selectedIconPath": "./img/dt.png"
             },
             {
                 "pagePath": "pages/Me/Me",

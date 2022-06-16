@@ -66,7 +66,7 @@ App({
 
         this.globalData = {
             cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
-            type_p: ['心理', '生活', '青春', '卫生', '安全', '全部'],
+            type_p: ['心理', '生活', '青春', '卫生', '安全','全部'],
             info_video: [],
             num_video: 0,
             batch: 20, //每次向数据库的最大读取批次
