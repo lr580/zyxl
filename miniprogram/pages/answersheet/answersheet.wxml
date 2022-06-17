@@ -27,7 +27,7 @@
                     </checkbox>
                 </checkbox-group>
             </view>
-            <view>{{nowIndex+1}} / {{problems.length}}</view>
+           
         </view>
         <view wx:elif="{{index==nowIndex && nowAnswers[index]}}">
             <view style="font-weight: 600;font-size: 30rpx;">{{index+1}}.{{item[0]}}</view>
@@ -50,10 +50,16 @@
             <view class="ans">{{item[4]}}</view>
         </view>
         <view wx:if="{{index==nowIndex}}">
-            <view wx:if="{{keepMemory}}">
-                <button bindtap="rollback" wx:if="{{index}}">上一题</button>
-                <button bindtap="submit" wx:if="{{!nowAnswers[index]}}">提交</button>
-                <button bindtap="rollnext" wx:if="{{index+1<problems.length || nowAnswers[index]}}">下一题</button>
+            <view class="state_body"  wx:if="{{keepMemory}}">
+                
+            <view style="width: 500rpx;display: flex;flex-direction: row;">
+                <view style="font-weight:400;color: rgb(185, 185, 185);text-align: center;padding: 7rpx;">第{{nowIndex+1}}题 / 共{{problems.length}}题</view>
+                <image style="width: 60rpx;height: 60rpx;margin-left: 40rpx;" src="/img/tolast.png" bindtap="rollback" wx:if="{{index}}">上一题</image>
+                
+                <image style="width: 60rpx;height: 60rpx;margin-left: 40rpx;" src="/img/tonext.png" bindtap="rollnext" wx:if="{{index+1<problems.length || nowAnswers[index]}}">下一题</image>
+                </view>
+                    <image style="width: 100rpx;height: 100rpx;" src="/img/submit.png" bindtap="submit" wx:if="{{!nowAnswers[index]}}"></image>
+               
                 <!-- <button bindtap="submit" wx:if="{{index==topIndex}}">提交</button> -->
                 <!-- <button bindtap="rollnext" wx:if="{{index<topIndex}}">下一题</button> -->
             </view>
@@ -62,34 +68,67 @@
             </view>
         </view>
     </view>
-    <view>下面是折叠的，请你设计默认折叠，点击再展开</view>
-    <view wx:for="{{problems}}">
-        <view>
-            第{{index+1}}题：
+    <view class="action">
+        <view class="btn_Suspension" bindtap="showModal">
+            <image class="Suspension_logo" src="/img/dtk.png" bindtap="showModal" data-target="Modal"></image>
+</view>
+    <!-- <image src="/img/dtk.png" bindtap="showModal" data-target="Modal"></image> -->
+  </view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">答题卡</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view style="display: flex;flex-direction: row;flex-wrap: wrap;" class="padding-xl">
+        <view wx:for="{{problems}}">
+        <view style="margin: 10rpx;">
+            {{index+1}}.
             <text wx:if="{{!nowAnswers[index]}}">
-                <text wx:if="{{nowIndex==index}}">在做本题</text>
-                <text wx:else>未做</text>
+                <text class="cuIcon-loading text-l text-yellow" wx:if="{{nowIndex==index}}"></text>
+                <text class="cuIcon-loading text-l text-yellow" wx:else></text>
             </text>
-            <text wx:elif="{{nowAnswers[index]==item[3]}}">正确</text>
-            <text wx:else>错误</text>
+            <text class="cuIcon-roundcheckfill text-l text-green" wx:elif="{{nowAnswers[index]==item[3]}}"></text>
+            <text class="cuIcon-roundclosefill text-l text-red" wx:else></text>
         </view>
     </view>
+    </view>
+  </view>
+</view>
+
 </view>
 <view wx:else>
     <view>你已完成全部题目！</view>
     <view>共有{{problems.length}}题，你答对了{{ac}}题！</view>
     <button bindtap="goback">返回(该按钮要放哪你喜欢)</button>
-    <view>题目解析：</view>
-    <view wx:for="{{problems}}" wx:if="{{(keepMemory && nowAnswers[index]) || !keepMemory}}">
-        <view>{{index+1}}.{{item[0]}}</view>
-        <view>{{['','判断','单选','多选'][item[1]]}}</view>
-        <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
-            <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
+    <view class="cu-bar bg-white">
+                 <view class="action">
+                <text class="cuIcon-title text-blue"></text>
+                 <text class="lg text-bold">解析</text>
+                </view>
+             </view>
+    <view class="ans_body radius shadow shadow-lg bg-white" wx:for="{{problems}}" wx:if="{{(keepMemory && nowAnswers[index]) || !keepMemory}}">
+        <view class="ans1">{{index+1}}.{{item[0]}}</view>
+        <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">{{['','判断','单选','多选'][item[1]]}}</view>
+    
+        <view class="option" wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
+            <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}" class="cuIcon-roundcheck text-xsl text-green"></text>
+                <!-- <text >(正确选择)</text> -->
+                <text class="cuIcon-roundcheck text-xsl text-cyan" wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                <text class="cuIcon-roundclose text-xsl text-red" wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                <text class="cuIcon-round text-xsl text-diy_gray" wx:else></text>
+                <text style="margin-left: 15rpx;">{{item2}}</text>
+            <!-- <text wx:if="{{(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
             <text wx:elif="{{(item[3]&(1<<item[8][j]))&&!(nowAnswers[index]&(1<<item[8][j])) }}">(对而未选)</text>
             <text wx:elif="{{!(item[3]&(1<<item[8][j]))&&(nowAnswers[index]&(1<<item[8][j])) }}">(错而选了)</text>
-            <text wx:else>(不选)</text>
-            <text>{{item2}}</text>
+            <text wx:else>(不选)</text> -->
+            <!-- <text>{{item2}}</text> -->
         </view>
-        <view>解：{{item[4]}}</view>
+        <view class="ans" style="margin-top: 20rpx;">解：{{item[4]}}</view>
     </view>
 </view>
+
+
+

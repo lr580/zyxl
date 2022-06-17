@@ -26,4 +26,50 @@
   
     padding:0 30rpx;
     font-size: 28rpx;
+    padding-bottom: 20rpx;
 }
+
+.dtk_content{
+    margin-top: 100rpx;
+}
+.state_body{
+    display: flex;flex-direction: row;margin-top:15rpx;
+    padding:20rpx;
+    border-top: 1rpx solid gainsboro ;
+    align-items: center;
+
+}
+
+.btn_Suspension{
+    position: absolute;
+    height: 80rpx;
+    width: 80rpx;
+    background-color: rgba(255, 255, 255, 0.755);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    box-shadow: 1px 0px 1px 1px #ede7e7;
+    margin-top:-700rpx;
+    margin-left: 590rpx;
+  }
+  .Suspension_logo{
+    position:absolute;
+    height:80%;
+    width:80%;
+    left:12%;
+    top:10%
+  }
+  
+  .ans_body{
+      margin: 20rpx;
+      padding: 15rpx;
+      border-radius: 16rpx;
+      background-color: #ffffff;
+      border: 1rpx gainsboro solid;
+  }
+
+  .ans1{
+      font-size: 28rpx;
+  }

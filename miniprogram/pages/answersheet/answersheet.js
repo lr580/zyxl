@@ -1,15 +1,30 @@
 // pages/answersheet/answersheet.js
 import * as io from '../../js/common/io'
 import * as problem from '../../js/base/problemCtrl'
+var startPoint
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        buttonTop: 0,
+        buttonLeft: 0,
+        windowHeight: '',
+        windowWidth: ''
     },
+    showModal(e) {
+        this.setData({
+          modalName: e.currentTarget.dataset.target
+        })
+      },
+      hideModal(e) {
+        this.setData({
+          modalName: null
+        })
+      },
 
+      
     /**
      * 生命周期函数--监听页面加载
      */
