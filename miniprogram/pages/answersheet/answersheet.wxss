@@ -37,7 +37,6 @@
     padding:20rpx;
     border-top: 1rpx solid gainsboro ;
     align-items: center;
-
 }
 
 .btn_Suspension{
@@ -72,4 +71,19 @@
 
   .ans1{
       font-size: 28rpx;
+  }
+  
+  .problem_txt{
+      padding: 15rpx;
+      font-size: 25rpx;
+      font-weight: 400;
+      color: rgb(97, 97, 97);
+      width:500rpx;
+      flex-wrap: wrap;
+  }
+
+  radio .wx-radio-input,
+  checkbox .wx-checkbox-input{
+    flex: none;
+
   }

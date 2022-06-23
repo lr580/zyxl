@@ -32,3 +32,44 @@ overflow: hidden;
     border-radius: 10rpx;
 }
 
+.btn_Suspension{
+    height: 100rpx;
+    width: 100rpx;
+    background-color: rgba(255, 255, 255, 0.755);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    box-shadow: 1px 0px 1px 1px #dad8d8;
+    border-radius: 15rpx;
+    margin-top: 800rpx;
+    margin-left: 400rpx;
+  }
+  .Suspension_logo{
+    height:60rpx;
+    width:60rpx;
+  
+  }
+
+  .movable-area{
+    pointer-events:none;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .movable-view{ 
+  	pointer-events:auto;
+    height: 50px;
+    width: 250rpx;
+   padding: 10rpx;
+  }

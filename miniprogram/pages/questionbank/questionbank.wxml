@@ -1,4 +1,4 @@
-<button bindtap="goto_combat">点我双人对战</button>
+
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
     <view class="cu-item flex-sub {{index==TabCur?'text-blue cur':''}}" wx:for="{{types}}" wx:for-item="item_type" wx:key bindtap="click_type" data-id="{{index}}">
@@ -33,3 +33,16 @@
 <button style="display: flex; color:grey;align-items: center;justify-content: center;text-align: center;vertical-align:middle;" bindtap="clearAll">
 <image style="width: 40rpx;height: 40rpx;margin-right: 15rpx;" src="/img/delete_rec.png"></image>
 清空记录</button>
+
+<!-- <view class="btn_Suspension" bindtap="btn_Suspension_click" catchtouchmove="buttonMove" bindtouchstart="buttonStart"
+  bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+  <image class="Suspension_logo" src="/img/PK.png"></image>
+</view> -->
+
+<movable-area class="movable-area">
+    <movable-view bindtap="goto_combat" class="movable-view btn_Suspension" direction="all">
+        <image class="Suspension_logo" src="/img/PK.png"></image>
+       <text style="margin-left: 10rpx;font-weight: 600;color: #0081ff;">双人对战</text> 
+    
+    </movable-view>
+  </movable-area>

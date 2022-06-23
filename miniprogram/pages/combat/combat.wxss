@@ -6,3 +6,67 @@
     -o-transform: rotate(180deg);   /* Opera */
     transform: rotate(180deg);
 }
+.option{
+    font-weight: 400;
+    font-size: 28rpx;
+    margin-top: 15rpx;
+    padding: 15rpx;
+    background-color: #f1f1f1;
+    border-radius: 6rpx;
+}
+
+
+.user_card{
+    padding: 20rpx;
+    border: blue solid 2rpx;
+    margin: 20rpx;
+}
+.problem_card{
+    padding: 40rpx;
+    margin: 30rpx;
+    /* border: aqua 1rpx solid; */
+    border-radius: 15rpx;
+}
+
+.tag{
+    width:80rpx;
+    height: 40rpx;
+    border-radius: 10rpx;
+}
+.ans{
+  
+    padding:0 30rpx;
+    font-size: 28rpx;
+    padding-bottom: 20rpx;
+}
+.state_body{
+    display: flex;flex-direction: row;margin-top:15rpx;
+    padding:20rpx;
+    border-top: 1rpx solid gainsboro ;
+    align-items: center;
+}
+.ans_body{
+    margin: 20rpx;
+    padding: 15rpx;
+    border-radius: 16rpx;
+    background-color: #ffffff;
+    border: 1rpx gainsboro solid;
+}
+.ans1{
+    font-size: 28rpx;
+}
+
+.problem_txt{
+    padding: 15rpx;
+    font-size: 25rpx;
+    font-weight: 400;
+    color: rgb(97, 97, 97);
+    width:500rpx;
+    flex-wrap: wrap;
+}
+
+.finish_tip{
+    font-weight: 600;
+    font-size: 30rpx;
+    color: rgb(97, 97, 97);
+}

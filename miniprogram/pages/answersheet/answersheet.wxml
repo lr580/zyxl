@@ -1,29 +1,28 @@
 <view class="problem_card  radius shadow shadow-lg bg-white"  wx:if="{{nowIndex<problems.length}}">
     <view  wx:for="{{problems}}">
-        <view  wx:if="{{index==nowIndex && !nowAnswers[index]}}">
-            <view>{{nowIndex+1}}.{{item[0]}}</view>
+        <view wx:if="{{index==nowIndex && !nowAnswers[index]}}">
+            <view style="font-size: 30rpx;font-weight: 600;">{{nowIndex+1}}.{{item[0]}}</view>
             <view  wx:if="{{1==item[1]}}" wx:for-index="i">
-                
-                (判断)
-                <radio-group bindchange="input_answer">
-                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                        <view>{{j}}</view>
+                <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">判断</view>
+                <radio-group style="display: flex;flex-direction: column;" class="check_box" bindchange="input_answer">
+                    <radio style="margin-top: 20rpx;" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                        <view class="problem_txt">{{j}}</view>
                     </radio>
                 </radio-group>
             </view>
             <view wx:elif="{{2==item[1]}}">
-                (单选)
-                <radio-group bindchange="input_answer">
-                    <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                        <view>{{j}}</view>
+                <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">单选</view>
+                <radio-group style="display: flex;flex-direction: column;" class="check_box" bindchange="input_answer">
+                    <radio style="margin-top: 20rpx;" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                        <view class="problem_txt">{{j}}</view>
                     </radio>
                 </radio-group>
             </view>
             <view wx:elif="{{3==item[1]}}">
-                (多选)
-                <checkbox-group bindchange="input_answer">
-                    <checkbox wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                        <view>{{j}}</view>
+                <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">多选</view>
+                <checkbox-group style="display: flex;flex-direction: column;" bindchange="input_answer">
+                    <checkbox style="margin-top: 20rpx;display: block;" class="check_box" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                        <view class="problem_txt">{{j}}</view>
                     </checkbox>
                 </checkbox-group>
             </view>
@@ -68,10 +67,10 @@
             </view>
         </view>
     </view>
-    <view class="action">
-        <view class="btn_Suspension" bindtap="showModal">
-            <image class="Suspension_logo" src="/img/dtk.png" bindtap="showModal" data-target="Modal"></image>
-</view>
+    <view style="margin-top: 100rpx;display: flex;align-content: center;justify-content: center;" class="action">
+      <button bindtap="showModal" class="cu-btn clock line-blue lg" data-target="Modal">
+        <image style="width: 40rpx;height: 40rpx;margin-right: 10rpx;" src="/img/dtk.png" bindtap="showModal" ></image>答题卡
+      </button>
     <!-- <image src="/img/dtk.png" bindtap="showModal" data-target="Modal"></image> -->
   </view>
 <view class="cu-modal {{modalName=='Modal'?'show':''}}">

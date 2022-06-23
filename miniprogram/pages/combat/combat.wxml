@@ -1,10 +1,10 @@
-<view>
+<view class="user_card ro">
     <view>甲方</view>
     <view>用时：{{timer1_show}}</view>
     <view wx:if="{{player1.nowIndex<player1.problems.length}}">
-        <view wx:for="{{player1.problems}}">
+        <view  wx:for="{{player1.problems}}">
             <view wx:if="{{index==player1.nowIndex && !player1.nowAnswers[index]}}">
-                <view>{{player1.nowIndex+1}}.{{item[0]}}</view>
+                <view style="font-size: 30rpx;font-weight: 600;">{{player1.nowIndex+1}}.{{item[0]}}</view>
                 <view wx:if="{{1==item[1]}}" wx:for-index="i">
                     (判断)
                     <radio-group bindchange="input_answer1">
@@ -63,35 +63,35 @@
         </view>
     </view>
 </view>
-
-<view>
+<scroll-view style="height:500rpx;border: red solid 2rpx;" scroll-y="true">
+<view class="user_card">
     <view>乙方</view>
     <view>用时：{{timer2_show}}</view>
-    <view wx:if="{{player2.nowIndex<player2.problems.length}}">
-        <view wx:for="{{player2.problems}}">
-            <view wx:if="{{index==player2.nowIndex && !player2.nowAnswers[index]}}">
-                <view>{{player2.nowIndex+1}}.{{item[0]}}</view>
+    <view  wx:if="{{player2.nowIndex<player2.problems.length}}">
+        <view  wx:for="{{player2.problems}}">
+            <view class="problem_card  radius shadow shadow-lg bg-white" wx:if="{{index==player2.nowIndex && !player2.nowAnswers[index]}}">
+                <view style="font-size: 30rpx;font-weight: 600;">{{player2.nowIndex+1}}.{{item[0]}}</view>
                 <view wx:if="{{1==item[1]}}" wx:for-index="i">
-                    (判断)
-                    <radio-group bindchange="input_answer2">
-                        <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                            <view>{{j}}</view>
+                    <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">判断</view>
+                    <radio-group style="display: flex;flex-direction: column;" class="check_box" bindchange="input_answer2">
+                        <radio style="margin-top: 20rpx;" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                            <view class="problem_txt">{{j}}</view>
                         </radio>
                     </radio-group>
                 </view>
                 <view wx:elif="{{2==item[1]}}">
-                    (单选)
-                    <radio-group bindchange="input_answer2">
-                        <radio wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                            <view>{{j}}</view>
+                    <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">单选</view>
+                    <radio-group style="display: flex;flex-direction: column;" class="check_box" bindchange="input_answer2">
+                        <radio style="margin-top: 20rpx;" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                            <view class="problem_txt">{{j}}</view>
                         </radio>
                     </radio-group>
                 </view>
                 <view wx:elif="{{3==item[1]}}">
-                    (多选)
-                    <checkbox-group bindchange="input_answer2">
-                        <checkbox wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
-                            <view>{{j}}</view>
+                    <view style="margin-top: 15rpx;" class="cu-tag bg-blue tag">多选</view>
+                    <checkbox-group style="display: flex;flex-direction: column;" bindchange="input_answer2">
+                        <checkbox style="margin-top: 20rpx;display: block;" class="check_box" wx:for="{{item[5]}}" wx:for-item="j" wx:for-index="jj" value="{{jj}}" wx:if="{{j!='None'}}">
+                            <view class="problem_txt">{{j}}</view>
                         </checkbox>
                     </checkbox-group>
                 </view>
@@ -103,35 +103,38 @@
         </view>
     </view>
     <view wx:else>
-        <view>您已答完，共 {{player2.problems.length}} 题，您答对了 {{player2.ac}} 题</view>
-        <view>请耐心等待您的小伙伴答完~ </view>
+        <view class="finish_tip">您已答完，共 {{player2.problems.length}} 题，您答对了 {{player2.ac}} 题</view>
+        <view class="finish_tip">请耐心等待您的小伙伴答完~ </view>
     </view>
-    <view>下面是折叠的，请你设计默认折叠，点击再展开</view>
+   
     <view wx:for="{{player2.problems}}">
         <view>
-            第{{index+1}}题：
+            
+            <!-- 
             <text wx:if="{{!player2.nowAnswers[index]}}">
                 <text wx:if="{{player2.nowIndex==index}}">在做本题</text>
                 <text wx:else>未做</text>
             </text>
             <text wx:elif="{{player2.nowAnswers[index]==item[3]}}">正确</text>
-            <text wx:else>错误</text>
+            <text wx:else>错误</text> -->
             <view wx:if="{{ended==2}}">
-                <view wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
-                    <text wx:if="{{(item[3]&(1<<item[8][j]))&&(player2.nowAnswers[index]&(1<<item[8][j])) }}">(正确选择)</text>
-                    <text wx:elif="{{(item[3]&(1<<item[8][j]))&&!(player2.nowAnswers[index]&(1<<item[8][j])) }}">(对而未选)</text>
-                    <text wx:elif="{{!(item[3]&(1<<item[8][j]))&&(player2.nowAnswers[index]&(1<<item[8][j])) }}">(错而选了)</text>
-                    <text wx:else>(不选)</text>
-                    <text>{{item2}}</text>
+                第{{index+1}}题：
+                <view class="option" wx:for="{{item[5]}}" wx:for-item="item2" wx:for-index="j" wx:if="{{item2!='None'}}">
+                    <text wx:if="{{(item[3]&(1<<item[8][j]))&&(player2.nowAnswers[index]&(1<<item[8][j])) }}" class="cuIcon-roundcheck text-xsl text-green"></text>
+                    <text class="cuIcon-roundcheck text-xsl text-cyan" wx:elif="{{(item[3]&(1<<item[8][j]))&&!(player2.nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                    <text lass="cuIcon-roundclose text-xsl text-red" wx:elif="{{!(item[3]&(1<<item[8][j]))&&(player2.nowAnswers[index]&(1<<item[8][j])) }}"></text>
+                    <text class="cuIcon-round text-xsl text-diy_gray" wx:else></text>
+                    <text style="margin-left: 15rpx;">{{item2}}</text>
                 </view>
-                <view>解：{{item[4]}}</view>
+                <view class="ans">解：{{item[4]}}</view>
             </view>
         </view>
     </view>
 </view>
 
-<view>--假装是分割符--</view>
+
 <view wx:if="{{ended==2}}">
     <view>结果：{{['平局','甲方胜','乙方胜'][winner]}}</view>
     <button bindtap="oncemore">再来一次</button>
 </view>
+</scroll-view>
