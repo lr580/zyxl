@@ -18,8 +18,8 @@
 
 .user_card{
     padding: 20rpx;
-    border: blue solid 2rpx;
-    margin: 20rpx;
+
+
 }
 .problem_card{
     padding: 40rpx;
@@ -69,4 +69,14 @@
     font-weight: 600;
     font-size: 30rpx;
     color: rgb(97, 97, 97);
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+.big_card{
+    width: 95%;
+    margin: 15rpx;
+    border-radius: 6rpx;
+    border: gainsboro 5rpx solid;
 }
