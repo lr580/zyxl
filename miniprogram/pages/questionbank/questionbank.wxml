@@ -11,7 +11,7 @@
 <view wx:for="{{types}}" wx:for-index="index_type" wx:for-item="item_type">
     <view wx:if="{{index_type == now_type}}">
         <view wx:for="{{problems}}">
-            <view wx:if="{{item[6]==now_type}}">
+            <view wx:if="{{item[6]==now_type || index_type==5}}">
                 <view class="pro_body shadow" bindtap="goto_answersheet" data-index="{{index}}" data-type="{{index_type}}">
                 
                     <view class="pro_tm">{{item[0]}}</view>
