@@ -57,7 +57,7 @@
     <!-- <van-divider style="padding-left: 60rpx;padding-right: 60rpx;"/> -->
 
     <van-divider contentPosition="left">功能</van-divider>
-    <van-grid icon-size="30px" clickable column-num="3">
+    <van-grid icon-size="30px" clickable column-num="2">
         <!-- <van-grid-item wx:if="{{userinfo}}" style="border-radius: 30rpx;" icon="/img/xiaoxi.png" link-type="navigateTo" url="../mymessage/mymessage" text="消息" /> -->
         <van-grid-item wx:if="{{userinfo}}" icon="/img/collect!.png" link-type="navigateTo" url="../mycollect/mycollect" text="收藏" />
         <van-grid-item wx:if="{{userinfo}}" icon="/img/liulan.png" link-type="navigateTo" url="../myhistory/myhistory" text="历史" />

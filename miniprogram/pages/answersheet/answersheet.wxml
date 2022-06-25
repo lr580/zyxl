@@ -99,9 +99,11 @@
 
 </view>
 <view wx:else>
-    <view>你已完成全部题目！</view>
-    <view>共有{{problems.length}}题，你答对了{{ac}}题！</view>
-    <button bindtap="goback">返回(该按钮要放哪你喜欢)</button>
+    <view  style="margin-top:20rpx; display: flex;align-items: center;justify-content: center;font-size: 50rpx;font-weight: 600;">
+    <image src="/img/finishi_flower.png" style="width: 100rpx;height: 100rpx;"></image>
+    你已完成全部题目！</view>
+    <view  style="margin-top:5rpx; display: flex;align-items: center;justify-content: center;font-size: 30rpx;font-weight: 200;color: rgb(150, 150, 150);">共有{{problems.length}}题，你答对了{{ac}}题！</view>
+    <!-- <button bindtap="goback">返回(该按钮要放哪你喜欢)</button> -->
     <view class="cu-bar bg-white">
                  <view class="action">
                 <text class="cuIcon-title text-blue"></text>

@@ -72,9 +72,17 @@
                 <view style="background-color: #d2f1f0;" class="video_option" bindtap="goto_clip" id="{{avail_choice_id[index]}}">{{item}}</view>
             </view>
         </view>
-        <view class="center" wx:if="{{state==3}}">
-            <text class="ending">您已到达结局!</text>
-            <button bindtap="goto_answersheet">点我答题</button>
+        <view class="aaa" wx:if="{{state==3}}">
+           
+        <view class="action" style="color: rgb(150, 150, 150);">
+         <text class="cuIcon-title text-red"></text>
+         <text class="text-xl text-bold">您已达到结局！</text>
+         </view>
+         <button style="width: 100rpx;margin-left:180rpx;" bindtap="goto_answersheet" class="cu-btn bg-blue shadow sm" >去答题</button>
+         <!-- <button bindtap="goto_answersheet">点我答题</button> -->
+         
+            <!-- <text class="ending">您已到达结局!</text> -->
+            <!-- <button bindtap="goto_answersheet">点我答题</button> -->
         </view>
     </view>
     <view class="big_body">

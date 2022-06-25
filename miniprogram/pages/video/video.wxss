@@ -157,7 +157,7 @@
     margin-right: 50rpx;
     border-radius: 20rpx;
     background-color: rgba(220, 220, 220, 0.185);
-    padding-bottom: 30rpx;
+    padding: 15rpx;
 }
 
 .big_body {
@@ -196,4 +196,11 @@
     margin-top: 10rpx;
     font-size: 40rpx;
     font-weight: 600;
+}
+
+.aaa{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }
