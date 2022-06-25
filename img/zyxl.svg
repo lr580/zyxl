@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="123px" height="20px" viewBox="0 0 123 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>OSCS</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="123" height="20" rx="3"></rect>
+        <linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#BBBBBB" stop-opacity="0.1" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.1" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-4" x="0" y="0" width="18" height="18" rx="9"></rect>
+        <filter x="-1.7%" y="-1.7%" width="103.3%" height="106.7%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="0.6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.312176471 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <path d="M8.3796875,2.2017306 C7.609375,2.80944967 6.1265625,3.91240512 3.9125,4.00145393 C3.4203125,4.0217633 3.015625,4.40920374 3,4.90131559 L3,11.4831163 C3,11.8080663 3.1578125,12.1142692 3.425,12.3017404 L8.446875,15.8324476 C8.7828125,16.0558508 9.2203125,16.0558508 9.55625,15.8324476 L14.575,12.3017404 C14.840625,12.1142692 15,11.8096286 15,11.4846785 L15,4.97005502 L15,4.93568531 C14.9828125,4.44513572 14.5796875,4.05925754 14.090625,4.03894816 C11.875,3.94677483 10.39375,2.81413645 9.621875,2.20485512 C9.278125,1.93302191 8.721875,1.93145965 8.3796875,2.2017306 Z" id="path-6"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="area2" transform="translate(-390.000000, -89.000000)">
+            <g id="git+github.com_Dreamacro_clash备份-2" transform="translate(390.000000, 89.000000)">
+                <g id="Clipped">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="矩形"></g>
+                    <g id="编组" mask="url(#mask-2)" fill-rule="nonzero">
+                        <g transform="translate(-15.000000, 0.000000)" id="路径">
+                            <polygon fill="#3DBCAD" points="13 0 66 0 66 20 13 20"></polygon>
+                            <polygon fill="#4F6FFF" points="64.5730337 0 137.573034 0 137.573034 20 64.5730337 20"></polygon>
+                            <polygon fill="url(#linearGradient-3)" points="0 0 166 0 166 20 0 20"></polygon>
+                        </g>
+                    </g>
+                </g>
+                <g id="编组" transform="translate(6.000000, 2.000000)" fill-rule="nonzero" font-size="11" font-weight="normal">
+                    <text id="OSCS" fill-opacity="0.3" fill="#010101" font-family="PingFangSC-Regular, PingFang SC">
+                        <tspan x="0" y="13">OSCS</tspan>
+                    </text>
+                    <text id="OSCS" fill="#FFFFFF" font-family="PingFangSC-Regular, PingFang SC">
+                        <tspan x="0" y="12">OSCS</tspan>
+                    </text>
+                    <text id="Protected" fill-opacity="0.3" fill="#010101" font-family="Verdana">
+                        <tspan x="57" y="13">Protected</tspan>
+                    </text>
+                    <text id="Protected" fill="#FFFFFF" font-family="Verdana">
+                        <tspan x="57" y="12">Protected</tspan>
+                    </text>
+                </g>
+                <g id="路径" transform="translate(41.000000, 1.000000)">
+                    <g id="矩形">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                    <mask id="mask-7" fill="white">
+                        <use xlink:href="#path-6"></use>
+                    </mask>
+                    <use id="蒙版" fill="#3D5AFE" fill-rule="nonzero" xlink:href="#path-6"></use>
+                    <polygon fill="url(#linearGradient-3)" fill-rule="nonzero" mask="url(#mask-7)" points="-56 -1 110 -1 110 19 -56 19"></polygon>
+                    <path d="M9.55415302,5.34467327 L10.3121324,6.87989123 C10.4022164,7.06189691 10.5760148,7.18839086 10.7771114,7.21751177 L12.4705084,7.46321945 C12.9773446,7.53693175 13.1793511,8.1593912 12.8126455,8.51703238 L11.5869574,9.71189971 C11.4413671,9.85386414 11.3749415,10.0586205 11.4095192,10.2588268 L11.6988799,11.9460195 C11.7853241,12.4510853 11.2557395,12.8360273 10.8025897,12.5975999 L9.28754081,11.801325 C9.10752651,11.7066816 8.89247349,11.7066816 8.71245919,11.801325 L7.1974103,12.5975999 C6.74426055,12.8360273 6.21467588,12.4510853 6.30112012,11.9460195 L6.5904808,10.2588268 C6.6250585,10.0586205 6.55863293,9.85386414 6.41304265,9.71189971 L5.18735445,8.5179424 C4.82064893,8.16030123 5.02265544,7.53784178 5.52949162,7.46412948 L7.2228886,7.21842181 C7.42398519,7.1893009 7.59778358,7.06280695 7.68786757,6.88080125 L8.44675693,5.34467327 C8.6733318,4.88510891 9.32757814,4.88510891 9.55415302,5.34467327 Z" fill="#FFEA6B" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

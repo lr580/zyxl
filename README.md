@@ -1,3 +1,7 @@
+[![OSCS Status](img/zyxl.svg)](https://www.oscs1024.com/project/lr580/zyxl?ref=badge_small)
+
+ <a href="https://www.oscs1024.com/project/oscs/lr580/zyxl?ref=badge_large" alt="OSCS Status"><img src="img/zyxl-16561365292392.svg"/></a>
+
 ## 全局变量定义
 
 云存储根目录完整url：
