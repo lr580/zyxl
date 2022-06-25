@@ -23,6 +23,9 @@ export function fitOptions(handler, options = {}) {
     if (!options) {
         options = {};
     } //options:若有vty,为多少代表当前是视频做题，无就是题库（有type和index）或对战(有combat)
+    if (options.type == 5) {
+        delete options.type;
+    }
 
     let problems = getApp().globalData.problems;
     let videos = getApp().globalData.info_video;
