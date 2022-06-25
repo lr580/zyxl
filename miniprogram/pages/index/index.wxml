@@ -128,5 +128,6 @@
 </view> -->
 </van-transition>
 <view wx:else>
-    <view class="a">您可以前往题库页面进行答题！</view>
+    <!-- <view class="a">您可以前往题库页面进行答题！</view> -->
+    <button bindtap="goto_answersheet">随机做题</button>
 </view>

@@ -2,7 +2,7 @@
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
-// import * as io from '../../js/common/io';
+import * as io from '../../js/common/io';
 
 Page({
 
@@ -49,6 +49,9 @@ Page({
 
     onLoad: function (options) {
         // io.getGlobal('forge', this);
+        io.helpGoto(this, 'answersheet', {
+            'vid': Math.floor(Math.random() * 3),
+        });
         console.log(1);
         getApp().handler = this;
         console.log(1);
@@ -110,8 +113,6 @@ Page({
     },
     // towerSwiper计算滚动
     towerEnd(e) {
-
-
         let direction = this.data.direction;
         let list = this.data.swiperList;
         if (direction == 'right') {
@@ -141,13 +142,6 @@ Page({
             })
         }
     },
-
-
-
-
-
-
-
 
     //初始化
     init_index: function () {
