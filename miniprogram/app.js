@@ -208,6 +208,7 @@ App({
             km.globalData.info_goods = res.data.goods;
             km.globalData.problems = res.data.problems;
             km.globalData.forge = res.data.forge;
+            km.globalData.type_p = res.data.type_p;
             io.out(km.globalData.forge);
             io.getGlobal('forge', km.handler); 
             let arr_pla = [];
