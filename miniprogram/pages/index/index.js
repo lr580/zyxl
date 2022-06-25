@@ -2,6 +2,7 @@
 const km = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
+// import * as io from '../../js/common/io';
 
 Page({
 
@@ -47,6 +48,10 @@ Page({
     },
 
     onLoad: function (options) {
+        // io.getGlobal('forge', this);
+        console.log(1);
+        getApp().handler = this;
+        console.log(1);
         this.update_index();
         this.towerSwiper('swiperList');
         this.setData({

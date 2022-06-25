@@ -25,10 +25,10 @@ Page({
         var that =this;
         wx.getSystemInfo({
           success: function (res) {
-            console.log(res);
+            // console.log(res);
             // 屏幕宽度、高度
-            console.log('height=' + res.windowHeight);
-            console.log('width=' + res.windowWidth);
+            // console.log('height=' + res.windowHeight);
+            // console.log('width=' + res.windowWidth);
             // 高度,宽度 单位为px
             that.setData({
               windowHeight:  res.windowHeight,
@@ -76,17 +76,17 @@ Page({
     
 
     click_type: function (v) {
-        console.log(v);
+        // console.log(v);
          let tid = Number(v.currentTarget.dataset.id);
-         console.log(now_type);
-         console.log(tid);
+        //  console.log(now_type);
+        //  console.log(tid);
         this.setData({
             TabCur: v.currentTarget.dataset.id,
             scrollLeft: (v.currentTarget.dataset.id - 1) * 60,
             now_type: tid
         })
-        console.log(now_type);
-        console.log(tid);
+        // console.log(now_type);
+        // console.log(tid);
     },
 
     onLoad(options) {

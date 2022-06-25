@@ -6,7 +6,8 @@
         </view>
     </swiper-item>
 </swiper>
-<van-transition name="slide-left">
+<!-- {{forge}} - {{!forge}} -->
+<van-transition name="slide-left" wx:if="{{forge}}">
     <!-- <view style="display: flex;flex-direction: row;align-items: center;">-->
     <!-- <view style="width: 50%;margin-top: 50rpx;" class="cu-bar bg-white aaaa">
             <view class="action sub-title">
@@ -126,3 +127,6 @@
   <view wx:else>加载中……</view>
 </view> -->
 </van-transition>
+<view wx:else>
+    <view class="a">您可以前往题库页面进行答题！</view>
+</view>

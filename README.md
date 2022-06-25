@@ -1,6 +1,6 @@
 [![OSCS Status](img/zyxl.svg)](https://www.oscs1024.com/project/lr580/zyxl?ref=badge_small)
 
- <a href="https://www.oscs1024.com/project/oscs/lr580/zyxl?ref=badge_large" alt="OSCS Status"><img src="img/zyxl-16561365292392.svg"/></a>
+ <a href="https://www.oscs1024.com/cd/1532225981145133056" alt="OSCS Status"><img src="img/zyxl-16561365292392.svg"/></a>
 
 ## 全局变量定义
 
@@ -10,10 +10,10 @@
 cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
 ```
 
-五种类别常量(类别下标和文字一一对应)：
+五种类别常量(类别下标和文字一一对应)(开发者大赛版本)：
 
 ```js
-type_p: ['感情', '学习', '心灵', '职业', '校园热点', '全部'],
+type_p: ['心理', '生活', '青春', '卫生', '安全', '全部'],
 ```
 
 互动视频相关变量：(动态读取数据库加载)
@@ -86,6 +86,14 @@ info_goods: [],
 ```js
 problems: [],
 ```
+
+神奇变量：(请保持true)
+
+```js
+forge: false, 
+```
+
+
 
 
 

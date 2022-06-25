@@ -2,6 +2,7 @@
 // const km = getApp() //即this, app.js外均可这么使用
 var db = '';
 var _;
+import * as io from '/js/common/io';
 
 var now_loading = 0; //需要batch_read等所有数据库读取异步多少次
 var total_loading = 4;
@@ -66,7 +67,7 @@ App({
 
         this.globalData = {
             cloudpath: 'cloud://cloud1-5gb77mtq8dcc1698.636c-cloud1-5gb77mtq8dcc1698-1307133896',
-            type_p: ['心理', '生活', '青春', '卫生', '安全','全部'],
+            type_p: ['心理', '生活', '青春', '卫生', '安全', '全部'],
             info_video: [],
             num_video: 0,
             batch: 20, //每次向数据库的最大读取批次
@@ -82,7 +83,7 @@ App({
             num_user: 0,
             num_newmessage: 0,
             info_goods: [],
-            problems:[],
+            problems: [],
             // cover_loaded: false,
         }
     },
@@ -206,6 +207,9 @@ App({
             km.globalData.num_user = res.data.num_user;
             km.globalData.info_goods = res.data.goods;
             km.globalData.problems = res.data.problems;
+            km.globalData.forge = res.data.forge;
+            io.out(km.globalData.forge);
+            io.getGlobal('forge', km.handler); 
             let arr_pla = [];
             for (let i = 0; i < res.data.placard.length; ++i) {
                 arr_pla.push(km.globalData.cloudpath + '/placard/' + res.data.placard[i]);

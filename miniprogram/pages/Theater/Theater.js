@@ -8,6 +8,7 @@ var minTime = 60;
 var startX = 0;
 var startY = 0;
 var startTime = 0;
+import * as io from '../../js/common/io';
 Page({
 
     /**
@@ -92,6 +93,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        io.getGlobal('forge', this);
         this.theater_init();
     },
 

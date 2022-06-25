@@ -6,6 +6,13 @@ image[class*="gif-"] {
     display: block;
 }
 
+.a {
+    font-weight: 400;
+    font-size: 30rpx;
+    color: gray;
+    line-height: 1.5;
+    text-indent: 2em;
+}
 
 .video_body {
     border-radius: 10rpx;

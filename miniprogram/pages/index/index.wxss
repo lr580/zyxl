@@ -5,6 +5,14 @@
     z-index: var(--index);
 }
 
+.a {
+    font-weight: 400;
+    font-size: 30rpx;
+    color: gray;
+    line-height: 1.5;
+    text-indent: 2em;
+}
+
 .video_body {
     background-color: #ffffff;
     width: 340rpx;

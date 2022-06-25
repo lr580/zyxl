@@ -47,7 +47,7 @@
             },
             {
                 "pagePath": "pages/Theater/Theater",
-                "text": "剧场",
+                "text": "学习",
                 "iconPath": "./img/Theatera.png",
                 "selectedIconPath": "./img/theater.png"
             },

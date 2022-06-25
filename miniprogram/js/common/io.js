@@ -308,3 +308,12 @@ export function get_col(colname, force = false) {
         app = getApp();
     }
 }
+
+export function getGlobal(varname, handler, localname = null) {
+    if (!localname) {
+        localname = varname;
+    }
+    let wrap = {};
+    wrap[localname] = getApp().globalData[varname];
+    handler.setData(wrap);
+}

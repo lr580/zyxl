@@ -113,6 +113,8 @@ Object 功能拓展。[对象深复制参考](https://blog.csdn.net/weixin_46074
 
 - `transformPicktime(val)` 将输入格式的日期转化为后台存储格式
 
+- `helpGlobal(varname, handler, localname=null)` 导入全局变量 `getApp().globalData.varname` 到 `handler.data.localname`，不填名字同 `varname`
+
 
 
 ##### randoms
