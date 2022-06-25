@@ -56,14 +56,14 @@
 <view>调试用：新消息数目{{num_newmessage}}</view> -->
     <!-- <van-divider style="padding-left: 60rpx;padding-right: 60rpx;"/> -->
 
-    <van-divider contentPosition="left">功能</van-divider>
-    <van-grid icon-size="30px" clickable column-num="2">
+    <van-divider contentPosition="left" wx:if="{{forge}}">功能</van-divider>
+    <van-grid icon-size="30px" clickable column-num="2" wx:if="{{forge}}">
         <!-- <van-grid-item wx:if="{{userinfo}}" style="border-radius: 30rpx;" icon="/img/xiaoxi.png" link-type="navigateTo" url="../mymessage/mymessage" text="消息" /> -->
         <van-grid-item wx:if="{{userinfo&&forge}}" icon="/img/collect!.png" link-type="navigateTo" url="../mycollect/mycollect" text="收藏" />
         <van-grid-item wx:if="{{userinfo&&forge}}" icon="/img/liulan.png" link-type="navigateTo" url="../myhistory/myhistory" text="历史" />
         <!-- <van-grid-item wx:if="{{userinfo}}" icon="/img/Th.png" link-type="navigateTo" url="../mypost/mypost" text="树洞" /> -->
         <van-grid-item icon="/img/help.png" link-type="navigateTo" url="../help/help" text="帮助" />
-        <van-grid-item icon="/img/fankui.png" link-type="navigateTo" url="" text="反馈" />
+        <van-grid-item icon="/img/fankui.png" link-type="navigateTo" open-type='feedback' text="反馈" />
     </van-grid>
 
     <!-- <view style="margin-top:2rpx;">
